@@ -1,3 +1,8 @@
+ @extends('admin.layouts.master')
+
+@section('title','Tableau de bord AIAE')
+@section('content')
+
  <div class="nxl-content">
             <!-- [ page-header ] start -->
             <div class="page-header">
@@ -1105,5 +1110,5 @@
             <!-- [ Main Content ] end -->
         </div>
 
-
+@endsection
 
