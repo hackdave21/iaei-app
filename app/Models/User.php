@@ -4,13 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +24,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'phone',
+        'is_active',
+        'last_login_at',
     ];
 
     /**
@@ -44,16 +50,61 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'last_login_at' => 'datetime',
         ];
     }
 
-     public function isAdmin(): bool
+    /*
+    |--------------------------------------------------------------------------
+    | Relations
+    |--------------------------------------------------------------------------
+    */
+
+    public function roles(): BelongsToMany
     {
-        return $this->role === 'admin';
+        return $this->belongsToMany(Role::class);
     }
 
-      public function scopeAdmins($query)
+    public function leads(): HasMany
     {
-        return $query->where('role', 'admin');
+        return $this->hasMany(Lead::class, 'user_id');
+    }
+
+    public function assignedLeads(): HasMany
+    {
+        return $this->hasMany(Lead::class, 'assigned_to_user_id');
+    }
+
+    public function simulations(): HasMany
+    {
+        return $this->hasMany(Simulation::class);
+    }
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin' || $this->roles()->where('slug', 'admin')->exists();
     }
 }
