@@ -13,7 +13,7 @@
     <title>@yield('title','AIAE Administration')</title>
     <!--! END:  Apps Title-->
     <!--! BEGIN: Favicon-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL.png') }}" />
     <!--! END: Favicon-->
     <!--! BEGIN: Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/bootstrap.min.css') }}" />
@@ -24,6 +24,73 @@
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/theme.min.css') }}" />
+    <style>
+        :root {
+            --bs-primary: #162064;
+            --bs-primary-rgb: 22, 32, 100;
+            --primary-color: #162064;
+        }
+
+        body, h1, h2, h3, h4, h5, h6, .nxl-mtext, .btn, .form-control {
+            font-family: 'Futura', 'Inter', sans-serif !important;
+        }
+
+        .bg-primary {
+            background-color: #162064 !important;
+        }
+
+        .text-primary {
+            color: #162064 !important;
+        }
+
+        .btn-primary {
+            background-color: #162064 !important;
+            border-color: #162064 !important;
+        }
+
+        .btn-primary:hover {
+            background-color: #05482C !important;
+            border-color: #05482C !important;
+        }
+
+        /* Secondary & Accent Colors */
+        .badge.bg-soft-success {
+            background-color: rgba(5, 72, 44, 0.1) !important;
+            color: #05482C !important;
+        }
+        
+        .badge.bg-soft-warning {
+            background-color: rgba(255, 132, 0, 0.1) !important;
+            color: #FF8400 !important;
+        }
+
+        .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link, 
+        .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link {
+            background-color: rgba(22, 32, 100, 0.08) !important;
+            color: #162064 !important;
+        }
+        
+        .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link .nxl-micon,
+        .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link .nxl-micon {
+            color: #162064 !important;
+        }
+        .nxl-navigation .m-header .logo-lg {
+            max-height: 50px !important;
+            width: auto !important;
+        }
+
+        .nxl-navigation .m-header .logo-sm {
+            max-height: 40px !important;
+            width: auto !important;
+        }
+
+        .b-brand {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 100% !important;
+        }
+    </style>
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->

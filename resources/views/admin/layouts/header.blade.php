@@ -114,30 +114,14 @@
                                     <i class="feather-chevron-right ms-auto me-0"></i>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <span class="hstack">
-                                            <i class="wd-10 ht-10 border border-2 border-gray-1 bg-warning rounded-circle me-2"></i>
-                                            <span>Absent</span>
-                                        </span>
-                                    </a>
+                                   
                                     <a href="javascript:void(0);" class="dropdown-item">
                                         <span class="hstack">
                                             <i class="wd-10 ht-10 border border-2 border-gray-1 bg-success rounded-circle me-2"></i>
                                             <span>En ligne</span>
                                         </span>
                                     </a>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <span class="hstack">
-                                            <i class="wd-10 ht-10 border border-2 border-gray-1 bg-danger rounded-circle me-2"></i>
-                                            <span>Occupé</span>
-                                        </span>
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <span class="hstack">
-                                            <i class="wd-10 ht-10 border border-2 border-gray-1 bg-info rounded-circle me-2"></i>
-                                            <span>Inactif</span>
-                                        </span>
-                                    </a>
+        
                                     <a href="javascript:void(0);" class="dropdown-item">
                                         <span class="hstack">
                                             <i class="wd-10 ht-10 border border-2 border-gray-1 bg-dark rounded-circle me-2"></i>
@@ -160,14 +144,7 @@
                                 <i class="feather-user"></i>
                                 <span>Profil</span>
                             </a>
-                            {{-- <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="feather-activity"></i>
-                                <span>Activity Feed</span>
-                            </a> --}}
-                            {{-- <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="feather-dollar-sign"></i>
-                                <span>Billing Details</span>
-                            </a> --}}
+                           
                             <a href="javascript:void(0);" class="dropdown-item">
                                 <i class="feather-settings"></i>
                                 <span>Paramètres</span>

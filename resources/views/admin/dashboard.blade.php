@@ -109,7 +109,7 @@
                                     <div class="d-flex align-items-center justify-content-between">
                                         <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Factures en attente </a>
                                         <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">$5,569</span>
+                                            <span class="fs-12 text-dark">{{ number_format(5569, 0, ',', ' ') }} FCFA</span>
                                             <span class="fs-11 text-muted">(56%)</span>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                     <div class="d-flex align-items-center justify-content-between">
                                         <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line"> Taux de conversion </a>
                                         <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">$2,254</span>
+                                            <span class="fs-12 text-dark">{{ number_format(2254, 0, ',', ' ') }} FCFA</span>
                                             <span class="fs-11 text-muted">(46%)</span>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
                                     <div class="col-lg-3">
                                         <div class="p-3 border border-dashed rounded">
                                             <div class="fs-12 text-muted mb-1">En attente</div>
-                                            <h6 class="fw-bold text-dark">$5,486</h6>
+                                            <h6 class="fw-bold text-dark">{{ number_format(5486, 0, ',', ' ') }} FCFA</h6>
                                             <div class="progress mt-2 ht-3">
                                                 <div class="progress-bar bg-primary" role="progressbar" style="width: 81%"></div>
                                             </div>
@@ -275,7 +275,7 @@
                                     <div class="col-lg-3">
                                         <div class="p-3 border border-dashed rounded">
                                             <div class="fs-12 text-muted mb-1">Terminé</div>
-                                            <h6 class="fw-bold text-dark">$9,275</h6>
+                                            <h6 class="fw-bold text-dark">{{ number_format(9275, 0, ',', ' ') }} FCFA</h6>
                                             <div class="progress mt-2 ht-3">
                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 82%"></div>
                                             </div>
@@ -284,7 +284,7 @@
                                     <div class="col-lg-3">
                                         <div class="p-3 border border-dashed rounded">
                                             <div class="fs-12 text-muted mb-1">Rejeté</div>
-                                            <h6 class="fw-bold text-dark">$3,868</h6>
+                                            <h6 class="fw-bold text-dark">{{ number_format(3868, 0, ',', ' ') }} FCFA</h6>
                                             <div class="progress mt-2 ht-3">
                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 68%"></div>
                                             </div>
@@ -293,7 +293,7 @@
                                     <div class="col-lg-3">
                                         <div class="p-3 border border-dashed rounded">
                                             <div class="fs-12 text-muted mb-1">Revenu</div>
-                                            <h6 class="fw-bold text-dark">$50,668</h6>
+                                            <h6 class="fw-bold text-dark">{{ number_format(50668, 0, ',', ' ') }} FCFA</h6>
                                             <div class="progress mt-2 ht-3">
                                                 <div class="progress-bar bg-dark" role="progressbar" style="width: 75%"></div>
                                             </div>

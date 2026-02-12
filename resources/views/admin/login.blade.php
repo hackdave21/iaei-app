@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -84,13 +84,13 @@
                         <div class="w-100 mt-5 text-center mx-auto">
                             <div class="mb-4 border-bottom position-relative"><span class="small py-1 px-3 text-uppercase text-muted bg-white position-absolute translate-middle">ou</span></div>
                             <div class="d-flex align-items-center justify-content-center gap-2">
-                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Login with Facebook">
+                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Se connecter avec Facebook">
                                     <i class="feather-facebook"></i>
                                 </a>
-                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Login with Twitter">
+                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Se connecter avec Twitter">
                                     <i class="feather-twitter"></i>
                                 </a>
-                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Login with Github">
+                                <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Se connecter avec Github">
                                     <i class="feather-github text"></i>
                                 </a>
                             </div>

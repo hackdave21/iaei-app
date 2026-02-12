@@ -3,8 +3,8 @@
             <div class="m-header">
                 <a href="{{ route('admin.dashboard') }}" class="b-brand">
                     <!-- ========   change your logo hear   ============ -->
-                    <img src="{{ asset('admin-assets/assets/images/logo-full.png') }}" alt="" class="logo logo-lg" />
-                    <img src="{{ asset('admin-assets/assets/images/logo-abbr.png') }}" alt="" class="logo logo-sm" />
+                    <img src="{{ asset('admin-assets/assets/images/Logos/LOGO_AIAE_FINAL.png') }}" alt="AIAE Logo" class="logo logo-lg" />
+                    <img src="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE Logo" class="logo logo-sm" />
                 </a>
             </div>
             <div class="navbar-content">
@@ -19,7 +19,7 @@
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.dashboard') }}">CRM</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analytics</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analyses</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -81,9 +81,9 @@
                             <span class="nxl-mtext">Centre d'aide</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Assistance</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Base de connaissances</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Documentation</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#overview">Assistance</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#crm">Base de connaissances</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#simulations">Documentation</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DivisionController;
+use App\Http\Controllers\Admin\HelpController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\SectorController;
@@ -48,6 +49,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('sector-types', SectorTypeController::class);
         Route::post('sector-types/{sector_type}/pricing-rules', [SectorTypeController::class, 'storePricingRule'])->name('sector-types.pricing-rules.store');
         Route::post('sector-types/{sector_type}/pricing-coefficients', [SectorTypeController::class, 'storePricingCoefficient'])->name('sector-types.pricing-coefficients.store');
-        // ...
+        Route::get('/help', [HelpController::class, 'index'])->name('help');
     });
 });

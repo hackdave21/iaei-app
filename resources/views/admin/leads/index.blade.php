@@ -112,7 +112,7 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th>Lead</th>
+                                        <th>Prospect</th>
                                         <th>Email</th>
                                         <th>Source</th>
                                         <th>Téléphone</th>
