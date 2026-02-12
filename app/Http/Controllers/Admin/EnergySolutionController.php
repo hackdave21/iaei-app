@@ -85,9 +85,13 @@ class EnergySolutionController extends Controller
     {
         $energySolution->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Energy solution deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Energy solution deleted successfully',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Solution énergétique supprimée avec succès.');
     }
 }

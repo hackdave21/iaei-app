@@ -23,6 +23,26 @@
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-activity"></i></span>
+                        <span class="nxl-mtext">Simulations</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.simulations.index') }}">Toutes les simulations</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analyses</a></li>
+                    </ul>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="javascript:void(0);" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-file-text"></i></span>
+                        <span class="nxl-mtext">Devis</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                    </a>
+                    <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.quotations.index') }}">Tous les devis</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Paramètres devis</a></li>
+                    </ul>
+                </li>
+                    <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-cast"></i></span>
                             <span class="nxl-mtext">Rapports</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>

@@ -20,10 +20,14 @@ class QuotationController extends Controller
             ->latest()
             ->paginate($request->per_page ?? 15);
 
-        return response()->json([
-            'success' => true,
-            'data' => $quotations,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $quotations,
+            ]);
+        }
+
+        return view('admin.quotations.index', compact('quotations'));
     }
 
     /**
@@ -53,10 +57,16 @@ class QuotationController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        return response()->json([
-            'success' => true,
-            'data' => $quotation->load(['lead', 'simulation']),
-        ]);
+        $quotation->load(['lead', 'simulation.sectorType', 'simulation.result']);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $quotation,
+            ]);
+        }
+
+        return view('admin.quotations.show', compact('quotation'));
     }
 
     /**
@@ -85,9 +95,13 @@ class QuotationController extends Controller
     {
         $quotation->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Quotation deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Quotation deleted successfully',
+            ]);
+        }
+
+        return redirect()->route('admin.quotations.index')->with('success', 'Devis supprimé avec succès.');
     }
 }

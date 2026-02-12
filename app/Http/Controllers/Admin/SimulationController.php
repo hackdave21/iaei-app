@@ -20,10 +20,14 @@ class SimulationController extends Controller
             ->latest()
             ->paginate($request->per_page ?? 15);
 
-        return response()->json([
-            'success' => true,
-            'data' => $simulations,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $simulations,
+            ]);
+        }
+
+        return view('admin.simulations.index', compact('simulations'));
     }
 
     /**
@@ -55,10 +59,16 @@ class SimulationController extends Controller
      */
     public function show(Simulation $simulation)
     {
-        return response()->json([
-            'success' => true,
-            'data' => $simulation->load(['user', 'lead', 'sectorType', 'result', 'simulationOptions']),
-        ]);
+        $simulation->load(['user', 'lead', 'sectorType', 'result', 'simulationOptions.option']);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $simulation,
+            ]);
+        }
+
+        return view('admin.simulations.show', compact('simulation'));
     }
 
     /**
@@ -88,9 +98,13 @@ class SimulationController extends Controller
     {
         $simulation->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Simulation deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Simulation deleted successfully',
+            ]);
+        }
+
+        return redirect()->route('admin.simulations.index')->with('success', 'Simulation supprimée avec succès.');
     }
 }

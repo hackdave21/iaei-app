@@ -83,9 +83,13 @@ class PricingRuleController extends Controller
     {
         $pricingRule->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pricing rule deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Pricing rule deleted successfully',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Règle de prix supprimée avec succès.');
     }
 }

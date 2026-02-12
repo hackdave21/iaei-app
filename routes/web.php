@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\LeadController;
+use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\SectorController;
 use App\Http\Controllers\Admin\SectorTypeController;
+use App\Http\Controllers\Admin\SimulationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +37,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Potential other admin routes
         Route::resource('leads', LeadController::class);
+        Route::resource('simulations', SimulationController::class)->only(['index', 'show', 'destroy']);
+        Route::resource('quotations', QuotationController::class)->only(['index', 'show', 'destroy']);
         
         // Settings & Configuration
         Route::resource('divisions', DivisionController::class);

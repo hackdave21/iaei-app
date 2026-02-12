@@ -81,9 +81,13 @@ class AgriculturalModelController extends Controller
     {
         $agriculturalModel->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Agricultural model deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Agricultural model deleted successfully',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Modèle agricole supprimé avec succès.');
     }
 }

@@ -95,10 +95,14 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'User deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted successfully',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Utilisateur supprimé avec succès.');
     }
 
     /**
