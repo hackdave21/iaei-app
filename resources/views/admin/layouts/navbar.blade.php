@@ -30,22 +30,6 @@
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Rapport de Ventes</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Rapport de Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Rapport de Projet</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Feuilles de temps</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-send"></i></span>
-                            <span class="nxl-mtext">Applications</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Chat</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">E-mail</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Tâches</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Notes</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Stockage</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Calendrier</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -95,115 +79,17 @@
                     </li>
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-briefcase"></i></span>
-                            <span class="nxl-mtext">Projets</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Projets</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Voir Projets</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Créer Projets</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-layout"></i></span>
-                            <span class="nxl-mtext">Widgets</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Listes</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Tables</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Graphiques</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Statistiques</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Divers</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-settings"></i></span>
                             <span class="nxl-mtext">Paramètres</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Général</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">SEO</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Tags</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">E-mail</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Tâches</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Support</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Finance</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Passerelles</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Clients</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Finances</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Localisation</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">reCAPTCHA</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">E-mail & SMS</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Passerelles</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Divers</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-power"></i></span>
-                            <span class="nxl-mtext">Authentification</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Login</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-login-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-login-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-login-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Register</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-register-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-register-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-register-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Error-404</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-404-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-404-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-404-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Reset Pass</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-reset-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-reset-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-reset-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Verify OTP</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-verify-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-verify-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-verify-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
-                            <li class="nxl-item nxl-hasmenu">
-                                <a href="javascript:void(0);" class="nxl-link">
-                                    <span class="nxl-mtext">Maintenance</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                                </a>
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-maintenance-cover.html">Cover</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-maintenance-minimal.html">Minimal</a></li>
-                                    <li class="nxl-item"><a class="nxl-link" href="./auth-maintenance-creative.html">Creative</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
