@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="pt-4">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Leads convertis </a>
+                                        <a href="{{ route('admin.leads.index') }}" class="fs-12 fw-medium text-muted text-truncate-1-line">Leads convertis </a>
                                         <div class="w-100 text-end">
                                             <span class="fs-12 text-dark">52 Terminés</span>
                                             <span class="fs-11 text-muted">(63%)</span>
@@ -503,7 +503,7 @@
                                                         <div class="avatar-text avatar-md bg-soft-primary text-primary">
                                                             {{ strtoupper(substr($lead->first_name, 0, 1)) }}
                                                         </div>
-                                                        <a href="javascript:void(0);">
+                                                        <a href="{{ route('admin.leads.show', $lead) }}">
                                                             <span class="d-block">{{ $lead->first_name }} {{ $lead->last_name }}</span>
                                                             <span class="fs-12 d-block fw-normal text-muted">{{ $lead->email }}</span>
                                                         </a>
@@ -517,7 +517,7 @@
                                                     <span class="badge bg-soft-primary text-primary">{{ ucfirst($lead->status) }}</span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="javascript:void(0);"><i class="feather-more-vertical"></i></a>
+                                                    <a href="{{ route('admin.leads.show', $lead) }}"><i class="feather-eye"></i></a>
                                                 </td>
                                             </tr>
                                             @endforeach

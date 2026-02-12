@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LeadController extends Controller
@@ -26,10 +27,23 @@ class LeadController extends Controller
             ->latest()
             ->paginate($request->per_page ?? 15);
 
-        return response()->json([
-            'success' => true,
-            'data' => $leads,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $leads,
+            ]);
+        }
+
+        return view('admin.leads.index', compact('leads'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $users = User::all();
+        return view('admin.leads.create', compact('users'));
     }
 
     /**
@@ -51,11 +65,15 @@ class LeadController extends Controller
 
         $lead = Lead::create($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Lead created successfully',
-            'data' => $lead,
-        ], 201);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Lead created successfully',
+                'data' => $lead,
+            ], 201);
+        }
+
+        return redirect()->route('admin.leads.index')->with('success', 'Lead créé avec succès.');
     }
 
     /**
@@ -63,10 +81,25 @@ class LeadController extends Controller
      */
     public function show(Lead $lead)
     {
-        return response()->json([
-            'success' => true,
-            'data' => $lead->load(['user', 'simulations', 'quotations', 'appointments']),
-        ]);
+        $lead->load(['user', 'simulations', 'quotations', 'appointments']);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $lead,
+            ]);
+        }
+
+        return view('admin.leads.show', compact('lead'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Lead $lead)
+    {
+        $users = User::all();
+        return view('admin.leads.edit', compact('lead', 'users'));
     }
 
     /**
@@ -88,11 +121,15 @@ class LeadController extends Controller
 
         $lead->update($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Lead updated successfully',
-            'data' => $lead,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Lead updated successfully',
+                'data' => $lead,
+            ]);
+        }
+
+        return redirect()->route('admin.leads.index')->with('success', 'Lead mis à jour avec succès.');
     }
 
     /**
@@ -102,9 +139,13 @@ class LeadController extends Controller
     {
         $lead->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Lead deleted successfully',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Lead deleted successfully',
+            ]);
+        }
+
+        return redirect()->route('admin.leads.index')->with('success', 'Lead supprimé avec succès.');
     }
 }

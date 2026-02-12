@@ -1,7 +1,7 @@
 <nav class="nxl-navigation">
         <div class="navbar-wrapper">
             <div class="m-header">
-                <a href="index.html" class="b-brand">
+                <a href="{{ route('admin.dashboard') }}" class="b-brand">
                     <!-- ========   change your logo hear   ============ -->
                     <img src="{{ asset('admin-assets/assets/images/logo-full.png') }}" alt="" class="logo logo-lg" />
                     <img src="{{ asset('admin-assets/assets/images/logo-abbr.png') }}" alt="" class="logo logo-sm" />
@@ -18,8 +18,8 @@
                             <span class="nxl-mtext">Tableaux de bord</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="index.html">CRM</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="analytics.html">Analytics</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.dashboard') }}">CRM</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analytics</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -72,9 +72,9 @@
                             <span class="nxl-mtext">Leads</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Voir Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Créer Leads</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.index') }}">Leads</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.index') }}">Voir Leads</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.create') }}">Créer Leads</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
