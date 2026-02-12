@@ -23,6 +23,16 @@
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-calendar"></i></span>
+                            <span class="nxl-mtext">Rendez-vous</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.appointments.index') }}">Calendrier / Liste</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.appointments.create') }}">Nouveau RDV</a></li>
+                        </ul>
+                    </li>
+                    <li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-activity"></i></span>
                         <span class="nxl-mtext">Simulations</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
@@ -44,59 +54,15 @@
                 </li>
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-cast"></i></span>
-                            <span class="nxl-mtext">Rapports</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Rapport de Ventes</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Rapport de Leads</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-at-sign"></i></span>
-                            <span class="nxl-mtext">Propositions</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Proposition</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Voir Proposition</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Modifier Proposition</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Créer Proposition</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-dollar-sign"></i></span>
-                            <span class="nxl-mtext">Paiements</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Paiement</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Voir Facture</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Créer Facture</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-users"></i></span>
-                            <span class="nxl-mtext">Clients</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Clients</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Voir Clients</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Créer Clients</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-alert-circle"></i></span>
                             <span class="nxl-mtext">Leads</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.index') }}">Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.index') }}">Voir Leads</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.create') }}">Créer Leads</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.index') }}">Liste des Leads</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.leads.create') }}">Nouveau Lead</a></li>
                         </ul>
                     </li>
+
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-settings"></i></span>
