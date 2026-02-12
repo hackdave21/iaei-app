@@ -10,20 +10,20 @@
     <meta name="author" content="flexilecode" />
     <!--! The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags !-->
     <!--! BEGIN: Apps Title-->
-    <title>@yield('title','AIAE Admin')</title>
+    <title>@yield('title','AIAE Administration')</title>
     <!--! END:  Apps Title-->
     <!--! BEGIN: Favicon-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/favicon.ico') }}" />
     <!--! END: Favicon-->
     <!--! BEGIN: Bootstrap CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/bootstrap.min.css') }}" />
     <!--! END: Bootstrap CSS-->
     <!--! BEGIN: Vendors CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/vendors/css/vendors.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/vendors/css/daterangepicker.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/vendors/css/vendors.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/vendors/css/daterangepicker.min.css') }}" />
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/theme.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/theme.min.css') }}" />
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
@@ -71,18 +71,18 @@
     <!--! Footer Script !-->
     <!--! ================================================================ !-->
     <!--! BEGIN: Vendors JS !-->
-    <script src="{{ asset('admin/assets/vendors/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/vendors/js/vendors.min.js') }}"></script>
     <!-- vendors.min.js {always must need to be top} -->
-    <script src="{{ asset('admin/assets/vendors/js/daterangepicker.min.js') }}"></script>
-    <script src="assets/vendors/js/apexcharts.min.js"></script>
-    <script src="{{ asset('admin/assets/vendors/js/circle-progress.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/vendors/js/daterangepicker.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/vendors/js/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/vendors/js/circle-progress.min.js') }}"></script>
     <!--! END: Vendors JS !-->
     <!--! BEGIN: Apps Init  !-->
-    <script src="{{ asset('admin/assets/js/common-init.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/dashboard-init.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/js/common-init.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/js/dashboard-init.min.js') }}"></script>
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
-    <script src="{{ asset('admin/assets/js/theme-customizer-init.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/assets/js/theme-customizer-init.min.js') }}"></script>
     <!--! END: Theme Customizer !-->
 </body>
 
