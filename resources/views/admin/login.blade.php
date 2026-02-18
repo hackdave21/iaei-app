@@ -10,10 +10,10 @@
     <meta name="author" content="theme_ocean">
     <!--! The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags !-->
     <!--! BEGIN: Apps Title-->
-    <title>AIAE || Connexion Admin</title>
+    <title>AIAE | Connexion Admin</title>
     <!--! END:  Apps Title-->
     <!--! BEGIN: Favicon-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}">
     <!--! END: Favicon-->
     <!--! BEGIN: Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/bootstrap.min.css') }}">
@@ -23,6 +23,40 @@
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/theme.min.css') }}">
+    <style>
+        :root {
+            --bs-primary: #162064;
+            --bs-primary-rgb: 22, 32, 100;
+            --primary-color: #162064;
+        }
+        .btn-primary {
+            background-color: #162064 !important;
+            border-color: #162064 !important;
+            color: #fff !important;
+        }
+        .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+            background-color: #0d1540 !important;
+            border-color: #0d1540 !important;
+            color: #fff !important;
+        }
+        .text-primary {
+            color: #162064 !important;
+        }
+        a.text-primary:hover {
+            color: #0d1540 !important;
+        }
+        .custom-control-input:checked ~ .custom-control-label::before {
+            border-color: #162064 !important;
+            background-color: #162064 !important;
+        }
+        .form-control:focus {
+            border-color: #162064 !important;
+            box-shadow: 0 0 0 0.25rem rgba(22, 32, 100, 0.25) !important;
+        }
+        .bg-primary {
+            background-color: #162064 !important;
+        }
+    </style>
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
@@ -41,12 +75,11 @@
             <div class="minimal-card-wrapper">
                 <div class="card mb-4 mt-5 mx-4 mx-sm-0 position-relative">
                     <div class="wd-50 bg-white p-2 rounded-circle shadow-lg position-absolute translate-middle top-0 start-50">
-                        <img src="{{ asset('admin-assets/assets/images/logo-abbr.png') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="" class="img-fluid">
                     </div>
                     <div class="card-body p-sm-5">
                         <h2 class="fs-20 fw-bolder mb-4">Connexion</h2>
-                        <h4 class="fs-13 fw-bold mb-2">Connectez-vous à votre compte</h4>
-                        <p class="fs-12 fw-medium text-muted">Merci de revenir sur les applications web <strong>AIAE</strong>, accédons à votre espace de gestion.</p>
+                        <p class="fs-12 fw-medium text-muted">Bienvenue Admin de l'application web <strong>AIAE</strong>, accédez à votre espace de gestion en entrant vos identifiants ci-dessous.</p>
                         <form action="{{ route('admin.login.submit') }}" method="POST" class="w-100 mt-4 pt-2">
                             @csrf
                             
@@ -63,8 +96,17 @@
                             <div class="mb-4">
                                 <input type="email" name="email" class="form-control" placeholder="Adresse E-mail" value="{{ old('email') }}" required autofocus>
                             </div>
-                            <div class="mb-3">
-                                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                            <div class="mb-4">
+                                <div class="hstack justify-content-between mb-2">
+                                    <label class="form-label mb-0">Mot de passe</label>
+                                    <a href="javascript:void(0);" class="fs-13 text-primary">Mot de passe oublié ?</a>
+                                </div>
+                                <div class="position-relative">
+                                    <input type="password" name="password" id="password_input" class="form-control" placeholder="Mot de passe" required autocomplete="current-password">
+                                    <div class="position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer" id="password_toggle">
+                                        <i class="feather-eye" id="toggle_icon"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
@@ -73,15 +115,12 @@
                                         <label class="custom-control-label c-pointer" for="rememberMe">Se souvenir de moi</label>
                                     </div>
                                 </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="fs-11 text-primary">Mot de passe oublié ?</a>
-                                </div>
                             </div>
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-lg btn-primary w-100">Se connecter</button>
                             </div>
                         </form>
-                        <div class="w-100 mt-5 text-center mx-auto">
+                        <!-- <div class="w-100 mt-5 text-center mx-auto">
                             <div class="mb-4 border-bottom position-relative"><span class="small py-1 px-3 text-uppercase text-muted bg-white position-absolute translate-middle">ou</span></div>
                             <div class="d-flex align-items-center justify-content-center gap-2">
                                 <a href="javascript:void(0);" class="btn btn-light-brand flex-fill" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Se connecter avec Facebook">
@@ -94,11 +133,11 @@
                                     <i class="feather-github text"></i>
                                 </a>
                             </div>
-                        </div>
-                        <div class="mt-5 text-muted">
+                        </div> -->
+                        <!-- <div class="mt-5 text-muted">
                             <span> Vous n'avez pas de compte ?</span>
                             <a href="javascript:void(0);" class="fw-bold">Créer un compte</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -260,6 +299,22 @@
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
     <script src="{{ asset('admin-assets/assets/js/theme-customizer-init.min.js') }}"></script>
+    <script>
+        document.getElementById('password_toggle').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password_input');
+            const toggleIcon = document.getElementById('toggle_icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('feather-eye');
+                toggleIcon.classList.add('feather-eye-off');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('feather-eye-off');
+                toggleIcon.classList.add('feather-eye');
+            }
+        });
+    </script>
     <!--! END: Theme Customizer !-->
 </body>
 

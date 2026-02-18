@@ -60,7 +60,31 @@
                                 </span>
                             </li>
                         </ul>
-                        <div class="mt-4 d-grid">
+                        <div class="mt-4 d-grid gap-2">
+                            @if($quotation->status != 'accepted')
+                                <form action="{{ route('admin.quotations.accept', $quotation) }}" method="POST" class="d-grid">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="feather-check-circle me-2"></i>Accepter le Devis
+                                    </button>
+                                </form>
+                            @endif
+                            @if($quotation->status != 'rejected')
+                                <form action="{{ route('admin.quotations.reject', $quotation) }}" method="POST" class="d-grid">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="feather-x-circle me-2"></i>Refuser le Devis
+                                    </button>
+                                </form>
+                            @endif
+
+                            <form action="{{ route('admin.quotations.send', $quotation) }}" method="POST" class="d-grid">
+                                @csrf
+                                <button type="submit" class="btn btn-info">
+                                    <i class="feather-mail me-2"></i>Envoyer par e-mail
+                                </button>
+                            </form>
+                            
                             @if($quotation->pdf_path)
                                 <a href="{{ asset($quotation->pdf_path) }}" class="btn btn-primary" target="_blank">
                                     <i class="feather-download me-2"></i>Télécharger le PDF

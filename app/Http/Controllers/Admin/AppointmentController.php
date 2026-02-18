@@ -8,6 +8,8 @@ use App\Models\Lead;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentScheduled;
 
 class AppointmentController extends Controller
 {
@@ -61,9 +63,16 @@ class AppointmentController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $validated['end_at'] = Carbon::parse($validated['start_at'])->addMinutes($validated['duration']);
+        $validated['end_at'] = Carbon::parse($validated['start_at'])->addMinutes((int) $validated['duration']);
         
         $appointment = Appointment::create($validated);
+
+        // Notify Lead
+        try {
+            Mail::to($appointment->lead->email)->send(new AppointmentScheduled($appointment));
+        } catch (\Exception $e) {
+            // Log error or ignore
+        }
 
         if ($request->wantsJson()) {
             return response()->json([
@@ -118,7 +127,7 @@ class AppointmentController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $validated['end_at'] = Carbon::parse($validated['start_at'])->addMinutes($validated['duration']);
+        $validated['end_at'] = Carbon::parse($validated['start_at'])->addMinutes((int) $validated['duration']);
         
         $appointment->update($validated);
 

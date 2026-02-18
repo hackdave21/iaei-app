@@ -156,6 +156,7 @@
     </div>
 </div>
 
+@push('modals')
 <!-- Modal Pricing Rule -->
 <div class="modal fade" id="addPricingRuleModal" tabindex="-1">
     <div class="modal-dialog">
@@ -229,4 +230,5 @@
         </form>
     </div>
 </div>
+@endpush
 @endsection

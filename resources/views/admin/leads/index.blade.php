@@ -204,8 +204,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer px-0 border-top-0">
-                            {{ $leads->links() }}
+                        <div class="card-footer d-flex justify-content-end">
+                            <div class="overflow-auto w-100">
+                                {{ $leads->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -42,6 +42,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('appointments', AppointmentController::class);
         Route::resource('simulations', SimulationController::class)->only(['index', 'show', 'destroy']);
         Route::resource('quotations', QuotationController::class)->only(['index', 'show', 'destroy']);
+        Route::post('quotations/{quotation}/accept', [QuotationController::class, 'accept'])->name('quotations.accept');
+        Route::post('quotations/{quotation}/reject', [QuotationController::class, 'reject'])->name('quotations.reject');
+        Route::post('quotations/{quotation}/send', [QuotationController::class, 'send'])->name('quotations.send');
         
         // Settings & Configuration
         Route::resource('divisions', DivisionController::class);

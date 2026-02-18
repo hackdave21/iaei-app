@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Quotation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\QuotationSent;
 
 class QuotationController extends Controller
 {
@@ -101,7 +103,42 @@ class QuotationController extends Controller
                 'message' => 'Quotation deleted successfully',
             ]);
         }
-
         return redirect()->route('admin.quotations.index')->with('success', 'Devis supprimé avec succès.');
+    }
+
+    /**
+     * Accept the specified quotation.
+     */
+    public function accept(Quotation $quotation)
+    {
+        $quotation->update(['status' => 'accepted']);
+        return back()->with('success', 'Devis accepté avec succès.');
+    }
+
+    /**
+     * Reject the specified quotation.
+     */
+    public function reject(Quotation $quotation)
+    {
+        $quotation->update(['status' => 'rejected']);
+        return back()->with('success', 'Devis refusé.');
+    }
+
+    /**
+     * Send the quotation to the lead via email.
+     */
+    public function send(Quotation $quotation)
+    {
+        if (!$quotation->lead || !$quotation->lead->email) {
+            return back()->with('error', 'Aucun email associé à ce lead.');
+        }
+
+        try {
+            Mail::to($quotation->lead->email)->send(new QuotationSent($quotation));
+            $quotation->update(['status' => 'sent']); // Optional: track that it was sent
+            return back()->with('success', 'Devis envoyé avec succès à ' . $quotation->lead->email);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de l\'envoi : ' . $e->getMessage());
+        }
     }
 }

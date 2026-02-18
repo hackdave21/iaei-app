@@ -7,6 +7,7 @@ use App\Models\Lead;
 use App\Models\Simulation;
 use App\Models\Quotation;
 use App\Models\User;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,10 @@ class DashboardController extends Controller
         $leadsRecents = Lead::with('user')->latest()->take(5)->get();
         $devisRecents = Quotation::with('lead')->latest()->take(5)->get();
 
+        $totalAppointments = Appointment::count();
+        $scheduledAppointments = Appointment::where('status', 'scheduled')->count();
+        $completedAppointments = Appointment::where('status', 'completed')->count();
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalLeads',
@@ -43,7 +48,10 @@ class DashboardController extends Controller
             'chiffreAffairesTotal',
             'simulationsParSecteur',
             'leadsRecents',
-            'devisRecents'
+            'devisRecents',
+            'totalAppointments',
+            'scheduledAppointments',
+            'completedAppointments'
         ));
     }
 }

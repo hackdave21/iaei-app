@@ -13,7 +13,7 @@
     <title>@yield('title','AIAE Administration')</title>
     <!--! END:  Apps Title-->
     <!--! BEGIN: Favicon-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL.png') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}" />
     <!--! END: Favicon-->
     <!--! BEGIN: Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/bootstrap.min.css') }}" />
@@ -49,8 +49,8 @@
         }
 
         .btn-primary:hover {
-            background-color: #05482C !important;
-            border-color: #05482C !important;
+            background-color: #0d1540 !important;
+            border-color: #0d1540 !important;
         }
 
         /* Secondary & Accent Colors */
@@ -137,6 +137,7 @@
     <!--! ================================================================ !-->
     <!--! Footer Script !-->
     <!--! ================================================================ !-->
+    @stack('modals')
     <!--! BEGIN: Vendors JS !-->
     <script src="{{ asset('admin-assets/assets/vendors/js/vendors.min.js') }}"></script>
     <!-- vendors.min.js {always must need to be top} -->

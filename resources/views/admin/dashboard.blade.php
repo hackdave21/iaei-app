@@ -223,107 +223,26 @@
                         </div>
                     </div>
                     <!-- [Conversion Rate] end -->
-                    <!-- [Payment Records] start -->
-                    <div class="col-xxl-8">
-                        <div class="card stretch stretch-full">
-                            <div class="card-header">
-                                <h5 class="card-title">Registre des paiements</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Supprimer">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger" data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Actualiser">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning" data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Agrandir/Réduire">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success" data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="avatar-text avatar-sm" data-bs-toggle="dropdown" data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-at-sign"></i>Nouveau</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-calendar"></i>Événement</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-bell"></i>Mis en veille</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-trash-2"></i>Supprimé</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-settings"></i>Paramètres</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-life-buoy"></i>Conseils & Astuces</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body custom-card-action p-0">
-                                <div id="payment-records-chart"></div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row g-4">
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">En attente</div>
-                                            <h6 class="fw-bold text-dark">{{ number_format(5486, 0, ',', ' ') }} FCFA</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 81%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Terminé</div>
-                                            <h6 class="fw-bold text-dark">{{ number_format(9275, 0, ',', ' ') }} FCFA</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 82%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Rejeté</div>
-                                            <h6 class="fw-bold text-dark">{{ number_format(3868, 0, ',', ' ') }} FCFA</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 68%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="p-3 border border-dashed rounded">
-                                            <div class="fs-12 text-muted mb-1">Revenu</div>
-                                            <h6 class="fw-bold text-dark">{{ number_format(50668, 0, ',', ' ') }} FCFA</h6>
-                                            <div class="progress mt-2 ht-3">
-                                                <div class="progress-bar bg-dark" role="progressbar" style="width: 75%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [Payment Records] end -->
                     <!-- [Mini] start -->
                     <div class="col-lg-4">
                         <div class="card mb-4 stretch stretch-full">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <div class="d-flex gap-3 align-items-center">
                                     <div class="avatar-text">
-                                        <i class="feather feather-star"></i>
+                                        <i class="feather feather-calendar text-primary"></i>
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">Tâches terminées</div>
-                                        <div class="fs-12 text-muted">22/35 terminées</div>
+                                        <div class="fw-semibold text-dark">Rendez-vous à venir</div>
+                                        <div class="fs-12 text-muted">{{ $scheduledAppointments }} programmés</div>
                                     </div>
                                 </div>
-                                <div class="fs-4 fw-bold text-dark">22/35</div>
+                                <div class="fs-4 fw-bold text-dark">{{ $scheduledAppointments }}</div>
                             </div>
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
                                 <div id="task-completed-area-chart"></div>
                                 <div class="fs-12 text-muted text-nowrap">
-                                    <span class="fw-semibold text-primary">28% de plus</span><br />
-                                    <span>depuis la semaine dernière</span>
+                                    <span class="fw-semibold text-primary">Prochainement</span><br />
+                                    <span>Planifiés cette semaine</span>
                                 </div>
                             </div>
                         </div>
@@ -333,20 +252,20 @@
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <div class="d-flex gap-3 align-items-center">
                                     <div class="avatar-text">
-                                        <i class="feather feather-file-text"></i>
+                                        <i class="feather feather-check-circle text-success"></i>
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">Nouvelles tâches</div>
-                                        <div class="fs-12 text-muted">0/20 tâches</div>
+                                        <div class="fw-semibold text-dark">Rendez-vous terminés</div>
+                                        <div class="fs-12 text-muted">{{ $completedAppointments }} effectués</div>
                                     </div>
                                 </div>
-                                <div class="fs-4 fw-bold text-dark">5/20</div>
+                                <div class="fs-4 fw-bold text-dark">{{ $completedAppointments }}</div>
                             </div>
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
                                 <div id="new-tasks-area-chart"></div>
                                 <div class="fs-12 text-muted text-nowrap">
-                                    <span class="fw-semibold text-success">34% de plus</span><br />
-                                    <span>depuis la semaine dernière</span>
+                                    <span class="fw-semibold text-success">Effectués</span><br />
+                                    <span>Depuis le début</span>
                                 </div>
                             </div>
                         </div>
@@ -356,20 +275,20 @@
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <div class="d-flex gap-3 align-items-center">
                                     <div class="avatar-text">
-                                        <i class="feather feather-airplay"></i>
+                                        <i class="feather feather-users text-info"></i>
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">Projets terminés</div>
-                                        <div class="fs-12 text-muted">20/30 projets</div>
+                                        <div class="fw-semibold text-dark">Total Rendez-vous</div>
+                                        <div class="fs-12 text-muted">{{ $totalAppointments }} au total</div>
                                     </div>
                                 </div>
-                                <div class="fs-4 fw-bold text-dark">20/30</div>
+                                <div class="fs-4 fw-bold text-dark">{{ $totalAppointments }}</div>
                             </div>
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
                                 <div id="project-done-area-chart"></div>
                                 <div class="fs-12 text-muted text-nowrap">
-                                    <span class="fw-semibold text-danger">42% de plus</span><br />
-                                    <span>depuis la semaine dernière</span>
+                                    <span class="fw-semibold text-info">Global</span><br />
+                                    <span>Toutes périodes</span>
                                 </div>
                             </div>
                         </div>

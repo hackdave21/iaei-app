@@ -19,7 +19,7 @@
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.dashboard') }}">CRM</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analyses</a></li>
+                            
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -39,7 +39,7 @@
                     </a>
                     <ul class="nxl-submenu">
                         <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.simulations.index') }}">Toutes les simulations</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Analyses</a></li>
+    
                     </ul>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
@@ -49,7 +49,7 @@
                     </a>
                     <ul class="nxl-submenu">
                         <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.quotations.index') }}">Tous les devis</a></li>
-                        <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Paramètres devis</a></li>
+                    
                     </ul>
                 </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -72,7 +72,7 @@
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.divisions.index') }}">Divisions</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sectors.index') }}">Secteurs</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sector-types.index') }}">Types de Secteur</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="javascript:void(0);">Paramètres Généraux</a></li>
+                            
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -81,8 +81,6 @@
                             <span class="nxl-mtext">Centre d'aide</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#overview">Assistance</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#crm">Base de connaissances</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.help') }}#simulations">Documentation</a></li>
                         </ul>
                     </li>
