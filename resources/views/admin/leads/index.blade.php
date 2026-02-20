@@ -113,9 +113,8 @@
                                             </div>
                                         </th>
                                         <th>Prospect</th>
-                                        <th>Email</th>
-                                        <th>Source</th>
-                                        <th>Téléphone</th>
+                                        <th>Demande</th>
+                                        <th>Projet</th>
                                         <th>Date</th>
                                         <th>Statut</th>
                                         <th class="text-end">Actions</th>
@@ -139,12 +138,16 @@
                                                 </div>
                                                 <div>
                                                     <span class="text-truncate-1-line">{{ $lead->first_name }} {{ $lead->last_name }}</span>
+                                                    <small class="text-muted d-block">{{ $lead->email }}</small>
                                                 </div>
                                             </a>
                                         </td>
-                                        <td><a href="mailto:{{ $lead->email }}">{{ $lead->email }}</a></td>
-                                        <td>{{ $lead->source ?? 'N/A' }}</td>
-                                        <td>{{ $lead->phone ?? 'N/A' }}</td>
+                                        <td>
+                                            <span class="badge bg-soft-info text-info text-uppercase">{{ $lead->type_demande }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-truncate-1-line">{{ $lead->type_projet ?? 'N/A' }}</span>
+                                        </td>
                                         <td>{{ $lead->created_at->format('d/m/Y H:i') }}</td>
                                         <td>
                                             @php

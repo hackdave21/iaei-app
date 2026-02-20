@@ -59,6 +59,10 @@ class LeadController extends Controller
             'company_name' => 'nullable|string',
             'status' => 'required|string',
             'source' => 'nullable|string',
+            'type_demande' => 'required|in:rappel,devis,rdv,info',
+            'type_projet' => 'nullable|string',
+            'description_projet' => 'nullable|string',
+            'budget_estime' => 'nullable|numeric',
             'assigned_to_user_id' => 'nullable|exists:users,id',
             'notes' => 'nullable|string',
         ]);
@@ -115,6 +119,10 @@ class LeadController extends Controller
             'company_name' => 'nullable|string',
             'status' => 'string',
             'source' => 'nullable|string',
+            'type_demande' => 'sometimes|in:rappel,devis,rdv,info',
+            'type_projet' => 'nullable|string',
+            'description_projet' => 'nullable|string',
+            'budget_estime' => 'nullable|numeric',
             'assigned_to_user_id' => 'nullable|exists:users,id',
             'notes' => 'nullable|string',
         ]);

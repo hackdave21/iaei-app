@@ -10,6 +10,11 @@ use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\SectorController;
 use App\Http\Controllers\Admin\SectorTypeController;
 use App\Http\Controllers\Admin\SimulationController;
+use App\Http\Controllers\Admin\ZoneController;
+use App\Http\Controllers\Admin\SolController;
+use App\Http\Controllers\Admin\TypeBatimentController;
+use App\Http\Controllers\Admin\TemplateProjetController;
+use App\Http\Controllers\Admin\EquipementOptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +57,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('sector-types', SectorTypeController::class);
         Route::post('sector-types/{sector_type}/pricing-rules', [SectorTypeController::class, 'storePricingRule'])->name('sector-types.pricing-rules.store');
         Route::post('sector-types/{sector_type}/pricing-coefficients', [SectorTypeController::class, 'storePricingCoefficient'])->name('sector-types.pricing-coefficients.store');
+
+        // Immobilier Pro Reference Data
+        Route::resource('zones', ZoneController::class);
+        Route::resource('sols', SolController::class);
+        Route::resource('type-batiments', TypeBatimentController::class);
+        Route::resource('templates-projets', TemplateProjetController::class);
+        Route::resource('equipement-options', EquipementOptionController::class);
+
         Route::get('/help', [HelpController::class, 'index'])->name('help');
     });
 });

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Simulation;
 use App\Models\SimulationResult;
 use Illuminate\Http\Request;
+use App\Services\EstimationService;
+use App\Services\DeductionService;
 use Illuminate\Support\Str;
 
 class PublicSimulationController extends Controller
@@ -13,30 +15,33 @@ class PublicSimulationController extends Controller
     /**
      * Perform a simulation calculation.
      */
+    protected $estimationService;
+    protected $deductionService;
+
+    public function __construct(EstimationService $estimationService, DeductionService $deductionService)
+    {
+        $this->estimationService = $estimationService;
+        $this->deductionService = $deductionService;
+    }
+
     public function calculate(Request $request)
     {
         $validated = $request->validate([
-            'sector_type_id' => 'required|exists:sector_types,id',
-            'input_quantity' => 'required|numeric|min:1',
-            'configuration_data' => 'nullable|array',
+            'standing' => 'required|string|exists:standings,code',
+            'surface_batie' => 'required|numeric|min:1',
+            'option_ids' => 'sometimes|array',
+            'option_ids.*' => 'exists:equipement_options,id',
         ]);
 
-        // Logic for calculation would go here.
-        // For now, generating a dummy result.
-        $baseAmount = $validated['input_quantity'] * 1500; // Example logic
-        $tax = $baseAmount * 0.20;
-        
-        $result = [
-            'base_amount' => $baseAmount,
-            'tax_amount' => $tax,
-            'total_amount_ttc' => $baseAmount + $tax,
-            'estimated_roi_years' => 7.5,
-        ];
+        if (!isset($validated['option_ids'])) {
+            $validated['option_ids'] = $this->deductionService->suggestOptions($validated['standing']);
+        }
+
+        $result = $this->estimationService->calculate($validated);
 
         return response()->json([
             'success' => true,
-            'message' => 'Simulation calculated successfully',
-            'data' => $result,
+            'data' => $result
         ]);
     }
 

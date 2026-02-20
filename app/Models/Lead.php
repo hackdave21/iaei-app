@@ -23,6 +23,19 @@ class Lead extends Model
         'phone',
         'company_name',
         'notes',
+        'type_demande',
+        'type_projet',
+        'description_projet',
+        'budget_estime',
+        'message',
+        'donnees_simulation_snapshot',
+        'contacte_at',
+        'traite_par'
+    ];
+
+    protected $casts = [
+        'donnees_simulation_snapshot' => 'array',
+        'contacte_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

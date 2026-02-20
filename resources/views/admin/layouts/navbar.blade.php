@@ -65,14 +65,26 @@
 
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-box"></i></span>
+                            <span class="nxl-mtext">Immobilier Pro</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.zones.index') }}">Zones (Togo)</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sols.index') }}">Types de Sols</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.type-batiments.index') }}">Types de Bâtiments</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.templates-projets.index') }}">Modèles Premium</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.equipement-options.index') }}">Options Équipements</a></li>
+                        </ul>
+                    </li>
+                    <li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-settings"></i></span>
-                            <span class="nxl-mtext">Configuration</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                            <span class="nxl-mtext">Configuration Basique</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.divisions.index') }}">Divisions</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sectors.index') }}">Secteurs</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sector-types.index') }}">Types de Secteur</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">

@@ -36,20 +36,15 @@ class DatabaseSeeder extends Seeder
             QuotationSeeder::class,
             AppointmentSeeder::class,
 
-            // 5. Energies (Dépendent des simulations)
-            EnergySolutionSeeder::class,
-            EnergyRoiCalculationSeeder::class,
-
-            // 6. Agriculture
-            AgriculturalModelSeeder::class,
-            AgriculturalYieldSeeder::class,
-            AgriculturalCostSeeder::class,
-            AgriculturalRoiSeeder::class,
-
-            // 7. Config & System
+            // 5. Config & System
             CurrencySeeder::class,
             ExchangeRateSeeder::class,
             AdminSettingSeeder::class,
+
+            // 6. V4.0 & V5.0 Updates (Specific to AIAE Simulation Engine)
+            ReferenceDataSeeder::class,
+            TemplateSeeder::class,
+            EquipementOptionSeeder::class,
         ]);
     }
 }

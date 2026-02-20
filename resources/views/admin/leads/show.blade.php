@@ -134,7 +134,10 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" id="leadDetailTabs" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="simulations-tab" data-bs-toggle="tab" data-bs-target="#simulations" type="button" role="tab">Simulations</button>
+                                <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Détails Projet V4</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="simulations-tab" data-bs-toggle="tab" data-bs-target="#simulations" type="button" role="tab">Simulations</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="quotations-tab" data-bs-toggle="tab" data-bs-target="#quotations" type="button" role="tab">Devis</button>
@@ -149,7 +152,37 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="leadDetailTabsContent">
-                            <div class="tab-pane fade show active" id="simulations" role="tabpanel">
+                            <div class="tab-pane fade show active" id="details" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold">Type de Projet</label>
+                                        <div class="p-3 bg-soft-primary rounded">{{ $lead->type_projet ?? 'Non spécifié' }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold">Budget Estimé</label>
+                                        <div class="p-3 bg-soft-success rounded">{{ $lead->budget_estime ? number_format($lead->budget_estime, 0, ',', ' ') . ' FCFA' : 'N/A' }}</div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fw-bold">Description du Projet</label>
+                                        <div class="p-3 border rounded">
+                                            {!! nl2br(e($lead->description_projet ?? 'Aucune description fournie.')) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fw-bold">Message du Client</label>
+                                        <div class="p-3 border rounded bg-light">
+                                            {!! nl2br(e($lead->message ?? 'Aucun message.')) !!}
+                                        </div>
+                                    </div>
+                                    @if($lead->donnees_simulation_snapshot)
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold text-danger">Aperçu Configuration (Snapshot)</label>
+                                        <pre class="bg-dark text-white p-3 rounded fs-10" style="max-height: 200px; overflow: auto;">{{ json_encode($lead->donnees_simulation_snapshot, JSON_PRETTY_PRINT) }}</pre>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="simulations" role="tabpanel">
                                 @if($lead->simulations->count() > 0)
                                     <div class="table-responsive">
                                         <table class="table table-hover">
