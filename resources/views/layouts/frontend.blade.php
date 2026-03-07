@@ -92,11 +92,15 @@
 </head>
 
 <body class="font-futura bg-gray-100 overflow-x-hidden">
-  @include('frontend.partials.navbar')
+  @if(!isset($hideHeaderFooter) || !$hideHeaderFooter)
+    @include('frontend.partials.navbar')
+  @endif
 
   @yield('content')
 
-  @include('frontend.partials.footer')
+  @if(!isset($hideHeaderFooter) || !$hideHeaderFooter)
+    @include('frontend.partials.footer')
+  @endif
 
   <!-- ================= JS ================= -->
   <script>

@@ -24,10 +24,6 @@
             class="px-4 py-2 rounded-full @if(Route::is('simulator.index') || Route::is('simulator.v1')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">Simulateurs</a>
         </li>
 
-        <li>
-          <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">Espace
-            client</a>
-        </li>
 
         <li>
           <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">Projets
@@ -40,9 +36,9 @@
       </ul>
 
       <div class="flex items-center gap-2">
-        <button class="w-11 h-11 rounded-full bg-glassDark flex items-center justify-center">
-          <img src="{{ asset('aiae-frontend/Images/Contact blanc.svg') }}" alt="" height="25" width="25" />
-        </button>
+        <a href="{{ route('profile') }}" class="w-11 h-11 rounded-full bg-glassDark flex items-center justify-center hover:bg-white/20 transition-colors">
+          <img src="{{ asset('aiae-frontend/Images/Contact blanc.svg') }}" alt="Profile" height="25" width="25" />
+        </a>
         <button class="hidden sm:block px-5 py-2 rounded-full bg-white text-black">
           Contact
         </button>
@@ -69,7 +65,6 @@
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">À propos</a>
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Nos divisions</a>
       <a href="{{ route('simulator.index') }}" class="block px-4 py-2 rounded-lg @if(Route::is('simulator.index')) bg-white @else bg-glassDark @endif">Simulateurs</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Espace client</a>
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Projets & Réalisations</a>
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">FAQ</a>
     </div>

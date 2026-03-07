@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SolController;
 use App\Http\Controllers\Admin\TypeBatimentController;
 use App\Http\Controllers\Admin\TemplateProjetController;
 use App\Http\Controllers\Admin\EquipementOptionController;
+use App\Http\Controllers\Auth\FrontendAuthController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SimulatorController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,17 @@ Route::get('/divisions', [FrontendController::class, 'divisions'])->name('divisi
 Route::get('/clients', [FrontendController::class, 'clients'])->name('clients');
 Route::get('/projects', [FrontendController::class, 'projects'])->name('projects');
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+
+// Frontend Auth Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [FrontendAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [FrontendAuthController::class, 'login'])->name('login.submit');
+    Route::get('/register', [FrontendAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [FrontendAuthController::class, 'register'])->name('register.submit');
+});
+Route::get('/mon-espace', [SimulatorController::class, 'profile'])->name('profile')->middleware('auth');
+Route::post('/simulator/save', [SimulatorController::class, 'save'])->name('simulator.save');
+Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
 
 // Simulator Routes
 Route::get('/simulator', [SimulatorController::class, 'index'])->name('simulator.index');

@@ -39,6 +39,54 @@ class SimulatorController extends Controller
         ));
     }
 
+    public function profile()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+        
+        $user = auth()->user();
+        // Simulation history will be fetched here later when the model is ready
+        $simulations = $user->simulations()->latest()->get();
+        
+        return view('frontend.profile.index', compact('user', 'simulations'));
+    }
+
+    public function save(Request $request)
+    {
+        $data = $request->all();
+        
+        if (auth()->check()) {
+            $simulation = new \App\Models\Simulation();
+            $simulation->reference_id = 'SIM-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
+            $simulation->user_id = auth()->id();
+            $simulation->sector_type_id = 1; // Placeholder for now or map properly
+            $simulation->input_quantity = $data['dimensions']['surface'] ?? 0;
+            $simulation->total_amount_ttc = $data['total'] ?? 0;
+            $simulation->total_amount_ht = ($data['total'] ?? 0) / 1.18; // Simple VAT reverse
+            $simulation->base_amount = $data['base_amount'] ?? 0;
+            $simulation->options_amount = $data['options_amount'] ?? 0;
+            $simulation->status = 'saved';
+            $simulation->configuration_data = [
+                'secteur' => $data['secteur'],
+                'typeBat' => $data['typeBat'],
+                'standing' => $data['standing'],
+                'zone' => $data['zone'],
+                'sol' => $data['sol'],
+                'dimensions' => $data['dimensions'],
+                'options' => $data['options'],
+                'details' => $data['details'] ?? []
+            ];
+            $simulation->save();
+            
+            return response()->json(['status' => 'success', 'redirect' => route('profile')]);
+        } else {
+            // Store in session for guest
+            session(['pending_simulation' => $data]);
+            return response()->json(['status' => 'guest', 'redirect' => route('register')]);
+        }
+    }
+
     public function results(Request $request)
     {
         if (!auth()->check()) {
