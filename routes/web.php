@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\SolController;
 use App\Http\Controllers\Admin\TypeBatimentController;
 use App\Http\Controllers\Admin\TemplateProjetController;
 use App\Http\Controllers\Admin\EquipementOptionController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\SimulatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +25,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect()->route('admin.dashboard');
-    }
-    return redirect()->route('admin.login');
-});
+// Frontend Routes
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/divisions', [FrontendController::class, 'divisions'])->name('divisions');
+Route::get('/clients', [FrontendController::class, 'clients'])->name('clients');
+Route::get('/projects', [FrontendController::class, 'projects'])->name('projects');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+
+// Simulator Routes
+Route::get('/simulator', [SimulatorController::class, 'index'])->name('simulator.index');
+Route::get('/simulator/v1', [SimulatorController::class, 'simulatorV1'])->name('simulator.v1');
+Route::get('/simulator/results', [SimulatorController::class, 'results'])->name('simulator.results');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Guest Admin Routes
