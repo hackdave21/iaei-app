@@ -42,6 +42,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [FrontendAuthController::class, 'register'])->name('register.submit');
 });
 Route::get('/mon-espace', [SimulatorController::class, 'profile'])->name('profile')->middleware('auth');
+Route::post('/mon-espace/profile/update', [SimulatorController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
+Route::get('/mon-espace/simulations/{id}', [SimulatorController::class, 'show'])->name('simulations.show')->middleware('auth');
 Route::post('/simulator/save', [SimulatorController::class, 'save'])->name('simulator.save');
 Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
 

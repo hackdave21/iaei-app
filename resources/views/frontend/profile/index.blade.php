@@ -25,7 +25,32 @@
         background-color: #162064 !important;
         backdrop-filter: none !important;
     }
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
+<script>
+    function toggleEdit() {
+        const display = document.getElementById('profile-display');
+        const form = document.getElementById('profile-edit-form');
+        const btn = document.getElementById('btn-edit-profile');
+        
+        if (display.classList.contains('hidden')) {
+            display.classList.remove('hidden');
+            form.classList.add('hidden');
+            btn.innerHTML = `<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg> Modifier`;
+        } else {
+            display.classList.add('hidden');
+            form.classList.remove('hidden');
+            btn.innerHTML = `Action en cours...`;
+            btn.onclick = null; // Disable button while in edit mode to avoid confusion, though it's not strictly necessary with "Annuler"
+        }
+    }
+</script>
 @endsection
 
 @section('content')
@@ -67,11 +92,22 @@
             <!-- Main Content -->
             <div class="flex-1 space-y-8">
                 <!-- Info Section -->
-                <div class="bg-white rounded-3xl p-8 profile-card shadow-xl">
-                    <h3 class="text-2xl font-bold text-[#162064] mb-6 font-FuturaStdMedium">Mes Informations</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-3xl p-8 profile-card shadow-xl overflow-hidden relative">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-[#162064] font-FuturaStdMedium">Mes Informations</h3>
+                        <button onclick="toggleEdit()" id="btn-edit-profile" class="text-xs font-bold uppercase tracking-widest text-[#162064] hover:text-[#ff8400] transition-colors flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                            Modifier
+                        </button>
+                    </div>
+
+                    <div id="profile-display" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div>
-                            <span class="text-gray-400 text-xs uppercase font-bold tracking-widest block mb-1">Email</span>
+                            <span class="text-gray-400 text-xs uppercase font-bold tracking-widest block mb-1">Nom complet</span>
+                            <div class="text-gray-800 font-medium">{{ $user->name }}</div>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-xs uppercase font-bold tracking-widest block mb-1">Adresse Email</span>
                             <div class="text-gray-800 font-medium">{{ $user->email }}</div>
                         </div>
                         <div>
@@ -79,6 +115,28 @@
                             <div class="text-gray-800 font-medium">{{ $user->phone ?? 'Non renseigné' }}</div>
                         </div>
                     </div>
+
+                    <form id="profile-edit-form" action="{{ route('profile.update') }}" method="POST" class="hidden animate-fade-in">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="text-gray-400 text-[10px] uppercase font-bold tracking-widest block mb-1">Nom complet</label>
+                                <input type="text" name="name" value="{{ $user->name }}" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#162064]">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 text-[10px] uppercase font-bold tracking-widest block mb-1">Email</label>
+                                <input type="email" name="email" value="{{ $user->email }}" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#162064]">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 text-[10px] uppercase font-bold tracking-widest block mb-1">Téléphone</label>
+                                <input type="text" name="phone" value="{{ $user->phone }}" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#162064]">
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end gap-3">
+                            <button type="button" onclick="toggleEdit()" class="px-4 py-2 text-xs font-bold uppercase text-gray-400 hover:text-gray-600 transition-colors">Annuler</button>
+                            <button type="submit" class="bg-[#162064] text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#ff8400] transition-all">Enregistrer</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- History Section -->
@@ -115,7 +173,7 @@
                                                 <span class="status-badge bg-green-100 text-green-700">Enregistré</span>
                                             </td>
                                             <td class="py-5 text-right">
-                                                <a href="#" class="text-[#162064] hover:text-[#ff8400] transition-colors inline-flex items-center gap-1 font-bold text-xs uppercase">
+                                                <a href="{{ route('simulations.show', $sim->id) }}" class="text-[#162064] hover:text-[#ff8400] transition-colors inline-flex items-center gap-1 font-bold text-xs uppercase">
                                                     Détails
                                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                                 </a>

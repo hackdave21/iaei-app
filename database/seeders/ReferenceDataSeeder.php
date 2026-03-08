@@ -12,32 +12,38 @@ class ReferenceDataSeeder extends Seeder
      */
     public function run(): void
     {
-        // 2.1 Zones géographiques
-        $zones = [
-            ['code' => 'grand_lome', 'nom' => 'Grand Lomé (Lomé, Baguida, Agoè, Adidogomé)', 'coefficient' => 1.00, 'profondeur_forage' => 60, 'prix_foncier_m2' => 50000],
-            ['code' => 'maritime', 'nom' => 'Région Maritime (Tsévié, Aného, Vogan, Kpémé)', 'coefficient' => 1.08, 'profondeur_forage' => 45, 'prix_foncier_m2' => 25000],
-            ['code' => 'plateaux', 'nom' => 'Région des Plateaux (Atakpamé, Kpalimé, Badou)', 'coefficient' => 1.14, 'profondeur_forage' => 70, 'prix_foncier_m2' => 15000],
-            ['code' => 'centrale', 'nom' => 'Région Centrale (Sokodé, Tchamba, Blitta)', 'coefficient' => 1.19, 'profondeur_forage' => 80, 'prix_foncier_m2' => 10000],
-            ['code' => 'kara_savanes', 'nom' => 'Kara et Savanes (Kara, Dapaong, Mango)', 'coefficient' => 1.25, 'profondeur_forage' => 90, 'prix_foncier_m2' => 8000],
-        ];
-
-        foreach ($zones as $zone) {
-            \App\Models\Zone::updateOrCreate(['code' => $zone['code']], $zone);
+        // 2.1 Zones géographiques        // Update Zones with V5 constants
+        foreach ([
+            'grand_lome' => ['coefficient' => 1.00, 'profondeur_forage' => 60, 'prix_foncier_m2' => 50000],
+            'maritime' => ['coefficient' => 1.08, 'profondeur_forage' => 45, 'prix_foncier_m2' => 25000],
+            'plateaux' => ['coefficient' => 1.14, 'profondeur_forage' => 70, 'prix_foncier_m2' => 15000],
+            'centrale' => ['coefficient' => 1.19, 'profondeur_forage' => 80, 'prix_foncier_m2' => 10000],
+            'kara_savanes' => ['coefficient' => 1.25, 'profondeur_forage' => 90, 'prix_foncier_m2' => 8000],
+        ] as $code => $data) {
+            Zone::where('code', $code)->update($data);
         }
 
-        // 2.2 Types de sol
-        $sols = [
-            ['code' => 'ferralitique', 'nom' => 'Ferralitique (terre de barre)', 'coefficient' => 1.00, 'prix_fondation_m2' => 25000, 'description' => 'Sol rouge-ocre, profond >3m, excellente portance. RÉFÉRENCE'],
-            ['code' => 'ferrugineux', 'nom' => 'Ferrugineux tropical', 'coefficient' => 1.10, 'prix_fondation_m2' => 30000, 'description' => 'Ocre-brun, concrétions ferrugineuses, bonne portance'],
-            ['code' => 'laterite', 'nom' => 'Latérite / Cuirasse', 'coefficient' => 1.03, 'prix_fondation_m2' => 22000, 'description' => 'Roche indurée très dure, excellente portance, terrassement coûteux'],
-            ['code' => 'argileux', 'nom' => 'Argileux', 'coefficient' => 1.30, 'prix_fondation_m2' => 45000, 'description' => 'Plastique, fissures saison sèche. ÉTUDE GÉOTECHNIQUE OBLIGATOIRE', 'alerte' => true],
-            ['code' => 'sableux', 'nom' => 'Sableux', 'coefficient' => 1.18, 'prix_fondation_m2' => 35000, 'description' => 'Granuleux, perméable, risque nappe proche'],
-            ['code' => 'hydromorphe', 'nom' => 'Hydromorphe', 'coefficient' => 1.48, 'prix_fondation_m2' => 65000, 'description' => "Engorgé, proche cours d'eau. CONSTRUCTION DÉCONSEILLÉE", 'alerte' => true],
-            ['code' => 'rocheux', 'nom' => 'Rocheux', 'coefficient' => 0.98, 'prix_fondation_m2' => 18000, 'description' => 'Roche dure à faible profondeur, excellente portance'],
-        ];
+        // Update Sols with V5 constants
+        foreach ([
+            'ferralitique' => ['coefficient' => 1.00, 'prix_fondation_m2' => 25000],
+            'ferrugineux' => ['coefficient' => 1.10, 'prix_fondation_m2' => 30000],
+            'laterite' => ['coefficient' => 1.03, 'prix_fondation_m2' => 22000],
+            'argileux' => ['coefficient' => 1.30, 'prix_fondation_m2' => 45000],
+            'sableux' => ['coefficient' => 1.18, 'prix_fondation_m2' => 35000],
+            'hydromorphe' => ['coefficient' => 1.48, 'prix_fondation_m2' => 65000],
+            'rocheux' => ['coefficient' => 0.98, 'prix_fondation_m2' => 18000],
+        ] as $code => $data) {
+            Sol::where('code', $code)->update($data);
+        }
 
-        foreach ($sols as $sol) {
-            \App\Models\Sol::updateOrCreate(['code' => $sol['code']], $sol);
+        // Update Standings with V5 price ranges
+        foreach ([
+            'standard' => ['prix_base_min' => 180000, 'prix_base_max' => 250000],
+            'confort' => ['prix_base_min' => 280000, 'prix_base_max' => 380000],
+            'premium' => ['prix_base_min' => 420000, 'prix_base_max' => 550000],
+            'prestige' => ['prix_base_min' => 600000, 'prix_base_max' => 900000],
+        ] as $code => $data) {
+            Standing::where('code', $code)->update($data);
         }
 
         // 2.3 Types de bâtiments

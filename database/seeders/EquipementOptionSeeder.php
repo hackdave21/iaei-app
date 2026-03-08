@@ -14,14 +14,14 @@ class EquipementOptionSeeder extends Seeder
     {
         $options = [
             // Solaire (Mapping included)
-            ['code' => 'solaire_3kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 3 kWc', 'prix_min' => 3500000, 'prix_max' => 5000000, 'puissance' => '3 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['standard' => 'opt', 'confort' => 'opt']],
-            ['code' => 'solaire_5kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 5 kWc', 'prix_min' => 5500000, 'prix_max' => 8000000, 'puissance' => '5 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'recom', 'premium' => 'opt']],
-            ['code' => 'solaire_10kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 10 kWc', 'prix_min' => 11000000, 'prix_max' => 15000000, 'puissance' => '10 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'recom', 'prestige' => 'opt']],
-            ['code' => 'solaire_15kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 15 kWc', 'prix_min' => 16000000, 'prix_max' => 21000000, 'puissance' => '15 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'preselect']],
-            ['code' => 'solaire_20kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 20 kWc', 'prix_min' => 21000000, 'prix_max' => 27000000, 'puissance' => '20 kWc', 'unite' => 'Forf.'],
-            ['code' => 'solaire_30kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 30 kWc', 'prix_min' => 30000000, 'prix_max' => 40000000, 'puissance' => '30 kWc', 'unite' => 'Forf.'],
-            ['code' => 'solaire_50kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 50 kWc', 'prix_min' => 48000000, 'prix_max' => 63000000, 'puissance' => '50 kWc', 'unite' => 'Forf.'],
-            ['code' => 'solaire_custom', 'categorie' => 'solaire', 'designation' => 'Kit sur mesure', 'prix_min' => 1000000, 'prix_max' => 1300000, 'puissance' => 'Sur mesure', 'unite' => '/kWc'],
+            ['code' => 'solaire_3kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 3 kWc', 'prix_min' => 4500000, 'prix_max' => 5500000, 'puissance' => '3 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['standard' => 'opt', 'confort' => 'opt']],
+            ['code' => 'solaire_5kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 5 kWc', 'prix_min' => 7500000, 'prix_max' => 9500000, 'puissance' => '5 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'recom', 'premium' => 'opt']],
+            ['code' => 'solaire_10kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 10 kWc', 'prix_min' => 14000000, 'prix_max' => 18000000, 'puissance' => '10 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'recom', 'prestige' => 'opt']],
+            ['code' => 'solaire_15kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 15 kWc', 'prix_min' => 20000000, 'prix_max' => 26000000, 'puissance' => '15 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'preselect']],
+            ['code' => 'solaire_20kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 20 kWc', 'prix_min' => 26000000, 'prix_max' => 33000000, 'puissance' => '20 kWc', 'unite' => 'Forf.'],
+            ['code' => 'solaire_30kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 30 kWc', 'prix_min' => 38000000, 'prix_max' => 48000000, 'puissance' => '30 kWc', 'unite' => 'Forf.'],
+            ['code' => 'solaire_50kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 50 kWc', 'prix_min' => 58000000, 'prix_max' => 75000000, 'puissance' => '50 kWc', 'unite' => 'Forf.'],
+            ['code' => 'solaire_100kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 100 kWc', 'prix_min' => 105000000, 'prix_max' => 135000000, 'puissance' => '100 kWc', 'unite' => 'Forf.'],
 
             // Sécurité - Alarme
             ['code' => 'alarme_basique', 'categorie' => 'securite', 'designation' => 'Alarme basique (4 détecteurs)', 'prix_min' => 350000, 'prix_max' => 500000, 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'opt', 'premium' => 'opt']],
@@ -78,12 +78,12 @@ class EquipementOptionSeeder extends Seeder
             ['code' => 'citerne_20m3', 'categorie' => 'exterieur', 'designation' => 'Citerne enterrée 20 000L', 'prix_min' => 2500000, 'prix_max' => 3500000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'recom']],
 
             // Groupes Électrogènes
-            ['code' => 'groupe_15kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 15 kVA', 'prix_min' => 2800000, 'prix_max' => 3800000, 'unite' => 'U'],
-            ['code' => 'groupe_30kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 30 kVA', 'prix_min' => 5000000, 'prix_max' => 6500000, 'unite' => 'U'],
-            ['code' => 'groupe_60kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 60 kVA', 'prix_min' => 9000000, 'prix_max' => 12000000, 'unite' => 'U'],
-            ['code' => 'groupe_100kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 100 kVA', 'prix_min' => 15000000, 'prix_max' => 19000000, 'unite' => 'U'],
-            ['code' => 'groupe_200kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 200 kVA', 'prix_min' => 27000000, 'prix_max' => 33000000, 'unite' => 'U'],
-            ['code' => 'groupe_500kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 500 kVA', 'prix_min' => 60000000, 'prix_max' => 78000000, 'unite' => 'U'],
+            ['code' => 'groupe_15kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 15 kVA', 'prix_min' => 4500000, 'prix_max' => 6000000, 'unite' => 'U'],
+            ['code' => 'groupe_20kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 20 kVA', 'prix_min' => 5500000, 'prix_max' => 7500000, 'unite' => 'U'],
+            ['code' => 'groupe_40kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 40 kVA', 'prix_min' => 9000000, 'prix_max' => 12000000, 'unite' => 'U'],
+            ['code' => 'groupe_60kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 60 kVA', 'prix_min' => 14000000, 'prix_max' => 18000000, 'unite' => 'U'],
+            ['code' => 'groupe_100kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 100 kVA', 'prix_min' => 22000000, 'prix_max' => 28000000, 'unite' => 'U'],
+            ['code' => 'groupe_150kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 150 kVA', 'prix_min' => 32000000, 'prix_max' => 42000000, 'unite' => 'U'],
         ];
 
         foreach ($options as $option) {

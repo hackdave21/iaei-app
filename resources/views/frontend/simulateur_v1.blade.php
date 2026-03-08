@@ -141,6 +141,21 @@
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="types-container">
           <!-- JS Rendered -->
         </div>
+
+        <!-- V8.1: Hôtel Stars (Only if Tertiaire + Hôtel) -->
+        <div id="hotel-stars-panel" class="hidden card p-6 mb-8 border-blue-100 bg-blue-50/30">
+            <h3 class="font-semibold text-[#162064] mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                Classification Hôtelière
+            </h3>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+                @foreach(['1s' => '★', '2s' => '★★', '3s' => '★★★', '4s' => '★★★★', '5s' => '★★★★★', 'palace' => 'Palace'] as $code => $label)
+                    <button onclick="setHotelStar('{{ $code }}')" id="star-{{ $code }}" class="star-btn px-2 py-3 rounded-xl border border-gray-200 text-xs font-bold hover:border-[#162064] hover:text-[#162064] transition-all bg-white">
+                        {{ $label }}
+                    </button>
+                @endforeach
+            </div>
+        </div>
         
         <div id="standing-container" class="hidden">
            <div class="card p-6 mb-8">
@@ -216,6 +231,45 @@
                   <div class="info-box bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 text-sm text-blue-800">
                       La surface totale bâtie estimée est de <span class="font-bold"><span id="val-surfBatie">0</span> m²</span>.
                   </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V8.1: Industrial & Agricole Features -->
+        <div id="sector-features-panel" class="hidden card p-6 mb-8 border-orange-100 bg-orange-50/20">
+            <div id="industrial-addon" class="hidden space-y-6">
+                <h3 class="font-semibold text-gray-700">Spécifications Industrielles</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Hauteur Libre (m)</span>
+                        <div class="input-num">
+                            <button onclick="changeDim('hauteurLibre', -1)">−</button>
+                            <div class="value" id="val-hauteur">8</div>
+                            <button onclick="changeDim('hauteurLibre', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" onchange="state.pontRoulant=this.checked; calculate();" class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Pont roulant</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" onchange="state.groupeFroid=this.checked; calculate();" class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Groupe froid</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="agricole-addon" class="hidden">
+                <h3 class="font-semibold text-gray-700 mb-4">Effectif Élevage</h3>
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-gray-100">
+                    <span class="text-gray-600">Nombre de sujets / têtes</span>
+                    <div class="input-num">
+                        <button onclick="changeDim('effectif', -10)">−</button>
+                        <div class="value" id="val-effectif">50</div>
+                        <button onclick="changeDim('effectif', 10)">+</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -326,6 +380,32 @@
                         <!-- JS Rendered -->
                     </div>
                 </div>
+
+                <!-- V8.1: BESOIN ÉNERGÉTIQUE -->
+                <div class="mt-8 card p-6 border-blue-100 bg-blue-50/10">
+                    <div class="flex items-center gap-2 mb-6 text-blue-900">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        <h3 class="text-lg font-bold">Estimation des besoins énergétiques</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-blue-50">
+                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Éclairage</div>
+                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-lum">--</span> <span class="text-xs">kW</span></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-blue-50">
+                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Prises de courants</div>
+                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-prises">--</span> <span class="text-xs">kW</span></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-blue-50">
+                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Climatisation</div>
+                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-clim">--</span> <span class="text-xs">kW</span></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-blue-50 flex justify-between items-center px-2">
+                        <span class="text-sm font-bold text-blue-800">PUISSANCE TOTALE ESTIMÉE</span>
+                        <span class="text-xl font-black text-blue-900 mono"><span id="energy-total">--</span> kVA</span>
+                    </div>
+                </div>
                 <div class="flex justify-center mt-6">
                     <button onclick="saveSimulation()" class="btn-primary px-10 py-4 text-lg">
                         Enregistrer & Voir mon historique
@@ -397,18 +477,50 @@
     };
 
     // STATE
-    let state = {
+    const state = {
       etape: 1,
       secteur: "{{ $secteur }}",
       typeBat: '',
       standing: 'confort',
-      dimA: 30, // Longueur
-      dimB: 20, // Largeur
+      catHotel: '3s',
+      forme: 'rect',
+      dimA: 30,
+      dimB: 20,
+      surfManuelle: 600,
+      terrainDispo: 'oui',
+      zone: 'zone1',
+      sol: '',
       niveaux: 1,
-      zone: 'grand_lome',
-      sol: 'ferralitique',
-      options: {}, // Stores selected codes: { solaire: 'solaire_3kwc', domotique: 'domotique_basique', ... }
-      volets: false, // For per-m2 calculation
+      ssSol: 0,
+      hspRdc: 3.0,
+      hspEtage: 2.8,
+      nbChambres: 30,
+      espacesHotel: [],
+      hauteurLibre: 8,
+      pontRoulant: false,
+      pontCap: 5,
+      groupeFroid: '',
+      effectif: 100,
+      irrigation: '',
+      surfExploit: 5,
+      nbAsc: 0,
+      nbQuais: 2,
+      solaire: '',
+      groupe: '',
+      alarme: '',
+      nbZones: 6,
+      video: '',
+      acces: '',
+      nbPortes: 2,
+      cloture: false,
+      clotureH: 2,
+      portail: '',
+      piscine: '',
+      forage: false,
+      forageProf: 30,
+      parkType: '',
+      parkPlaces: 0,
+      options: {}
     };
 
     // INIT
@@ -464,9 +576,38 @@
       btnPrev.classList.toggle('invisible', state.etape === 1);
       btnNext.innerHTML = state.etape === 5 ? 'Finaliser' : (state.etape === 4 ? 'Voir l\'estimation' : 'Continuer');
       
+      // Sector Panel Visibility
+      const hotelPanel = document.getElementById('hotel-stars-panel');
+      if (hotelPanel) {
+          hotelPanel.classList.toggle('hidden', !(state.secteur === 'tertiaire' && state.typeBat === 'hotel' && state.etape === 1));
+      }
+
+      const featuresPanel = document.getElementById('sector-features-panel');
+      if (featuresPanel) {
+          const isShow = (state.secteur === 'industriel' || state.secteur === 'agricole') && state.etape === 3;
+          featuresPanel.classList.toggle('hidden', !isShow);
+          if (isShow) {
+              document.getElementById('industrial-addon').classList.toggle('hidden', state.secteur !== 'industriel');
+              document.getElementById('agricole-addon').classList.toggle('hidden', state.secteur !== 'agricole');
+          }
+      }
+
+      // Star highlighting
+      document.querySelectorAll('.star-btn').forEach(btn => {
+          const code = btn.id.replace('star-', '');
+          btn.classList.toggle('border-[#162064]', state.catHotel === code);
+          btn.classList.toggle('bg-blue-100', state.catHotel === code);
+      });
+
       // Disable next if input missing
       if (state.etape === 1) btnNext.disabled = !state.typeBat;
       else btnNext.disabled = false;
+    }
+
+    function setHotelStar(code) {
+        state.catHotel = code;
+        updateUI();
+        calculate();
     }
 
     // RENDERS
@@ -645,149 +786,159 @@
 
     // DIMENSIONS
     function changeDim(key, delta) {
-        state[key] = Math.max(key === 'niveaux' ? 1 : 10, state[key] + delta);
-        document.getElementById('val-' + key).textContent = state[key];
+        state[key] = Math.max(key === 'niveaux' ? 1 : (key === 'hauteurLibre' ? 4 : 0), state[key] + delta);
+        
+        if (document.getElementById('val-' + key)) {
+            document.getElementById('val-' + key).textContent = state[key];
+        }
+        if (key === 'dimA') document.getElementById('val-dimA').textContent = state.dimA;
+        if (key === 'dimB') document.getElementById('val-dimB').textContent = state.dimB;
         if (key === 'niveaux') document.getElementById('label-etages').textContent = state.niveaux - 1;
+        if (key === 'hauteurLibre' && document.getElementById('val-hauteur')) document.getElementById('val-hauteur').textContent = state.hauteurLibre;
+        if (key === 'effectif' && document.getElementById('val-effectif')) document.getElementById('val-effectif').textContent = state.effectif;
         
         // Update derivatives
         const surface = state.dimA * state.dimB;
-        document.getElementById('val-surf').textContent = surface;
+        if (document.getElementById('val-surf')) document.getElementById('val-surf').textContent = surface;
         
-        const empriseTaux = (STANDINGS[state.standing]?.emprise_max || 50) / 100;
+        const standingData = STANDINGS[state.standing] || { emprise_max: 50 };
+        const empriseTaux = standingData.emprise_max / 100;
         const surfBatie = Math.round(surface * empriseTaux * state.niveaux);
-        document.getElementById('val-surfBatie').textContent = surfBatie;
-        calculate(); // Recalculate when dimensions change
+        if (document.getElementById('val-surfBatie')) document.getElementById('val-surfBatie').textContent = surfBatie;
+        
+        calculate(); 
     }
 
     // CALCULATE
     function calculate() {
-      const resView = document.getElementById('results-view');
-      if (!resView) return;
-
-      const surface = state.dimA * state.dimB;
-      const standingData = STANDINGS[state.standing];
-      const empriseTaux = (standingData?.emprise_max || 50) / 100;
-      const surfaceRDC = surface * empriseTaux;
-      const surfBatie = surfaceRDC * state.niveaux;
+      // 1. DATA PREP
+      const zoneData = ZONES[state.zone] || { coefficient: 1.0, prix_foncier_m2: 50000 };
+      const solData = SOLS[state.sol] || { coefficient: 1.15, prix_fondation_m2: 45000, nom: 'Non déterminé' };
       
-      const zoneData = ZONES[state.zone];
-      const solData = SOLS[state.sol];
-      const coefZone = zoneData?.coefficient || 1;
-      const coefSol = solData?.coefficient || 1;
-      const coefTotal = coefZone * coefSol;
-
-      const prixMin = standingData.prix_m2_min;
-      const prixMax = standingData.prix_m2_max;
+      // 2. SURFACE CALCULATIONS
+      let surface = state.forme === 'carre' ? state.dimA * state.dimA : (state.forme === 'rect' ? state.dimA * state.dimB : state.surfManuelle);
+      let perimetre = state.forme === 'carre' ? 4 * state.dimA : (state.forme === 'rect' ? 2 * (parseFloat(state.dimA) + parseFloat(state.dimB)) : Math.sqrt(state.surfManuelle) * 4 * 1.1);
       
-      // POST 2: FONDATIONS
-      const fondMinMax = surfaceRDC * solData.prix_fondation_m2 * coefZone;
+      const STANDINGS_EMPRISE = { standard: 0.40, confort: 0.35, premium: 0.30, prestige: 0.25 };
+      const emprise = state.secteur === 'residentiel' ? (STANDINGS_EMPRISE[state.standing] || 0.35) : (state.secteur === 'industriel' ? 0.65 : (state.secteur === 'agricole' ? 0.50 : 0.40));
       
-      // POST 3-8: CONSTRUCTION BASE (0.95 of Total Const excluding foundation)
-      const constBaseMin = surfBatie * prixMin * coefTotal;
-      const constBaseMax = surfBatie * prixMax * coefTotal;
-      
-      const workMin = fondMinMax + (constBaseMin * 0.95);
-      const workMax = fondMinMax + (constBaseMax * 0.95);
-
-      // POST 9-10: OPTIONS (EXT & TECH)
-      let optExtMin = 0, optExtMax = 0;
-      let optTechMin = 0, optTechMax = 0;
-      
-      // exterior categories
-      ['piscine', 'citerne', 'paysager', 'cloture', 'portail'].forEach(k => {
-        if (state.options[k]) {
-          const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
-          if (o) { 
-              let pMin = o.prix_min, pMax = o.prix_max;
-              if (o.unite === 'ml') {
-                  const perimetre = 4 * Math.sqrt(surface);
-                  pMin *= perimetre;
-                  pMax *= perimetre;
-              }
-              optExtMin += pMin; optExtMax += pMax; 
-          }
-        }
-      });
-      if (state.forage) { 
-          const code = state.options['forage'] || 'forage_60m';
-          const f = (EQUIP_OPTIONS['exterieur'] || []).find(o => o.code === code);
-          if (f) { optExtMin += f.prix_min; optExtMax += f.prix_max; }
+      let surfaceBatie;
+      if (state.secteur === 'agricole' && (state.typeBat === 'ferme_avicole' || state.typeBat === 'elevage')) {
+          const ratio = (state.typeBat === 'ferme_avicole') ? 0.1 : 5;
+          surfaceBatie = Math.round(state.effectif * ratio * 1.3);
+      } else {
+          const empriseAuSol = surface * emprise;
+          surfaceBatie = Math.round(empriseAuSol * state.niveaux + state.ssSol * empriseAuSol * 0.85);
       }
 
-      // tech categories
-      ['solaire', 'alarme', 'video', 'domotique', 'volet'].forEach(k => {
-        if (state.options[k]) {
-          const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
-          if (o) {
-            let pMin = o.prix_min, pMax = o.prix_max;
-            if (o.unite === 'm²') { 
-                const voletSurfByStanding = { standard: 10, confort: 17, premium: 28, prestige: 45 };
-                const vSurf = voletSurfByStanding[state.standing] || 20;
-                pMin *= vSurf;
-                pMax *= vSurf;
-            }
-            optTechMin += pMin; optTechMax += pMax; 
+      // 3. PRICING M2
+      const STANDINGS_PRIX = { standard: 375000, confort: 500000, premium: 690000, prestige: 1025000 };
+      const HOTELS_PRIX = { '1s': 430000, '2s': 500000, '3s': 625000, '4s': 800000, '5s': 1175000, 'palace': 2000000 };
+      
+      let prixM2;
+      if (state.secteur === 'residentiel') {
+          prixM2 = STANDINGS_PRIX[state.standing] || 500000;
+      } else if (state.typeBat === 'hotel') {
+          prixM2 = HOTELS_PRIX[state.catHotel] || 625000;
+      } else if (state.secteur === 'industriel') {
+          prixM2 = 250000;
+          if (state.hauteurLibre > 10) prixM2 *= 1.12;
+          if (state.pontRoulant) prixM2 *= 1.15;
+          if (state.groupeFroid) prixM2 *= 1.25;
+      } else {
+          prixM2 = 450000;
+      }
+
+      const coefTotal = zoneData.coefficient * solData.coefficient;
+      const baseCost = surfaceBatie * prixM2 * coefTotal;
+
+      // 4. POSTES BREAKDOWN
+      const postes = [];
+      let total = 0;
+      const add = (id, nom, detail, montant, accent = false) => { postes.push({ id, nom, val: fmtM(montant), accent, detail }); total += montant; };
+
+      if (state.terrainDispo !== 'oui') {
+          const foncier = surface * (zoneData.prix_foncier_m2 || 50000);
+          add('0', '1. Acquisition foncière', `${Math.round(surface)} m²`, foncier);
+      }
+      
+      add('1', '2. Études et honoraires', 'Architecture, structure', baseCost * 0.08);
+      
+      let fond = surface * emprise * (solData.prix_fondation_m2 || 45000);
+      if (state.secteur === 'industriel') fond *= 1.3;
+      if (state.ssSol > 0) fond += state.ssSol * surface * emprise * 85000;
+      add('2', '3. Fondations', solData.nom || 'À définir', fond);
+      
+      add('3', '4. Gros œuvre', 'Maçonnerie, planchers', baseCost * 0.38);
+      add('4', '5. Charpente / Couverture', 'Toiture et étanchéité', baseCost * 0.12);
+      add('5', '6. Second œuvre', 'Cloisons, menuiseries', baseCost * 0.13);
+      add('6', '7. Lots techniques', 'Électricité, plomberie', baseCost * 0.18);
+      add('7', '8. Finitions', 'Peinture, revêtements', baseCost * 0.11);
+
+      // 5. EQUIPMENT & OPTIONS
+      let equip = 0;
+      if (state.nbAsc > 0) equip += state.nbAsc * (state.niveaux <= 5 ? 28000000 : 35000000);
+      if (state.nbQuais > 0 && state.secteur === 'industriel') equip += state.nbQuais * 8500000;
+      if (state.pontRoulant) equip += state.pontCap <= 5 ? 28000000 : (state.pontCap <= 10 ? 48000000 : 78000000);
+      if (state.groupeFroid) equip += surfaceBatie * (state.groupeFroid === 'negatif' ? 95000 : 55000);
+      if (equip > 0) add('8', '9. Équipements spécifiques', 'Ascenseurs, quais, etc.', equip);
+
+      let secu = 0;
+      ['alarme', 'video', 'acces'].forEach(k => {
+          if (state.options[k]) {
+              const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
+              if (o) secu += o.prix_moyen || o.prix_min;
           }
-        }
+      });
+      if (secu > 0) add('9', '10. Sécurité & Tech', 'Alarme, vidéo, etc.', secu);
+
+      let vrd = surface * 8500;
+      ['cloture', 'portail', 'piscine', 'citerne'].forEach(k => {
+          if (state.options[k]) {
+              const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
+              if (o) {
+                  let val = o.prix_moyen || o.prix_min;
+                  if (o.unite === 'ml') val *= perimetre;
+                  vrd += val;
+              }
+          }
+      });
+      if (state.forage) vrd += 4500000; // Simplified forage base
+      if (vrd > 0) add('10', '11. Aménagements ext.', 'Clôture, forage, etc.', vrd);
+
+      // Aleas 5%
+      add('11', '12. Provisions et divers', 'Assurances, aléas (5%)', total * 0.05);
+
+      // 6. ENERGY NEEDS
+      const energy = {
+          lum: Math.round(surfaceBatie * (state.secteur === 'industriel' ? 0.008 : 0.012) * 10) / 10,
+          prises: Math.round(surfaceBatie * 0.015 * 10) / 10,
+          clim: Math.round(surfaceBatie * (state.secteur === 'residentiel' ? 0.7 : 0.4) * 0.1 * 10) / 10
+      };
+      energy.total = Math.ceil(energy.lum + energy.prises + energy.clim);
+
+      // 7. RENDER RESULTS
+      if (document.getElementById('total-estimation')) {
+          document.getElementById('total-estimation').innerText = fmt(total) + ' F CFA';
+      }
+      if (document.getElementById('postes-details')) {
+          document.getElementById('postes-details').innerHTML = postes.map(p => `
+              <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                  <div>
+                      <div class="font-bold text-gray-800 text-sm">${p.nom}</div>
+                      <div class="text-xs text-gray-400 italic">${p.detail || ''}</div>
+                  </div>
+                  <div class="font-bold text-[#162064] text-sm">${p.val} F</div>
+              </div>
+          `).join('');
+      }
+
+      ['lum', 'prises', 'clim', 'total'].forEach(id => {
+          const el = document.getElementById('energy-' + id);
+          if (el) el.innerText = energy[id];
       });
 
-      // POST 11: HONORAIRES
-      const forfaitHonos = 500000;
-      const rates = { standard: 0.06, confort: 0.05, premium: 0.04, prestige: 0.03 };
-      const rate = rates[state.standing] || 0.05;
-      
-      const subTotalForHonosMin = workMin + optExtMin + optTechMin;
-      const subTotalForHonosMax = workMax + optExtMax + optTechMax;
-      
-      const honosMin = forfaitHonos + (subTotalForHonosMin * rate);
-      const honosMax = forfaitHonos + (subTotalForHonosMax * rate);
-
-      // POST 12: ASSURANCES (2%)
-      const baseAssurancesMin = subTotalForHonosMin + honosMin;
-      const baseAssurancesMax = subTotalForHonosMax + honosMax;
-      const assurancesMin = baseAssurancesMin * 0.02;
-      const assurancesMax = baseAssurancesMax * 0.02;
-
-      // TOTAL AVANT MARGE
-      const totalAvantMargeMin = baseAssurancesMin + assurancesMin;
-      const totalAvantMargeMax = baseAssurancesMax + assurancesMax;
-
-      // MARGE AIAE
-      const margeRate = standingData.marge || 0.20;
-      const margeValMin = totalAvantMargeMin * margeRate;
-      const margeValMax = totalAvantMargeMax * margeRate;
-
-      // TOTAL CLIENT
-      const finalMin = totalAvantMargeMin + margeValMin;
-      const finalMax = totalAvantMargeMax + margeValMax;
-
-      document.getElementById('total-estimation').textContent = `${fmtM(finalMin)} — ${fmtM(finalMax)} FCFA`;
-
-      // 12 POSTES DETAILS
-      const postes = [
-        { nom: '1. Terrain', val: fmtM(surface * zoneData.prix_foncier_m2) },
-        { nom: '2. Fondations', val: fmtM(fondMinMax) },
-        { nom: '3. Structure Gros Œuvre (42%)', val: fmtM(constBaseMin * 0.42) + ' - ' + fmtM(constBaseMax * 0.42) },
-        { nom: '4. Charpente / Couverture (12%)', val: fmtM(constBaseMin * 0.12) + ' - ' + fmtM(constBaseMax * 0.12) },
-        { nom: '5. Menuiseries (10%)', val: fmtM(constBaseMin * 0.10) + ' - ' + fmtM(constBaseMax * 0.10) },
-        { nom: '6. Revêtements / Finitions (14%)', val: fmtM(constBaseMin * 0.14) + ' - ' + fmtM(constBaseMax * 0.14) },
-        { nom: '7. Électricité (9%)', val: fmtM(constBaseMin * 0.09) + ' - ' + fmtM(constBaseMax * 0.09) },
-        { nom: '8. Plomberie / Sanitaires (8%)', val: fmtM(constBaseMin * 0.08) + ' - ' + fmtM(constBaseMax * 0.08) },
-        { nom: '9. Aménagements Extérieurs', val: fmtM(optExtMin) + ' - ' + fmtM(optExtMax) },
-        { nom: '10. Équipements Techniques', val: fmtM(optTechMin) + ' - ' + fmtM(optTechMax) },
-        { nom: '11. Honoraires & Études', val: fmtM(honosMin) + ' - ' + fmtM(honosMax) },
-        { nom: '12. Assurances & Divers', val: fmtM(assurancesMin) + ' - ' + fmtM(assurancesMax) },
-        { nom: 'Marge AIAE (' + (margeRate*100) + '%)', val: fmtM(margeValMin) + ' - ' + fmtM(margeValMax), accent: true }
-      ];
-
-      document.getElementById('postes-details').innerHTML = postes.map(p => `
-        <div class="flex justify-between border-b border-gray-100 pb-2 ${p.accent ? 'bg-orange-50 -mx-2 px-2 py-2 rounded' : ''}">
-            <div class="text-sm ${p.accent ? 'font-bold text-orange-800' : 'text-gray-600'}">${p.nom}</div>
-            <div class="text-right">
-                <div class="mono font-bold text-sm ${p.accent ? 'text-orange-900' : 'text-blue-900'}">${p.val}</div>
-            </div>
-        </div>
-      `).join('');
+      state.results = { total, postes, energy, surfaceBatie };
     }
 
     function saveSimulation(target = null) {
@@ -813,12 +964,25 @@
           largeur: state.dimA,
           longueur: state.dimB,
           surface: surface,
-          niveaux: state.niveaux
+          niveaux: state.niveaux,
+          catHotel: state.catHotel,
+          hauteurLibre: state.hauteurLibre
         },
         options: state.options,
         total: finalTotal,
         base_amount: 0,
-        options_amount: 0
+        options_amount: 0,
+        energy: {
+            lum: document.getElementById('energy-lum')?.textContent || '0',
+            prises: document.getElementById('energy-prises')?.textContent || '0',
+            clim: document.getElementById('energy-clim')?.textContent || '0',
+            total: document.getElementById('energy-total')?.textContent || '0'
+        },
+        details: Array.from(document.getElementById('postes-details').children).map(el => ({
+            'nom': el.querySelector('.text-sm').textContent,
+            'val': el.querySelector('.mono').textContent,
+            'accent': el.classList.contains('bg-orange-50')
+        }))
       };
 
       fetch('{{ route("simulator.save") }}', {
