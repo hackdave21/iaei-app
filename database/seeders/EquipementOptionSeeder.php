@@ -56,26 +56,26 @@ class EquipementOptionSeeder extends Seeder
             ['code' => 'piscine_12x5', 'categorie' => 'exterieur', 'designation' => 'Piscine à débordement 12×5m', 'prix_min' => 22000000, 'prix_max' => 30000000, 'unite' => 'Forf.'],
             ['code' => 'piscine_plage', 'categorie' => 'exterieur', 'designation' => 'Piscine plage immergée 8×4m', 'prix_min' => 16000000, 'prix_max' => 22000000, 'unite' => 'Forf.'],
 
-            // Domotique
-            ['code' => 'domotique_basique', 'categorie' => 'domotique', 'designation' => 'Éclairage connecté (8-12 pts)', 'prix_min' => 400000, 'prix_max' => 700000, 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'opt']],
-            ['code' => 'domotique_partielle', 'categorie' => 'domotique', 'designation' => 'Domotique partielle (15-20 pts)', 'prix_min' => 1200000, 'prix_max' => 2000000, 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'opt']],
-            ['code' => 'domotique_complete', 'categorie' => 'domotique', 'designation' => 'Maison intelligente complète', 'prix_min' => 3000000, 'prix_max' => 5500000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'opt']],
+            // 5.1 Domotique (Tableau 5 - V5)
+            ['code' => 'domotique_basique', 'categorie' => 'domotique', 'designation' => 'Éclairage connecté', 'prix_min' => 400000, 'prix_max' => 700000, 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'opt']],
+            ['code' => 'domotique_partielle', 'categorie' => 'domotique', 'designation' => 'Domotique partielle', 'prix_min' => 1200000, 'prix_max' => 2000000, 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'opt']],
+            ['code' => 'domotique_complete', 'categorie' => 'domotique', 'designation' => 'Maison intelligente', 'prix_min' => 3000000, 'prix_max' => 5500000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'opt']],
 
-            // Paysager
+            // 5.2 Aménagement Paysager (Tableau 6 - V5)
             ['code' => 'paysager_basique', 'categorie' => 'exterieur', 'designation' => 'Gazon + arbres (~200m²)', 'prix_min' => 1500000, 'prix_max' => 3000000, 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'opt']],
             ['code' => 'paysager_soigne', 'categorie' => 'exterieur', 'designation' => 'Jardin soigné (~300m²)', 'prix_min' => 3000000, 'prix_max' => 5500000, 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'opt']],
-            ['code' => 'paysager_prestige', 'categorie' => 'exterieur', 'designation' => 'Design paysager prestige', 'prix_min' => 6000000, 'prix_max' => 12000000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'opt']],
+            ['code' => 'paysager_prestige', 'categorie' => 'exterieur', 'designation' => 'Design paysager (~500m²)', 'prix_min' => 6000000, 'prix_max' => 12000000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'opt']],
 
-            // Volets
-            ['code' => 'volet_manuel', 'categorie' => 'second_oeuvre', 'designation' => 'Volet PVC manuel', 'prix_min' => 35000, 'prix_max' => 50000, 'unite' => 'm²', 'mapping_standings' => ['confort' => 'opt']],
-            ['code' => 'volet_motorise', 'categorie' => 'second_oeuvre', 'designation' => 'Volet alu motorisé', 'prix_min' => 55000, 'prix_max' => 80000, 'unite' => 'm²', 'mapping_standings' => ['premium' => 'opt']],
-            ['code' => 'volet_centralise', 'categorie' => 'second_oeuvre', 'designation' => 'Volet motorisé centralisé', 'prix_min' => 70000, 'prix_max' => 100000, 'unite' => 'm²'],
-            ['code' => 'volet_connecte', 'categorie' => 'second_oeuvre', 'designation' => 'Volet motorisé connecté', 'prix_min' => 85000, 'prix_max' => 120000, 'unite' => 'm²', 'mapping_standings' => ['prestige' => 'opt']],
+            // 5.3 Volets Roulants (Tableau 7 - V5)
+            ['code' => 'volet_manuel', 'categorie' => 'second_oeuvre', 'designation' => 'PVC manuel', 'prix_min' => 35000, 'prix_max' => 50000, 'unite' => 'm²', 'mapping_standings' => ['confort' => 'opt']],
+            ['code' => 'volet_motorise', 'categorie' => 'second_oeuvre', 'designation' => 'Alu motorisé', 'prix_min' => 55000, 'prix_max' => 80000, 'unite' => 'm²', 'mapping_standings' => ['premium' => 'opt']],
+            ['code' => 'volet_centralise', 'categorie' => 'second_oeuvre', 'designation' => 'Alu centralisé', 'prix_min' => 70000, 'prix_max' => 100000, 'unite' => 'm²'],
+            ['code' => 'volet_connecte', 'categorie' => 'second_oeuvre', 'designation' => 'Alu connecté', 'prix_min' => 85000, 'prix_max' => 120000, 'unite' => 'm²', 'mapping_standings' => ['prestige' => 'opt']],
 
-            // Citernes
-            ['code' => 'citerne_5m3', 'categorie' => 'exterieur', 'designation' => 'Citerne enterrée 5 000L', 'prix_min' => 800000, 'prix_max' => 1200000, 'unite' => 'Forf.', 'mapping_standings' => ['standard' => 'opt', 'confort' => 'opt']],
-            ['code' => 'citerne_10m3', 'categorie' => 'exterieur', 'designation' => 'Citerne enterrée 10 000L', 'prix_min' => 1400000, 'prix_max' => 2000000, 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'recom']],
-            ['code' => 'citerne_20m3', 'categorie' => 'exterieur', 'designation' => 'Citerne enterrée 20 000L', 'prix_min' => 2500000, 'prix_max' => 3500000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'recom']],
+            // 5.4 Citerne Eau de Pluie (Tableau 8 - V5)
+            ['code' => 'citerne_5m3', 'categorie' => 'exterieur', 'designation' => 'Citerne 5 000L', 'prix_min' => 800000, 'prix_max' => 1200000, 'unite' => 'Forf.', 'mapping_standings' => ['standard' => 'opt', 'confort' => 'opt']],
+            ['code' => 'citerne_10m3', 'categorie' => 'exterieur', 'designation' => 'Citerne 10 000L', 'prix_min' => 1400000, 'prix_max' => 2000000, 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'recom']],
+            ['code' => 'citerne_20m3', 'categorie' => 'exterieur', 'designation' => 'Citerne 20 000L', 'prix_min' => 2500000, 'prix_max' => 3500000, 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'recom']],
 
             // Groupes Électrogènes
             ['code' => 'groupe_15kva', 'categorie' => 'groupe', 'designation' => 'Groupe électrogène 15 kVA', 'prix_min' => 4500000, 'prix_max' => 6000000, 'unite' => 'U'],

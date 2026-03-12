@@ -85,16 +85,10 @@ class SimulatorController extends Controller
             $simulation->base_amount = $data['base_amount'] ?? 0;
             $simulation->options_amount = $data['options_amount'] ?? 0;
             $simulation->status = 'saved';
-            $simulation->configuration_data = [
-                'secteur' => $data['secteur'],
-                'typeBat' => $data['typeBat'],
-                'standing' => $data['standing'],
-                'zone' => $data['zone'],
-                'sol' => $data['sol'],
-                'dimensions' => $data['dimensions'],
-                'options' => $data['options'],
-                'details' => $data['details'] ?? []
-            ];
+            $simulation->configuration_data = $data;
+            if (isset($data['details'])) {
+                $simulation->configuration_data = array_merge($data, ['details' => $data['details']]);
+            }
             $simulation->save();
             
             return response()->json(['status' => 'success', 'redirect' => route('profile')]);
@@ -114,15 +108,49 @@ class SimulatorController extends Controller
         $optionCodes = collect($config['options'] ?? [])->filter()->values()->toArray();
         $optionLabels = \App\Models\EquipementOption::whereIn('code', $optionCodes)->pluck('designation', 'code')->toArray();
 
-        $secteurLabels = ['residentiel' => 'Résidentiel', 'tertiaire' => 'Tertiaire / Services', 'industriel' => 'Industriel', 'agricole' => 'Agricole'];
-        $typeLabels = [
-            'villa' => 'Villa', 'duplex' => 'Duplex', 'immeuble' => 'Immeuble',
-            'bureaux' => 'Bureaux', 'commerce' => 'Commerce', 'hotel' => 'Hôtel', 'ecole' => 'École / Clinique',
-            'entrepot' => 'Entrepôt', 'usine' => 'Usine',
-            'hangar_agri' => 'Hangar Agricole', 'elevage' => 'Bâtiment d\'élevage'
+        $secteurLabels = [
+            'residentiel' => 'Résidentiel', 
+            'tertiaire' => 'Tertiaire / Services', 
+            'industriel' => 'Industriel', 
+            'agricole' => 'Agricole'
         ];
-        $zoneLabels = \App\Models\Zone::pluck('nom', 'code')->toArray();
-        $solLabels = \App\Models\Sol::pluck('nom', 'code')->toArray();
+        $typeLabels = [
+            'villa' => 'Villa individuelle', 
+            'immeuble' => 'Immeuble résidentiel', 
+            'residence' => 'Résidence de standing',
+            'bureaux' => 'Bureaux', 
+            'commerce' => 'Commerce', 
+            'hotel' => 'Hôtel', 
+            'clinique' => 'Clinique',
+            'entrepot' => 'Entrepôt', 
+            'usine' => 'Usine', 
+            'atelier' => 'Atelier', 
+            'frigo' => 'Chambre froide',
+            'hangar' => 'Hangar', 
+            'elevage_bovins' => 'Élevage bovins', 
+            'elevage_volailles' => 'Élevage volailles', 
+            'serres' => 'Serres', 
+            'stockage' => 'Silos'
+        ];
+        
+        $zoneLabels = [
+            'zone1' => 'Zone 1 – Grand Lomé',
+            'zone2' => 'Zone 2 – Maritime',
+            'zone3' => 'Zone 3 – Plateaux',
+            'zone4' => 'Zone 4 – Centrale',
+            'zone5' => 'Zone 5 – Kara & Savanes'
+        ];
+        
+        $solLabels = [
+            'inconnu' => 'Non déterminé',
+            'ferralitique' => 'Ferralitique (Terre de barre)',
+            'ferrugineux' => 'Ferrugineux tropical',
+            'laterite' => 'Latérite / Cuirasse',
+            'argileux' => 'Argileux',
+            'sableux' => 'Sableux',
+            'hydromorphe' => 'Hydromorphe',
+            'rocheux' => 'Rocheux'
+        ];
         
         return view('frontend.profile.simulation_details', compact('simulation', 'config', 'optionLabels', 'secteurLabels', 'typeLabels', 'zoneLabels', 'solLabels'));
     }

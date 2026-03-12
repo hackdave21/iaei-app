@@ -160,17 +160,29 @@
                                 </thead>
                                 <tbody class="divide-y divide-gray-50">
                                     @foreach($simulations as $sim)
+                                        @php 
+                                            $config = $sim->configuration_data;
+                                            $typeLabels = [
+                                                'villa' => 'Villa', 'immeuble' => 'Immeuble', 'residence' => 'Résidence',
+                                                'bureaux' => 'Bureaux', 'commerce' => 'Commerce', 'hotel' => 'Hôtel', 'clinique' => 'Clinique',
+                                                'entrepot' => 'Entrepôt', 'usine' => 'Usine', 'hangar' => 'Hangar', 'elevage_bovins' => 'Élevage', 'elevage_volailles' => 'Volailles'
+                                            ];
+                                        @endphp
                                         <tr>
                                             <td class="py-5 text-gray-600 text-sm italic">{{ $sim->created_at->format('d/m/Y') }}</td>
                                             <td class="py-5">
-                                                <div class="font-bold text-[#162064]">{{ $sim->type_batiment ?? 'N/A' }}</div>
-                                                <div class="text-[10px] text-gray-400">{{ $sim->surface }} m² - {{ $sim->secteur }}</div>
+                                                <div class="font-bold text-[#162064]">{{ $typeLabels[$config['typeBat'] ?? ''] ?? ($config['typeBat'] ?? 'N/A') }}</div>
+                                                <div class="text-[10px] text-gray-400 font-medium">
+                                                    {{ number_format($sim->input_quantity, 0) }} m² - 
+                                                    {{ ucfirst($config['secteur'] ?? 'N/A') }} 
+                                                    <span class="text-[#ff8400] ml-1">({{ ucfirst($config['standing'] ?? 'Standard') }})</span>
+                                                </div>
                                             </td>
                                             <td class="py-5">
-                                                <div class="font-bold text-[#ff8400] mono text-sm">{{ number_format($sim->prix_total, 0, ',', ' ') }} F</div>
+                                                <div class="font-bold text-[#162064] mono text-sm">{{ number_format($sim->total_amount_ttc, 0, ',', ' ') }} F</div>
                                             </td>
                                             <td class="py-5">
-                                                <span class="status-badge bg-green-100 text-green-700">Enregistré</span>
+                                                <span class="status-badge bg-blue-50 text-blue-600 border border-blue-100 italic">Version 5.1</span>
                                             </td>
                                             <td class="py-5 text-right">
                                                 <a href="{{ route('simulations.show', $sim->id) }}" class="text-[#162064] hover:text-[#ff8400] transition-colors inline-flex items-center gap-1 font-bold text-xs uppercase">

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TypeBatiment extends Model
 {
-    protected $fillable = ['code', 'nom', 'icone', 'description'];
+    protected $fillable = ['secteur', 'code', 'nom', 'icone', 'description'];
 }

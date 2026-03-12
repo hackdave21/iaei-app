@@ -51,10 +51,11 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-white/60 mb-1 text-sm">Estimation Totale (Min-Max)</div>
-                        <div class="text-3xl md:text-4xl font-bold mono text-[#ff8400]">
-                            {{ number_format($simulation->total_amount_ttc * 0.9, 0, ',', ' ') }} — {{ number_format($simulation->total_amount_ttc * 1.15, 0, ',', ' ') }} F
+                        <div class="text-white/60 mb-1 text-sm">Estimation Totale TTC</div>
+                        <div class="text-4xl font-bold mono text-[#ff8400]">
+                            {{ number_format($simulation->total_amount_ttc, 0, ',', ' ') }} F
                         </div>
+                        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-widest">Valeur indicative moyenne</div>
                     </div>
                 </div>
             </div>
@@ -63,35 +64,40 @@
                 <!-- Info Column -->
                 <div class="md:col-span-1 space-y-6">
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-[#162064] mb-4">Configuration</h3>
+                        <h3 class="font-bold text-[#162064] mb-4 text-sm uppercase tracking-wider">Configuration</h3>
                         <div class="space-y-3 text-sm">
-                            <div class="flex justify-between"><span class="text-gray-500">Surface</span><span class="font-bold">{{ $config['dimensions']['surface'] ?? 0 }} m²</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">Niveaux</span><span class="font-bold">R+{{ ($config['dimensions']['niveaux'] ?? 1) - 1 }}</span></div>
-                            @if(isset($config['dimensions']['catHotel']))
-                                <div class="flex justify-between"><span class="text-gray-500">Classe Hôtel</span><span class="font-bold border-b border-blue-200">{{ strtoupper($config['dimensions']['catHotel']) }}</span></div>
-                            @endif
-                            @if(isset($config['dimensions']['hauteurLibre']))
-                                <div class="flex justify-between"><span class="text-gray-500">H. Libre</span><span class="font-bold">{{ $config['dimensions']['hauteurLibre'] }} m</span></div>
-                            @endif
-                            <div class="flex justify-between"><span class="text-gray-500">Sol</span><span class="font-bold text-blue-600">{{ $solLabels[$config['sol']] ?? $config['sol'] }}</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-500">Surface</span><span class="font-bold mono">{{ number_format($simulation->input_quantity, 0) }} m²</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-500">Niveaux</span><span class="font-bold">R+{{ ($config['dimensions']['niveaux'] ?? 1) - 1 }}</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-500">Sous-sol</span><span class="font-bold">{{ $config['dimensions']['ssSol'] ?? 0 }}</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-500">Zone</span><span class="font-bold text-xs text-right">{{ $zoneLabels[$config['zone'] ?? ''] ?? 'N/A' }}</span></div>
+                            <div class="flex justify-between items-center"><span class="text-gray-500">Sol</span><span class="font-bold text-blue-600 text-xs text-right">{{ $solLabels[$config['sol'] ?? ''] ?? 'N/A' }}</span></div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-[#162064] mb-4">Options Choisies</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @php $hasOptions = false; @endphp
-                            @foreach($config['options'] as $key => $val)
-                                @if($val && $val !== 'non')
-                                    @php $hasOptions = true; @endphp
-                                    <span class="px-2 py-1 bg-gray-50 text-gray-700 rounded text-[10px] font-bold uppercase border border-gray-100">
-                                        {{ str_replace('_', ' ', $key) }}: {{ $optionLabels[$val] ?? (is_bool($val) ? 'Oui' : $val) }}
-                                    </span>
-                                @endif
-                            @endforeach
-                            @if(!$hasOptions)
-                                <span class="text-gray-400 text-xs italic">Aucune option spécifique</span>
-                            @endif
+                        <h3 class="font-bold text-[#162064] mb-4 text-sm uppercase tracking-wider">Options & Énergie</h3>
+                        <div class="space-y-4">
+                           @if($config['options']['solaire'] ?? false)
+                              <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
+                                 <div class="text-[9px] font-bold text-blue-600 uppercase mb-1">Système Solaire</div>
+                                 <div class="text-xs font-bold text-[#162064]">{{ $config['options']['solaire'] }} kWc</div>
+                              </div>
+                           @endif
+                           @if($config['options']['groupe'] ?? false)
+                              <div class="p-3 bg-orange-50 rounded-xl border border-orange-100">
+                                 <div class="text-[9px] font-bold text-orange-600 uppercase mb-1">Groupe Électrogène</div>
+                                 <div class="text-xs font-bold text-[#162064]">{{ $config['options']['groupe'] }} kVA</div>
+                              </div>
+                           @endif
+                           <div class="flex flex-wrap gap-1.5 pt-2">
+                                @foreach($config['options'] ?? [] as $key => $val)
+                                    @if($val && $val !== 'non' && !in_array($key, ['solaire', 'groupe']))
+                                        <span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[9px] font-bold uppercase border border-gray-100">
+                                            {{ str_replace('_', ' ', $key) }}
+                                        </span>
+                                    @endif
+                                @endforeach
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -99,62 +105,42 @@
                 <!-- Posts Column -->
                 <div class="md:col-span-2">
                     <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                        <h3 class="text-xl font-bold text-[#162064] mb-6">Détails des postes de coût</h3>
-                        <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-[#162064] mb-6">Détail du budget (Postes V5)</h3>
+                        <div class="space-y-3">
                             @if(isset($config['details']) && count($config['details']) > 0)
                                 @foreach($config['details'] as $poste)
-                                    <div class="flex justify-between items-center border-b border-gray-50 pb-3 {{ ($poste['accent'] ?? false) ? 'bg-orange-50 -mx-2 px-2 py-2 rounded' : '' }}">
-                                        <div>
-                                            <div class="text-sm font-bold {{ ($poste['accent'] ?? false) ? 'text-orange-900' : 'text-gray-800' }}">{{ $poste['nom'] ?? $poste['label'] }}</div>
-                                            <div class="text-[10px] text-gray-500">{{ $poste['description'] ?? '' }}</div>
+                                    <div class="flex justify-between items-center border-b border-gray-50 pb-3">
+                                        <div class="flex-1">
+                                            <div class="text-sm font-bold text-gray-800">{{ $poste['nom'] }}</div>
+                                            <div class="text-[10px] text-gray-500 italic">{{ $poste['detail'] ?? '' }}</div>
                                         </div>
-                                        <div class="text-right">
-                                            <div class="text-sm mono font-bold {{ ($poste['accent'] ?? false) ? 'text-orange-700' : 'text-[#162064]' }}">{{ $poste['val'] ?? number_format($poste['montant'] ?? 0, 0, ',', ' ') . ' F' }}</div>
+                                        <div class="text-right ml-4">
+                                            <div class="text-xs mono font-bold text-gray-400">{{ number_format($poste['min'], 0, ',', ' ') }} F</div>
+                                            <div class="text-sm mono font-black text-[#162064]">{{ number_format($poste['max'], 0, ',', ' ') }} F</div>
                                         </div>
                                     </div>
                                 @endforeach
                             @else
-                                <div class="text-center py-10 text-gray-400 italic">
-                                    Détails non disponibles pour cette simulation.
-                                </div>
+                                <div class="text-center py-10 text-gray-400 italic">Détails non disponibles.</div>
                             @endif
                         </div>
 
-                        @if(isset($config['energy']))
-                            <!-- Energy Summary -->
-                            <div class="mt-8 pt-8 border-t border-gray-100">
-                                <h3 class="text-sm font-bold text-[#162064] mb-4 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                                    Besoins Énergétiques Estimés
-                                </h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-gray-50 p-3 rounded-lg">
-                                        <div class="text-[10px] text-gray-500 uppercase font-bold">Éclairage</div>
-                                        <div class="text-lg font-bold mono text-[#162064]">{{ $config['energy']['lum'] ?? '0' }} <span class="text-[10px]">kW</span></div>
-                                    </div>
-                                    <div class="bg-gray-50 p-3 rounded-lg">
-                                        <div class="text-[10px] text-gray-500 uppercase font-bold">Prises</div>
-                                        <div class="text-lg font-bold mono text-[#162064]">{{ $config['energy']['prises'] ?? '0' }} <span class="text-[10px]">kW</span></div>
-                                    </div>
-                                    <div class="bg-gray-50 p-3 rounded-lg">
-                                        <div class="text-[10px] text-gray-500 uppercase font-bold">Clim</div>
-                                        <div class="text-lg font-bold mono text-[#162064]">{{ $config['energy']['clim'] ?? '0' }} <span class="text-[10px]">kW</span></div>
-                                    </div>
-                                    <div class="bg-[#162064] p-3 rounded-lg text-white">
-                                        <div class="text-[10px] text-white/70 uppercase font-bold">Total Estimé</div>
-                                        <div class="text-lg font-bold mono">{{ $config['energy']['total'] ?? '0' }} <span class="text-[10px]">kVA</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
+                        <div class="mt-10 p-5 bg-blue-900 rounded-2xl text-white">
+                           <div class="flex justify-between items-end">
+                              <div>
+                                 <div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Total Estimatif HTVA</div>
+                                 <div class="text-2xl font-bold mono">{{ number_format($simulation->base_amount, 0, ',', ' ') }} F</div>
+                              </div>
+                              <div class="text-right">
+                                 <div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Catégorie</div>
+                                 <div class="font-bold">CONFORME V5.1</div>
+                              </div>
+                           </div>
+                        </div>
 
-                        <div class="mt-10 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Note Importante</h4>
-                            <p class="text-[11px] text-gray-500 leading-relaxed">
-                                Les estimations fournies sont à titre indicatif et ne constituent pas un devis contractuel. 
-                                Les prix peuvent varier selon l'étude géotechnique réelle et l'évolution du coût des matériaux.
-                                Contactez AIAE pour une étude technique approfondie.
-                            </p>
+                        <div class="mt-6 text-[10px] text-gray-400 leading-relaxed italic border-t pt-4">
+                            * Les prix indiqués incluent les frais généraux, les assurances et les honoraires d'études forfaitaires. 
+                            Cette estimation est basée sur les tarifs AIAE V5 (Février 2026).
                         </div>
                     </div>
                 </div>

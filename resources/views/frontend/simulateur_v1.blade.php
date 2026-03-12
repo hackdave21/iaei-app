@@ -1,1018 +1,1013 @@
-@extends('layouts.frontend')
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Simulateur AIAE v5 - Estimation Construction</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logo.png') }}">
+<style>
+body{font-family:'Inter',sans-serif;background:#f8fafc;margin:0}
+*{box-sizing:border-box}
+.mono{font-family:'JetBrains Mono',monospace}
+:root{--bleu:#162064;--vert:#05482C;--orange:#FF8400}
+.card{background:white;border:1px solid #e2e8f0;border-radius:12px}
+.btn-primary{background:var(--orange);color:white;padding:12px 24px;border-radius:8px;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:filter .2s}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-primary:disabled{background:#e5e7eb;color:#9ca3af;cursor:not-allowed;filter:none}
+.btn-sec{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;border:2px solid var(--bleu);color:var(--bleu);cursor:pointer;background:white;text-decoration:none;transition:all .2s}
+.btn-sec:hover{background:var(--bleu);color:white}
+.opt-btn{padding:14px;border:2px solid #e2e8f0;border-radius:10px;text-align:left;cursor:pointer;background:white;transition:all .2s;width:100%;display:block}
+.opt-btn:hover{border-color:#cbd5e1;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.opt-btn.sel{border-color:#3b82f6;background:#eff6ff}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-orange{background:#ffedd5;color:#c2410c}
+.badge-gray{background:#f3f4f6;color:#374151}
+.warn-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0}
+.alert-box{background:#fee2e2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 8px 8px 0}
+.info-box{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;border-radius:0 8px 8px 0}
+.success-box{background:#ecfdf5;border-left:4px solid #10b981;padding:12px 16px;border-radius:0 8px 8px 0}
+.num-ctrl{display:flex;align-items:center;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;background:white}
+.num-ctrl button{width:38px;height:38px;border:none;background:#f8fafc;cursor:pointer;font-size:18px;flex-shrink:0}
+.num-ctrl button:hover{background:#e2e8f0}
+.num-ctrl .nv{flex:1;text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;padding:4px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+header{background:white;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
+.opt-ring{box-shadow:0 0 0 3px rgba(34,197,94,.4)}
+@media print{.no-print{display:none!important}body{background:white}}
+</style>
+</head>
+<body>
+<div id="app"></div>
 
-@section('title', 'Simulateur - Estimation Construction')
+<script>
+// ---- BLADE CONTEXT ----
+const CSRF=document.querySelector('meta[name="csrf-token"]').content;
+const IS_AUTH={{ auth()->check() ? 'true' : 'false' }};
+const SAVE_URL='{{ route("simulator.save") }}';
+const LOGIN_URL='{{ route("login") }}';
+const REGISTER_URL='{{ route("register") }}';
+const PROFILE_URL='{{ route("profile") }}';
 
-@section('styles')
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bleu: #162064;
-      --vert: #05482C;
-      --orange: #FF8400
+// ---- ZONES ----
+const ZONES={
+  zone1:{name:'Zone 1 – Grand Lomé',loc:'Lomé, Baguida, Agoè, Adidogomé',coef:1.00,forage:25,foncier:75000},
+  zone2:{name:'Zone 2 – Maritime',loc:'Tsévié, Tabligbo, Aného',coef:1.08,forage:35,foncier:25000},
+  zone3:{name:'Zone 3 – Plateaux',loc:'Atakpamé, Kpalimé, Badou',coef:1.14,forage:50,foncier:12000},
+  zone4:{name:'Zone 4 – Centrale',loc:'Sokodé, Tchamba, Blitta',coef:1.19,forage:60,foncier:6000},
+  zone5:{name:'Zone 5 – Kara & Savanes',loc:'Kara, Dapaong, Mango',coef:1.25,forage:75,foncier:4000}
+};
+// ---- SOLS ----
+const SOLS={
+  inconnu:{name:'Non déterminé',coef:1.15,portance:'?',fond:'À définir après étude',prixFond:55000,risque:'moyen'},
+  ferralitique:{name:'Ferralitique (Terre de barre)',coef:1.00,portance:'1.5–2.5 bars',fond:'Semelles filantes',prixFond:32000,risque:'faible'},
+  ferrugineux:{name:'Ferrugineux tropical',coef:1.10,portance:'1.0–2.0 bars',fond:'Semelles renforcées',prixFond:38000,risque:'faible'},
+  laterite:{name:'Latérite / Cuirasse',coef:1.03,portance:'3.0–5.0 bars',fond:'Semelles réduites',prixFond:28000,risque:'faible'},
+  argileux:{name:'Argileux ⚠️',coef:1.30,portance:'0.5–1.5 bars',fond:'Radier ou pieux',prixFond:75000,risque:'élevé'},
+  sableux:{name:'Sableux',coef:1.18,portance:'1.0–2.0 bars',fond:'Semelles + compactage',prixFond:48000,risque:'moyen'},
+  hydromorphe:{name:'Hydromorphe ⚠️⚠️',coef:1.55,portance:'0.3–1.0 bars',fond:'Pieux profonds',prixFond:120000,risque:'très élevé'},
+  rocheux:{name:'Rocheux',coef:0.98,portance:'>5 bars',fond:'Ancrages roche',prixFond:25000,risque:'faible'}
+};
+// ---- STANDINGS (V5 prices) ----
+const STANDINGS={
+  standard:{name:'Standard',desc:'Économique et fonctionnel',icon:'🏠',pMin:180000,pMax:250000,emprise:.50,marge:.17,hon:.06},
+  confort:{name:'Confort',desc:'Qualité-prix optimal',icon:'🏡',pMin:280000,pMax:380000,emprise:.35,marge:.20,hon:.05},
+  premium:{name:'Premium',desc:'Excellence et personnalisation',icon:'🏘️',pMin:420000,pMax:550000,emprise:.30,marge:.23,hon:.04},
+  prestige:{name:'Prestige',desc:'Luxe sans compromis',icon:'🏰',pMin:600000,pMax:900000,emprise:.25,marge:.27,hon:.03}
+};
+// ---- TYPES ----
+const TYPES={
+  residentiel:[
+    {id:'villa',name:'Villa individuelle',max:3,icon:'🏠'},
+    {id:'immeuble',name:'Immeuble résidentiel',max:10,icon:'🏢'},
+    {id:'residence',name:'Résidence de standing',max:12,maj:1.15,icon:'🏛️'}
+  ],
+  tertiaire:[
+    {id:'bureaux',name:'Bureaux',max:20,prix:520000,icon:'🏢'},
+    {id:'commerce',name:'Commerce',max:4,prix:450000,icon:'🏪'},
+    {id:'hotel',name:'Hôtel',max:20,prix:625000,icon:'🏨'},
+    {id:'clinique',name:'Clinique',max:6,prix:720000,icon:'🏥'}
+  ],
+  industriel:[
+    {id:'entrepot',name:'Entrepôt',max:2,prix:220000,icon:'📦'},
+    {id:'usine',name:'Usine',max:3,prix:350000,icon:'🏭'},
+    {id:'atelier',name:'Atelier',max:2,prix:280000,icon:'🔧'},
+    {id:'frigo',name:'Chambre froide',max:2,prix:480000,icon:'❄️'}
+  ],
+  agricole:[
+    {id:'hangar',name:'Hangar',max:1,prix:120000,icon:'🚜'},
+    {id:'elevage_bovins',name:'Élevage bovins',max:1,prix:85000,ratio:8,icon:'🐄'},
+    {id:'elevage_volailles',name:'Volailles',max:1,prix:45000,ratio:.1,icon:'🐔'},
+    {id:'serres',name:'Serres',max:1,prix:65000,icon:'🌱'},
+    {id:'stockage',name:'Silos',max:1,prix:150000,icon:'🌾'}
+  ]
+};
+// ---- HOTELS ----
+const HOTELS=[
+  {id:'1s',name:'★',surfCh:16},{id:'2s',name:'★★',surfCh:18},{id:'3s',name:'★★★',surfCh:22},
+  {id:'4s',name:'★★★★',surfCh:28},{id:'5s',name:'★★★★★',surfCh:35},{id:'palace',name:'Palace',surfCh:50}
+];
+const HOTELS_PRIX={'1s':430000,'2s':500000,'3s':625000,'4s':800000,'5s':1175000,'palace':2000000};
+// ---- ENERGY ----
+const SOLAIRES=[
+  {id:'3',kw:3,prix:4500000},{id:'5',kw:5,prix:7500000},{id:'10',kw:10,prix:14000000},
+  {id:'15',kw:15,prix:20000000},{id:'20',kw:20,prix:26000000},{id:'30',kw:30,prix:38000000},
+  {id:'50',kw:50,prix:58000000},{id:'100',kw:100,prix:105000000}
+];
+const GROUPES=[
+  {id:'15',kva:15,prix:4500000},{id:'20',kva:20,prix:5500000},{id:'40',kva:40,prix:9000000},
+  {id:'60',kva:60,prix:14000000},{id:'100',kva:100,prix:22000000},{id:'150',kva:150,prix:32000000}
+];
+// ---- V5 NEW OPTIONS ----
+const DOMOTIQUE=[
+  {id:'domo_basique',name:'Éclairage connecté',min:400000,max:700000},
+  {id:'domo_partielle',name:'Domotique partielle',min:1200000,max:2000000},
+  {id:'domo_complete',name:'Maison intelligente',min:3000000,max:5500000}
+];
+const PAYSAGER=[
+  {id:'pay_basique',name:'Gazon + arbres (~200m²)',min:1500000,max:3000000},
+  {id:'pay_soigne',name:'Jardin soigné (~300m²)',min:3000000,max:5500000},
+  {id:'pay_prestige',name:'Design paysager (~500m²)',min:6000000,max:12000000}
+];
+const VOLETS=[
+  {id:'vol_manuel',name:'PVC manuel',mM2:35000,xM2:50000},
+  {id:'vol_motorise',name:'Alu motorisé',mM2:55000,xM2:80000},
+  {id:'vol_centralise',name:'Alu centralisé',mM2:70000,xM2:100000},
+  {id:'vol_connecte',name:'Alu connecté',mM2:85000,xM2:120000}
+];
+const CITERNES=[
+  {id:'cit_5',name:'Citerne 5 000L',min:800000,max:1200000},
+  {id:'cit_10',name:'Citerne 10 000L',min:1400000,max:2000000},
+  {id:'cit_20',name:'Citerne 20 000L',min:2500000,max:3500000}
+];
+</script>
+<script>
+// ---- STATE ----
+let S={
+  etape:1,secteur:'',typeBat:'',standing:'confort',catHotel:'3s',
+  forme:'rect',dimA:30,dimB:20,surfManuelle:600,terrainDispo:'oui',
+  zone:'zone1',sol:'',niveaux:1,ssSol:0,hspRdc:3.0,hspEtage:2.8,
+  nbChambres:30,espacesHotel:[],hauteurLibre:8,pontRoulant:false,pontCap:5,
+  groupeFroid:'',effectif:100,irrigation:'',surfExploit:5,
+  nbAsc:0,nbQuais:2,solaire:'',groupe:'',
+  alarme:'',nbZones:6,video:'',acces:'',nbPortes:2,
+  cloture:false,clotureH:2,portail:'',piscine:'',forage:false,forageProf:30,
+  parkType:'',parkPlaces:0,
+  domotique:'',paysager:'',volet:'',nbVoletM2:30,citerne:'',
+  showAuthModal:false
+};
+// ---- HELPERS ----
+const fmt=n=>new Intl.NumberFormat('fr-FR').format(Math.round(n||0));
+const fmtM=n=>n>=1e9?(n/1e9).toFixed(2)+' Mrd':n>=1e6?(n/1e6).toFixed(1)+' M':fmt(n);
+const td=()=>TYPES[S.secteur]?.find(t=>t.id===S.typeBat);
+const zd=()=>ZONES[S.zone]||ZONES.zone1;
+const sd=()=>SOLS[S.sol];
+const st=()=>STANDINGS[S.standing]||STANDINGS.confort;
+// ---- COMPUTED VALUES ----
+function cSurf(){
+  return S.forme==='carre'?S.dimA*S.dimA:S.forme==='rect'?S.dimA*S.dimB:S.surfManuelle;
+}
+function cPer(){
+  return S.forme==='carre'?4*S.dimA:S.forme==='rect'?2*(S.dimA+S.dimB):Math.sqrt(S.surfManuelle)*4*1.1;
+}
+function cEmp(){
+  if(S.secteur==='residentiel') return st().emprise||.35;
+  return S.secteur==='industriel'?.65:S.secteur==='agricole'?.50:.40;
+}
+function cSB(){
+  const t=td(),s=cSurf(),e=cEmp();
+  if(S.secteur==='agricole'&&S.typeBat?.startsWith('elevage_')) return Math.round(S.effectif*(t?.ratio||5)*1.3);
+  const es=s*e;
+  return Math.round(es*S.niveaux+S.ssSol*es*.85);
+}
+function cHaut(){
+  const h=S.hspRdc+.30+(S.niveaux>1?(S.niveaux-1)*(S.hspEtage+.25):0);
+  return Math.round((h+(S.secteur==='industriel'?1.5:2.5))*10)/10;
+}
+function cPrixM2(){
+  const t=td(), s=st();
+  if(S.secteur==='residentiel') return ((s.pMin+s.pMax)/2)*(t?.maj||1);
+  if(S.typeBat==='hotel') return HOTELS_PRIX[S.catHotel]||625000;
+  if(S.secteur==='industriel'){
+    let b=t?.prix||250000;
+    if(S.hauteurLibre>10)b*=1.12;
+    if(S.pontRoulant)b*=1.15;
+    if(S.typeBat==='frigo')b*=1.25;
+    return Math.round(b);
+  }
+  return t?.prix||450000;
+}
+function cCat(){
+  const ht=cHaut(); let cat='A1',g=false,m=[];
+  if(S.niveaux>4||ht>15){cat='B2';g=true;m.push('>R+4');}
+  else if(S.niveaux>2||ht>8){cat='A2';g=true;m.push('R+3 ou >8m');}
+  if(['hotel','commerce','clinique'].includes(S.typeBat)){g=true;m.push('ERP');}
+  if(S.sol==='argileux'||S.sol==='hydromorphe'){g=true;m.push('Sol risque');}
+  if(S.ssSol>0){g=true;m.push('Sous-sol');}
+  return{cat,geoOblig:g,motifs:m,mission:g?(cat==='B2'?'G2 PRO':'G2 AVP'):'G1'};
+}
+// ---- ENERGY NEEDS ----
+function cBesoins(){
+  const sb=cSB(); const det=[];
+  det.push({label:'💡 Éclairage',kw:Math.round(sb*(S.secteur==='industriel'?.008:S.secteur==='agricole'?.005:.012)*10)/10,prio:1});
+  det.push({label:'🔌 Prises',kw:Math.round(sb*.015*10)/10,prio:2});
+  const sc=sb*(S.secteur==='industriel'?.15:S.secteur==='agricole'?.10:.70);
+  if(sc>0)det.push({label:'❄️ Climatisation',kw:Math.round(sc*.10*10)/10,prio:5});
+  if(S.typeBat==='hotel'){
+    det.push({label:'🚿 Eau chaude',kw:Math.round(S.nbChambres*.3*10)/10,prio:4});
+    if(S.espacesHotel.includes('restaurant'))det.push({label:'🍳 Cuisine pro',kw:15,prio:6});
+    if(S.espacesHotel.includes('spa'))det.push({label:'💆 Spa',kw:12,prio:7});
+  }
+  if(S.secteur==='residentiel')det.push({label:'🍳 Électroménager',kw:Math.round(sb*.008*10)/10,prio:6});
+  if(S.nbAsc>0)det.push({label:'🛗 Ascenseurs',kw:Math.round(S.nbAsc*12*.15*10)/10,prio:9});
+  if(S.pontRoulant)det.push({label:'🏗️ Pont roulant',kw:Math.round((S.pontCap<=5?15:S.pontCap<=10?25:40)*.2*10)/10,prio:10});
+  if(S.alarme)det.push({label:'🚨 Alarme',kw:.5,prio:11});
+  if(S.video)det.push({label:'📹 Vidéo',kw:S.video==='16+'?1.5:.8,prio:3});
+  if(S.piscine)det.push({label:'🏊 Piscine',kw:S.piscine==='12x5'?5:3.5,prio:8});
+  if(S.forage)det.push({label:'💧 Pompe forage',kw:S.secteur==='agricole'?5:2,prio:7});
+  det.sort((a,b)=>a.prio-b.prio);
+  return{details:det,total:Math.ceil(det.reduce((s,d)=>s+d.kw,0))};
+}
+// ---- SOLAR PROPOSITIONS ----
+function cSolaires(){
+  const{details,total}=cBesoins(); if(!total)return[];
+  return SOLAIRES.map(k=>{
+    const couv=Math.round((k.kw/total)*100);
+    if(couv<40||couv>150)return null;
+    let r=k.kw;const cov=[],nc=[];
+    details.forEach(d=>{if(r>=d.kw){cov.push(d.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());r-=d.kw;}else nc.push(d.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());});
+    return{...k,couv,couverts:cov,nonCouverts:nc,optimal:couv>=95&&couv<=115};
+  }).filter(Boolean);
+}
+// ---- GENERATOR PROPOSITIONS ----
+function cGroupes(){
+  const{details,total}=cBesoins(); const bt=total*.8; if(!bt)return[];
+  return GROUPES.map(g=>{
+    const pu=g.kva*.8,couv=Math.round((pu/bt)*100);
+    if(couv<40||couv>150)return null;
+    let r=pu;const cov=[],nc=[];
+    details.forEach(d=>{if(r>=d.kw){cov.push(d.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());r-=d.kw;}else nc.push(d.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());});
+    return{...g,couv,couverts:cov,nonCouverts:nc,optimal:couv>=95&&couv<=115};
+  }).filter(Boolean);
+}
+// ---- 12-POST ESTIMATION (V5) ----
+function cEstimation(){
+  const surf=cSurf(),sb=cSB(),pos=[],z=zd(),s=sd(),e=cEmp(),p=st();
+  if(!sb||!S.sol)return null;
+  const coef=(z.coef||1)*((s?.coef)||1.15);
+  let fMin=0,fMax=0;
+  if(S.terrainDispo!=='oui'){fMin=fMax=surf*z.foncier;pos.push({code:'0',nom:'Acquisition foncière',detail:`${Math.round(surf)} m²`,min:fMin,max:fMax});}
+  // P2 fondations
+  const fb=surf*e*(s?.prixFond||45000);
+  let p2m=fb,p2x=fb*1.1;
+  if(S.secteur==='industriel'){p2m*=1.3;p2x*=1.3;}
+  if(S.ssSol>0){p2m+=S.ssSol*surf*e*70000;p2x+=S.ssSol*surf*e*100000;}
+  pos.push({code:'2',nom:'Fondations',detail:s?.fond||'À définir',min:p2m,max:p2x});
+  // P3-P8 construction
+  const cMin=sb*p.pMin*coef, cMax=sb*p.pMax*coef;
+  pos.push({code:'3',nom:'Structure gros œuvre',detail:'Structure, maçonnerie, planchers',min:cMin*.42,max:cMax*.42});
+  pos.push({code:'4',nom:'Charpente/Couverture',detail:'Toiture, zingueries',min:cMin*.12,max:cMax*.12});
+  pos.push({code:'5',nom:'Menuiseries',detail:'Portes, fenêtres, vitrages',min:cMin*.10,max:cMax*.10});
+  pos.push({code:'6',nom:'Revêtements/Finitions',detail:'Carrelages, peintures',min:cMin*.14,max:cMax*.14});
+  pos.push({code:'7',nom:'Électricité',detail:'Installation électrique complète',min:cMin*.09,max:cMax*.09});
+  pos.push({code:'8',nom:'Plomberie/Sanitaires',detail:'Plomberie, appareils sanitaires',min:cMin*.08,max:cMax*.08});
+  // P9 extérieurs
+  const per=cPer();
+  let e9m=surf*7000,e9x=surf*9000;
+  if(S.cloture){e9m+=per*(S.clotureH<=2?75000:110000);e9x+=per*(S.clotureH<=2?100000:160000);}
+  if(S.portail==='manuel'){e9m+=450000;e9x+=650000;}
+  if(S.portail==='motorise'){e9m+=1400000;e9x+=1900000;}
+  if(S.piscine==='8x4'){e9m+=12000000;e9x+=17000000;}
+  if(S.piscine==='12x5'){e9m+=22000000;e9x+=30000000;}
+  if(S.forage){e9m+=S.forageProf*80000+1000000;e9x+=S.forageProf*110000+1500000;}
+  if(S.parkPlaces>0){const u=S.parkType==='souterrain'?3200000:S.parkType==='couvert'?1100000:350000;const v=S.parkType==='souterrain'?4400000:S.parkType==='couvert'?1600000:500000;e9m+=S.parkPlaces*u;e9x+=S.parkPlaces*v;}
+  const py=PAYSAGER.find(x=>x.id===S.paysager);if(py){e9m+=py.min;e9x+=py.max;}
+  pos.push({code:'9',nom:'Aménagements extérieurs',detail:'Clôture, portail, piscine, parking',min:e9m,max:e9x});
+  // P10 équipements techniques
+  let q10m=0,q10x=0;
+  if(S.nbAsc>0){const u=S.niveaux<=5?24000000:30000000;q10m+=S.nbAsc*u;q10x+=S.nbAsc*(u*1.3);}
+  if(S.nbQuais>0&&S.secteur==='industriel'){q10m+=S.nbQuais*7000000;q10x+=S.nbQuais*10000000;}
+  if(S.pontRoulant){const u=S.pontCap<=5?24000000:S.pontCap<=10?40000000:65000000;q10m+=u;q10x+=u*1.3;}
+  if(S.groupeFroid){q10m+=sb*(S.groupeFroid==='negatif'?80000:47000);q10x+=sb*(S.groupeFroid==='negatif'?110000:63000);}
+  if(S.alarme){const al={basique:[700000,1000000],avancee:[1400000,1800000],connectee:[2200000,2800000],pro:[3200000,4400000]};const ar=al[S.alarme]||[0,0];q10m+=ar[0]+S.nbZones*100000;q10x+=ar[1]+S.nbZones*160000;}
+  if(S.video==='4-8'){q10m+=1800000;q10x+=2600000;}if(S.video==='16+'){q10m+=7000000;q10x+=10000000;}
+  if(S.acces==='badge'){q10m+=800000+S.nbPortes*270000;q10x+=1100000+S.nbPortes*370000;}
+  if(S.acces==='bio'){q10m+=1500000+S.nbPortes*600000;q10x+=2100000+S.nbPortes*840000;}
+  const ks=SOLAIRES.find(k=>k.id===S.solaire);const gr=GROUPES.find(g=>g.id===S.groupe);
+  if(ks){q10m+=ks.prix*.9;q10x+=ks.prix*1.1;}if(gr){q10m+=gr.prix*.9;q10x+=gr.prix*1.1;}
+  const dm=DOMOTIQUE.find(d=>d.id===S.domotique);if(dm){q10m+=dm.min;q10x+=dm.max;}
+  const vl=VOLETS.find(v=>v.id===S.volet);if(vl&&S.nbVoletM2>0){q10m+=S.nbVoletM2*vl.mM2;q10x+=S.nbVoletM2*vl.xM2;}
+  const ct=CITERNES.find(c=>c.id===S.citerne);if(ct){q10m+=ct.min;q10x+=ct.max;}
+  if(q10m>0)pos.push({code:'10',nom:'Équipements techniques',detail:'Énergie, sécurité, domotique',min:q10m,max:q10x});
+  // Sous-total
+  const stm=pos.filter(x=>x.code!=='0').reduce((a,x)=>a+x.min,0);
+  const stx=pos.filter(x=>x.code!=='0').reduce((a,x)=>a+x.max,0);
+  // P11 honoraires
+  const h11m=500000+stm*p.hon, h11x=500000+stx*p.hon;
+  pos.push({code:'11',nom:'Honoraires/Études',detail:`Forfait 500K + ${Math.round(p.hon*100)}% sous-total`,min:h11m,max:h11x});
+  // P12 assurances
+  pos.push({code:'12',nom:'Assurances/Divers',detail:'2% du sous-total',min:(stm+h11m)*.02,max:(stx+h11x)*.02});
+  const totMin=pos.reduce((a,x)=>a+x.min,0);
+  const totMax=pos.reduce((a,x)=>a+x.max,0);
+  const mg=p.marge||.20;
+  let dur=6;
+  if(S.secteur==='residentiel')dur=S.typeBat==='villa'?8:14+(S.niveaux-2)*1.5;
+  else if(S.secteur==='tertiaire')dur=S.typeBat==='hotel'?18+(S.niveaux-3)*2:12+(S.niveaux-2)*1.5;
+  else if(S.secteur==='industriel')dur=sb>3000?14:sb>1500?10:7;
+  else if(S.secteur==='agricole')dur=5;
+  if(S.ssSol>0)dur+=S.ssSol*2.5;
+  if(S.sol==='argileux'||S.sol==='hydromorphe')dur+=2;
+  dur=Math.round(Math.max(4,dur));
+  return{postes:pos,totMin,totMax,clientMin:Math.round(totMin*(1+mg)),clientMax:Math.round(totMax*(1+mg)),marge:mg,duree:dur,fMin,fMax};
+}
+// ---- AUTO-SAVE ----
+function autoSave(){
+  const est=cEstimation(); if(!est)return;
+  const payload={
+    secteur:S.secteur,typeBat:S.typeBat,standing:S.standing,zone:S.zone,sol:S.sol,
+    dimensions:{surface:cSurf(),niveaux:S.niveaux,ssSol:S.ssSol},
+    options:{alarme:S.alarme,video:S.video,acces:S.acces,solaire:S.solaire,
+      groupe:S.groupe,piscine:S.piscine,forage:S.forage,cloture:S.cloture,
+      portail:S.portail,domotique:S.domotique,paysager:S.paysager,
+      volet:S.volet,citerne:S.citerne,parkPlaces:S.parkPlaces},
+    total:(est.clientMin+est.clientMax)/2,
+    base_amount:(est.totMin+est.totMax)/2,
+    options_amount:0,
+    details:est.postes.map(p=>({nom:p.nom,detail:p.detail,min:p.min,max:p.max}))
+  };
+  localStorage.setItem('aiae_sim_draft',JSON.stringify({...payload,etape:S.etape,ts:Date.now()}));
+  if(IS_AUTH){
+    fetch(SAVE_URL,{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':CSRF},body:JSON.stringify(payload)}).catch(()=>{});
+  }
+}
+// ---- RESTORE DRAFT ----
+(function(){
+  try{
+    const d=JSON.parse(localStorage.getItem('aiae_sim_draft'));
+    if(d&&Date.now()-d.ts<86400000){
+      const keys=['secteur','typeBat','standing','zone','sol','niveaux','ssSol','alarme','video','acces','solaire','groupe','piscine','forage','cloture','portail','domotique','paysager','volet','citerne','parkPlaces'];
+      keys.forEach(k=>{if(d[k]!==undefined)S[k]=d[k];});
+      if(d.dimensions){S.niveaux=d.dimensions.niveaux||1;S.ssSol=d.dimensions.ssSol||0;}
+      if(d.options)Object.assign(S,d.options);
     }
+  }catch(e){}
+})();
+</script>
+<script>
+// ---- RENDERING ENGINE ----
+function r(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
 
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #f8fafc
-    }
+function render(){
+  let h=`<div class="min-h-screen flex flex-col">`;
+  h+=renderHeader();
+  h+=`<main class="flex-1 max-w-5xl mx-auto w-full px-4 py-6">`;
+  
+  if(S.etape===1) h+=renderStep1();
+  else if(S.etape===2) h+=renderStep2();
+  else if(S.etape===3) h+=renderStep3();
+  else if(S.etape===4) h+=renderStep4();
+  else if(S.etape===5) h+=renderStep5();
+  
+  h+=`</main>`;
+  h+=renderFooter();
+  h+='</div>';
+  if(S.showAuthModal) h+=renderAuthModal();
+  
+  document.getElementById('app').innerHTML=h;
+  attachEvents();
+}
 
-    .mono {
-      font-family: 'JetBrains Mono', monospace
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px
-    }
-
-    .btn-primary {
-      background: var(--orange);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary:disabled {
-      background: #e5e7eb;
-      color: #9ca3af;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .option-btn {
-      padding: 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: white;
-      width: 100%;
-    }
-
-    .option-btn:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1)
-    }
-
-    .option-btn.selected {
-      border-color: #3b82f6;
-      background: #eff6ff
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600
-    }
-
-    .badge-blue { background: #dbeafe; color: #1e40af }
-    .badge-gray { background: #f3f4f6; color: #374151 }
-
-    .input-num {
-      display: flex;
-      align-items: center;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      overflow: hidden;
-      width: 140px;
-    }
-
-    .input-num button {
-      width: 40px;
-      height: 40px;
-      border: none;
-      background: #f8fafc;
-      cursor: pointer;
-      font-size: 18px
-    }
-
-    .input-num .value {
-      flex: 1;
-      text-align: center;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Force Navbar background color for this page */
-    #navBar {
-      background-color: var(--bleu) !important;
-      backdrop-filter: none !important;
-    }
-  </style>
-@endsection
-
-@section('content')
-  <div class="pt-32 pb-20 px-4">
-    <div class="max-w-5xl mx-auto">
-      
-      <!-- Progress Bar -->
-      <div id="progress-container" class="mb-10 flex justify-between items-center relative">
-        <div class="absolute h-1 bg-gray-200 top-1/2 -translate-y-1/2 left-0 right-0 z-0"></div>
-        <div id="progress-bar" class="absolute h-1 bg-blue-600 top-1/2 -translate-y-1/2 left-0 z-0 transition-all duration-500" style="width: 0%"></div>
-        
-        <div class="step-dot active z-10 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
-        <div class="step-dot z-10 w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold text-sm">2</div>
-        <div class="step-dot z-10 w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold text-sm">3</div>
-        <div class="step-dot z-10 w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold text-sm">4</div>
-        <div class="step-dot z-10 w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center font-bold text-sm">5</div>
+function renderHeader(){
+  return `
+  <header class="no-print">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="setS({etape:1})">
+        <img src="{{ asset('aiae-frontend/Images/logo.png') }}" class="w-10 h-10 object-contain" alt="AIAE">
+        <div class="hidden sm:block">
+          <div class="font-bold text-sm" style="color:var(--bleu)">AIAE SARL</div>
+          <div class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Simulateur Construction v5</div>
+        </div>
       </div>
-
-      <!-- STEP 1: TYPE DE PROJET -->
-      <section id="step-1" class="step-content">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Type de projet (<span id="display-secteur">{{ $secteur }}</span>)</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="types-container">
-          <!-- JS Rendered -->
-        </div>
-
-        <!-- V8.1: Hôtel Stars (Only if Tertiaire + Hôtel) -->
-        <div id="hotel-stars-panel" class="hidden card p-6 mb-8 border-blue-100 bg-blue-50/30">
-            <h3 class="font-semibold text-[#162064] mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                Classification Hôtelière
-            </h3>
-            <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
-                @foreach(['1s' => '★', '2s' => '★★', '3s' => '★★★', '4s' => '★★★★', '5s' => '★★★★★', 'palace' => 'Palace'] as $code => $label)
-                    <button onclick="setHotelStar('{{ $code }}')" id="star-{{ $code }}" class="star-btn px-2 py-3 rounded-xl border border-gray-200 text-xs font-bold hover:border-[#162064] hover:text-[#162064] transition-all bg-white">
-                        {{ $label }}
-                    </button>
-                @endforeach
-            </div>
-        </div>
-        
-        <div id="standing-container" class="hidden">
-           <div class="card p-6 mb-8">
-              <h3 class="font-semibold text-gray-700 mb-4">Standing souhaité</h3>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="standings-grid">
-                  <!-- JS Rendered -->
+      <div class="flex items-center gap-6">
+        <div class="hidden md:flex gap-1">
+          ${[1,2,3,4,5].map(n=>`
+            <div class="flex items-center">
+              <div class="step-dot ${n<S.etape?'bg-green-500 text-white':n===S.etape?'bg-blue-600 text-white':'bg-gray-200 text-gray-400'}">
+                ${n<S.etape?'✓':n}
               </div>
-           </div>
+              ${n<5?`<div class="w-6 h-0.5 ${n<S.etape?'bg-green-500':'bg-gray-200'}"></div>`:''}
+            </div>
+          `).join('')}
         </div>
-      </section>
-
-      <!-- STEP 2: LOCALISATION -->
-      <section id="step-2" class="step-content hidden">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Localisation et Terrain</h2>
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-            <div class="card p-6">
-                <h3 class="font-semibold text-gray-700 mb-4">Zone géographique</h3>
-                <div class="space-y-3" id="zones-container">
-                    <!-- JS Rendered -->
-                </div>
-            </div>
-            <div class="card p-6">
-                <h3 class="font-semibold text-gray-700 mb-4">Type de sol</h3>
-                <div class="grid grid-cols-1 gap-2" id="sols-container">
-                    <!-- JS Rendered -->
-                </div>
-            </div>
-        </div>
-      </section>
-
-      <!-- STEP 3: DIMENSIONS (Placeholder logic for now, keeping it simple) -->
-      <section id="step-3" class="step-content hidden">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Dimensions du bâtiment</h2>
-        <div class="card p-6 mb-8">
-            <div class="grid md:grid-cols-2 gap-10">
-                <div>
-                  <h3 class="font-semibold text-gray-700 mb-4">Emprise au sol</h3>
-                  <div class="space-y-6">
-                      <div class="flex justify-between items-center">
-                          <span class="text-gray-600">Longueur (m)</span>
-                          <div class="input-num">
-                              <button onclick="changeDim('dimA', -5)">−</button>
-                              <div class="value" id="val-dimA">30</div>
-                              <button onclick="changeDim('dimA', 5)">+</button>
-                          </div>
-                      </div>
-                      <div class="flex justify-between items-center">
-                          <span class="text-gray-600">Largeur (m)</span>
-                          <div class="input-num">
-                              <button onclick="changeDim('dimB', -5)">−</button>
-                              <div class="value" id="val-dimB">20</div>
-                              <button onclick="changeDim('dimB', 5)">+</button>
-                          </div>
-                      </div>
-                      <div class="pt-4 border-t">
-                          <div class="flex justify-between text-sm text-gray-500">
-                              <span>Surface terrain</span>
-                              <span class="font-bold text-gray-800"><span id="val-surf">600</span> m²</span>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-700 mb-4">Nombre de niveaux</h3>
-                  <div class="flex items-center gap-4 mb-6">
-                      <div class="input-num">
-                          <button onclick="changeDim('niveaux', -1)">−</button>
-                          <div class="value" id="val-niveaux">1</div>
-                          <button onclick="changeDim('niveaux', 1)">+</button>
-                      </div>
-                      <span class="text-sm text-gray-500">(R+<span id="label-etages">0</span>)</span>
-                  </div>
-                  <div class="info-box bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 text-sm text-blue-800">
-                      La surface totale bâtie estimée est de <span class="font-bold"><span id="val-surfBatie">0</span> m²</span>.
-                  </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- V8.1: Industrial & Agricole Features -->
-        <div id="sector-features-panel" class="hidden card p-6 mb-8 border-orange-100 bg-orange-50/20">
-            <div id="industrial-addon" class="hidden space-y-6">
-                <h3 class="font-semibold text-gray-700">Spécifications Industrielles</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="flex justify-between items-center">
-                        <span class="text-gray-600">Hauteur Libre (m)</span>
-                        <div class="input-num">
-                            <button onclick="changeDim('hauteurLibre', -1)">−</button>
-                            <div class="value" id="val-hauteur">8</div>
-                            <button onclick="changeDim('hauteurLibre', 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="checkbox" onchange="state.pontRoulant=this.checked; calculate();" class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Pont roulant</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="checkbox" onchange="state.groupeFroid=this.checked; calculate();" class="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Groupe froid</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="agricole-addon" class="hidden">
-                <h3 class="font-semibold text-gray-700 mb-4">Effectif Élevage</h3>
-                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-gray-100">
-                    <span class="text-gray-600">Nombre de sujets / têtes</span>
-                    <div class="input-num">
-                        <button onclick="changeDim('effectif', -10)">−</button>
-                        <div class="value" id="val-effectif">50</div>
-                        <button onclick="changeDim('effectif', 10)">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-
-      <!-- STEP 4: OPTIONS -->
-      <section id="step-4" class="step-content hidden">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 font-FuturaStdMedium">Équipements et Options</h2>
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-           <!-- SÉCURITÉ -->
-           <div class="card p-6">
-              <h3 class="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                Sécurité & Surveillance
-              </h3>
-              <div class="space-y-4">
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Alarme</span>
-                    <div class="space-y-2 mt-2" id="alarme-container"></div>
-                  </div>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Vidéosurveillance</span>
-                    <div class="space-y-2 mt-2" id="video-container"></div>
-                  </div>
-              </div>
-           </div>
-
-           <!-- DOMOTIQUE -->
-           <div class="card p-6">
-              <h3 class="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                Maison Intelligente
-              </h3>
-              <div class="space-y-2" id="domotique-container"></div>
-           </div>
-
-           <!-- EXTERIEUR & EAU -->
-           <div class="card p-6">
-              <h3 class="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                Aménagement & Eau
-              </h3>
-              <div class="space-y-4">
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Clôture</span>
-                    <div class="space-y-2 mt-2" id="cloture-container"></div>
-                  </div>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Portail</span>
-                    <div class="space-y-2 mt-2" id="portail-container"></div>
-                  </div>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Piscine</span>
-                    <div class="space-y-2 mt-2" id="piscine-container"></div>
-                  </div>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Citerne Eau de Pluie</span>
-                    <div class="space-y-2 mt-2" id="citerne-container"></div>
-                  </div>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Aménagement Paysager</span>
-                    <div class="space-y-2 mt-2" id="paysager-container"></div>
-                  </div>
-              </div>
-           </div>
-
-           <!-- ÉNERGIE & AUTRES -->
-           <div class="card p-6">
-              <h3 class="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                Énergie & Finitions
-              </h3>
-              <div class="space-y-4">
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Solaire</span>
-                    <div class="space-y-2 mt-2" id="solaire-container"></div>
-                  </div>
-                  <hr>
-                  <div>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Volets Roulants</span>
-                    <div class="space-y-2 mt-2" id="volets-container"></div>
-                  </div>
-                  <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                      <span class="font-medium">Forage d'eau</span>
-                      <input type="checkbox" onchange="toggleOption('forage', true)" class="w-5 h-5">
-                  </label>
-              </div>
-           </div>
-        </div>
-      </section>
-
-      <!-- STEP 5: RÉSULTATS -->
-      <section id="step-5" class="step-content hidden">
-          @auth
-            <div id="results-view">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Estimation de votre projet</h2>
-                <div class="card p-8 mb-8" style="background: linear-gradient(135deg, #162064 0%, #1e3a8a 100%)">
-                    <div class="text-center text-white">
-                        <div class="text-white/70 mb-2">Budget estimé (Clé en main)</div>
-                        <div class="text-4xl md:text-5xl font-bold mono" id="total-estimation">
-                            --
-                        </div>
-                    </div>
-                </div>
-                <div class="card p-6">
-                    <h3 class="font-bold mb-4">Détails des postes</h3>
-                    <div class="space-y-4" id="postes-details">
-                        <!-- JS Rendered -->
-                    </div>
-                </div>
-
-                <!-- V8.1: BESOIN ÉNERGÉTIQUE -->
-                <div class="mt-8 card p-6 border-blue-100 bg-blue-50/10">
-                    <div class="flex items-center gap-2 mb-6 text-blue-900">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        <h3 class="text-lg font-bold">Estimation des besoins énergétiques</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-xl border border-blue-50">
-                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Éclairage</div>
-                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-lum">--</span> <span class="text-xs">kW</span></div>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl border border-blue-50">
-                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Prises de courants</div>
-                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-prises">--</span> <span class="text-xs">kW</span></div>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl border border-blue-50">
-                            <div class="text-xs text-blue-600 font-bold uppercase mb-1">Climatisation</div>
-                            <div class="text-2xl font-bold mono text-blue-900"><span id="energy-clim">--</span> <span class="text-xs">kW</span></div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-blue-50 flex justify-between items-center px-2">
-                        <span class="text-sm font-bold text-blue-800">PUISSANCE TOTALE ESTIMÉE</span>
-                        <span class="text-xl font-black text-blue-900 mono"><span id="energy-total">--</span> kVA</span>
-                    </div>
-                </div>
-                <div class="flex justify-center mt-6">
-                    <button onclick="saveSimulation()" class="btn-primary px-10 py-4 text-lg">
-                        Enregistrer & Voir mon historique
-                    </button>
-                </div>
-            </div>
-          @else
-            <div class="text-center py-20 card p-10 bg-white shadow-xl">
-                <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-10 h-10 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Connectez-vous pour voir vos résultats</h2>
-                <p class="text-gray-600 mb-8 max-w-md mx-auto">
-                    Afin de vous fournir une étude détaillée et de sauvegarder votre simulation, vous devez être connecté à votre espace client.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="saveSimulation('login')" class="btn-primary">Se connecter</button>
-                    <button onclick="saveSimulation('register')" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold text-center mt-2 sm:mt-0">Créer un compte</button>
-                </div>
-            </div>
-          @endauth
-      </section>
-
-      <!-- NAVIGATION BUTTONS -->
-      <div id="nav-container" class="flex justify-between items-center mt-8 pt-6 border-t no-print">
-        <button id="btn-prev" onclick="moveStep(-1)" class="px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg">
-          Retour
-        </button>
-        <button id="btn-next" onclick="moveStep(1)" class="btn-primary flex items-center gap-2">
-          Continuer
+        <button onclick="window.location.reload()" class="text-xs font-bold text-gray-400 hover:text-red-500 uppercase tracking-wider flex items-center gap-1 transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Effacer
         </button>
       </div>
-
     </div>
-  </div>
-@endsection
+  </header>`;
+}
 
-@section('scripts')
-  <script>
-    // DATA INJECTION
-    // DATA INJECTION
-    const ZONES = @json($zones->keyBy('code'));
-    const SOLS = @json($sols->keyBy('code'));
-    const STANDINGS = @json($standings->keyBy('code'));
-    const TYPE_BATIMENTS = @json($typeBatiments->keyBy('code'));
-    const EQUIP_OPTIONS = @json($equipementOptions->groupBy('categorie'));
+function renderFooter(){
+  return `<footer class="text-center py-6 text-gray-400 text-[10px] no-print uppercase tracking-widest leading-relaxed">
+    © 2026 AIAE SARL • Afrika Infrastructure, Automation & Energy • Lomé, Togo<br>
+    Spécifications techniques v5.1 • Février 2026
+  </footer>`;
+}
+
+function renderNav(canContinue=true){
+  return `
+  <div class="flex justify-between items-center mt-12 pt-6 border-t no-print">
+    <button onclick="prevStep()" class="font-bold text-gray-400 hover:text-gray-600 uppercase tracking-widest text-xs flex items-center gap-2">
+      ← Précédent
+    </button>
+    <button id="btn-next" onclick="nextStep()" ${!canContinue?'disabled':''} class="btn-primary">
+      ${S.etape===5?'Terminer':'Suivant'} →
+    </button>
+  </div>`;
+}
+
+// ---- STEP 1: TYPE ----
+function renderStep1(){
+  const types=TYPES[S.secteur]||[];
+  let h=`<div class="animate-fade-in">
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">1. Type de projet</h2>
+      <p class="text-gray-500 text-sm">Sélectionnez le secteur et le type de bâtiment</p>
+    </div>
+    <div class="card p-6 mb-8 shadow-sm">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Secteur d'activité</h3>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        ${Object.keys(TYPES).map(k=>`
+          <button onclick="setS({secteur:'${k}',typeBat:''})" class="opt-btn ${S.secteur===k?'sel':''}">
+            <div class="text-2xl mb-2">${k==='residentiel'?'🏠':k==='tertiaire'?'🏢':k==='industriel'?'🏭':'🌾'}</div>
+            <div class="font-bold text-gray-800">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+
+  if(S.secteur){
+    h+=`<div class="card p-6 mb-8 shadow-sm border-t-4 border-blue-600">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Modèle de construction</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        ${types.map(t=>`
+          <button onclick="setS({typeBat:'${t.id}'})" class="opt-btn ${S.typeBat===t.id?'sel':''}">
+             <div class="flex justify-between items-start">
+               <div>
+                  <div class="text-2xl mb-2">${t.icon}</div>
+                  <div class="font-bold text-gray-800">${t.name}</div>
+                  <div class="text-[10px] text-gray-400 mt-1 uppercase">Max R+${t.max-1}</div>
+               </div>
+               ${S.typeBat===t.id?'<div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-white text-[10px]">✓</div>':''}
+             </div>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+
+  if(S.secteur==='residentiel' && S.typeBat){
+    h+=`<div class="card p-6 mb-8 shadow-sm">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Niveau de finition (Standing)</h3>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        ${Object.entries(STANDINGS).map(([k,v])=>`
+          <button onclick="setS({standing:'${k}'})" class="opt-btn ${S.standing===k?'sel':''}">
+            <div class="text-xl mb-1">${v.icon}</div>
+            <div class="font-bold text-sm text-gray-800">${v.name}</div>
+            <div class="text-[10px] text-gray-500 leading-tight">${v.desc}</div>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+
+  if(S.typeBat==='hotel'){
+    h+=`<div class="card p-6 mb-8 shadow-sm">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Classification Hôtelière</h3>
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-3">
+        ${HOTELS.map(v=>`
+          <button onclick="setS({catHotel:'${v.id}'})" class="opt-btn ${S.catHotel===v.id?'sel':''} text-center">
+            <div class="font-bold text-blue-800">${v.name}</div>
+            <div class="text-[10px] text-gray-400 mt-1">${v.surfCh}m²</div>
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+
+  h+=renderNav(!!S.typeBat);
+  h+=`</div>`;
+  return h;
+}
+
+// ---- STEP 2: TERRAIN ----
+function renderStep2(){
+  const s=cSurf(), p=cPer(), z=zd();
+  return `
+  <div class="animate-fade-in">
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">2. Le Terrain</h2>
+      <p class="text-gray-500 text-sm">Dimensions, zone géographique et nature du sol</p>
+    </div>
     
-    const TYPES = {
-      residentiel: [
-        { id: 'villa', name: 'Villa individuelle', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-        { id: 'duplex', name: 'Duplex / Triplex', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-        { id: 'immeuble', name: 'Immeuble résidentiel', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' }
-      ],
-      tertiaire: [
-        { id: 'bureaux', name: 'Bureaux', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' },
-        { id: 'commerce', name: 'Commerce / Boutiques', icon: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z' },
-        { id: 'hotel', name: 'Hôtel / Résidence', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' }
-      ],
-      industriel: [
-        { id: 'entrepot', name: 'Entrepôt Logistique', icon: 'M19 21V10l-6-3-6 3v11m12 0h-12m12 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1' },
-        { id: 'usine', name: 'Unité de Production', icon: 'M19 21V10l-6-3-6 3v11m12 0h-12m12 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1' }
-      ],
-      agricole: [
-        { id: 'hangar_agri', name: 'Hangar Agricole', icon: 'M19 21V10l-6-3-6 3v11m12 0h-12m12 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1' },
-        { id: 'ferme_avicole', name: 'Bâtiment d\'élevage', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3' }
-      ]
-    };
-
-    // STATE
-    const state = {
-      etape: 1,
-      secteur: "{{ $secteur }}",
-      typeBat: '',
-      standing: 'confort',
-      catHotel: '3s',
-      forme: 'rect',
-      dimA: 30,
-      dimB: 20,
-      surfManuelle: 600,
-      terrainDispo: 'oui',
-      zone: 'zone1',
-      sol: '',
-      niveaux: 1,
-      ssSol: 0,
-      hspRdc: 3.0,
-      hspEtage: 2.8,
-      nbChambres: 30,
-      espacesHotel: [],
-      hauteurLibre: 8,
-      pontRoulant: false,
-      pontCap: 5,
-      groupeFroid: '',
-      effectif: 100,
-      irrigation: '',
-      surfExploit: 5,
-      nbAsc: 0,
-      nbQuais: 2,
-      solaire: '',
-      groupe: '',
-      alarme: '',
-      nbZones: 6,
-      video: '',
-      acces: '',
-      nbPortes: 2,
-      cloture: false,
-      clotureH: 2,
-      portail: '',
-      piscine: '',
-      forage: false,
-      forageProf: 30,
-      parkType: '',
-      parkPlaces: 0,
-      options: {}
-    };
-
-    // INIT
-    function init() {
-      renderTypes();
-      renderStandings();
-      renderZones();
-      renderSols();
-      
-      // Apply initial standing mapping
-      applyStandingMapping(state.standing);
-
-      updateProgress();
-      updateUI();
-    }
-
-    // STEP NAVIGATION
-    function moveStep(delta) {
-      if (delta === 1 && state.etape === 5) return;
-      if (delta === -1 && state.etape === 1) return;
-      
-      state.etape += delta;
-      
-      // Handle hidden sections
-      document.querySelectorAll('.step-content').forEach(s => s.classList.add('hidden'));
-      document.getElementById('step-' + state.etape).classList.remove('hidden');
-      
-      if (state.etape === 5) calculate();
-      
-      updateProgress();
-      updateUI();
-    }
-
-    function updateProgress() {
-      const bar = document.getElementById('progress-bar');
-      bar.style.width = ((state.etape - 1) / 4 * 100) + '%';
-      
-      document.querySelectorAll('.step-dot').forEach((dot, i) => {
-        if (i < state.etape) {
-          dot.classList.add('bg-blue-600', 'text-white');
-          dot.classList.remove('bg-gray-200', 'text-gray-500');
-        } else {
-          dot.classList.remove('bg-blue-600', 'text-white');
-          dot.classList.add('bg-gray-200', 'text-gray-500');
-        }
-      });
-    }
-
-    function updateUI() {
-      const btnNext = document.getElementById('btn-next');
-      const btnPrev = document.getElementById('btn-prev');
-      
-      btnPrev.classList.toggle('invisible', state.etape === 1);
-      btnNext.innerHTML = state.etape === 5 ? 'Finaliser' : (state.etape === 4 ? 'Voir l\'estimation' : 'Continuer');
-      
-      // Sector Panel Visibility
-      const hotelPanel = document.getElementById('hotel-stars-panel');
-      if (hotelPanel) {
-          hotelPanel.classList.toggle('hidden', !(state.secteur === 'tertiaire' && state.typeBat === 'hotel' && state.etape === 1));
-      }
-
-      const featuresPanel = document.getElementById('sector-features-panel');
-      if (featuresPanel) {
-          const isShow = (state.secteur === 'industriel' || state.secteur === 'agricole') && state.etape === 3;
-          featuresPanel.classList.toggle('hidden', !isShow);
-          if (isShow) {
-              document.getElementById('industrial-addon').classList.toggle('hidden', state.secteur !== 'industriel');
-              document.getElementById('agricole-addon').classList.toggle('hidden', state.secteur !== 'agricole');
-          }
-      }
-
-      // Star highlighting
-      document.querySelectorAll('.star-btn').forEach(btn => {
-          const code = btn.id.replace('star-', '');
-          btn.classList.toggle('border-[#162064]', state.catHotel === code);
-          btn.classList.toggle('bg-blue-100', state.catHotel === code);
-      });
-
-      // Disable next if input missing
-      if (state.etape === 1) btnNext.disabled = !state.typeBat;
-      else btnNext.disabled = false;
-    }
-
-    function setHotelStar(code) {
-        state.catHotel = code;
-        updateUI();
-        calculate();
-    }
-
-    // RENDERS
-    function renderTypes() {
-      const container = document.getElementById('types-container');
-      const types = TYPES[state.secteur] || TYPES.residentiel;
-      container.innerHTML = types.map(t => `
-        <button onclick="setType('${t.id}')" class="option-btn ${state.typeBat === t.id ? 'selected' : ''}">
-          <div class="text-blue-600 mb-2">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="${t.icon}" />
-            </svg>
-          </div>
-          <div class="font-medium text-gray-800">${t.name}</div>
-        </button>
-      `).join('');
-    }
-
-    function setType(id) {
-       state.typeBat = id;
-       renderTypes();
-       updateUI();
-    }
-
-    function setSecteur(id) {
-      state.secteur = id;
-      state.typeBat = ''; // Reset type bat when sector changes
-      // renderSecteurs(); // This function is not defined in the provided code, assuming it's external or a typo.
-      renderTypes();
-      
-      const standingContainer = document.getElementById('standing-container');
-      if (state.secteur === 'residentiel') {
-         standingContainer.classList.remove('hidden');
-      } else {
-         standingContainer.classList.add('hidden');
-         state.standing = 'standard'; // Default for non-residential calculations
-      }
-      
-      updateUI();
-    }
-
-    function renderStandings() {
-      const container = document.getElementById('standings-grid');
-      container.innerHTML = Object.values(STANDINGS).map(s => `
-        <button onclick="setStanding('${s.code}')" class="option-btn ${state.standing === s.code ? 'selected' : ''}">
-          <div class="font-bold">${s.name}</div>
-          <div class="text-[10px] text-gray-500 mt-1">${fmt(s.prix_m2_min)} - ${fmt(s.prix_m2_max)} F/m²</div>
-        </button>
-      `).join('');
-    }
-
-    function setStanding(code) {
-      state.standing = code;
-      applyStandingMapping(code);
-      renderStandings();
-    }
-
-    function applyStandingMapping(standing) {
-      // Clear options that are influenced by mapping
-      const catsToClear = ['solaire', 'securite', 'alarme', 'video', 'exterieur', 'piscine', 'citerne', 'paysager', 'volet', 'second_oeuvre'];
-      
-      // Auto-logic from Tableau 14
-      const mapping = {
-        standard: { solaire: 'solaire_3kwc', video: null, alarme: null, piscine: null, domotique: null, paysager: null, volet: null, citerne: 'citerne_5m3' },
-        confort: { solaire: 'solaire_5kwc', video: 'video_4cam', alarme: 'alarme_basique', piscine: 'piscine_6x3', domotique: 'domotique_basique', paysager: 'paysager_basique', volet: 'volet_manuel', citerne: 'citerne_5m3' },
-        premium: { solaire: 'solaire_10kwc', video: 'video_8cam', alarme: 'alarme_avancee', piscine: 'piscine_8x4', domotique: 'domotique_partielle', paysager: 'paysager_soigne', volet: 'volet_motorise', citerne: 'citerne_10m3' },
-        prestige: { solaire: 'solaire_15kwc', video: 'video_8cam', alarme: 'alarme_complete', piscine: 'piscine_10x5', domotique: 'domotique_complete', paysager: 'paysager_prestige', volet: 'volet_connecte', citerne: 'citerne_20m3' }
-      };
-
-      const defaults = mapping[standing] || {};
-      
-      // Reset and apply
-      state.options = {};
-      for (const [key, code] of Object.entries(defaults)) {
-         if (code) setOption(key, code, false); // false = don't recalculate immediately during loop
-      }
-      
-      // Forage depth mapping based on zone
-      const zoneDepth = { grand_lome: 'forage_60m', maritime: 'forage_30m', plateaux: 'forage_90m', centrale: 'forage_90m', kara_savanes: 'forage_120m' };
-      state.options['forage'] = zoneDepth[state.zone] || 'forage_60m';
-      state.forage = (standing === 'premium' || standing === 'prestige'); // Recommended/Pre-selected
-
-      // Clôture & Portail defaults
-      const clotureDefaults = { standard: 'cloture_agglos', confort: 'cloture_agglos', premium: 'cloture_mixte', prestige: 'cloture_hg' };
-      const portailDefaults = { standard: 'portail_simple', confort: 'portail_double', premium: 'portail_motorise', prestige: 'portail_motorise' };
-      setOption('cloture', clotureDefaults[standing]);
-      setOption('portail', portailDefaults[standing]);
-
-      initStep4(); // Re-render Step 4 to show recommendations
-      calculate();
-    }
-
-    function initStep4() {
-      renderOptionCategory('solaire', 'solaire-container');
-      renderOptionCategory('securite', 'alarme-container', true, 'alarme');
-      renderOptionCategory('securite', 'video-container', true, 'video');
-      renderOptionCategory('domotique', 'domotique-container');
-      renderOptionCategory('exterieur', 'cloture-container', true, 'cloture');
-      renderOptionCategory('exterieur', 'portail-container', true, 'portail');
-      renderOptionCategory('exterieur', 'piscine-container', true, 'piscine');
-      renderOptionCategory('exterieur', 'citerne-container', true, 'citerne');
-      renderOptionCategory('exterieur', 'paysager-container', true, 'paysager');
-      renderOptionCategory('second_oeuvre', 'volets-container', true, 'volet');
-    }
-
-    function renderZones() {
-      const container = document.getElementById('zones-container');
-      container.innerHTML = Object.values(ZONES).map(z => `
-        <button onclick="setZone('${z.code}')" class="w-full option-btn flex justify-between items-center ${state.zone === z.code ? 'selected' : ''}">
-            <div class="font-medium">${z.nom}</div>
-            <span class="badge badge-blue">×${z.coefficient.toFixed(2)}</span>
-        </button>
-      `).join('');
-    }
-
-    function setZone(code) { state.zone = code; renderZones(); }
-
-    function renderSols() {
-      const container = document.getElementById('sols-container');
-      container.innerHTML = Object.values(SOLS).map(s => `
-        <button onclick="setSol('${s.code}')" class="option-btn flex justify-between items-center ${state.sol === s.code ? 'selected' : ''}">
-            <div class="text-sm">${s.nom}</div>
-            <span class="badge badge-gray">×${s.coefficient.toFixed(2)}</span>
-        </button>
-      `).join('');
-    }
-
-    function setSol(code) { state.sol = code; renderSols(); }
-
-    function renderOptionCategory(cat, containerId, filter = false, keyword = '') {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      
-      let options = EQUIP_OPTIONS[cat] || [];
-      if (filter) {
-        options = options.filter(o => o.code.includes(keyword) || o.designation.toLowerCase().includes(keyword.toLowerCase()));
-      }
-
-      container.innerHTML = options.map(o => {
-        const mapping = o.mapping_standings?.[state.standing];
-        const isSelected = state.options[keyword || cat] === o.code;
-        const isPreselect = mapping === 'preselect';
-        const isRecom = mapping === 'recom';
-
-        return `
-          <label class="flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:bg-gray-50 ${isSelected ? 'bg-blue-50 border-blue-600' : ''}">
-            <div class="flex items-center gap-3">
-              <input type="${keyword === 'volet' ? 'checkbox' : 'radio'}" name="${keyword || cat}" 
-                onchange="setOption('${keyword || cat}', '${o.code}')" 
-                ${isSelected ? 'checked' : ''}>
-              <div>
-                <div class="flex items-center gap-2">
-                    <div class="font-medium text-sm">${o.designation}</div>
-                    ${isPreselect ? '<span class="text-[8px] bg-blue-100 text-blue-700 px-1 rounded uppercase font-bold">Pré-sélectionné</span>' : ''}
-                    ${isRecom ? '<span class="text-[8px] bg-green-100 text-green-700 px-1 rounded uppercase font-bold">Recommandé</span>' : ''}
-                </div>
-                <div class="text-[10px] text-gray-400">${o.puissance || ''}</div>
+    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+      <div class="card p-6">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Forme & Dimensions</h3>
+        <div class="tag-row mb-6">
+          ${['rect','carre','irregulier'].map(f=>`
+            <button onclick="setS({forme:'${f}'})" class="chip ${S.forme===f?'bg-blue-600 text-white':'bg-gray-100 text-gray-500'}">
+              ${f==='rect'?'Rectangle':f==='carre'?'Carré':'Libre'}
+            </button>
+          `).join('')}
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          ${S.forme!=='irregulier'?`
+            <div>
+              <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">${S.forme==='carre'?'Côté':'Longueur'} (m)</label>
+              <div class="num-ctrl">
+                <button onclick="setS({dimA:Math.max(5,S.dimA-1)})">-</button>
+                <div class="nv">${S.dimA}</div>
+                <button onclick="setS({dimA:S.dimA+1})">+</button>
               </div>
             </div>
-            <span class="text-xs mono text-gray-500">${fmt(o.prix_min)} F${o.unite === 'm²' ? '/m²' : (o.unite === 'ml' ? '/ml' : '')}</span>
-          </label>
-        `;
-      }).join('');
-    }
-
-    function setOption(key, code, recalc = true) {
-      if (key === 'volet') {
-        state.options[key] = state.options[key] === code ? null : code;
-      } else {
-        state.options[key] = state.options[key] === code ? null : code;
-      }
-      
-      initStep4(); 
-      if (recalc) calculate();
-    }
-
-    // DIMENSIONS
-    function changeDim(key, delta) {
-        state[key] = Math.max(key === 'niveaux' ? 1 : (key === 'hauteurLibre' ? 4 : 0), state[key] + delta);
-        
-        if (document.getElementById('val-' + key)) {
-            document.getElementById('val-' + key).textContent = state[key];
-        }
-        if (key === 'dimA') document.getElementById('val-dimA').textContent = state.dimA;
-        if (key === 'dimB') document.getElementById('val-dimB').textContent = state.dimB;
-        if (key === 'niveaux') document.getElementById('label-etages').textContent = state.niveaux - 1;
-        if (key === 'hauteurLibre' && document.getElementById('val-hauteur')) document.getElementById('val-hauteur').textContent = state.hauteurLibre;
-        if (key === 'effectif' && document.getElementById('val-effectif')) document.getElementById('val-effectif').textContent = state.effectif;
-        
-        // Update derivatives
-        const surface = state.dimA * state.dimB;
-        if (document.getElementById('val-surf')) document.getElementById('val-surf').textContent = surface;
-        
-        const standingData = STANDINGS[state.standing] || { emprise_max: 50 };
-        const empriseTaux = standingData.emprise_max / 100;
-        const surfBatie = Math.round(surface * empriseTaux * state.niveaux);
-        if (document.getElementById('val-surfBatie')) document.getElementById('val-surfBatie').textContent = surfBatie;
-        
-        calculate(); 
-    }
-
-    // CALCULATE
-    function calculate() {
-      // 1. DATA PREP
-      const zoneData = ZONES[state.zone] || { coefficient: 1.0, prix_foncier_m2: 50000 };
-      const solData = SOLS[state.sol] || { coefficient: 1.15, prix_fondation_m2: 45000, nom: 'Non déterminé' };
-      
-      // 2. SURFACE CALCULATIONS
-      let surface = state.forme === 'carre' ? state.dimA * state.dimA : (state.forme === 'rect' ? state.dimA * state.dimB : state.surfManuelle);
-      let perimetre = state.forme === 'carre' ? 4 * state.dimA : (state.forme === 'rect' ? 2 * (parseFloat(state.dimA) + parseFloat(state.dimB)) : Math.sqrt(state.surfManuelle) * 4 * 1.1);
-      
-      const STANDINGS_EMPRISE = { standard: 0.40, confort: 0.35, premium: 0.30, prestige: 0.25 };
-      const emprise = state.secteur === 'residentiel' ? (STANDINGS_EMPRISE[state.standing] || 0.35) : (state.secteur === 'industriel' ? 0.65 : (state.secteur === 'agricole' ? 0.50 : 0.40));
-      
-      let surfaceBatie;
-      if (state.secteur === 'agricole' && (state.typeBat === 'ferme_avicole' || state.typeBat === 'elevage')) {
-          const ratio = (state.typeBat === 'ferme_avicole') ? 0.1 : 5;
-          surfaceBatie = Math.round(state.effectif * ratio * 1.3);
-      } else {
-          const empriseAuSol = surface * emprise;
-          surfaceBatie = Math.round(empriseAuSol * state.niveaux + state.ssSol * empriseAuSol * 0.85);
-      }
-
-      // 3. PRICING M2
-      const STANDINGS_PRIX = { standard: 375000, confort: 500000, premium: 690000, prestige: 1025000 };
-      const HOTELS_PRIX = { '1s': 430000, '2s': 500000, '3s': 625000, '4s': 800000, '5s': 1175000, 'palace': 2000000 };
-      
-      let prixM2;
-      if (state.secteur === 'residentiel') {
-          prixM2 = STANDINGS_PRIX[state.standing] || 500000;
-      } else if (state.typeBat === 'hotel') {
-          prixM2 = HOTELS_PRIX[state.catHotel] || 625000;
-      } else if (state.secteur === 'industriel') {
-          prixM2 = 250000;
-          if (state.hauteurLibre > 10) prixM2 *= 1.12;
-          if (state.pontRoulant) prixM2 *= 1.15;
-          if (state.groupeFroid) prixM2 *= 1.25;
-      } else {
-          prixM2 = 450000;
-      }
-
-      const coefTotal = zoneData.coefficient * solData.coefficient;
-      const baseCost = surfaceBatie * prixM2 * coefTotal;
-
-      // 4. POSTES BREAKDOWN
-      const postes = [];
-      let total = 0;
-      const add = (id, nom, detail, montant, accent = false) => { postes.push({ id, nom, val: fmtM(montant), accent, detail }); total += montant; };
-
-      if (state.terrainDispo !== 'oui') {
-          const foncier = surface * (zoneData.prix_foncier_m2 || 50000);
-          add('0', '1. Acquisition foncière', `${Math.round(surface)} m²`, foncier);
-      }
-      
-      add('1', '2. Études et honoraires', 'Architecture, structure', baseCost * 0.08);
-      
-      let fond = surface * emprise * (solData.prix_fondation_m2 || 45000);
-      if (state.secteur === 'industriel') fond *= 1.3;
-      if (state.ssSol > 0) fond += state.ssSol * surface * emprise * 85000;
-      add('2', '3. Fondations', solData.nom || 'À définir', fond);
-      
-      add('3', '4. Gros œuvre', 'Maçonnerie, planchers', baseCost * 0.38);
-      add('4', '5. Charpente / Couverture', 'Toiture et étanchéité', baseCost * 0.12);
-      add('5', '6. Second œuvre', 'Cloisons, menuiseries', baseCost * 0.13);
-      add('6', '7. Lots techniques', 'Électricité, plomberie', baseCost * 0.18);
-      add('7', '8. Finitions', 'Peinture, revêtements', baseCost * 0.11);
-
-      // 5. EQUIPMENT & OPTIONS
-      let equip = 0;
-      if (state.nbAsc > 0) equip += state.nbAsc * (state.niveaux <= 5 ? 28000000 : 35000000);
-      if (state.nbQuais > 0 && state.secteur === 'industriel') equip += state.nbQuais * 8500000;
-      if (state.pontRoulant) equip += state.pontCap <= 5 ? 28000000 : (state.pontCap <= 10 ? 48000000 : 78000000);
-      if (state.groupeFroid) equip += surfaceBatie * (state.groupeFroid === 'negatif' ? 95000 : 55000);
-      if (equip > 0) add('8', '9. Équipements spécifiques', 'Ascenseurs, quais, etc.', equip);
-
-      let secu = 0;
-      ['alarme', 'video', 'acces'].forEach(k => {
-          if (state.options[k]) {
-              const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
-              if (o) secu += o.prix_moyen || o.prix_min;
-          }
-      });
-      if (secu > 0) add('9', '10. Sécurité & Tech', 'Alarme, vidéo, etc.', secu);
-
-      let vrd = surface * 8500;
-      ['cloture', 'portail', 'piscine', 'citerne'].forEach(k => {
-          if (state.options[k]) {
-              const o = Object.values(EQUIP_OPTIONS).flat().find(x => x.code === state.options[k]);
-              if (o) {
-                  let val = o.prix_moyen || o.prix_min;
-                  if (o.unite === 'ml') val *= perimetre;
-                  vrd += val;
-              }
-          }
-      });
-      if (state.forage) vrd += 4500000; // Simplified forage base
-      if (vrd > 0) add('10', '11. Aménagements ext.', 'Clôture, forage, etc.', vrd);
-
-      // Aleas 5%
-      add('11', '12. Provisions et divers', 'Assurances, aléas (5%)', total * 0.05);
-
-      // 6. ENERGY NEEDS
-      const energy = {
-          lum: Math.round(surfaceBatie * (state.secteur === 'industriel' ? 0.008 : 0.012) * 10) / 10,
-          prises: Math.round(surfaceBatie * 0.015 * 10) / 10,
-          clim: Math.round(surfaceBatie * (state.secteur === 'residentiel' ? 0.7 : 0.4) * 0.1 * 10) / 10
-      };
-      energy.total = Math.ceil(energy.lum + energy.prises + energy.clim);
-
-      // 7. RENDER RESULTS
-      if (document.getElementById('total-estimation')) {
-          document.getElementById('total-estimation').innerText = fmt(total) + ' F CFA';
-      }
-      if (document.getElementById('postes-details')) {
-          document.getElementById('postes-details').innerHTML = postes.map(p => `
-              <div class="flex justify-between items-center py-2 border-b border-gray-50">
-                  <div>
-                      <div class="font-bold text-gray-800 text-sm">${p.nom}</div>
-                      <div class="text-xs text-gray-400 italic">${p.detail || ''}</div>
-                  </div>
-                  <div class="font-bold text-[#162064] text-sm">${p.val} F</div>
+            ${S.forme==='rect'?`
+            <div>
+              <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Largeur (m)</label>
+              <div class="num-ctrl">
+                <button onclick="setS({dimB:Math.max(5,S.dimB-1)})">-</button>
+                <div class="nv">${S.dimB}</div>
+                <button onclick="setS({dimB:S.dimB+1})">+</button>
               </div>
-          `).join('');
-      }
+            </div>`:''}
+          `:`
+            <div class="col-span-2">
+              <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Surface Totale (m²)</label>
+              <div class="num-ctrl">
+                <button onclick="setS({surfManuelle:Math.max(50,S.surfManuelle-50)})">-</button>
+                <div class="nv">${S.surfManuelle}</div>
+                <button onclick="setS({surfManuelle:S.surfManuelle+50})">+</button>
+              </div>
+            </div>
+          `}
+        </div>
 
-      ['lum', 'prises', 'clim', 'total'].forEach(id => {
-          const el = document.getElementById('energy-' + id);
-          if (el) el.innerText = energy[id];
-      });
+        <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+          <div><div class="text-[10px] text-gray-400 uppercase font-bold">Surface</div><div class="text-lg font-bold mono text-blue-900">${fmt(s)} m²</div></div>
+          <div class="w-px bg-gray-200"></div>
+          <div><div class="text-[10px] text-gray-400 uppercase font-bold">Périmètre</div><div class="text-lg font-bold mono text-blue-900">${fmt(p)} ml</div></div>
+        </div>
+      </div>
 
-      state.results = { total, postes, energy, surfaceBatie };
-    }
+      <div class="card p-6">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Zone & Disponibilité</h3>
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          ${['oui','non'].map(v=>`
+            <button onclick="setS({terrainDispo:'${v}'})" class="opt-btn ${S.terrainDispo===v?'sel':''} py-3 text-center">
+              <div class="font-bold text-sm">${v==='oui'?'Déjà acquis':'À acquérir'}</div>
+            </button>
+          `).join('')}
+        </div>
+        
+        <label class="text-[10px] uppercase font-bold text-gray-400 block mb-2">Localisation au Togo</label>
+        <div class="space-y-2 max-h-[160px] overflow-y-auto pr-2 custom-scroll">
+          ${Object.entries(ZONES).map(([k,v])=>`
+            <button onclick="setS({zone:'${k}'})" class="w-full flex items-center justify-between p-3 border rounded-xl hover:bg-gray-50 transition-colors ${S.zone===k?'border-blue-500 bg-blue-50 ring-1 ring-blue-500':''}">
+              <div class="text-left">
+                <div class="text-xs font-bold">${v.name}</div>
+                <div class="text-[9px] text-gray-400">${v.loc}</div>
+              </div>
+              <div class="badge badge-blue">×${v.coef.toFixed(2)}</div>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    </div>
 
-    function saveSimulation(target = null) {
-      console.log('Saving simulation...', { target, state });
-      const surface = state.dimA * state.dimB;
-      const totalElem = document.getElementById('total-estimation');
-      const totalText = totalElem ? totalElem.textContent : '0 — 0';
+    <div class="card p-6 mb-6">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Nature Géotechnique du Sol</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+        ${Object.entries(SOLS).map(([k,v])=>`
+           <button onclick="setS({sol:'${k}'})" class="opt-btn ${S.sol===k?'sel':''} ${v.risque==='élevé'||v.risque==='très élevé'?'border-red-200 bg-red-50':''}">
+              <div class="font-bold text-xs truncate">${v.name}</div>
+              <div class="text-[9px] text-gray-500 mt-1">${v.portance} • ${v.risque}</div>
+              <div class="flex justify-between items-center mt-2">
+                <span class="badge ${v.risque==='faible'?'badge-green':v.risque==='moyen'?'badge-blue':'badge-orange'}">×${v.coef.toFixed(2)}</span>
+              </div>
+           </button>
+        `).join('')}
+      </div>
+      ${S.sol==='argileux'||S.sol==='hydromorphe'?`<div class="alert-box mt-4 text-[11px]">⚠️ <strong>Étude G2 obligatoire</strong> : Nature instable ou inondable.</div>`:''}
+    </div>
+
+    ${renderNav(!!S.sol)}
+  </div>`;
+}
+
+// ---- STEP 3: CONFIG ----
+function renderStep3(){
+  const sb=cSB(), ht=cHaut(), cat=cCat();
+  return `
+  <div class="animate-fade-in">
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">3. Configuration du Bâtiment</h2>
+      <p class="text-gray-500 text-sm">Définition des niveaux, hauteurs et spécificités</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+      <div class="card p-6">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Niveaux & Volume</h3>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Niveaux Hors-Sol</label>
+            <div class="num-ctrl">
+              <button onclick="setS({niveaux:Math.max(1,S.niveaux-1)})">-</button>
+              <div class="nv">R+${S.niveaux-1}</div>
+              <button onclick="setS({niveaux:Math.min(td()?.max||20,S.niveaux+1)})">+</button>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Nombre de Sous-Sols</label>
+            <div class="num-ctrl">
+              <button onclick="setS({ssSol:Math.max(0,S.ssSol-1)})">-</button>
+              <div class="nv">${S.ssSol}</div>
+              <button onclick="setS({ssSol:Math.min(3,S.ssSol+1)})">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">HSP Rez-de-Chaussée (m)</label>
+            <div class="num-ctrl">
+              <button onclick="setS({hspRdc:Math.max(2.4,S.hspRdc-0.1)})">-</button>
+              <div class="nv">${S.hspRdc.toFixed(1)}</div>
+              <button onclick="setS({hspRdc:S.hspRdc+0.1})">+</button>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">HSP Étages (m)</label>
+            <div class="num-ctrl">
+              <button onclick="setS({hspEtage:Math.max(2.4,S.hspEtage-0.1)})">-</button>
+              <div class="nv">${S.hspEtage.toFixed(1)}</div>
+              <button onclick="setS({hspEtage:S.hspEtage+0.1})">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-6 bg-blue-900 text-white relative overflow-hidden">
+        <svg class="absolute -right-8 -bottom-8 w-40 h-40 opacity-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg>
+        <h3 class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-4">Métriques de l'Ouvrage</h3>
+        <div class="space-y-4">
+          <div class="flex justify-between items-end border-b border-blue-800 pb-2">
+            <span class="text-blue-300 text-xs">Surface plancher totale</span>
+            <span class="text-2xl font-bold mono">${fmt(sb)} <span class="text-xs">m²</span></span>
+          </div>
+          <div class="flex justify-between items-end border-b border-blue-800 pb-2">
+            <span class="text-blue-300 text-xs">Hauteur totale estimée</span>
+            <span class="text-2xl font-bold mono">${ht.toFixed(1)} <span class="text-xs">m</span></span>
+          </div>
+          <div class="pt-2">
+            <div class="flex flex-wrap gap-2">
+              <span class="badge ${cat.cat==='A1'?'bg-green-500':'bg-orange-600'} text-white">Cat. ${cat.cat}</span>
+              <span class="badge bg-blue-700 text-white">${cat.mission}</span>
+            </div>
+             ${cat.motifs.length?`<div class="text-[9px] text-blue-200 mt-2 italic capitalize">${cat.motifs.join(' • ')}</div>`:''}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    ${S.secteur==='industriel'?`
+    <div class="card p-6 mb-8 border-l-4 border-orange-500">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 italic">Spécificités Industrielles</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Hauteur Libre Utile (m)</label>
+          <div class="num-ctrl">
+            <button onclick="setS({hauteurLibre:Math.max(4,S.hauteurLibre-1)})">-</button>
+            <div class="nv">${S.hauteurLibre}m</div>
+            <button onclick="setS({hauteurLibre:S.hauteurLibre+1})">+</button>
+          </div>
+        </div>
+        <div>
+          <label class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Nombre de Quais</label>
+          <div class="num-ctrl">
+            <button onclick="setS({nbQuais:Math.max(0,S.nbQuais-1)})">-</button>
+            <div class="nv">${S.nbQuais}</div>
+            <button onclick="setS({nbQuais:S.nbQuais+1})">+</button>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <input type="checkbox" id="chk-pont" ${S.pontRoulant?'checked':''} onchange="setS({pontRoulant:this.checked})">
+          <label for="chk-pont" class="text-sm font-bold text-gray-700">Pont Roulant</label>
+          ${S.pontRoulant?`<div class="num-ctrl scale-90">
+             <button onclick="setS({pontCap:Math.max(1,S.pontCap-1)})">-</button>
+             <div class="nv">${S.pontCap}T</div>
+             <button onclick="setS({pontCap:S.pontCap+1})">+</button>
+          </div>`:''}
+        </div>
+      </div>
+    </div>`:''}
+
+    ${renderNav()}
+  </div>`;
+}
+
+// ---- STEP 4: OPTIONS ----
+function renderStep4(){
+  return `
+  <div class="animate-fade-in">
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">4. Équipements & Clé en Main</h2>
+      <p class="text-gray-500 text-sm">Sécurité, énergie et options de confort moderne</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+       <!-- Securité -->
+       <div class="card p-6">
+         <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Sécurité Électronique
+         </h3>
+         <div class="space-y-4">
+           <div>
+             <label class="text-[10px] font-bold text-gray-500 uppercase block mb-2">Alarme Anti-Intrusion</label>
+             <div class="tag-row">
+               ${['','basique','avancee','connectee','pro'].map(v=>`
+                 <button onclick="setS({alarme:'${v}',nbZones:6})" class="chip ${S.alarme===v?'bg-blue-600 text-white':'bg-gray-100 text-gray-500'}">
+                   ${v===''?'Aucun':v.charAt(0).toUpperCase()+v.slice(1)}
+                 </button>
+               `).join('')}
+             </div>
+             ${S.alarme?`
+               <div class="mt-3 flex items-center gap-3">
+                  <span class="text-xs text-gray-400 italic">Zones :</span>
+                  <div class="num-ctrl scale-75 origin-left">
+                    <button onclick="setS({nbZones:Math.max(2,S.nbZones-2)})">-</button>
+                    <div class="nv">${S.nbZones}</div>
+                    <button onclick="setS({nbZones:S.nbZones+2})">+</button>
+                  </div>
+               </div>`:''}
+           </div>
+           
+           <div>
+             <label class="text-[10px] font-bold text-gray-500 uppercase block mb-2">Vidéosurveillance (IP 4K)</label>
+             <div class="tag-row">
+               ${['','4-8','16+'].map(v=>`
+                 <button onclick="setS({video:'${v}'})" class="chip ${S.video===v?'bg-blue-600 text-white':'bg-gray-100 text-gray-500'}">${v===''?'Aucun':v+' Caméras'}</button>
+               `).join('')}
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <!-- Nouvelles options V5 -->
+       <div class="card p-6 bg-gray-50 border-dashed border-2">
+         <h3 class="text-xs font-bold text-orange-600 uppercase tracking-widest mb-4 flex items-center gap-2">
+            ✨ Nouveautés V5.0
+         </h3>
+         <div class="space-y-6">
+           <div>
+             <label class="text-[10px] font-bold text-gray-400 uppercase block mb-2">Domotique Intelligent</label>
+             <div class="grid grid-cols-1 gap-2">
+                <button onclick="setS({domotique:''})" class="w-full text-left p-2 border rounded-lg text-xs ${S.domotique===''?'bg-white border-blue-500 font-bold':'bg-gray-50'}">Non inclus</button>
+                ${DOMOTIQUE.map(o=>`
+                  <button onclick="setS({domotique:'${o.id}'})" class="w-full text-left p-2 border rounded-lg text-xs ${S.domotique===o.id?'bg-white border-blue-500 font-bold':'bg-white/50 hover:bg-white'} transition-all flex justify-between">
+                    <span>${o.name}</span>
+                    <span class="text-gray-400 font-medium">${fmtM(o.min)} — ${fmtM(o.max)}</span>
+                  </button>
+                `).join('')}
+             </div>
+           </div>
+           
+           <div class="flex items-center gap-4">
+              <input type="checkbox" id="chk-forage" ${S.forage?'checked':''} onchange="setS({forage:this.checked})">
+              <label for="chk-forage" class="text-sm font-bold text-gray-700">Forage & Automatisme</label>
+              ${S.forage?`<div class="num-ctrl scale-75 origin-left"><button onclick="setS({forageProf:Math.max(20,S.forageProf-5)})">-</button><div class="nv">${S.forageProf}m</div><button onclick="setS({forageProf:S.forageProf+5})">+</button></div>`:''}
+           </div>
+         </div>
+       </div>
+    </div>
+
+    <div class="card p-6 mb-8">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Aménagements de Standing</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+         <div class="space-y-4">
+            <div>
+               <label class="text-[10px] font-bold text-gray-500 uppercase block mb-2">Aménagement Paysager</label>
+               <div class="grid grid-cols-1 gap-2">
+                  <button onclick="setS({paysager:''})" class="chip-plain text-[11px] p-2 border rounded-lg text-left ${S.paysager===''?'bg-blue-50 border-blue-300 font-bold':'bg-white'}">Inclus dans VRD standard</button>
+                  ${PAYSAGER.map(o=>`
+                    <button onclick="setS({paysager:'${o.id}'})" class="p-2 border rounded-lg text-left text-[11px] ${S.paysager===o.id?'bg-blue-50 border-blue-300 font-bold':'bg-white hover:bg-gray-50'}">
+                        ${o.name} (+${fmtM(o.min)})
+                    </button>
+                  `).join('')}
+               </div>
+            </div>
+         </div>
+         <div class="space-y-4">
+             <div>
+                <label class="text-[10px] font-bold text-gray-500 uppercase block mb-2">Volets Roulants</label>
+                <div class="grid grid-cols-2 gap-2">
+                   ${VOLETS.map(o=>`
+                     <button onclick="setS({volet:S.volet===o.id?'':o.id})" class="p-2 border rounded-lg text-left text-[11px] ${S.volet===o.id?'bg-blue-50 border-blue-300 font-bold':'bg-white'}">
+                        ${o.name}
+                     </button>
+                   `).join('')}
+                </div>
+                ${S.volet?`<div class="mt-2 flex items-center justify-between"><span class="text-[10px] text-gray-400">Total m² :</span> <div class="num-ctrl scale-75"><button onclick="setS({nbVoletM2:Math.max(2,S.nbVoletM2-2)})">-</button><div class="nv">${S.nbVoletM2}m²</div><button onclick="setS({nbVoletM2:S.nbVoletM2+2})">+</button></div></div>`:''}
+             </div>
+         </div>
+      </div>
+    </div>
+
+    ${renderNav()}
+  </div>`;
+}
+</script>
+<script>
+// ---- STEP 5: RESULTS ----
+function renderStep5(){
+  const est=cEstimation(); if(!est)return '';
+  const bes=cBesoins(), sol=cSolaires(), grp=cGroupes(), t=td();
+  
+  return `
+  <div class="animate-fade-in pb-12">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800">5. Synthèse & Estimation</h2>
+        <p class="text-gray-500 text-sm">Récapitulatif technique et proposition commerciale</p>
+      </div>
+      <button onclick="window.print()" class="btn-sec text-sm py-2">🖨️ Imprimer la fiche</button>
+    </div>
+
+    <!-- Summary -->
+    <div class="card p-6 mb-8 bg-[#162064] text-white">
+       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div><div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Type de construction</div><div class="font-bold">${t?.name||S.typeBat}</div><div class="text-[10px] text-blue-200">Standing ${st().name}</div></div>
+          <div><div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Terrain</div><div class="font-bold mono">${fmt(cSurf())} m²</div><div class="text-[10px] text-blue-200">${zd().name}</div></div>
+          <div><div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Surface Plancher</div><div class="font-bold mono">${fmt(cSB())} m²</div><div class="text-[10px] text-blue-200">R+${S.niveaux-1} (${cHaut()}m)</div></div>
+          <div><div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Durée Chantier</div><div class="font-bold text-orange-400">${est.duree} mois</div><div class="text-[10px] text-blue-200">Estimation moyenne</div></div>
+       </div>
+    </div>
+
+    <!-- Energy Section -->
+    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+       <!-- Needs -->
+       <div class="card p-6 border-t-8 border-orange-500">
+         <h3 class="font-bold text-gray-800 mb-6 flex justify-between">
+           <span>⚡ Besoins Énergétiques</span>
+           <span class="mono text-orange-600">${bes.total} kW</span>
+         </h3>
+         <div class="grid grid-cols-2 gap-2">
+            ${bes.details.map(d=>`<div class="bg-gray-50 p-2 rounded flex justify-between text-[11px]"><span class="text-gray-500">${d.label}</span><span class="font-bold">${d.kw.toFixed(1)}</span></div>`).join('')}
+         </div>
+       </div>
+
+       <!-- Options Energy -->
+       <div class="space-y-4">
+          <div class="card p-5">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Solution Solaire (40-150%)</h3>
+            <select onchange="setS({solaire:this.value})" class="w-full p-3 bg-gray-50 border rounded-xl text-sm font-bold focus:ring-2 ring-blue-500 outline-none">
+               <option value="">🚫 Aucune installation</option>
+               ${sol.map(k=>`<option value="${k.id}" ${S.solaire===k.id?'selected':''}>${k.kw} kWc • ${k.couv}% de couverture • ${fmtM(k.prix)} F</option>`).join('')}
+            </select>
+          </div>
+          <div class="card p-5">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Secours Groupe Électrogène</h3>
+            <select onchange="setS({groupe:this.value})" class="w-full p-3 bg-gray-50 border rounded-xl text-sm font-bold focus:ring-2 ring-orange-500 outline-none">
+               <option value="">🚫 Pas de groupe</option>
+               ${grp.map(g=>`<option value="${g.id}" ${S.groupe===g.id?'selected':''}>${g.kva} kVA • ${g.couv}% de couverture • ${fmtM(g.prix)} F</option>`).join('')}
+            </select>
+          </div>
+       </div>
+    </div>
+
+    <!-- Financial Table -->
+    <div class="card overflow-hidden mb-8">
+       <table class="w-full text-left">
+          <thead class="bg-gray-50 border-b">
+             <tr>
+                <th class="p-4 text-[10px] uppercase font-bold text-gray-400">Poste Budgétaire</th>
+                <th class="p-4 text-[10px] uppercase font-bold text-gray-400">Description</th>
+                <th class="p-4 text-[10px] uppercase font-bold text-gray-400 text-right">Fourchette Estimative (FCFA)</th>
+             </tr>
+          </thead>
+          <tbody class="divide-y text-sm">
+             ${est.postes.map(p=>`
+               <tr class="${p.code==='0'?'bg-blue-50/30':''}">
+                  <td class="p-4 font-bold text-gray-700">${p.nom}</td>
+                  <td class="p-4 text-xs text-gray-500 italic">${p.detail}</td>
+                  <td class="p-4 text-right mono font-semibold">
+                    <span class="text-gray-400">${fmtM(p.min)}</span>
+                    <span class="mx-2 text-gray-300">—</span>
+                    <span class="text-blue-900">${fmtM(p.max)}</span>
+                  </td>
+               </tr>
+             `).join('')}
+          </tbody>
+          <tfoot class="bg-blue-900 text-white font-bold">
+             <tr>
+                <td class="p-4" colspan="2">TOTAL HTVA + FRAIS GÉNÉRAUX</td>
+                <td class="p-4 text-right mono text-xl">${fmtM(est.totMin)} — ${fmtM(est.totMax)} F</td>
+             </tr>
+          </tfoot>
+       </table>
+    </div>
+
+    <!-- Final Price -->
+    <div class="card p-8 bg-gradient-to-br from-blue-950 to-blue-800 text-white text-center shadow-2xl border-none">
+       <div class="text-blue-200 text-sm uppercase tracking-widest font-bold mb-4">Estimation Totale Projet Client TTC</div>
+       <div class="text-5xl md:text-6xl font-black mono text-orange-400 mb-6 drop-shadow-lg">
+          ${fmtM(est.clientMin)} <span class="text-xl mx-2 text-white/30">—</span> ${fmtM(est.clientMax)} <span class="text-xl">F</span>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto pt-6 border-t border-white/10">
+          <div class="bg-white/5 rounded-xl p-3"><div class="text-[9px] uppercase opacity-60">Marge AIAE</div><div class="font-bold text-blue-200">${Math.round(est.marge*100)}% incluse</div></div>
+          <div class="bg-white/5 rounded-xl p-3"><div class="text-[9px] uppercase opacity-60">Estimation au m²</div><div class="font-bold text-blue-200">${fmt(Math.round(((est.clientMin+est.clientMax)/2)/cSB()))} F/m²</div></div>
+          <div class="bg-white/5 rounded-xl p-3"><div class="text-[9px] uppercase opacity-60">Catégorie Projet</div><div class="font-bold text-blue-200">${cCat().cat} • ${cCat().mission}</div></div>
+       </div>
+    </div>
+
+    <div class="warn-box mt-8 text-[11px]">
+      <strong>⚠️ AVERTISSEMENT :</strong> Cette simulation est purement indicative. Elle ne peut être utilisée comme document contractuel. AIAE SARL décline toute responsabilité en cas de variation des coûts réels lors de l'exécution du projet. Un devis définitif nécessite une étude technique approfondie par nos ingénieurs.
+    </div>
+
+    ${renderNav()}
+  </div>`;
+}
+
+// ---- AUTH MODAL ----
+function renderAuthModal(){
+  return `
+  <div class="modal-overlay animate-fade-in no-print">
+    <div class="card max-w-md w-full p-8 shadow-2xl relative">
+      <button onclick="setS({showAuthModal:false})" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">✕</button>
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800">Sauvegardez votre projet</h3>
+        <p class="text-gray-500 text-sm mt-2">Créez un compte gratuitement pour conserver vos simulations, télécharger le PDF détaillé et demander un devis ferme.</p>
+      </div>
       
-      let finalTotal = 0;
-      try {
-          const parts = totalText.split('—');
-          const maxPart = parts[1] || parts[0];
-          finalTotal = parseFloat(maxPart.replace(/[^0-9]/g, '')) || 0;
-      } catch(e) { console.error('Error parsing total', e); }
+      <div class="space-y-3">
+        <a href="${REGISTER_URL}" class="btn-primary w-full justify-center py-4 rounded-xl text-center">Créer mon compte Gratuitement</a>
+        <a href="${LOGIN_URL}" class="btn-sec w-full justify-center py-4 rounded-xl text-center">Me connecter</a>
+      </div>
+      
+      <div class="mt-6 pt-6 border-t text-center text-xs text-gray-400 italic">
+        AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY
+      </div>
+    </div>
+  </div>`;
+}
+</script>
+<script>
+// ---- STATE CONTROL ----
+function setS(obj){
+  Object.assign(S,obj);
+  autoSave();
+  render();
+}
 
-      const payload = {
-        secteur: state.secteur,
-        typeBat: state.typeBat,
-        standing: state.standing,
-        zone: state.zone,
-        sol: state.sol,
-        dimensions: {
-          largeur: state.dimA,
-          longueur: state.dimB,
-          surface: surface,
-          niveaux: state.niveaux,
-          catHotel: state.catHotel,
-          hauteurLibre: state.hauteurLibre
-        },
-        options: state.options,
-        total: finalTotal,
-        base_amount: 0,
-        options_amount: 0,
-        energy: {
-            lum: document.getElementById('energy-lum')?.textContent || '0',
-            prises: document.getElementById('energy-prises')?.textContent || '0',
-            clim: document.getElementById('energy-clim')?.textContent || '0',
-            total: document.getElementById('energy-total')?.textContent || '0'
-        },
-        details: Array.from(document.getElementById('postes-details').children).map(el => ({
-            'nom': el.querySelector('.text-sm').textContent,
-            'val': el.querySelector('.mono').textContent,
-            'accent': el.classList.contains('bg-orange-50')
-        }))
-      };
+function nextStep(){
+  if(S.etape===4 && !IS_AUTH){
+    setS({showAuthModal:true});
+    return;
+  }
+  if(S.etape<5) setS({etape:S.etape+1});
+  else {
+    // Final step action
+    if(IS_AUTH) window.location.href=PROFILE_URL;
+    else setS({showAuthModal:true});
+  }
+}
 
-      fetch('{{ route("simulator.save") }}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Save response:', data);
-        if (target === 'login') window.location.href = '{{ route("login") }}';
-        else if (target === 'register') window.location.href = '{{ route("register") }}';
-        else if (data.redirect) window.location.href = data.redirect;
-      })
-      .catch(err => {
-        console.error('Erreur sauvegarde:', err);
-        // Fallback redirection if save fails but we have a target
-        if (target === 'login') window.location.href = '{{ route("login") }}';
-        else if (target === 'register') window.location.href = '{{ route("register") }}';
-      });
-    }
+function prevStep(){
+  if(S.etape>1) setS({etape:S.etape-1});
+  else window.location.href='/';
+}
 
-    // UTILS
-    function fmt(n) { return new Intl.NumberFormat('fr-FR').format(Math.round(n || 0)); }
-    function fmtM(n) { return n >= 1e6 ? (n / 1e6).toFixed(1) + ' M' : fmt(n); }
+function attachEvents(){
+  // Event listeners for window/custom components if needed
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-    // INITIALIZE
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
-@endsection
+// ---- START ----
+document.addEventListener('DOMContentLoaded',()=>{
+  render();
+});
+</script>
+
+</body>
+</html>
