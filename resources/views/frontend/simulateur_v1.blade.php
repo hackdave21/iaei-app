@@ -117,13 +117,13 @@ const HOTELS=[
 const HOTELS_PRIX={'1s':430000,'2s':500000,'3s':625000,'4s':800000,'5s':1175000,'palace':2000000};
 // ---- ENERGY ----
 const SOLAIRES=[
-  {id:'3',kw:3,prix:4500000},{id:'5',kw:5,prix:7500000},{id:'10',kw:10,prix:14000000},
-  {id:'15',kw:15,prix:20000000},{id:'20',kw:20,prix:26000000},{id:'30',kw:30,prix:38000000},
-  {id:'50',kw:50,prix:58000000},{id:'100',kw:100,prix:105000000}
+  {id:'3',kw:3,min:3500000,max:5000000},{id:'5',kw:5,min:5500000,max:8000000},{id:'10',kw:10,min:11000000,max:15000000},
+  {id:'15',kw:15,min:16000000,max:21000000},{id:'20',kw:20,min:21000000,max:27000000},{id:'30',kw:30,min:30000000,max:40000000},
+  {id:'50',kw:50,min:48000000,max:63000000}
 ];
 const GROUPES=[
-  {id:'15',kva:15,prix:4500000},{id:'20',kva:20,prix:5500000},{id:'40',kva:40,prix:9000000},
-  {id:'60',kva:60,prix:14000000},{id:'100',kva:100,prix:22000000},{id:'150',kva:150,prix:32000000}
+  {id:'15',kva:15,min:2800000,max:3800000},{id:'30',kva:30,min:5000000,max:6500000},{id:'60',kva:60,min:9000000,max:12000000},
+  {id:'100',kva:100,min:15000000,max:19000000},{id:'200',kva:200,min:27000000,max:33000000},{id:'500',kva:500,min:60000000,max:78000000}
 ];
 // ---- V5 NEW OPTIONS ----
 const DOMOTIQUE=[
@@ -147,18 +147,58 @@ const CITERNES=[
   {id:'cit_10',name:'Citerne 10 000L',min:1400000,max:2000000},
   {id:'cit_20',name:'Citerne 20 000L',min:2500000,max:3500000}
 ];
+const PISCINES=[
+  {id:'6x3',name:'Piscine béton 6×3m',min:6000000,max:9000000},
+  {id:'8x4',name:'Piscine béton 8×4m',min:9500000,max:13000000},
+  {id:'10x5',name:'Piscine béton 10×5m',min:14000000,max:19000000},
+  {id:'12x5',name:'Piscine débordement 12×5m',min:22000000,max:30000000},
+  {id:'plage',name:'Piscine plage 8×4m',min:16000000,max:22000000}
+];
+const CLOTURES=[
+  {id:'prefab',name:'Préfabriqué H=2m',minM:50000,maxM:70000},
+  {id:'agglos',name:'Agglos crépi H=2m',minM:65000,maxM:90000},
+  {id:'mixte',name:'Mixte agglos+grille H=2m',minM:75000,maxM:100000},
+  {id:'hg',name:'Haut de gamme H=2m',minM:110000,maxM:150000}
+];
+const PORTAILS=[
+  {id:'portillon',name:'Portillon piéton 1m',min:130000,max:200000},
+  {id:'simple',name:'Portail simple 3m',min:350000,max:500000},
+  {id:'double',name:'Portail double 5m',min:600000,max:800000},
+  {id:'motorise',name:'Coulissant motorisé 5m',min:1200000,max:1600000}
+];
+const ALARMES=[
+  {id:'basique',name:'Alarme basique (4 détect.)',min:350000,max:500000},
+  {id:'avancee',name:'Alarme avancée (GSM)',min:600000,max:850000},
+  {id:'complete',name:'Alarme complète connectée',min:900000,max:1400000}
+];
+const VIDEO=[
+  {id:'4cam',name:'Vidéosurveillance 4 cam HD',min:500000,max:850000},
+  {id:'8cam',name:'Vidéosurveillance 8 cam HD',min:1000000,max:1500000},
+  {id:'16cam',name:'Vidéosurveillance 16 cam HD',min:2000000,max:2800000}
+];
+const ACCES=[
+  {id:'simple',name:'Contrôle accès simple',min:450000,max:650000},
+  {id:'complet',name:'Contrôle accès complet',min:1800000,max:2500000}
+];
+const FORAGES=[
+  {id:'30',prof:30,name:'30m (Lomé littoral)',min:2500000,max:3500000},
+  {id:'60',prof:60,name:'60m (Plateaux sud)',min:4000000,max:5800000},
+  {id:'90',prof:90,name:'90m (Centrale)',min:5500000,max:8000000},
+  {id:'120',prof:120,name:'120m (Kara/Savanes)',min:7500000,max:11000000}
+];
 </script>
 <script>
 // ---- STATE ----
 let S={
-  etape:1,secteur:'',typeBat:'',standing:'confort',catHotel:'3s',
+  simulation_id:null,
+  etape:1,secteur:'{{ $secteur }}',typeBat:'',standing:'confort',catHotel:'3s',
   forme:'rect',dimA:30,dimB:20,surfManuelle:600,terrainDispo:'oui',
   zone:'zone1',sol:'',niveaux:1,ssSol:0,hspRdc:3.0,hspEtage:2.8,
   nbChambres:30,espacesHotel:[],hauteurLibre:8,pontRoulant:false,pontCap:5,
   groupeFroid:'',effectif:100,irrigation:'',surfExploit:5,
   nbAsc:0,nbQuais:2,solaire:'',groupe:'',
   alarme:'',nbZones:6,video:'',acces:'',nbPortes:2,
-  cloture:false,clotureH:2,portail:'',piscine:'',forage:false,forageProf:30,
+  cloture:'',portail:'',piscine:'',forage:'',forageProf:30,
   parkType:'',parkPlaces:0,
   domotique:'',paysager:'',volet:'',nbVoletM2:30,citerne:'',
   showAuthModal:false
@@ -281,27 +321,27 @@ function cEstimation(){
   // P9 extérieurs
   const per=cPer();
   let e9m=surf*7000,e9x=surf*9000;
-  if(S.cloture){e9m+=per*(S.clotureH<=2?75000:110000);e9x+=per*(S.clotureH<=2?100000:160000);}
-  if(S.portail==='manuel'){e9m+=450000;e9x+=650000;}
-  if(S.portail==='motorise'){e9m+=1400000;e9x+=1900000;}
-  if(S.piscine==='8x4'){e9m+=12000000;e9x+=17000000;}
-  if(S.piscine==='12x5'){e9m+=22000000;e9x+=30000000;}
-  if(S.forage){e9m+=S.forageProf*80000+1000000;e9x+=S.forageProf*110000+1500000;}
+  
+  const cl=CLOTURES.find(c=>c.id===S.cloture); if(cl){e9m+=per*cl.minM;e9x+=per*cl.maxM;}
+  const pt=PORTAILS.find(p=>p.id===S.portail); if(pt){e9m+=pt.min;e9x+=pt.max;}
+  const ps=PISCINES.find(p=>p.id===S.piscine); if(ps){e9m+=ps.min;e9x+=ps.max;}
+  const fr=FORAGES.find(f=>f.id===String(S.forage)); if(fr){e9m+=fr.min;e9x+=fr.max;}
+  
   if(S.parkPlaces>0){const u=S.parkType==='souterrain'?3200000:S.parkType==='couvert'?1100000:350000;const v=S.parkType==='souterrain'?4400000:S.parkType==='couvert'?1600000:500000;e9m+=S.parkPlaces*u;e9x+=S.parkPlaces*v;}
   const py=PAYSAGER.find(x=>x.id===S.paysager);if(py){e9m+=py.min;e9x+=py.max;}
-  pos.push({code:'9',nom:'Aménagements extérieurs',detail:'Clôture, portail, piscine, parking',min:e9m,max:e9x});
+  pos.push({code:'9',nom:'Aménagements extérieurs',detail:'Clôture, portail, piscine, parking, forage',min:e9m,max:e9x});
   // P10 équipements techniques
   let q10m=0,q10x=0;
   if(S.nbAsc>0){const u=S.niveaux<=5?24000000:30000000;q10m+=S.nbAsc*u;q10x+=S.nbAsc*(u*1.3);}
   if(S.nbQuais>0&&S.secteur==='industriel'){q10m+=S.nbQuais*7000000;q10x+=S.nbQuais*10000000;}
   if(S.pontRoulant){const u=S.pontCap<=5?24000000:S.pontCap<=10?40000000:65000000;q10m+=u;q10x+=u*1.3;}
   if(S.groupeFroid){q10m+=sb*(S.groupeFroid==='negatif'?80000:47000);q10x+=sb*(S.groupeFroid==='negatif'?110000:63000);}
-  if(S.alarme){const al={basique:[700000,1000000],avancee:[1400000,1800000],connectee:[2200000,2800000],pro:[3200000,4400000]};const ar=al[S.alarme]||[0,0];q10m+=ar[0]+S.nbZones*100000;q10x+=ar[1]+S.nbZones*160000;}
-  if(S.video==='4-8'){q10m+=1800000;q10x+=2600000;}if(S.video==='16+'){q10m+=7000000;q10x+=10000000;}
-  if(S.acces==='badge'){q10m+=800000+S.nbPortes*270000;q10x+=1100000+S.nbPortes*370000;}
-  if(S.acces==='bio'){q10m+=1500000+S.nbPortes*600000;q10x+=2100000+S.nbPortes*840000;}
+  
+  const alm=ALARMES.find(a=>a.id===S.alarme); if(alm){q10m+=alm.min;q10x+=alm.max;}
+  const vid=VIDEO.find(v=>v.id===S.video); if(vid){q10m+=vid.min;q10x+=vid.max;}
+  const acc=ACCES.find(a=>a.id===S.acces); if(acc){q10m+=acc.min;q10x+=acc.max;}
   const ks=SOLAIRES.find(k=>k.id===S.solaire);const gr=GROUPES.find(g=>g.id===S.groupe);
-  if(ks){q10m+=ks.prix*.9;q10x+=ks.prix*1.1;}if(gr){q10m+=gr.prix*.9;q10x+=gr.prix*1.1;}
+  if(ks){q10m+=ks.min;q10x+=ks.max;}if(gr){q10m+=gr.min;q10x+=gr.max;}
   const dm=DOMOTIQUE.find(d=>d.id===S.domotique);if(dm){q10m+=dm.min;q10x+=dm.max;}
   const vl=VOLETS.find(v=>v.id===S.volet);if(vl&&S.nbVoletM2>0){q10m+=S.nbVoletM2*vl.mM2;q10x+=S.nbVoletM2*vl.xM2;}
   const ct=CITERNES.find(c=>c.id===S.citerne);if(ct){q10m+=ct.min;q10x+=ct.max;}
@@ -344,7 +384,22 @@ function autoSave(){
   };
   localStorage.setItem('aiae_sim_draft',JSON.stringify({...payload,etape:S.etape,ts:Date.now()}));
   if(IS_AUTH){
-    fetch(SAVE_URL,{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':CSRF},body:JSON.stringify(payload)}).catch(()=>{});
+    const body = {...payload};
+    if(S.simulation_id) body.simulation_id = S.simulation_id;
+    
+    fetch(SAVE_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-CSRF-TOKEN':CSRF},
+      body:JSON.stringify(body)
+    })
+    .then(r=>r.json())
+    .then(res=>{
+      if(res.simulation_id && S.simulation_id !== res.simulation_id){
+        S.simulation_id = res.simulation_id;
+        localStorage.setItem('aiae_sim_draft',JSON.stringify({...S,ts:Date.now()}));
+      }
+    })
+    .catch(()=>{});
   }
 }
 // ---- RESTORE DRAFT ----
@@ -442,7 +497,7 @@ function renderStep1(){
       <h2 class="text-2xl font-bold text-gray-800">1. Type de projet</h2>
       <p class="text-gray-500 text-sm">Sélectionnez le secteur et le type de bâtiment</p>
     </div>
-    <div class="card p-6 mb-8 shadow-sm">
+    <div class="card p-6 mb-8 shadow-sm ${S.secteur?'hidden md:block opacity-50':''}">
       <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Secteur d'activité</h3>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
         ${Object.keys(TYPES).map(k=>`
@@ -452,6 +507,7 @@ function renderStep1(){
           </button>
         `).join('')}
       </div>
+      ${S.secteur?`<div class="mt-2 text-[10px] text-blue-600 font-bold uppercase">Secteur selectionné : ${S.secteur}</div>`:''}
     </div>`;
 
   if(S.secteur){
@@ -974,8 +1030,30 @@ function renderAuthModal(){
 </script>
 <script>
 // ---- STATE CONTROL ----
+function applyMapping(){
+  const s=S.standing;
+  const updates={};
+  if(s==='standard'){
+    updates.solaire='3'; updates.cloture='agglos'; updates.portail='simple'; updates.citerne='cit_5';
+    updates.alarme=''; updates.video=''; updates.piscine=''; updates.domotique=''; updates.volet='';
+  } else if(s==='confort'){
+    updates.solaire='5'; updates.cloture='agglos'; updates.portail='double'; updates.alarme='basique'; updates.video='4cam';
+  } else if(s==='premium'){
+    updates.solaire='10'; updates.cloture='mixte'; updates.portail='motorise'; updates.alarme='avancee'; updates.piscine='8x4'; updates.citerne='cit_10'; updates.volet='vol_motorise';
+  } else if(s==='prestige'){
+    updates.solaire='15'; updates.cloture='hg'; updates.portail='motorise'; updates.alarme='complete'; updates.video='8cam'; updates.piscine='10x5'; updates.citerne='cit_20'; updates.volet='vol_connecte'; updates.domotique='domo_complete';
+  }
+  Object.assign(S,updates);
+}
+
 function setS(obj){
+  const sChanged = obj.standing && obj.standing !== S.standing;
+  const sectChanged = obj.secteur && obj.secteur !== S.secteur;
+  
   Object.assign(S,obj);
+  
+  if(sChanged || sectChanged) applyMapping();
+  
   autoSave();
   render();
 }

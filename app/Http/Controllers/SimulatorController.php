@@ -73,27 +73,38 @@ class SimulatorController extends Controller
     public function save(Request $request)
     {
         $data = $request->all();
+        $simulationId = $request->input('simulation_id');
         
         if (auth()->check()) {
-            $simulation = new \App\Models\Simulation();
-            $simulation->reference_id = 'SIM-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
-            $simulation->user_id = auth()->id();
+            if ($simulationId) {
+                $simulation = \App\Models\Simulation::where('id', $simulationId)
+                    ->where('user_id', auth()->id())
+                    ->first();
+            }
+
+            if (!isset($simulation) || !$simulation) {
+                $simulation = new \App\Models\Simulation();
+                $simulation->reference_id = 'SIM-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
+                $simulation->user_id = auth()->id();
+                $simulation->status = 'saved';
+            }
+
             $simulation->sector_type_id = 1; 
             $simulation->input_quantity = $data['dimensions']['surface'] ?? 0;
             $simulation->total_amount_ttc = $data['total'] ?? 0;
             $simulation->total_amount_ht = ($data['total'] ?? 0) / 1.18;
             $simulation->base_amount = $data['base_amount'] ?? 0;
             $simulation->options_amount = $data['options_amount'] ?? 0;
-            $simulation->status = 'saved';
+            
             $simulation->configuration_data = $data;
-            if (isset($data['details'])) {
-                $simulation->configuration_data = array_merge($data, ['details' => $data['details']]);
-            }
             $simulation->save();
             
-            return response()->json(['status' => 'success', 'redirect' => route('profile')]);
+            return response()->json([
+                'status' => 'success', 
+                'simulation_id' => $simulation->id,
+                'redirect' => route('profile')
+            ]);
         } else {
-            // Store in session for guest
             session(['pending_simulation' => $data]);
             return response()->json(['status' => 'guest', 'redirect' => route('register')]);
         }
