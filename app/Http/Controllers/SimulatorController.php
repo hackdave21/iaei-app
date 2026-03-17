@@ -141,7 +141,9 @@ class SimulatorController extends Controller
             'elevage_bovins' => 'Élevage bovins', 
             'elevage_volailles' => 'Élevage volailles', 
             'serres' => 'Serres', 
-            'stockage' => 'Silos'
+            'stockage' => 'Silos Agricoles',
+            'culture_vivriere' => 'Culture vivrière',
+            'transformation' => 'Unité de transformation'
         ];
         
         $zoneLabels = [

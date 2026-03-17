@@ -48,5 +48,12 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('site')->group(function () {
     Route::post('/simulations/calculate', [Api\PublicSimulationController::class, 'calculate']);
     Route::post('/leads', [Api\LeadController::class, 'store']);
-    Route::post('/energy/analyze', [Api\EnergyCalculatorController::class, 'analyze']);
+    
+    // Nouveau Calculateur Énergie AIAE
+    Route::prefix('energy')->group(function () {
+        Route::get('/equipements', [Api\EnergieApiController::class, 'getEquipements']);
+        Route::get('/zones', [Api\EnergieApiController::class, 'getZones']);
+        Route::post('/calculate', [Api\EnergieApiController::class, 'calculer'])->middleware('throttle:30,1');
+        Route::post('/calculate-biogaz', [Api\EnergieApiController::class, 'calculerBiogaz'])->middleware('throttle:30,1');
+    });
 });

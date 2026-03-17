@@ -52,6 +52,10 @@ Route::get('/simulator', [SimulatorController::class, 'index'])->name('simulator
 Route::get('/simulator/v1', [SimulatorController::class, 'simulatorV1'])->name('simulator.v1');
 Route::get('/simulator/results', [SimulatorController::class, 'results'])->name('simulator.results');
 
+// Energy Calculator Routes
+Route::get('/energie/calculateur', [\App\Http\Controllers\EnergieController::class, 'calculator'])->name('energie.calculator');
+Route::get('/energie/resultats/{code}', [\App\Http\Controllers\EnergieController::class, 'show'])->name('energie.results');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     // Guest Admin Routes
     Route::middleware('guest')->group(function () {

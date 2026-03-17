@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logo.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
 <style>
 body{font-family:'Inter',sans-serif;background:#f8fafc;margin:0}
 *{box-sizing:border-box}
@@ -444,10 +444,9 @@ function renderHeader(){
   <header class="no-print">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3 cursor-pointer" onclick="setS({etape:1})">
-        <img src="{{ asset('aiae-frontend/Images/logo.png') }}" class="w-10 h-10 object-contain" alt="AIAE">
+        <img src="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png') }}" class="w-10 h-10 object-contain" alt="AIAE">
         <div class="hidden sm:block">
-          <div class="font-bold text-sm" style="color:var(--bleu)">AIAE SARL</div>
-          <div class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Simulateur Construction v5</div>
+          <div class="font-bold text-sm" style="color:var(--bleu)">SIMULATEUR AIAE</div>
         </div>
       </div>
       <div class="flex items-center gap-6">
