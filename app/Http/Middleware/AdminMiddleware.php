@@ -21,7 +21,12 @@ class AdminMiddleware
         }
 
         if ($request->expectsJson()) {
-            return response()->json(['message' => 'Unauthorized. Admin role required.'], 403);
+            return response()->json(['message' => 'Accès refusé. Droits administrateur requis.'], 403);
+        }
+
+        // if logged in but not admin, send to profile or home
+        if (Auth::check()) {
+            return redirect()->route('home')->with('error', 'Accès interdit : vous n\'avez pas les droits administrateur.');
         }
 
         return redirect()->route('admin.login')->with('error', 'Veuillez vous connecter en tant qu\'administrateur.');

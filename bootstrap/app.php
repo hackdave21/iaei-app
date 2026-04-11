@@ -25,7 +25,12 @@ return Application::configure(basePath: dirname(__DIR__))
             },
             users: function ($request) {
                 if ($request->user() && $request->user()->isAdmin()) {
-                    return '/admin/dashboard';
+                    return route('admin.dashboard');
+                }
+                if ($request->is('admin') || $request->is('admin/*')) {
+                    if ($request->user()) {
+                        return route('home'); // or some error page
+                    }
                 }
                 return route('profile');
             }

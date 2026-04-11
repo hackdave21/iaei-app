@@ -31,8 +31,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/divisions', [FrontendController::class, 'divisions'])->name('divisions');
-Route::get('/clients', [FrontendController::class, 'clients'])->name('clients');
-Route::get('/projects', [FrontendController::class, 'projects'])->name('projects');
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::get('/diaspora', [FrontendController::class, 'diaspora'])->name('diaspora');
@@ -47,7 +45,7 @@ Route::middleware('guest')->group(function () {
 });
 Route::get('/mon-espace', [SimulatorController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/mon-espace/profile/update', [SimulatorController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
-Route::get('/mon-espace/simulations/{id}', [SimulatorController::class, 'show'])->name('simulations.show')->middleware('auth');
+Route::get('/mon-espace/simulations/{id}', [SimulatorController::class, 'show'])->name('profile.simulations.show')->middleware('auth');
 Route::post('/simulator/save', [SimulatorController::class, 'save'])->name('simulator.save');
 Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout');
 
@@ -62,10 +60,8 @@ Route::get('/energie/resultats/{code}', [\App\Http\Controllers\EnergieController
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Guest Admin Routes
-    Route::middleware('guest')->group(function () {
-        Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-        Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
-    });
+    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
 
     // Protected Admin Routes
     Route::middleware(['auth', 'admin'])->group(function () {

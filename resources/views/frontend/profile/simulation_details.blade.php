@@ -39,60 +39,60 @@
 
         <div class="space-y-8">
             <!-- Header Summary -->
-            <div class="bg-[#162064] text-white rounded-3xl p-8 shadow-xl">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h1 class="text-3xl font-bold mb-2">{{ $typeLabels[$config['typeBat']] ?? $config['typeBat'] }}</h1>
-                        <p class="text-white/70 text-sm">Réalisée le {{ $simulation->created_at->format('d/m/Y à H:i') }}</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-white/10 rounded-lg text-xs">{{ $secteurLabels[$config['secteur']] ?? $config['secteur'] }}</span>
-                            <span class="px-3 py-1 bg-white/10 rounded-lg text-xs">{{ ucfirst($config['standing'] ?? 'Standard') }}</span>
-                            <span class="px-3 py-1 bg-white/10 rounded-lg text-xs">{{ $zoneLabels[$config['zone']] ?? $config['zone'] }}</span>
+            <div class="bg-[#162064] text-white rounded-3xl p-6 md:p-8 shadow-xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="w-full md:w-auto">
+                        <h1 class="text-2xl md:text-3xl font-bold mb-2">{{ $typeLabels[$config['typeBat']] ?? $config['typeBat'] }}</h1>
+                        <p class="text-white/70 text-[10px] md:text-sm">Réalisée le {{ $simulation->created_at->format('d/m/Y à H:i') }}</p>
+                        <div class="mt-4 flex flex-wrap gap-1.5">
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-[9px] md:text-xs tracking-wider">{{ $secteurLabels[$config['secteur']] ?? $config['secteur'] }}</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-[9px] md:text-xs tracking-wider">{{ ucfirst($config['standing'] ?? 'Standard') }}</span>
+                            <span class="px-2 py-1 bg-white/10 rounded-lg text-[9px] md:text-xs tracking-wider">{{ $zoneLabels[$config['zone']] ?? $config['zone'] }}</span>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <div class="text-white/60 mb-1 text-sm">Estimation Totale TTC</div>
-                        <div class="text-4xl font-bold mono text-[#ff8400]">
+                    <div class="w-full md:w-auto text-left md:text-right border-t border-white/10 pt-4 md:border-0 md:pt-0">
+                        <div class="text-white/60 mb-1 text-[10px] uppercase tracking-widest">Estimation Totale TTC</div>
+                        <div class="text-3xl md:text-4xl font-bold mono text-[#ff8400]">
                             {{ number_format($simulation->total_amount_ttc, 0, ',', ' ') }} F
                         </div>
-                        <div class="text-[10px] text-white/40 mt-1 uppercase tracking-widest">Valeur indicative moyenne</div>
+                        <div class="text-[8px] md:text-[10px] text-white/40 mt-1 uppercase tracking-widest">Valeur indicative moyenne</div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <!-- Info Column -->
-                <div class="md:col-span-1 space-y-6">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-[#162064] mb-4 text-sm uppercase tracking-wider">Configuration</h3>
-                        <div class="space-y-3 text-sm">
+                <div class="order-2 md:order-1 md:col-span-1 space-y-6">
+                    <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-[#162064] mb-4 text-[10px] uppercase tracking-wider">Configuration</h3>
+                        <div class="space-y-3 text-xs">
                             <div class="flex justify-between items-center"><span class="text-gray-500">Surface</span><span class="font-bold mono">{{ number_format($simulation->input_quantity, 0) }} m²</span></div>
                             <div class="flex justify-between items-center"><span class="text-gray-500">Niveaux</span><span class="font-bold">R+{{ ($config['dimensions']['niveaux'] ?? 1) - 1 }}</span></div>
                             <div class="flex justify-between items-center"><span class="text-gray-500">Sous-sol</span><span class="font-bold">{{ $config['dimensions']['ssSol'] ?? 0 }}</span></div>
-                            <div class="flex justify-between items-center"><span class="text-gray-500">Zone</span><span class="font-bold text-xs text-right">{{ $zoneLabels[$config['zone'] ?? ''] ?? 'N/A' }}</span></div>
-                            <div class="flex justify-between items-center"><span class="text-gray-500">Sol</span><span class="font-bold text-blue-600 text-xs text-right">{{ $solLabels[$config['sol'] ?? ''] ?? 'N/A' }}</span></div>
+                            <div class="flex justify-between items-center gap-4"><span class="text-gray-500 shrink-0">Zone</span><span class="font-bold text-[10px] text-right">{{ $zoneLabels[$config['zone'] ?? ''] ?? 'N/A' }}</span></div>
+                            <div class="flex justify-between items-center gap-4"><span class="text-gray-500 shrink-0">Sol</span><span class="font-bold text-blue-600 text-[10px] text-right">{{ $solLabels[$config['sol'] ?? ''] ?? 'N/A' }}</span></div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-[#162064] mb-4 text-sm uppercase tracking-wider">Options & Énergie</h3>
+                    <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-[#162064] mb-4 text-[10px] uppercase tracking-wider">Options & Énergie</h3>
                         <div class="space-y-4">
                            @if($config['options']['solaire'] ?? false)
                               <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
-                                 <div class="text-[9px] font-bold text-blue-600 uppercase mb-1">Système Solaire</div>
+                                 <div class="text-[8px] font-bold text-blue-600 uppercase mb-1 tracking-tighter">Système Solaire</div>
                                  <div class="text-xs font-bold text-[#162064]">{{ $config['options']['solaire'] }} kWc</div>
                               </div>
                            @endif
                            @if($config['options']['groupe'] ?? false)
                               <div class="p-3 bg-orange-50 rounded-xl border border-orange-100">
-                                 <div class="text-[9px] font-bold text-orange-600 uppercase mb-1">Groupe Électrogène</div>
+                                 <div class="text-[8px] font-bold text-orange-600 uppercase mb-1 tracking-tighter">Groupe Électrogène</div>
                                  <div class="text-xs font-bold text-[#162064]">{{ $config['options']['groupe'] }} kVA</div>
                               </div>
                            @endif
-                           <div class="flex flex-wrap gap-1.5 pt-2">
+                           <div class="flex flex-wrap gap-1.5 pt-1">
                                 @foreach($config['options'] ?? [] as $key => $val)
                                     @if($val && $val !== 'non' && !in_array($key, ['solaire', 'groupe']))
-                                        <span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[9px] font-bold uppercase border border-gray-100">
+                                        <span class="px-2 py-0.5 bg-gray-50 text-gray-500 rounded text-[8px] font-bold uppercase border border-gray-100">
                                             {{ str_replace('_', ' ', $key) }}
                                         </span>
                                     @endif
@@ -103,45 +103,56 @@
                 </div>
 
                 <!-- Posts Column -->
-                <div class="md:col-span-2">
-                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                        <h3 class="text-xl font-bold text-[#162064] mb-6">Détail du budget (Postes V5)</h3>
-                        <div class="space-y-3">
+                <div class="order-1 md:order-2 md:col-span-2">
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 h-full">
+                        <h3 class="text-lg md:text-xl font-bold text-[#162064] mb-6">Détail du budget (V5.1)</h3>
+                        <div class="space-y-4">
                             @if(isset($config['details']) && count($config['details']) > 0)
                                 @foreach($config['details'] as $poste)
-                                    <div class="flex justify-between items-center border-b border-gray-50 pb-3">
-                                        <div class="flex-1">
-                                            <div class="text-sm font-bold text-gray-800">{{ $poste['nom'] }}</div>
-                                            <div class="text-[10px] text-gray-500 italic">{{ $poste['detail'] ?? '' }}</div>
+                                    <div class="flex justify-between items-center border-b border-gray-50 pb-3 gap-4">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-[11px] md:text-sm font-bold text-gray-800 break-words">{{ $poste['nom'] }}</div>
+                                            <div class="text-[9px] text-gray-400 italic">{{ $poste['detail'] ?? '' }}</div>
                                         </div>
-                                        <div class="text-right ml-4">
-                                            <div class="text-xs mono font-bold text-gray-400">{{ number_format($poste['min'], 0, ',', ' ') }} F</div>
-                                            <div class="text-sm mono font-black text-[#162064]">{{ number_format($poste['max'], 0, ',', ' ') }} F</div>
+                                        <div class="text-right shrink-0">
+                                            <div class="text-[9px] mono font-bold text-gray-300">{{ number_format($poste['min'], 0, ',', ' ') }} F</div>
+                                            <div class="text-xs md:text-sm mono font-black text-[#162064]">{{ number_format($poste['max'], 0, ',', ' ') }} F</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @elseif(isset($config['postes']) && count($config['postes']) > 0)
+                                @foreach($config['postes'] as $poste)
+                                    <div class="flex justify-between items-center border-b border-gray-50 pb-3 gap-4">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-[11px] md:text-sm font-bold text-gray-800 break-words">{{ $poste['nom'] }}</div>
+                                            <div class="text-[9px] text-gray-400 italic">{{ $poste['detail'] ?? '' }}</div>
+                                        </div>
+                                        <div class="text-right shrink-0">
+                                            <div class="text-xs md:text-sm mono font-black text-[#162064]">{{ number_format($poste['montant'], 0, ',', ' ') }} F</div>
                                         </div>
                                     </div>
                                 @endforeach
                             @else
-                                <div class="text-center py-10 text-gray-400 italic">Détails non disponibles.</div>
+                                <div class="text-center py-10 text-gray-400 italic text-xs">Détails non disponibles pour cette version.</div>
                             @endif
                         </div>
 
-                        <div class="mt-10 p-5 bg-blue-900 rounded-2xl text-white">
+                        <div class="mt-8 md:mt-10 p-5 bg-[#162064] rounded-2xl text-white shadow-lg">
                            <div class="flex justify-between items-end">
                               <div>
-                                 <div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Total Estimatif HTVA</div>
-                                 <div class="text-2xl font-bold mono">{{ number_format($simulation->base_amount, 0, ',', ' ') }} F</div>
+                                 <div class="text-[8px] md:text-[10px] text-blue-200 uppercase font-bold mb-1 tracking-widest">Base Estimative</div>
+                                 <div class="text-xl md:text-2xl font-bold mono">{{ number_format($simulation->base_amount, 0, ',', ' ') }} F</div>
                               </div>
                               <div class="text-right">
-                                 <div class="text-[10px] text-blue-300 uppercase font-bold mb-1">Catégorie</div>
-                                 <div class="font-bold">CONFORME V5.1</div>
+                                 <div class="text-[8px] md:text-[10px] text-blue-200 uppercase font-bold mb-1 tracking-widest">Certification</div>
+                                 <div class="font-bold text-[10px] md:text-xs">AIAE VALIDE</div>
                               </div>
                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="mt-6 text-[10px] text-gray-400 leading-relaxed italic border-t pt-4">
-                            * Les prix indiqués incluent les frais généraux, les assurances et les honoraires d'études forfaitaires. 
-                            Cette estimation est basée sur les tarifs AIAE V5 (Février 2026).
-                        </div>
                     </div>
                 </div>
             </div>

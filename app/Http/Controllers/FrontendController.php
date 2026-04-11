@@ -21,15 +21,6 @@ class FrontendController extends Controller
         return view('frontend.divisions');
     }
 
-    public function clients()
-    {
-        return view('frontend.clients');
-    }
-
-    public function projects()
-    {
-        return view('frontend.projects');
-    }
 
     public function faq()
     {

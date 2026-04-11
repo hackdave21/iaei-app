@@ -1,47 +1,258 @@
-@extends('layouts.frontend')
+<!doctype html>
+<html lang="fr">
 
-@section('title', 'À propos - AIAE')
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos - AIAE</title>
+  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
-@section('styles')
-<style>
-  /* Animations */
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
-  @keyframes fadeInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
-  @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
-  .animate-fade-left { animation: fadeInLeft 0.8s ease-out forwards; }
-  .animate-fade-right { animation: fadeInRight 0.8s ease-out forwards; }
-  .animate-scale { animation: scaleIn 0.6s ease-out forwards; }
-  .animate-float { animation: float 4s ease-in-out infinite; }
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            futura: ["Futura", "sans-serif"],
+            futuraCondensed: ["Futura Condensed", "sans-serif"],
+          },
+          colors: {
+            primary: "#05482C",
+            secondary: "#CC6A00",
+            glass: "rgba(255,255,255,0.55)",
+            glassDark: "rgba(255,255,255,0.35)",
+          },
+        },
+      },
+    };
+  </script>
 
-  .delay-100 { animation-delay: 0.1s; } .delay-200 { animation-delay: 0.2s; }
-  .delay-300 { animation-delay: 0.3s; } .delay-400 { animation-delay: 0.4s; }
-  .delay-500 { animation-delay: 0.5s; } .delay-600 { animation-delay: 0.6s; }
-  .delay-700 { animation-delay: 0.7s; } .delay-800 { animation-delay: 0.8s; }
+  <!-- ================= FONTS ================= -->
+  <style>
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdLight.otf') }}");
+      font-weight: 300;
+    }
 
-  .opacity-0-init { opacity: 0; }
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdMedium.otf') }}");
+      font-weight: 500;
+    }
 
-  .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
-  .hover-scale { transition: transform 0.3s ease; }
-  .hover-scale:hover { transform: scale(1.05); }
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdBold.otf') }}");
+      font-weight: 700;
+    }
 
-  .pattern-bg {
-    background-image: radial-gradient(circle at 20% 80%, rgba(11, 91, 58, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(26, 31, 77, 0.05) 0%, transparent 50%);
-  }
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdHeavy.otf') }}");
+      font-weight: 900;
+    }
 
-  strong { font-weight: 600; color: #1d1d1b; }
+    /* Condensed */
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensed.otf') }}");
+      font-weight: 500;
+    }
 
-  .divider-green { width: 80px; height: 4px; background: linear-gradient(90deg, #05482C, #05482C); }
-  .divider-orange { width: 80px; height: 4px; background: linear-gradient(90deg, #CC6A00, #f59e0b); }
-</style>
-@endsection
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensedBold.otf') }}");
+      font-weight: 700;
+    }
 
-@section('content')
+    @media (max-width: 640px) {
+
+      body,
+      html {
+        overflow-x: hidden !important;
+      }
+
+      section,
+      div,
+      img {
+        max-width: 100% !important;
+      }
+    }
+
+    .nav-scrolled {
+      backdrop-filter: blur(18px);
+      background: rgba(22, 32, 100, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .animate-fade-left {
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+
+    .animate-fade-right {
+      animation: fadeInRight 0.8s ease-out forwards;
+    }
+
+    .animate-scale {
+      animation: scaleIn 0.6s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-600 {
+      animation-delay: 0.6s;
+    }
+
+    .delay-700 {
+      animation-delay: 0.7s;
+    }
+
+    .delay-800 {
+      animation-delay: 0.8s;
+    }
+
+    .opacity-0-init {
+      opacity: 0;
+    }
+
+    /* Hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    /* Background pattern */
+    .pattern-bg {
+      background-image: radial-gradient(circle at 20% 80%, rgba(11, 91, 58, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(26, 31, 77, 0.05) 0%, transparent 50%);
+    }
+
+    strong {
+      font-weight: 600;
+      color: #1d1d1b;
+    }
+
+    /* Divider */
+    .divider-green {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #05482C, #05482C);
+    }
+
+    .divider-orange {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #CC6A00, #f59e0b);
+    }
+  </style>
+  <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
+</head>
+
+<body class="font-futura bg-gray-100 overflow-x-hidden">
+  @include('frontend.partials.navbar')
 
   <!-- ================= HERO ================= -->
   <section class="pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
@@ -53,28 +264,28 @@
         <div class="mt-4">
           <!-- TITRE -->
          <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8">
-            UNE EXPERTISE NÉE D'UN CONSTAT
+            UNE EXPERTISE NÉE D’UN CONSTAT
           </h2>
 
           <!-- TEXTE -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            AIAE est née d'une observation simple : <strong>en Afrique de l'Ouest, le client qui<br class="hidden xl:block">
-              souhaite construire doit coordonner lui-même une multitude d'intervenants</strong><br class="hidden xl:block">
-            architecte, bureau d'études, maçon, électricien, plombier <strong>sans garantie de<br class="hidden xl:block">
+            AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br class="hidden xl:block">
+              souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br class="hidden xl:block">
+            architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br class="hidden xl:block">
               cohérence ni de respect des engagements.</strong>
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            Fort de <strong>plus de 18 années d'expérience en génie civil</strong>, d'un parcours<br class="hidden xl:block">
-            d'<strong>enseignant-chercheur</strong> et d'une solide <strong>formation en administration des<br class="hidden xl:block">
-              entreprises, le fondateur d'AIAE a décidé de proposer</strong> un modèle différent :<br class="hidden xl:block">
-            <strong>une entreprise qui maîtrise l'intégralité de la chaîne, de la conception à la<br class="hidden xl:block">
+            Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br class="hidden xl:block">
+            d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br class="hidden xl:block">
+              entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br class="hidden xl:block">
+            <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br class="hidden xl:block">
               réalisation.</strong>
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
             <strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br class="hidden xl:block">
-            Afrique de l'Ouest pour les <strong>solutions intégrées de construction, d'énergie, de<br class="hidden xl:block">
+            Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br class="hidden xl:block">
               sécurité et de préfabrication.</strong>
           </p>
         </div>
@@ -97,55 +308,70 @@
 
         <!-- TITRE -->
         <h2 class="text-white text-center font-bold text-[12px] sm:text-[20px] md:text-[30px] leading-[1.05] mb-10">
-          UNE EXPERTISE NÉE D'UN CONSTAT
+          UNE EXPERTISE NÉE D’UN CONSTAT
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
 
           <!-- CARD 1 -->
-          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift flex flex-col items-center text-center">
+          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift 
+            flex flex-col items-center text-center">
             <div class="mb-4">
               <img src="{{ asset('aiae-frontend/Images/col1.png') }}" class="w-14 h-14" />
             </div>
-            <h3 class="font-black text-[24px] uppercase mb-2">+18 ANS D'EXPERTISE</h3>
+            <h3 class="font-black text-[24px] uppercase mb-2">
+              +18 ANS D’EXPERTISE
+            </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré<br> dans <strong class="text-white">plus de 15 ans de pratique terrain</strong> :<br>
-              conception, dimensionnement, réalisation et<br> supervision d'ouvrages complexes.
+              Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré<br> dans <strong
+                class="text-white">plus de 15 ans de practice terrain</strong> :<br>
+              conception, dimensionnement, réalisation et<br> supervision d’ouvrages complexes.
             </p>
           </div>
 
-          <!-- CARD 2 -->
-          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift flex flex-col items-center text-center">
+          <!-- CARD 2 (CERCLE À CRÉER) -->
+          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift 
+            flex flex-col items-center text-center">
             <div class="mb-4 flex justify-center">
               <div class="w-14 h-14 rounded-full border-2 border-[#00ff9c] flex items-center justify-center">
                 <img src="{{ asset('aiae-frontend/Images/col4.png') }}" class="w-7 h-7" />
               </div>
             </div>
-            <h3 class="font-black text-[24px] uppercase mb-2">UN MODÈLE INTÉGRÉ UNIQUE</h3>
+            <h3 class="font-black text-[24px] uppercase mb-2">
+              UN MODÈLE INTÉGRÉ UNIQUE
+            </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Construction, énergie, sécurité, préfabrication<br> <strong class="text-white">quatre divisions complémentaires sous une seule<br> enseigne,</strong>
-              sans équivalent en Afrique de l'Ouest.
+              Construction, énergie, sécurité, préfabrication<br> <strong class="text-white">quatre divisions
+                complémentaires sous une seule<br> enseigne,</strong>
+              sans équivalent en Afrique de l’Ouest.
             </p>
           </div>
 
           <!-- CARD 3 -->
-          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift flex flex-col items-center text-center">
+          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift 
+            flex flex-col items-center text-center">
             <div class="mb-4">
               <img src="{{ asset('aiae-frontend/Images/col3.png') }}" class="w-14 h-14" />
             </div>
-            <h3 class="font-black text-[24px] uppercase mb-2">RIGUEUR TECHNIQUE</h3>
+            <h3 class="font-black text-[24px] uppercase mb-2">
+              RIGUEUR TECHNIQUE
+            </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux<br> de standing normalisés, devis détaillés</strong> ligne<br> par ligne.
+              Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux<br> de standing normalisés,
+                devis détaillés</strong> ligne<br> par ligne.
               <strong class="text-white">Chaque franc est justifié.</strong>
             </p>
           </div>
 
           <!-- CARD 4 -->
-          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift flex flex-col items-center text-center">
+          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift 
+            flex flex-col items-center text-center">
             <div class="mb-4">
               <img src="{{ asset('aiae-frontend/Images/col2.png') }}" class="w-14 h-14" />
             </div>
-            <h3 class="font-black text-[24px] uppercase mb-2">ENGAGEMENT CONTRACTUEL</h3>
+            <h3 class="font-black text-[24px] uppercase mb-2">
+              ENGAGEMENT CONTRACTUEL
+            </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
               Délais, coûts et qualité inscrits au contrat.<br> <strong class="text-white">Pénalités de retard.</strong>
               Garantie décennale.<br>
@@ -162,39 +388,58 @@
   <!-- ================= NOTRE MISSION ================= -->
   <section class="bg-[#121a44] py-10">
     <div class="max-w-[950px] mx-auto px-6 text-center text-white">
-      <h2 class="text-[30px] md:text-[40px] font-black tracking-[1px] uppercase mb-6">NOTRE MISSION</h2>
+
+      <!-- TITRE -->
+      <h2 class="text-[30px] md:text-[40px] font-black tracking-[1px] uppercase mb-6">
+        NOTRE MISSION
+      </h2>
+
+      <!-- TEXTE -->
       <p class="text-[18px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">
         « Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire,
         équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »
       </p>
+
     </div>
   </section>
 
   <!-- ================= CE QUI NOUS ANIME ================= -->
   <section class="bg-[#f7f7f7] py-24 relative overflow-hidden">
+
+    <!-- OVALE DERRIÈRE -->
     <div class="absolute -top-32 -left-40 w-[600px] h-[400px] bg-[#e6e6e6] rounded-[50%]"></div>
 
     <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+
       <div class="grid md:grid-cols-2 gap-20">
 
         <!-- COLONNE GAUCHE -->
         <div class="flex flex-col gap-10">
-          <h2 class="text-[40px] md:text-[46px] font-bold text-[#0b4a2b] leading-[1.2]">Ce qui nous<br>anime :</h2>
+
+          <!-- TITRE -->
+          <h2 class="text-[40px] md:text-[46px] font-bold text-[#0b4a2b] leading-[1.2]">
+            Ce qui nous<br>anime :
+          </h2>
 
           <!-- 02 -->
           <div class="flex gap-4 pt-10">
-            <div class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">02</div>
+            <div
+              class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
+              02</div>
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">Respecter</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                <strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong><br> inscrits au contrat.
+                <strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong><br>
+                inscrits au contrat.
               </p>
             </div>
           </div>
 
           <!-- 04 -->
           <div class="flex gap-4">
-            <div class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">04</div>
+            <div
+              class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
+              04</div>
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">Innover</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
@@ -203,24 +448,31 @@
               </p>
             </div>
           </div>
+
         </div>
 
         <!-- COLONNE DROITE -->
         <div class="flex flex-col gap-10">
+
           <!-- 01 -->
           <div class="flex gap-4">
-            <div class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">01</div>
+            <div
+              class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
+              01</div>
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">Simplifier</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                <strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong><br> au lieu de cinq ou six.
+                <strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong><br>
+                au lieu de cinq ou six.
               </p>
             </div>
           </div>
 
           <!-- 03 -->
           <div class="flex gap-4">
-            <div class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">03</div>
+            <div
+              class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
+              03</div>
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">Démocratiser</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
@@ -232,7 +484,9 @@
 
           <!-- 05 -->
           <div class="flex gap-4">
-            <div class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">05</div>
+            <div
+              class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
+              05</div>
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">Durer</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
@@ -241,269 +495,643 @@
               </p>
             </div>
           </div>
+
         </div>
 
       </div>
+
     </div>
   </section>
 
   <!-- ================= NOS DIVISIONS ================= -->
   <section class="relative pt-4 md:pt-24 pb-20 md:pb-36 bg-[#f3f3f3] overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] sm:w-[150vw] md:w-[900px] aspect-square bg-[#e6e6e6] rounded-full"></div>
+
+    <!-- forme "demi-cercle" décoratif parfait -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2
+              w-[200vw] sm:w-[150vw] md:w-[900px] aspect-square
+              bg-[#e6e6e6] rounded-full">
+    </div>
+
+    <!-- image décorative gauche -->
     <img src="{{ asset('aiae-frontend/Images/Gauche.png') }}" class="absolute left-0 top-1/2 -translate-y-1/2 w-[30vw] md:w-[40vw] lg:w-[470px]">
+
+    <!-- image décorative droite -->
     <img src="{{ asset('aiae-frontend/Images/Droit.png') }}" class="absolute right-0 top-1/2 -translate-y-1/2 w-[30vw] md:w-[40vw] lg:w-[450px]">
 
     <div class="relative z-10 max-w-[900px] mx-auto text-center px-6">
+
+      <!-- TITRE -->
       <h2 class="text-darkBlue font-bold text-[40px] sm:text-[60px] md:text-[90px] leading-[1.05]">
-        NOS <span class="text-primary">04</span><br>DIVISIONS
+        NOS <span class="text-primary">04</span><br>
+        DIVISIONS
       </h2>
+
+      <!-- TEXTE -->
       <p class="mt-4 sm:mt-6 font-normal text-[10px] min-[400px]:text-xs sm:text-sm md:text-base text-black max-w-[520px] mx-auto leading-relaxed">
+
         AIAE STRUCTURE SON DÉVELOPPEMENT AUTOUR DE<br>
+
         <span class="font-heavy">QUATRE DIVISIONS COMPLÉMENTAIRES</span>, ENSEMBLE,<br>
+
         ELLES FORMENT UN <span class="font-heavy">ÉCOSYSTÈME INÉDIT SUR LE</span><br>
+
         <span class="font-heavy">MARCHÉ OUEST-AFRICAIN.</span>
+
       </p>
+
     </div>
+
   </section>
 
   <!-- ================= SECTION DIVISIONS ================= -->
   <section class="py-10 bg-[#f3f3f3]">
+
     <div class="max-w-[1100px] mx-auto px-6">
 
-      <!-- Ligne 1 - Construction -->
+      <!-- Ligne 1 -->
       <div class="grid md:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 md:items-stretch">
+
         <img src="{{ asset('aiae-frontend/Images/Constr.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center">
+
+        <!-- Texte -->
         <div class="flex flex-col justify-center h-full gap-5 py-4">
           <div>
-            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">CONSTRUCTION</h3>
+            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+              CONSTRUCTION
+            </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
               <strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong>
-              <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel, tertiaire, industriel, agricole, ouvrages d'art.
+              <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel,
+              tertiaire, industriel, agricole, ouvrages d’art.
             </p>
           </div>
           <div>
-            <span class="inline-block bg-[#05482C] text-white px-8 py-2 md:px-10 border-[4px] border-[#00a651] rounded-[50px] text-[20px] md:text-[22px] font-book mt-2 shadow-sm">Opérationnelle</span>
+            <span class="inline-block bg-[#05482C] text-white px-8 py-2 md:px-10 border-[4px] border-[#00a651] rounded-[50px] text-[20px] md:text-[22px] font-book mt-2 shadow-sm">
+              Opérationnelle
+            </span>
           </div>
         </div>
       </div>
 
+      <!-- Séparateur -->
       <div class="border-t border-gray-300 my-8 md:my-16"></div>
 
-      <!-- Ligne 2 - Énergie -->
+      <!-- Ligne 2 -->
       <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
+
+        <!-- Texte énergie -->
         <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
           <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">ÉNERGIE</h3>
+            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+              ÉNERGIE
+            </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              Solutions <strong class="font-heavy text-gray-800">d'autonomie<br> énergétique</strong> pour vos installations.<br>
+              Solutions <strong class="font-heavy text-gray-800">d’autonomie<br> énergétique</strong> pour vos installations.<br>
               Solaire C&I, systèmes hybrides, sites<br> isolés.
             </p>
           </div>
           <div>
-            <p class="text-gray-600 text-[22px] md:text-[26px] mt-2">Lancement <span class="font-black text-gray-800">2026</span></p>
+            <p class="text-gray-600 text-[22px] md:text-[26px] mt-2">
+              Lancement <span class="font-black text-gray-800">2026</span>
+            </p>
           </div>
         </div>
+
         <img src="{{ asset('aiae-frontend/Images/solair.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center order-first md:order-last">
+
       </div>
 
+      <!-- Séparateur -->
       <div class="border-t border-gray-300 my-8 md:my-16"></div>
 
-      <!-- Ligne 3 - Sécurité -->
+      <!-- Ligne 3 -->
       <div class="grid md:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 md:items-stretch">
+
         <img src="{{ asset('aiae-frontend/Images/coffre.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center">
+
+        <!-- Texte sécurité -->
         <div class="flex flex-col justify-center h-full gap-5 py-4">
           <div>
-            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">SÉCURITÉ</h3>
+            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+              SÉCURITÉ
+            </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d'accès.
+              <strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d’accès.
             </p>
           </div>
           <div>
-            <p class="text-[#05482C] text-[22px] md:text-[26px] mt-2">Prochainement</p>
+            <p class="text-[#05482C] text-[22px] md:text-[26px] mt-2">
+              Prochainement
+            </p>
           </div>
         </div>
+
       </div>
 
+      <!-- Séparateur -->
       <div class="border-t border-gray-300 my-8 md:my-16"></div>
 
-      <!-- Ligne 4 - Préfabrication -->
+      <!-- Ligne 4 -->
       <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
+
+        <!-- Texte prefabrication -->
         <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
           <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">PRÉFABRICATION</h3>
+            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+              PRÉFABRICATION
+            </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Production industrielle</strong> d'éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.
+              <strong class="font-heavy text-gray-800">Production industrielle</strong> d’éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.
             </p>
           </div>
           <div>
-            <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">Prochainement</p>
+            <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">
+              Prochainement
+            </p>
           </div>
         </div>
+
         <img src="{{ asset('aiae-frontend/Images/Préfabrication.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center order-first md:order-last">
+
       </div>
 
     </div>
+
   </section>
 
   <!-- ================= ÉQUIPE ================= -->
   <section class="bg-[#f3f3f3] py-10">
+
     <div class="max-w-[1200px] mx-auto px-6">
+
+      <!-- BLOC BLEU -->
       <div class="bg-[#111a4a] rounded-[30px] md:rounded-[55px] p-6 sm:p-10 md:p-14 relative overflow-hidden">
+        <!-- CONTENU -->
         <div class="relative z-10">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">Les personnes derrière AIAE</h2>
+
+          <!-- TITRE -->
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">
+            Les personnes derrière AIAE
+          </h2>
 
           <div class="grid md:grid-cols-2 gap-6 md:gap-10">
 
             <!-- CARD 1 : Technique -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
-              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">Direction Technique<br>et Stratégique</div>
+              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
+                Direction Technique<br>et Stratégique
+              </div>
               <div class="bg-white p-5 text-[18px] text-gray-700 flex-1 leading-[1.6]">
-                <strong class="text-gray-700 font-heavy">Spécialiste en génie civil avec plus de 18 ans d'expérience</strong> en
+                <strong class="text-gray-700 font-heavy">Spécialiste en génie civil avec plus de 18 ans d’expérience</strong> en
                 conception et dimensionnement de <strong class="text-gray-700 font-heavy">structures complexes</strong>.
-                <strong class="text-gray-700 font-heavy">Enseignant-chercheur</strong> dans plusieurs disciplines du génie civil.
-                <strong class="text-gray-700 font-heavy">Formation complémentaire en administration des entreprises.</strong> Fondateur d'AIAE.
+                <strong class="text-gray-700 font-heavy">Enseignant-chercheur</strong> dans plusieurs disciplines du génie civil
+                (ouvrages d’art, structures de chaussées, modélisation aux éléments finis).
+                <strong class="text-gray-700 font-heavy">Formation complémentaire en administration des entreprises.</strong>
+                Fondateur d’AIAE.
               </div>
             </div>
 
-            <!-- CARD 2 : Générale -->
+            <!-- CARD 3 : Générale (Top Right) -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
-              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">Direction Générale<br><span class="hidden md:inline">&nbsp;</span></div>
+              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
+                Direction Générale<br><span class="hidden md:inline">&nbsp;</span>
+              </div>
               <div class="bg-white p-4 lg:p-5 text-[16px] xl:text-[18px] text-gray-700 flex-1">
-                En charge de la gestion opérationnelle quotidienne, de la coordination des projets et des relations clients.
-                <strong class="text-gray-700 font-heavy">Expérience en gestion de projets BTP et coordination multi-lots.</strong>
+                En charge de la gestion opérationnelle quotidienne, de la<br class="hidden md:block"> coordination des projets et des relations
+                clients.
+                <strong class="text-gray-700 font-heavy">Expérience en<br class="hidden md:block"> gestion de projets BTP et coordination multi-lots.</strong>
               </div>
             </div>
 
-            <!-- CARD 3 : Administrative -->
+            <!-- CARD 2 : Administrative (Bottom Left) -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
-              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">Direction Administrative<br>et Juridique</div>
-              <div class="bg-white p-5 text-[18px] text-gray-700 flex-1">
-                <strong class="font-heavy text-gray-700">Représentante légale</strong> de l'entreprise. En charge de la conformité réglementaire,
+              <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
+                Direction Administrative<br>et Juridique
+              </div>
+              <div class="bg-white p-5 text-[18px] text-gray-700 flex-1 ">
+                <strong class="font-heavy text-gray-700">Représentante légale</strong> de l’entreprise. En charge de la conformité réglementaire,
                 des contrats et de la gestion administrative.
               </div>
             </div>
 
-            <!-- TEXTE -->
+            <!-- TEXTE (Bottom Right) -->
             <div class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              Notre équipe s'appuie également sur <strong class="text-white font-heavy">un réseau de partenaires techniques qualifiés</strong>
-              (architectes, géotechniciens, topographes, bureaux de contrôle)
-              <strong class="text-white font-heavy">mobilisés selon les besoins de chaque projet.</strong>
+              Notre équipe s’appuie<br class="hidden md:block"> également sur <strong class="text-white font-heavy">un réseau de<br class="hidden md:block"> partenaires techniques
+                qualifiés</strong><br class="hidden md:block">
+              (architectes, géotechniciens,<br class="hidden md:block"> topographes, bureaux de<br class="hidden md:block"> contrôle)
+              <strong class="text-white font-heavy">mobilisés selon les<br class="hidden md:block"> besoins de chaque projet.</strong>
             </div>
 
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ================= SECTION VALEURS ================= -->
+<!-- ================= SECTION VALEURS ================= -->
   <section class="relative w-full bg-secondary overflow-hidden pt-10">
+
     <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-left">
+
+        <!-- GAUCHE : TEXTE -->
         <div class="text-white lg:ml-20 max-w-xl text-left">
-          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">Nos Valeurs</h2>
+
+          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
+            Nos Valeurs
+          </h2>
+
           <p class="text-[18px] md:text-xl leading-relaxed text-white font-light">
-            Ces valeurs constituent l'ADN d'AIAE. Elles<br class="hidden md:block">
+            Ces valeurs constituent l’ADN d’AIAE. Elles<br class="hidden md:block">
             ne sont pas négociables, quelles que soient<br class="hidden md:block">
             les circonstances.
           </p>
+
         </div>
+
+        <!-- DROITE : BLOC VALEURS -->
         <div class="relative lg:mr-20 flex justify-center lg:justify-end">
+
           <img src="{{ asset('aiae-frontend/Images/valeurs.png') }}" alt="Valeurs AIAE" class="w-[350px] sm:w-[420px] max-w-full drop-shadow-2xl">
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
   <div class="relative">
+    <!-- SHAPE -->
     <img src="{{ asset('aiae-frontend/Images/chap.png') }}" class="absolute right-0 bottom-[-20px] lg:bottom-[-40px] w-[100px] sm:w-[150px] lg:w-[320px] z-30 pointer-events-none">
-
     <!-- ================= SECTION VALEURS DETAILS ================= -->
     <section class="bg-[#f3f3f3] py-20 relative z-10 overflow-hidden lg:overflow-visible">
+
       <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
+
         <div class="grid md:grid-cols-2 gap-x-20 gap-y-14">
 
           <!-- 01 -->
           <div class="flex gap-6">
-            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">01</div>
+
+            <div
+              class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">
+              01
+            </div>
+
             <div>
-              <h3 class="text-secondary font-bold text-[27px] mb-2">LA QUALITÉ EST<br> PRIMORDIALE</h3>
+              <h3 class="text-secondary font-bold text-[27px] mb-2">
+                LA QUALITÉ EST<br> PRIMORDIALE
+              </h3>
+
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                Nous ne construisons pas pour aujourd'hui,
+                Nous ne construisons pas pour aujourd’hui,
                 <strong class="font-heavy">nous construisons pour des générations.</strong>
               </p>
             </div>
+
           </div>
+
 
           <!-- 02 -->
           <div class="flex gap-6">
-            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">02</div>
+
+            <div
+              class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">
+              02
+            </div>
+
             <div>
-              <h3 class="text-secondary font-bold text-[27px] mb-2">LA PAROLE DONNÉE EST<br> SACRÉE</h3>
+              <h3 class="text-secondary font-bold text-[27px] mb-2">
+                LA PAROLE DONNÉE EST<br> SACRÉE
+              </h3>
+
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                <strong class="font-heavy">Un engagement pris est un engagement tenu.</strong> Sans exception.
+                <strong class="font-heavy">Un engagement pris est un engagement tenu.</strong>
+                Sans exception.
               </p>
             </div>
+
           </div>
+
 
           <!-- 03 -->
           <div class="flex gap-6">
-            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">03</div>
+
+            <div
+              class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">
+              03
+            </div>
+
             <div>
-              <h3 class="text-secondary font-bold text-[27px] mb-2">HONNÊTETÉ ENVERS<br> LES CLIENTS</h3>
+              <h3 class="text-secondary font-bold text-[27px] mb-2">
+                HONNÊTETÉ ENVERS<br> LES CLIENTS
+              </h3>
+
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
                 <strong class="font-heavy">Un client bien informé</strong> est un client satisfait.
               </p>
             </div>
+
           </div>
+
 
           <!-- 04 -->
           <div class="flex gap-6">
-            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">04</div>
+
+            <div
+              class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">
+              04
+            </div>
+
             <div>
-              <h3 class="text-secondary font-bold text-[27px] mb-2">RESPECT DES ÉQUIPES</h3>
+              <h3 class="text-secondary font-bold text-[27px] mb-2">
+                RESPECT DES ÉQUIPES
+              </h3>
+
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
                 La qualité dépend du <strong class="font-heavy">respect accordé à ceux qui réalisent.</strong>
               </p>
             </div>
+
           </div>
+
 
           <!-- 05 -->
           <div class="flex gap-6">
-            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">05</div>
+
+            <div
+              class="flex items-center justify-center w-16 h-16 rounded-full bg-secondary font-heavy text-white font-bold text-[30px] shrink-0">
+              05
+            </div>
+
             <div>
-              <h3 class="text-secondary font-bold text-[27px] mb-2">RESPECT DES DÉLAIS<br> ET DES COÛTS</h3>
+              <h3 class="text-secondary font-bold text-[27px] mb-2">
+                RESPECT DES DÉLAIS<br> ET DES COÛTS
+              </h3>
+
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
                 <strong class="font-heavy">Un projet en retard ou hors budget est un échec</strong>,
-                même s'il est techniquement parfait.
+                même s’il est techniquement parfait.
               </p>
             </div>
+
           </div>
 
         </div>
+
       </div>
+
     </section>
   </div>
 
-  <!-- ================= SECTION CTA ================= -->
-  <section class="bg-[#e5e5e5] py-10 relative z-20">
-    <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
-      <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">Prêt À Construire ?</h2>
-      <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
-        Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block">
-        gratuit et sans engagement.
-      </p>
-      <div class="flex flex-col md:flex-row justify-center">
-        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
-          DEMANDER UN DEVIS GRATUIT
-          <span class="block text-sm font-light text-white">Réponse sous 48h</span>
-        </a>
-        <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy">
-          PRENDRE RENDEZ-VOUS
-          <span class="block text-sm font-light text-white">En personne ou en visio</span>
-        </a>
+    <!-- ================= SECTION CTA ================= -->
+    <section class="bg-[#e5e5e5] py-10 relative z-20">
+      <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
+        <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">
+          Prêt À Construire ?
+        </h2>
+
+        <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
+          Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block">
+          gratuit et sans engagement.
+        </p>
+        <div class="flex flex-col md:flex-row justify-center">
+          <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+            DEMANDER UN DEVIS GRATUIT
+           <span class="block text-sm font-light text-white">
+              Réponse sous 48h
+            </span>
+          </a>
+           <a href="#" class="bg-primary text-white px-10 py-5 text-center font-heavy">
+            PRENDRE RENDEZ-VOUS
+            <span class="block text-sm font-light text-white">
+              En personne ou en visio
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+   <!-- ================= RÉSEAUX SOCIAUX ================= -->
+  <section class="w-full">
+    <!-- BARRE VERTE -->
+    <div class="bg-[#0b4a2b] text-white py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6">
+        <!-- ICÔNES -->
+        <div class="flex items-center gap-6">
+          <!-- TikTok -->
+          <a href="#" aria-label="TikTok">
+            <img src="{{ asset('aiae-frontend/Images/TiktokLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram">
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook">
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+        </div>
+
+        <!-- TEXTE DROIT -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
+          <p class="text-lg text-gray-300 font-light">
+            Suivez nous, <strong class="font-heavy text-gray-300">Abonnez vous</strong> &
+            <strong class="font-heavy text-gray-300">Likez nos post</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRE CLAIRE -->
+    <div class="bg-[#f5f5f5] py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
+        <!-- WhatsApp Icon -->
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+
+        <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
+          <p class="text-2xl md:text-3xl text-left">
+            +228 <span class="font-bold">XX XX XX XX</span>
+          </p>
+
+          <p class="text-xs md:text-sm font-book text-left">
+            <strong class="font-heavy text-primary">Écrivez-nous</strong> pour toutes<br />
+            <strong class="font-heavy text-primary">informations</strong> supplémentaires
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-@endsection
+   <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#e6e6e6] pt-20">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-16">
+
+        <!-- LOGO + DESCRIPTION -->
+        <div>
+
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
+
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+            <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
+            <strong class="font-heavy">Equipements.</strong> De La Conception<br>
+            À La Réalisation.
+          </p>
+
+        </div>
+
+
+        <!-- DIVISIONS -->
+        <div>
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Nos divisions
+          </h3>
+
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Construction</li>
+            <li>Énergie</li>
+            <li>Sécurité</li>
+            <li>Préfabrication</li>
+
+          </ul>
+        </div>
+
+
+        <!-- CONTACT -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Contact
+          </h3>
+
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</li>
+            <li>+228 90 03 54 16</li>
+            <li>contact@aiae.services</li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- ACCEDER -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Accéder à
+          </h3>
+
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Demander un devis
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Prendre rendez-vous
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                FAQ
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ route('mentions-legales') }}" class="hover:text-primary transition">
+                Mentions Légales
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+    <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
+
+      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+
+    </div>
+
+  </footer>
+
+  <!-- ================= JS ================= -->
+  <script>
+    // Intersection Observer for animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+
+          // Counter animation
+          if (entry.target.querySelector('[data-count]')) {
+            const counter = entry.target.querySelector('[data-count]');
+            const target = parseInt(counter.dataset.count);
+            animateCounter(counter, target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation function
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 30);
+    }
+
+    // Parallax effect for hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('section:first-of-type');
+      if (hero) {
+        const scrolled = window.scrollY;
+        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+      }
+    });
+  </script>
+</body>
+
+</html>

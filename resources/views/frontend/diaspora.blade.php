@@ -1,31 +1,348 @@
-@extends('layouts.frontend')
+<!doctype html>
+<html lang="fr">
 
-@section('title', 'Diaspora - Construire au Togo depuis l\'étranger - AIAE')
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diaspora - AIAE</title>
+  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
-@section('styles')
-<style>
-  strong { font-weight: 600; color: #1d1d1b; }
-</style>
-@endsection
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-@section('content')
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            futura: ["Futura", "sans-serif"],
+            futuraCondensed: ["Futura Condensed", "sans-serif"],
+          },
+          colors: {
+            primary: "#05482C",
+            secondary: "#CC6A00",
+            darkBlue: "#121a44",
+            glass: "rgba(255,255,255,0.55)",
+            glassDark: "rgba(255,255,255,0.35)",
+          },
+          fontWeight: {
+            light: "300",
+            book: "400",
+            normal: "400",
+            medium: "500",
+            bold: "700",
+            heavy: "800",
+            extrabold: "800",
+            black: "900",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ================= FONTS ================= -->
+  <style>
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdLight.otf') }}");
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdBook.otf') }}");
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdMedium.otf') }}");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdBold.otf') }}");
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdHeavy.otf') }}");
+      font-weight: 800;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdExtraBold.otf') }}");
+      font-weight: 900;
+    }
+
+    /* Condensed */
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensed.otf') }}");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensedBold.otf') }}");
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+
+      body,
+      html {
+        overflow-x: hidden !important;
+      }
+
+      section,
+      div,
+      img {
+        max-width: 100% !important;
+      }
+    }
+
+    .nav-scrolled {
+      backdrop-filter: blur(18px);
+      background: rgba(22, 32, 100, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .animate-fade-left {
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+
+    .animate-fade-right {
+      animation: fadeInRight 0.8s ease-out forwards;
+    }
+
+    .animate-scale {
+      animation: scaleIn 0.6s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-600 {
+      animation-delay: 0.6s;
+    }
+
+    .delay-700 {
+      animation-delay: 0.7s;
+    }
+
+    .delay-800 {
+      animation-delay: 0.8s;
+    }
+
+    .opacity-0-init {
+      opacity: 0;
+    }
+
+    /* Hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    /* Background pattern */
+    .pattern-bg {
+      background-image: radial-gradient(circle at 20% 80%, rgba(11, 91, 58, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(26, 31, 77, 0.05) 0%, transparent 50%);
+    }
+
+    strong {
+      font-weight: 600;
+      color: #1d1d1b;
+    }
+
+    /* Divider */
+    .divider-green {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #05482C, #05482C);
+    }
+
+    .divider-orange {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #CC6A00, #f59e0b);
+    }
+
+    /* Animation du panneau */
+    #details-panel {
+      animation: slideDown 0.4s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Carte active */
+    .standing-card.active {
+      opacity: 1 !important;
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(17, 29, 74, 0.2);
+    }
+
+    /* Rotation icône */
+    #details-icon.rotate {
+      transform: rotate(180deg);
+    }
+
+    /* Bouton actif */
+    .standing-btn.active {
+      background: #0E1540 !important;
+      color: white !important;
+      border-color: #0E1540 !important;
+    }
+  </style>
+  <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
+</head>
+
+<body class="font-futura bg-gray-100 overflow-x-hidden">
+  @include('frontend.partials.navbar')
 
   <!-- ================= HERO DIASPORA ================= -->
   <section class="pt-24 md:pt-32 pb-5 bg-[#e6e6e6]">
+
     <div class="max-w-[99%] mx-auto px-2">
+
       <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
+
+        <!-- IMAGE -->
         <img src="{{ asset('aiae-frontend/Images/home.png') }}" class="w-full h-[600px] sm:h-[500px] md:h-[400px] object-cover">
+
+        <!-- OVERLAY -->
         <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- CONTENU -->
         <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-20 text-white">
 
           <h1 class="leading-[0.85] mb-4 md:mb-8">
-            <span class="block text-[30px] sm:text-[40px] md:text-[85px] font-light tracking-tight">CONSTRUIRE AU TOGO</span>
-            <span class="block text-[32px] sm:text-[45px] md:text-[115px] font-bold tracking-tighter">DEPUIS L'ÉTRANGER</span>
+            <span class="block text-[30px] sm:text-[40px] md:text-[85px] font-light tracking-tight">
+              CONSTRUIRE AU TOGO
+            </span>
+            <span class="block text-[32px] sm:text-[45px] md:text-[115px] font-bold tracking-tighter">
+              DEPUIS L'ÉTRANGER
+            </span>
           </h1>
 
           <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
-            <p class="mb-4"><strong class="text-white font-heavy">Et c'est serein avec AIAE.</strong></p>
-            <p class="mt-4 md:mt-6">
+            <p class="mb-4 whitespace-normal md:whitespace-nowrap">
+              <strong class="text-white font-heavy">Et c'est serein avec AIAE.</strong>
+            </p>
+            <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
               Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br class="hidden md:block">
               Vous rêvez de <strong class="text-white font-heavy">construire votre maison, votre résidence secondaire</strong><br class="hidden md:block">
               ou un <strong class="text-white font-heavy">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br class="hidden md:block">
@@ -33,190 +350,882 @@
             </p>
           </div>
 
-          <!-- BOUTONS (Desktop) -->
+          <!-- BOUTONS (Positionnés en bas à droite sur desktop) -->
           <div class="hidden md:flex absolute bottom-6 right-6 flex-col gap-4">
-            <a href="{{ route('contact') }}" class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex flex-col items-center text-center transition-all hover:scale-105 shadow-xl font-bold">
+            <a href="{{ route('contact') }}"
+              class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex flex-col items-center text-center transition-all hover:scale-105 shadow-xl font-bold">
               <p class="text-[17px] tracking-wide font-light whitespace-nowrap">Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span></p>
             </a>
-            <a href="{{ route('contact') }}" class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex items-center justify-between gap-4 transition-all hover:scale-105 shadow-xl min-w-[280px] font-bold">
+
+            <a href="{{ route('contact') }}"
+              class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex items-center justify-between gap-4 transition-all hover:scale-105 shadow-xl min-w-[280px] font-bold">
               <p class="text-[17px] text-left font-light leading-tight tracking-wide whitespace-nowrap">Prendre rendez-vous maintenant</p>
               <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-6 h-6 object-contain" />
             </a>
           </div>
 
-          <!-- BOUTONS MOBILE -->
+          <!-- BOUTONS MOBILE (Inclus dans le flux vertical sur mobile) -->
           <div class="md:hidden flex flex-col gap-3 mt-8">
-            <a href="{{ route('contact') }}" class="bg-primary text-white px-4 py-3 rounded-full flex flex-col items-center text-center font-bold shadow-lg">
+            <a href="{{ route('contact') }}"
+              class="bg-primary text-white px-4 py-3 rounded-full flex flex-col items-center text-center font-bold shadow-lg">
               <p class="text-[14px] tracking-wide font-light">Prendre rdv en visio</p>
             </a>
-            <a href="{{ route('contact') }}" class="bg-primary text-white px-4 py-3 rounded-full flex items-center justify-center gap-3 font-bold shadow-lg">
+            <a href="{{ route('contact') }}"
+              class="bg-primary text-white px-4 py-3 rounded-full flex items-center justify-center gap-3 font-bold shadow-lg">
               <p class="text-[14px] font-light">Prendre rendez-vous maintenant</p>
               <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-5 h-5 object-contain" />
             </a>
           </div>
 
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ================= CE QUI VOUS INQUIÈTE ================= -->
+  <!-- ================= CE QUE NOUS CONSTRUISONS (FAQ HEADER) ================= -->
   <section class="bg-[#e6e6e6] py-5">
+
     <div class="max-w-[1000px] mx-auto px-6 text-center">
+
+      <!-- TITRE STYLE DIVISION -->
       <h2 class="leading-[0.9] uppercase">
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">ON SAIT CE QUI</span>
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">VOUS INQUIÈTE</span>
+
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">
+          ON SAIT CE QUI
+        </span>
+
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">
+          VOUS INQUIÈTE
+        </span>
+
       </h2>
+
+      <!-- TEXTE -->
       <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
         CONSTRUIRE AU TOGO DEPUIS L'ÉTRANGER : <strong class="font-heavy text-black">VOICI NOS RÉPONSES</strong>
       </p>
-    </div>
-  </section>
 
-  <!-- ================= FAQ SECTION ================= -->
+    </div>
+
+  </section>
+  
   <section class="bg-[#f3f3f3] py-10">
+
     <div class="max-w-[1100px] mx-auto px-6 space-y-4">
 
+      <!-- QUESTION 01 -->
       <details open class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">01</span>
-            <p class="font-heavy text-3xl text-darkBlue">Mon argent sera-t-il bien utilisé ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              01
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Mon argent sera-t-il bien utilisé ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Chaque franc est tracé. Vous recevez un devis ligne par ligne basé sur notre Bordereau des Prix Unitaires (BPU). Le paiement se fait par étapes, uniquement sur constat d'avancement validé par photos et vidéos.
+          Chaque franc est tracé. Vous recevez un devis ligne par ligne basé sur notre Bordereau des Prix Unitaires
+          (BPU). Le paiement se fait par étapes, uniquement sur constat d’avancement validé par photos et vidéos.
+          Aucun paiement intégral n’est demandé avant le démarrage.
         </div>
       </details>
 
+      <!-- QUESTION 02 -->
       <details class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">02</span>
-            <p class="font-heavy text-3xl text-darkBlue">Comment suivre mon chantier à 10 000 km ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              02
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Comment suivre mon chantier à 10 000 km ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Rapports photos et vidéos hebdomadaires envoyés par WhatsApp ou email. Visioconférences de suivi bimensuelles adaptées à votre fuseau horaire. Un chef de projet dédié, joignable par téléphone et WhatsApp.
+          Rapports photos et vidéos hebdomadaires envoyés par WhatsApp ou email. Visioconférences de suivi
+          bimensuelles adaptées à votre fuseau horaire (soirées et week-ends disponibles). Un chef de projet dédié,
+          joignable par téléphone et WhatsApp.
         </div>
       </details>
 
+      <!-- QUESTION 03 -->
       <details class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">03</span>
-            <p class="font-heavy text-3xl text-darkBlue">Comment payer en toute sécurité depuis l'étranger ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              03
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Comment payer en toute sécurité depuis l’étranger ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Virement international vers un compte bancaire togolais vérifié, au nom de l'entreprise AIAE SARL. Échéancier clair. Reçu émis pour chaque versement.
+          Virement international vers un compte bancaire togolais vérifié, au nom de l’entreprise AIAE SARL.
+          Échéancier de paiement clair défini au contrat. Aucun paiement en espèces demandé. Reçu émis pour chaque
+          versement.
         </div>
       </details>
 
+      <!-- QUESTION 04 -->
       <details class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">04</span>
-            <p class="font-heavy text-3xl text-darkBlue">Et les démarches administratives au Togo ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              04
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Et les démarches administratives au Togo ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Nous gérons tout pour vous : permis de construire, raccordements (eau, électricité, télécom), formalités foncières si nécessaire.
+          Nous gérons tout pour vous : permis de construire, raccordements (eau, électricité, télécom), formalités
+          foncières si nécessaire. Vous n’avez rien à gérer sur place.
         </div>
       </details>
 
+      <!-- QUESTION 05 -->
       <details class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">05</span>
-            <p class="font-heavy text-3xl text-darkBlue">Quelle garantie ai-je que le travail sera bien fait ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              05
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Quelle garantie ai-je que le travail sera bien fait ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat détaillé signable devant notaire.
+          Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat
+          détaillé avec spécifications techniques, signable devant notaire au Togo pour une sécurité juridique
+          maximale. Références vérifiables fournies sur demande lors d’un rendez-vous.
         </div>
       </details>
 
+      <!-- QUESTION 06 -->
       <details class="group border border-darkBlue rounded-lg bg-white overflow-hidden">
         <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
           <div class="flex items-center gap-4">
-            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">06</span>
-            <p class="font-heavy text-3xl text-darkBlue">Je n'ai pas encore de terrain, pouvez-vous m'aider ?</p>
+            <span class="bg-darkBlue text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+              06
+            </span>
+            <p class="font-heavy text-3xl text-darkBlue">
+              Je n’ai pas encore de terrain, pouvez-vous m’aider ?
+            </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Nous pouvons vous conseiller sur le choix du terrain en fonction de votre projet (zone, type de sol, accessibilité).
+          Nous pouvons vous conseiller sur le choix du terrain en fonction de votre projet (zone, type de sol,
+          accessibilité). Nous ne sommes pas agent immobilier, mais notre expertise technique vous évitera les
+          mauvaises surprises.
         </div>
       </details>
 
     </div>
+
   </section>
 
-  <!-- ================= VOTRE PARCOURS AVEC AIAE ================= -->
   <section class="pt-5 pb-5 bg-primary">
+    <!-- TITRE -->
     <div class="text-center">
       <h2 class="text-[40px] md:text-[55px] font-heavy uppercase mb-4 tracking-tight">
-        <span class="text-white">VOTRE</span> <span class="text-secondary">PARCOURS</span> <span class="text-white">AVEC AIAE</span>
+        <span class="text-white">VOTRE</span>
+        <span class="text-secondary">PARCOURS</span>
+        <span class="text-white">AVEC AIAE</span>
       </h2>
       <p class="text-white text-[18px] md:text-[26px] font-light opacity-90 italic">
         De votre <strong class="font-heavy text-white">premier appel</strong> à la <strong class="font-heavy text-white">remise des clés</strong>
       </p>
     </div>
   </section>
+  <!-- ================= SECTION PARCOURS ================= -->
+  <section class="bg-[#f2f3f5] py-20 w-full relative overflow-hidden font-FuturaStdLight">
+    <!-- Cercles décoratifs (Subtils) -->
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 
-  <section class="bg-[#f2f3f5] py-20 w-full relative overflow-hidden">
     <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+
+      <!-- GRID DES ÉTAPES (2X2) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16">
 
-        @php
-        $steps = [
-          ['01', 'PREMIER CONTACT VISIOCONFÉRENCE GRATUITE', 'Échange en visioconférence adapté à votre fuseau horaire. Nous écoutons votre projet, vos besoins, votre budget. Gratuit et sans engagement. Durée : 30 à 45 minutes.'],
-          ['02', 'ÉTUDE ET DEVIS À DISTANCE', 'Nous réalisons les études préliminaires : faisabilité technique, esquisse architecturale, devis détaillé basé sur le BPU. Tout est transmis par email. Délai : 2 à 4 semaines.'],
-          ['03', 'CONTRAT + ÉCHÉANCIER DE PAIEMENT', 'Contrat détaillé envoyé par email. Signature électronique à distance ou devant notaire au Togo. Échéancier de paiement clair, lié à des jalons d\'avancement vérifiables.'],
-          ['04', 'CONSTRUCTION + SUIVI EN TEMPS RÉEL', 'Rapports photos et vidéos hebdomadaires, visioconférences de suivi bimensuelles. Votre chef de projet est joignable par téléphone et WhatsApp.'],
-          ['05', 'RÉCEPTION ET REMISE DES CLÉS', 'Procès-verbal de réception établi lors de votre visite ou par visioconférence détaillée. Réserves notées et corrigées. Remise des clés et de la documentation technique complète.'],
-          ['06', 'SUIVI POST-LIVRAISON', 'Garantie de parfait achèvement pendant 1 an : tout défaut constaté est réparé gratuitement. Garantie décennale sur la structure. Votre interlocuteur AIAE reste disponible.'],
-        ];
-        @endphp
-
-        @foreach($steps as $step)
+        <!-- ÉTAPE 01 -->
         <div class="flex gap-6 items-start">
-          <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">{{ $step[0] }}</div>
-          <div>
-            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">{!! nl2br(e($step[1])) !!}</h3>
-            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed">{{ $step[2] }}</p>
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            01</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              PREMIER CONTACT <br>
+              VISIOCONFÉRENCE GRATUITE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              <strong class="font-heavy">Échange en visioconférence adapté à votre fuseau horaire</strong>. Nous écoutons votre projet, vos
+              besoins, votre budget. <strong class="font-heavy">Gratuit et sans engagement</strong>. Durée : 30 à 45 minutes.
+            </p>
           </div>
         </div>
-        @endforeach
+
+        <!-- ÉTAPE 02 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            02</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              ÉTUDE ET DEVIS À DISTANCE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              Nous réalisons les études préliminaires : faisabilité technique, esquisse architecturale, devis détaillé
+              basé sur le BPU avec décomposition par postes. <strong class="font-heavy">Tout est transmis par email pour votre
+                validation</strong>. Délai : 2 à 4 semaines.
+            </p>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 03 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            03</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              CONTRAT + ÉCHÉANCIER <br>
+              DE PAIEMENT
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              Contrat détaillé envoyé par email. <strong class="font-heavy">Deux options de signature</strong> : signature électronique à
+              distance ou signature devant notaire au Togo pour une sécurité juridique maximale (un mandataire peut
+              signer en votre nom si vous ne pouvez pas vous déplacer). <strong class="font-heavy">Échéancier de paiement clair</strong>,
+              lié à des jalons d'avancement <strong class="font-heavy">vérifiables</strong> (fondations terminées, dalle coulée, toiture
+              posée, etc.). Premier versement pour démarrage du chantier.
+            </p>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 04 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            04</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              CONSTRUCTION + SUIVI <br>
+              EN TEMPS RÉEL
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              Pendant toute la durée du chantier : <strong class="font-heavy">rapports photos et vidéos hebdomadaires</strong>, visioconférences de suivi
+              bimensuelles, alertes immédiates en cas de décision à prendre. Votre chef de projet est <strong class="font-heavy">joignable par
+              téléphone et WhatsApp</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 05 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            05</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              RÉCEPTION ET REMISE DES CLÉS
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              <strong class="font-heavy">Procès-verbal de réception</strong> établi lors de votre visite au Togo ou par visioconférence détaillée. Réserves
+              notées et corrigées. <strong class="font-heavy">Remise des clés et de la documentation technique complète</strong> (plans d’exécution, PV,
+              garanties).
+            </p>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 06 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            06</div>
+          <div class="">
+            <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
+              SUIVI POST-LIVRAISON
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
+              <strong class="font-heavy">Garantie de parfait achèvement pendant 1 an</strong> : tout défaut constaté est réparé gratuitement. <strong class="font-heavy">Garantie
+              décennale sur la structure</strong>. Votre interlocuteur AIAE reste disponible après la livraison.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION FAQ DIASPORA TITLE ================= -->
+  <section class="bg-[#e6e6e6] py-5 w-full">
+    <div class="max-w-[1200px] mx-auto px-6 text-center">
+      <h2 class="text-[32px] md:text-[60px] font-black uppercase leading-tight">
+        <span class="text-primary">QUESTIONS<br> FRÉQUENTES</span>
+        <span class="text-primary">DE LA<br></span> <span class="text-darkBlue">DIASPORA</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- ================= SECTION FAQ DIASPORA Q&A ================= -->
+  <section class="bg-[#f3f3f3] pt-5 pb-20 w-full">
+    <div class="max-w-[1100px] mx-auto px-6 space-y-4">
+
+        <!-- Q1 -->
+        <details class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                01
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Puis-je lancer un projet sans être physiquement au Togo ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            Oui, absolument. Tout le processus est conçu pour être géré à distance : études, contrat, paiements,
+            suivi. Votre présence est souhaitable uniquement pour la réception finale, et même cette étape peut se
+            faire par vidéo.
+          </div>
+        </details>
+
+        <!-- Q2 -->
+        <details class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                02
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Dans quels pays avez-vous des clients de la diaspora ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            Nous accompagnons des clients résidant en France, au Canada, aux États-Unis, en Allemagne, en Belgique, en
+            Suisse, au Royaume-Uni et dans d’autres pays. Notre organisation est adaptée à tous les fuseaux horaires.
+          </div>
+        </details>
+
+        <!-- Q3 -->
+        <details class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                03
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Quel est le budget minimum pour un projet ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            Pour une villa Standard de 100 m² en zone Grand Lomé, comptez à partir de 33 millions FCFA (environ 50 000
+            €) pour la construction seule. Ce montant varie selon le standing, la surface et la localisation. Utilisez
+            notre simulateur en ligne pour une estimation personnalisée.
+          </div>
+        </details>
+
+        <!-- Q4 -->
+        <details open class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                04
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Combien de temps dure la construction ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            De 8 à 18 mois selon la surface et le standing. Une villa Standard de 150 m² prend environ 8-12 mois. Les
+            délais sont contractuels.
+          </div>
+        </details>
+
+        <!-- Q5 -->
+        <details class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                05
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Puis-je combiner construction et énergie solaire ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            Oui, c’est même l’un de nos atouts majeurs. Notre Division Énergie (lancement 2026) permet d’intégrer une
+            installation solaire dès la conception de votre bâtiment. Un seul interlocuteur, un seul contrat, une
+            maison autonome en énergie.
+          </div>
+        </details>
+
+        <!-- Q6 -->
+        <details class="group border border-primary rounded-lg bg-white overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="bg-primary text-white flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full text-2xl font-bold">
+                06
+              </span>
+              <p class="font-heavy text-3xl text-primary">
+                Avez-vous un représentant en France / Europe ?
+              </p>
+            </div>
+            <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
+          </summary>
+          <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
+            Nous n’avons pas de bureau physique en Europe, mais des rendez-vous en personne peuvent être organisés
+            ponctuellement lors de déplacements de notre équipe en Europe. En dehors de ces périodes, la
+            visioconférence reste notre mode de communication principal
+          </div>
+        </details>
 
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION CTA ================= -->
-  <section class="bg-[#e6e6e6] py-10 w-full">
-    <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
-      <h2 class="text-black text-4xl md:text-[55px] font-heavy mb-6 leading-tight">Prêt à Lancer Votre Projet ?</h2>
-      <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px]">
-        Premier échange gratuit et sans engagement.<br class="hidden md:block"> Adapté à votre fuseau horaire.
+
+  <!-- ================= SECTION POURQUOI NOUS FAIRE CONFIANCE ================= -->
+  <section class="bg-darkBlue py-5 w-full">
+    <div class="max-w-[1200px] mx-auto px-6 text-center">
+      <h2 class="text-[35px] md:text-[55px] font-heavy text-white mb-6 leading-tight">
+        Pourquoi Nous Faire Confiance
+      </h2>
+      <p class="text-white text-[18px] md:text-[26px] font-light max-w-4xl mx-auto leading-relaxed">
+        Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br class="hidden md:block">
+        concrets et vérifiables qui fondent notre engagement :</strong>
       </p>
-      <div class="flex flex-col md:flex-row justify-center">
-        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy uppercase tracking-wider">
-          DEMANDER UN DEVIS GRATUIT
-          <span class="block text-sm font-light text-white normal-case">Réponse sous 48h</span>
-        </a>
-        <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy uppercase tracking-wider">
-          PRENDRE RDV EN VISIO
-          <span class="block text-sm font-light text-white normal-case">Soirées et week-ends disponibles</span>
-        </a>
+    </div>
+  </section>
+  <!-- ================= SECTION 8 POINTS DE CONFIANCE ================= -->
+  <section class="bg-[#f2f3f5] py-20 w-full font-FuturaStdLight">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+
+        <!-- POINT 01 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            01</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              ENTREPRISE ENREGISTRÉE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              AIAE SARL, immatriculée au Togo,<br> avec siège social à Lomé. Statuts<br> disponibles sur demande.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 02 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            02</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              CONTRAT SIGNABLE<br> DEVANT NOTAIRE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Pour une sécurité juridique maximale,<br> votre contrat peut être signé devant un<br> notaire togolais. Un
+              mandataire peut<br> agir en votre nom.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 03 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            03</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              DEVIS TRANSPARENT (BPU)
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Chaque franc est justifié, ligne par ligne.<br> Pas de forfait opaque.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 04 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            04</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              PAIEMENT PAR ÉTAPES
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Vous ne payez que sur constat<br> d’avancement, validé par preuves<br> visuelles. Jamais d’intégralité en<br> avance.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 05 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            05</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              GARANTIE DÉCENNALE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              10 ans sur la structure, 1 an de<br> parfait achèvement. Inscrites au<br> contrat.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 06 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            06</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              SUIVI VÉRIFIABLE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Rapports photos/vidéos<br> hebdomadaires, visioconférences de<br> suivi. Vous voyez votre chantier en<br> temps réel.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 07 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            07</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              COMPTE BANCAIRE VÉRIFIÉ
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Virement international vers le<br>  compte de l’entreprise AIAE SARL.<br> Reçu émis pour chaque versement.
+            </p>
+          </div>
+        </div>
+
+        <!-- POINT 08 -->
+        <div class="flex gap-6 items-start">
+          <div
+            class="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-full bg-darkBlue flex items-center justify-center text-white text-[20px] md:text-[28px] font-heavy shadow-lg">
+            08</div>
+          <div class="">
+            <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
+              RÉFÉRENCES SUR DEMANDE
+            </h3>
+            <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
+              Lors de votre premier rendez-vous, nous<br> partageons des références vérifiables de<br> projets réalisés.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-@endsection
+  <!-- ================= SECTION CTA (Prenez Rendez-Vous) ================= -->
+  <section class="bg-[#e6e6e6] py-10 w-full font-FuturaStdLight">
+    <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
+
+      <h2 class="text-black text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
+        Prêt À Lancer Votre Projet <br class="hidden md:block">
+        Depuis L’étranger ?
+      </h2>
+      <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px] max-w-[700px] md:mx-auto">
+        Prenez 30 minutes pour un premier échange gratuit et sans<br class="hidden md:block">
+        engagement. Nous nous adaptons à votre fuseau horaire.
+      </p>
+
+      <div class="flex flex-col md:flex-row justify-center">
+        <!-- Bouton Orange -->
+        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+          PRENDRE RDV EN VISIO
+          <span class="block text-sm font-light text-white">
+            Gratuit et sans engagement
+          </span>
+        </a>
+
+        <!-- Bouton Vert -->
+        <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy">
+          DEMANDER UN DEVIS GRATUIT
+          <span class="block text-sm font-light text-white">
+            Réponse sous 48h
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= RÉSEAUX SOCIAUX ================= -->
+  <section class="w-full">
+    <!-- BARRE VERTE -->
+    <div class="bg-[#0b4a2b] text-white py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6">
+        <!-- ICÔNES -->
+        <div class="flex items-center gap-6">
+          <!-- TikTok -->
+          <a href="#" aria-label="TikTok">
+            <img src="{{ asset('aiae-frontend/Images/TiktokLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram">
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook">
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- YouTube -->
+
+        </div>
+
+        <!-- TEXTE DROIT -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
+          <p class="text-lg text-gray-300 font-light">
+            Suivez nous, <strong class="font-heavy text-gray-300">Abonnez vous</strong> &
+            <strong class="font-heavy text-gray-300">Likez nos post</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRE CLAIRE -->
+    <div class="bg-[#f5f5f5] py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
+        <!-- WhatsApp Icon -->
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+
+        <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
+          <p class="text-2xl md:text-3xl text-left">
+            +228 <span class="font-bold">XX XX XX XX</span>
+          </p>
+
+          <p class="text-xs md:text-sm font-book text-left">
+            <strong class="font-heavy text-primary">Écrivez-nous</strong> pour toutes<br />
+            <strong class="font-heavy text-primary">informations</strong> supplémentaires
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#e6e6e6] pt-20">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-16">
+
+        <!-- LOGO + DESCRIPTION -->
+        <div>
+
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
+
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+            <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
+            <strong class="font-heavy">Equipements.</strong> De La Conception<br>
+            À La Réalisation.
+          </p>
+
+        </div>
+
+
+        <!-- DIVISIONS -->
+        <div>
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Nos divisions
+          </h3>
+
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Construction</li>
+            <li>Énergie</li>
+            <li>Sécurité</li>
+            <li>Préfabrication</li>
+
+          </ul>
+        </div>
+
+
+        <!-- CONTACT -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Contact
+          </h3>
+
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</li>
+            <li>+228 90 03 54 16</li>
+            <li>contact@aiae.services</li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- ACCEDER -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Accéder à
+          </h3>
+
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Demander un devis
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Prendre rendez-vous
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                FAQ
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ route('mentions-legales') }}" class="hover:text-primary transition">
+                Mentions Légales
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+    <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
+
+      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+
+    </div>
+
+  </footer>
+
+  <!-- ================= JS ================= -->
+  <script>
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+
+          // Counter animation
+          if (entry.target.querySelector('[data-count]')) {
+            const counter = entry.target.querySelector('[data-count]');
+            const target = parseInt(counter.dataset.count);
+            animateCounter(counter, target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation function
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 30);
+    }
+
+    // Parallax effect for hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('section:first-of-type');
+      if (hero) {
+        const scrolled = window.scrollY;
+        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+      }
+    });
+    // plus de details 
+    const btn = document.getElementById("toggleDetails");
+    const panel = document.getElementById("details-panel");
+    const icon = document.getElementById("details-icon");
+
+    if (btn && panel && icon) {
+      btn.addEventListener("click", () => {
+        panel.classList.toggle("hidden");
+        icon.classList.toggle("rotate");
+      });
+    }
+
+    // plus de details pour les étapes
+    const btnSteps = document.getElementById("toggleStepsDetails");
+    const panelSteps = document.getElementById("steps-panel");
+    const iconSteps = document.getElementById("steps-icon");
+
+    if (btnSteps && panelSteps && iconSteps) {
+      btnSteps.addEventListener("click", () => {
+        panelSteps.classList.toggle("hidden");
+        iconSteps.classList.toggle("rotate-180");
+      });
+    }
+  </script>
+</body>
+
+</html>

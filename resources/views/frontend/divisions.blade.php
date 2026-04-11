@@ -1,134 +1,1383 @@
-@extends('layouts.frontend')
+<!doctype html>
+<html lang="fr">
 
-@section('title', 'Nos Divisions - AIAE')
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Disions - AIAE</title>
+  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
-@section('styles')
-<style>
-  strong { font-weight: 600; color: #1d1d1b; }
-  .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
-</style>
-@endsection
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-@section('content')
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            futura: ["Futura", "sans-serif"],
+            futuraCondensed: ["Futura Condensed", "sans-serif"],
+          },
+          colors: {
+            primary: "#05482C",
+            secondary: "#CC6A00",
+            darkBlue: "#0E1540",
+            glass: "rgba(255,255,255,0.55)",
+            glassDark: "rgba(255,255,255,0.35)",
+          },
+        },
+      },
+    };
+  </script>
 
-  <!-- ================= HERO ================= -->
-  <section class="relative pt-4 md:pt-24 pb-20 md:pb-36 bg-[#f3f3f3] overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] sm:w-[150vw] md:w-[900px] aspect-square bg-[#e6e6e6] rounded-full"></div>
-    <img src="{{ asset('aiae-frontend/Images/Gauche.png') }}" class="absolute left-0 top-1/2 -translate-y-1/2 w-[30vw] md:w-[40vw] lg:w-[470px]">
-    <img src="{{ asset('aiae-frontend/Images/Droit.png') }}" class="absolute right-0 top-1/2 -translate-y-1/2 w-[30vw] md:w-[40vw] lg:w-[450px]">
+  <!-- ================= FONTS ================= -->
+  <style>
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdLight.otf') }}");
+      font-weight: 300;
+    }
 
-    <div class="relative z-10 max-w-[900px] mx-auto text-center px-6 pt-28">
-      <h1 class="text-darkBlue font-bold text-[40px] sm:text-[60px] md:text-[90px] leading-[1.05]">
-        NOS <span class="text-primary">04</span><br>DIVISIONS
-      </h1>
-      <p class="mt-4 sm:mt-6 font-normal text-[10px] min-[400px]:text-xs sm:text-sm md:text-base text-black max-w-[520px] mx-auto leading-relaxed">
-        AIAE STRUCTURE SON DÉVELOPPEMENT AUTOUR DE<br>
-        <span class="font-heavy">QUATRE DIVISIONS COMPLÉMENTAIRES</span>, ENSEMBLE,<br>
-        ELLES FORMENT UN <span class="font-heavy">ÉCOSYSTÈME INÉDIT SUR LE</span><br>
-        <span class="font-heavy">MARCHÉ OUEST-AFRICAIN.</span>
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdMedium.otf') }}");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdBold.otf') }}");
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdHeavy.otf') }}");
+      font-weight: 900;
+    }
+
+    /* Condensed */
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensed.otf') }}");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("{{ asset('aiae-frontend/fonts/FuturaStdCondensedBold.otf') }}");
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+
+      body,
+      html {
+        overflow-x: hidden !important;
+      }
+
+      section,
+      div,
+      img {
+        max-width: 100% !important;
+      }
+    }
+
+    .nav-scrolled {
+      backdrop-filter: blur(18px);
+      background: rgba(22, 32, 100, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .animate-fade-left {
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+
+    .animate-fade-right {
+      animation: fadeInRight 0.8s ease-out forwards;
+    }
+
+    .animate-scale {
+      animation: scaleIn 0.6s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+
+    .delay-600 {
+      animation-delay: 0.6s;
+    }
+
+    .delay-700 {
+      animation-delay: 0.7s;
+    }
+
+    .delay-800 {
+      animation-delay: 0.8s;
+    }
+
+    .opacity-0-init {
+      opacity: 0;
+    }
+
+    /* Hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    /* Background pattern */
+    .pattern-bg {
+      background-image: radial-gradient(circle at 20% 80%, rgba(11, 91, 58, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(26, 31, 77, 0.05) 0%, transparent 50%);
+    }
+
+    strong {
+      font-weight: 600;
+      color: #1d1d1b;
+    }
+
+    /* Divider */
+    .divider-green {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #05482C, #05482C);
+    }
+
+    .divider-orange {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #CC6A00, #f59e0b);
+    }
+
+    /* Animation du panneau */
+    #details-panel {
+      animation: slideDown 0.4s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Carte active */
+    .standing-card.active {
+      opacity: 1 !important;
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(17, 29, 74, 0.2);
+    }
+
+    /* Rotation icône */
+    #details-icon.rotate {
+      transform: rotate(180deg);
+    }
+
+    /* Bouton actif */
+    .standing-btn.active {
+      background: #0E1540 !important;
+      color: white !important;
+      border-color: #0E1540 !important;
+    }
+
+    /* Ultra Gras helper */
+    .font-ultra {
+      font-weight: 900 !important;
+      -webkit-text-stroke: 0.8px currentColor;
+      text-stroke: 0.8px currentColor;
+      paint-order: stroke fill;
+    }
+  </style>
+  <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
+</head>
+
+<body class="font-futura bg-gray-100 overflow-x-hidden">
+  @include('frontend.partials.navbar')
+
+  <!-- ================= HERO DIVISION ================= -->
+  <section class="pt-24 md:pt-32 pb-5 bg-[#e6e6e6]">
+
+    <div class="max-w-[99%] mx-auto px-2">
+
+      <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
+
+        <!-- IMAGE -->
+        <img src="{{ asset('aiae-frontend/Images/home.png') }}" class="w-full h-[450px] sm:h-[400px] md:h-[400px] object-cover">
+
+        <!-- OVERLAY -->
+        <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- CONTENU -->
+        <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-20 text-white">
+
+          <h1 class="leading-[0.85] mb-4 md:mb-8">
+            <span class="block text-[32px] sm:text-[42px] md:text-[85px] font-light tracking-tight">
+              DIVISION
+            </span>
+            <span class="block text-[35px] sm:text-[48px] md:text-[115px] font-bold tracking-tighter">
+              CONSTRUCTION
+            </span>
+          </h1>
+
+          <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
+            <p class="mb-4 whitespace-normal md:whitespace-nowrap">Concevoir et réaliser des infrastructures durables, c’est la raison d’être
+              d’AIAE.
+              <strong class="text-white font-heavy">Nous prenons en<br class="hidden md:block"> charge l’intégralité de vos projets de
+                construction, de la première esquisse à la remise des clés.</strong>
+            </p>
+            <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
+              <strong class="text-white font-heavy">Forte de plus de 18 ans d’expérience en génie civil,</strong> AIAE
+              dispose de
+              compétences rares au Togo<br class="hidden md:block">
+              pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des
+              <strong class="text-white font-heavy">ouvrages d’art complexes.</strong>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- BADGE -->
+        <div
+          class="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-primary/60  text-white px-4 md:px-6 py-3 md:py-4 rounded-[12px] text-[14px] sm:text-[16px] md:text-[20px] max-w-[220px] sm:max-w-[260px] md:max-w-[300px] whitespace-normal md:whitespace-nowrap">
+          Fondée en 2025, <strong class="text-white font-heavy">ancrée<br class="hidden md:block">dans 18 ans d’expertise.</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= CE QUE NOUS CONSTRUISONS ================= -->
+  <section class="bg-[#e6e6e6] py-5">
+
+    <div class="max-w-[900px] mx-auto px-6 text-center">
+
+      <!-- TITRE -->
+      <h2 class="leading-[0.9] uppercase">
+
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">
+          CE QUE NOUS
+        </span>
+
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">
+          CONSTRUISONS
+        </span>
+
+      </h2>
+
+      <!-- TEXTE -->
+      <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
+        <strong class="font-heavy text-black">CATÉGORIES :</strong>
+        RÉSIDENTIEL, TERTIAIRE, INDUSTRIEL,<br class="hidden md:block">
+        AGRICOLE, RÉHABILITATION ET EXTENSION
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ================= DETAILS CONSTRUCTION ================= -->
+  <section class="bg-[#f3f3f3] py-10">
+
+    <div class="max-w-[1000px] mx-auto px-6 space-y-16">
+
+      <!-- 01 -->
+      <div class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <div class="relative">
+            <img src="{{ asset('aiae-frontend/Images/secteur1.png') }}" class="w-full h-auto rounded-[15px] object-cover">
+          </div>
+          <div class="text-left">
+            <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
+              RÉSIDENTIEL
+            </h3>
+            <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
+              Villas individuelles, immeubles<br class="hidden md:block">d’habitation, duplex, résidences<br class="hidden md:block">gardées. <strong
+                class="text-[#333] font-heavy">Du standing Standard au<br class="hidden md:block">Prestige, nous adaptons chaque projet<br class="hidden md:block">à
+                votre budget
+                et vos exigences.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
+            <li><strong class="text-[#333]  font-heavy">Villas de 80 à 600 m²</strong> : tous standings (Standard,
+              Confort, Premium,
+              Prestige)</li>
+            <li><strong class="text-[#333] font-heavy">Immeubles d’habitation</strong> : R+2 à R+5 (Confort à Premium)
+            </li>
+            <li><strong class="text-[#333] font-heavy">Duplex</strong> : 150 à 400 m² (Confort à Prestige)</li>
+            <li><strong class="text-[#333] font-heavy">Résidences gardées</strong> : ensembles sécurisés (Confort à
+              Prestige)</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="border-gray-300">
+
+      <!-- 02 -->
+      <div class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <div class="relative">
+            <img src="{{ asset('aiae-frontend/Images/secteur2.png') }}" class="w-full h-auto rounded-[15px] object-cover">
+          </div>
+          <div class="text-left">
+            <h3 class="text-secondary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
+              TERTIAIRE
+            </h3>
+            <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
+              Bureaux, commerces, hôtels, cliniques<br class="hidden md:block">et établissements recevant du public.<br class="hidden md:block"><strong
+                class="text-[#333] font-heavy">Conception fonctionnelle optimisée<br class="hidden md:block">pour votre activité.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
+            <li><strong class="text-[#333] font-heavy">Bureaux et espaces de travail</strong> : PME, sièges sociaux</li>
+            <li><strong class="text-[#333] font-heavy">Locaux commerciaux</strong> : boutiques, showrooms, centres
+              commerciaux</li>
+            <li><strong class="text-[#333] font-heavy">Hôtellerie</strong> : hôtels 2★ à 5★, résidences meublées</li>
+            <li><strong class="text-[#333] font-heavy">Santé</strong> : cliniques, cabinets médicaux, pharmacies</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="border-gray-300">
+
+      <!-- 03 -->
+      <div class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <div class="relative">
+            <img src="{{ asset('aiae-frontend/Images/secteur3.png') }}" class="w-full h-auto rounded-[15px] object-cover">
+          </div>
+          <div class="text-left">
+            <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
+              INDUSTRIEL
+            </h3>
+            <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
+              Entrepôts, usines, ateliers de<br class="hidden md:block">production. <strong
+                class="text-[#333] font-heavy">Structures<br class="hidden md:block">optimisées pour la
+                logistique<br class="hidden md:block">et la production.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
+            <li><strong class="text-[#333] font-heavy">Entrepôts</strong> : de 200 à 5 000 m²</li>
+            <li><strong class="text-[#333] font-heavy">Usines et ateliers</strong> : structures métalliques ou béton</li>
+            <li><strong class="text-[#333] font-heavy">Plateformes logistiques</strong> : quais de chargement, zones de
+              stockage</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="border-gray-300">
+
+      <!-- 04 -->
+      <div class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <div class="relative">
+            <img src="{{ asset('aiae-frontend/Images/secteur4.png') }}" class="w-full h-auto rounded-[15px] object-contain">
+          </div>
+          <div class="text-left">
+            <h3 class="text-secondary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
+              AGRICOLE
+            </h3>
+            <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
+              Infrastructures agricoles et d'élevage<br class="hidden md:block">adaptées aux conditions tropicales. AIAE<br class="hidden md:block">conçoit des
+              bâtiments fonctionnels,<br class="hidden md:block">durables et conformes aux normes<br class="hidden md:block">sanitaires en vigueur. <strong
+                class="text-[#333] font-heavy">Solutions intégrées<br class="hidden md:block">avec notre Division Énergie pour
+                des<br class="hidden md:block">exploitations
+                autonomes.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col items-start">
+          <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
+            <li><strong class="text-[#333] font-heavy">Élevage avicole</strong> : Poulaillers ventilés (pondeuses, chair),
+              couvoir,
+              unités d'aliments de bétail</li>
+            <li><strong class="text-[#333] font-heavy">Élevage porcin</strong> : Porcheries avec système de gestion des
+              effluents,
+              maternité, engraissement</li>
+            <li><strong class="text-[#333] font-heavy">Élevage bovin</strong> : Parcs d'embouche, étables laitières, aires
+              d'abattage, couloirs de contention, abreuvoirs bétonnés</li>
+            <li><strong class="text-[#333] font-heavy">Pisciculture</strong> : Bassins en béton armé, étangs aménagés,
+              raceways,
+              écloseries, systèmes de recirculation (RAS)</li>
+            <li><strong class="text-[#333] font-heavy">Apiculture</strong> : Mielleries, ateliers d'extraction et de
+              conditionnement,
+              locaux de stockage aux normes</li>
+            <li><strong class="text-[#333] font-heavy">Stockage agricole</strong> : Silos, magasins ventilés, chambres
+              froides, aires
+              de séchage</li>
+            <li><strong class="text-[#333] font-heavy">Serres et pépinières</strong> : Tunnels, multi-chapelles, systèmes
+              d'irrigation intégrés</li>
+            <li><strong class="text-[#333] font-heavy">Transformation</strong> : Huileries, décortiqueries, unités de
+              séchage,
+              abattoirs aux normes</li>
+          </ul>
+          <p class="text-[#333] font-light italic text-[16px] sm:text-[18px] md:text-[24px] leading-relaxed md:ml-6 mt-6 md:mt-4 max-w-[800px] whitespace-normal text-left">
+            Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br class="hidden md:block">éclairage, froid) pour
+            des exploitations autonomes en énergie, particulièrement en zones<br class="hidden md:block">rurales non raccordées.
+          </p>
+        </div>
+      </div>
+
+      <hr class="border-gray-300">
+
+      <!-- 05 -->
+      <div class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+          <div class="relative">
+            <img src="{{ asset('aiae-frontend/Images/secteur5.png') }}" class="w-full h-auto rounded-[15px] object-cover">
+          </div>
+          <div class="text-left">
+            <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
+              RÉHABILITATION ET EXTENSION
+            </h3>
+            <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
+              Vous disposez d’un bâtiment existant<br class="hidden md:block">à remettre en état ou à agrandir ?<br class="hidden md:block"><strong
+                class="text-[#333] font-heavy">Nous réalisons des diagnostics structurels<br class="hidden md:block">et proposons des solutions
+                adaptées.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
+            <li><strong class="text-[#333] font-heavy">Diagnostic</strong> structurel et étude de faisabilité</li>
+            <li><strong class="text-[#333] font-heavy">Renforcement de structures</strong> (poteaux, poutres, fondations)
+            </li>
+            <li><strong class="text-[#333] font-heavy">Extension</strong> horizontale ou verticale</li>
+            <li><strong class="text-[#333] font-heavy">Rénovation complète</strong> intérieure et extérieure</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= 04 NIVEAUX DE QUALITÉ ================= -->
+  <section class="bg-[#111d4a] py-10">
+
+    <div class="max-w-[1100px] mx-auto px-6 text-left md:text-center">
+
+      <!-- HEADER : 04 + TITRE -->
+      <div class="flex items-center justify-start md:justify-center gap-4 md:gap-8 mb-6 md:mb-10">
+        <span class="text-[80px] md:text-[140px] font-heavy leading-none text-secondary shrink-0">04</span>
+        <h2 class="text-white font-heavy text-[32px] sm:text-[45px] md:text-[65px] leading-[1.05] text-left">
+          Niveaux De Qualité<br class="hidden md:block">Pour Votre Projet
+        </h2>
+      </div>
+
+      <!-- PARAGRAPHE -->
+      <p class="text-white text-[16px] sm:text-[20px] md:text-[28px] leading-relaxed text-left md:text-center">
+        <span class="font-light">AIAE propose quatre niveaux de standing pour la construction résidentielle.</span><br class="hidden md:block">
+        Chaque niveau définit des caractéristiques techniques minimales garanties<br class="hidden md:block">
+        : matériaux, dimensions, équipements, finitions.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ================= STANDINGS ================= -->
+  <section class="bg-[#f3f3f3] py-12">
+    <div class="max-w-[1100px] mx-auto px-6">
+
+      <!-- TABS CONTAINER -->
+      <div
+        class="w-full max-w-5xl mx-auto grid grid-cols-2 lg:flex gap-[2px] bg-white rounded-xl overflow-hidden shadow-md">
+
+        <!-- Plus de détails -->
+        <button id="toggleDetails"
+          class="col-span-2 lg:flex-none flex items-center justify-center gap-3 px-6 py-4 bg-secondary text-white transition-colors hover:bg-secondary/90">
+
+          <img src="{{ asset('aiae-frontend/Images/plus.png') }}" alt="" id="details-icon" class="w-8 h-8 transition-transform duration-300">
+
+          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">Plus de détails</span>
+        </button>
+
+        <!-- Tabs style standardized -->
+        <button
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
+          STANDARD
+        </button>
+        <button
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
+          CONFORT
+        </button>
+        <button
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
+          PREMIUM
+        </button>
+        <button
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
+          PRESTIGE
+        </button>
+
+      </div>
+
+      <!-- PANNEAU DÉTAILS (caché par défaut) -->
+      <div id="details-panel" class="hidden mt-8">
+
+        <!-- En-tête panneau -->
+        <div class="bg-[#111d4a] rounded-t-[20px] px-8 py-6">
+          <h3 class="text-white text-[28px] font-bold">Détail par standing</h3>
+        </div>
+
+        <!-- Contenu panneau -->
+        <div class="bg-[#111d4a] rounded-b-[20px] px-6 pb-8 pt-4">
+
+          <!-- Grille des cartes -->
+          <div class="grid md:grid-cols-2 gap-6">
+
+            <!-- CARTE STANDARD -->
+            <div id="card-standard"
+              class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
+              <div class="bg-darkBlue px-6 py-5 text-white">
+                <h4 class="text-[30px] leading-snug"><span class="font-heavy">STANDARD</span> :
+                  <span>Conception<br>économique et fonctionnelle</span></h4>
+              </div>
+              <div class="p-6 text-gray-800 text-[18px] flex-1">
+                <p class="mb-5 leading-relaxed">
+                  Le standing Standard offre un logement <strong class="font-heavy">fonctionnel et durable à prix
+                    optimisé</strong>. Idéal
+                  pour un premier investissement immobilier ou un projet locatif.
+                </p>
+                <ul class="space-y-2 list-disc pl-5">
+                  <li><strong class="font-heavy">Matériaux</strong> : Parpaings 15 cm, dalles 16+4, enduit lissé,
+                    peinture économique</li>
+                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium anodisé standard, simple vitrage</li>
+                  <li><strong class="font-heavy">Sols</strong> : Carrelage 40x40 cm standard</li>
+                  <li><strong class="font-heavy">Sanitaires</strong> : Gamme économique, robinetterie chrome</li>
+                  <li><strong class="font-heavy">Électricité</strong> : Installation standard, tableau 1 rangée</li>
+                  <li><strong class="font-heavy">Cuisine</strong> : Plan de travail carrelé, meubles basiques</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- CARTE CONFORT -->
+            <div id="card-confort"
+              class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
+              <div class="bg-darkBlue px-6 py-5 text-white">
+                <h4 class="text-[30px] leading-snug"><span class="font-heavy">CONFORT</span> :
+                  <span>Équilibre<br>qualité-prix optimal</span></h4>
+              </div>
+              <div class="p-6 text-gray-800 text-[18px] flex-1">
+                <p class="mb-5 leading-relaxed">
+                  Le standing Confort constitue le <strong class="font-heavy">meilleur rapport
+                    qualité-prix</strong>.<br>Finitions
+                  soignées, espaces généreux, équipements complets.
+                </p>
+                <ul class="space-y-2 list-disc pl-5">
+                  <li><strong class="font-heavy">Matériaux</strong> : Parpaings 20 cm, dalles 20+5, enduit gratté,
+                    peinture qualité</li>
+                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium laqué, double vitrage zones exposées
+                  </li>
+                  <li><strong class="font-heavy">Sols</strong> : Carrelage grès cérame 60x60</li>
+                  <li><strong class="font-heavy">Sanitaires</strong> : Gamme design, robinetterie qualité, eau chaude
+                  </li>
+                  <li><strong class="font-heavy">Électricité</strong> : Tableau 2 rangées, prises RJ45, pré-câblage
+                    domotique</li>
+                  <li><strong class="font-heavy">Cuisine</strong> : Plan granit/quartz, meubles MDF stratifié</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- CARTE PREMIUM -->
+            <div id="card-premium"
+              class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
+              <div class="bg-darkBlue px-6 py-5 text-white">
+                <h4 class="text-[30px] leading-snug"><span class="font-heavy">PREMIUM</span> : <span>Excellence
+                    et<br>personnalisation</span></h4>
+              </div>
+              <div class="p-6 text-gray-800 text-[18px] flex-1">
+                <p class="mb-5 leading-relaxed">
+                  Le standing Premium offre des prestations <strong class="font-heavy">haut de gamme avec
+                    personnalisation
+                    poussée</strong>. Piscine incluse, garage 2 véhicules, bureau et salle multimédia.
+                </p>
+                <ul class="space-y-2 list-disc pl-5">
+                  <li><strong class="font-heavy">Matériaux</strong> : Béton banché ou agglos 20 cm, isolation thermique,
+                    enduit décoratif
+                  </li>
+                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium à rupture thermique, double vitrage
+                    intégral</li>
+                  <li><strong class="font-heavy">Sols</strong> : Carrelage rectifié haut de gamme, parquet chambres</li>
+                  <li><strong class="font-heavy">Sanitaires</strong> : Baignoire + douche suite, double vasque,
+                    robinetterie design</li>
+                  <li><strong class="font-heavy">Électricité</strong> : Domotique partielle, éclairage architectural,
+                    parafoudre</li>
+                  <li><strong class="font-heavy">Piscine</strong> : 8x4 m minimum, local technique, pool house 20-25 m²
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- CARTE PRESTIGE -->
+            <div id="card-prestige"
+              class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
+              <div class="bg-darkBlue px-6 py-5 text-white">
+                <h4 class="text-[30px] leading-snug"><span class="font-heavy">PRESTIGE</span> : <span>Luxe
+                    et<br>exclusivité sans compromis</span></h4>
+              </div>
+              <div class="p-6 text-gray-800 text-[18px] flex-1">
+                <p class="mb-5 leading-relaxed">
+                  Le standing Prestige représente l'<strong class="font-heavy">excellence absolue</strong>. Villa
+                  d'architecte avec des
+                  matériaux d'exception, domotique complète et équipements de luxe.
+                </p>
+                <ul class="space-y-2 list-disc pl-5">
+                  <li><strong class="font-heavy">Matériaux</strong> : Béton architectonique, pierre naturelle, isolation
+                    haute performance
+                  </li>
+                  <li><strong class="font-heavy">Menuiseries</strong> : Sur mesure importées, triple vitrage, motorisées
+                  </li>
+                  <li><strong class="font-heavy">Sols</strong> : Marbre, travertin ou parquet massif importé</li>
+                  <li><strong class="font-heavy">Sanitaires</strong> : Marques designer, robinetterie prestige, spa
+                    privatif</li>
+                  <li><strong class="font-heavy">Électricité</strong> : Domotique complète (KNX/Loxone), groupe
+                    électrogène intégré</li>
+                  <li><strong class="font-heavy">Piscine</strong> : 12x5 m à débordement, chauffée, pool house bar</li>
+                  <li><strong class="font-heavy">Sécurité</strong> : Vidéosurveillance 16 caméras, alarme périmétrique,
+                    safe room
+                    optionnelle (Division Sécurité).</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RÉSUMÉ MOBILE (visible par défaut sur mobile) -->
+      <div class="md:hidden mt-6 space-y-4">
+        <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
+          <h4 class="text-darkBlue text-[18px] font-bold">STANDARD</h4>
+          <p class="text-gray-600 text-[13px] mt-2">Le standing Standard offre un logement fonctionnel et durable à prix
+            optimisé.</p>
+        </div>
+        <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
+          <h4 class="text-darkBlue text-[18px] font-bold">CONFORT</h4>
+          <p class="text-gray-600 text-[13px] mt-2">Le standing Confort constitue le meilleur rapport qualité-prix.
+            Finitions soignées et équipements complets.</p>
+        </div>
+        <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
+          <h4 class="text-darkBlue text-[18px] font-bold">PREMIUM</h4>
+          <p class="text-gray-600 text-[13px] mt-2">Le standing Premium offre des prestations haut de gamme avec
+            personnalisation poussée.</p>
+        </div>
+        <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
+          <h4 class="text-darkBlue text-[18px] font-bold">PRESTIGE</h4>
+          <p class="text-gray-600 text-[13px] mt-2">Le standing Prestige représente l'excellence absolue. Villa
+            d'architecte avec des matériaux d'exception.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= DES COMPÉTENCES RARES ================= -->
+  <section class="bg-primary py-10 text-left md:text-center text-white">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <h2 class="text-[35px] md:text-[50px] font-heavy mb-6">Des Compétences Rares Au Togo</h2>
+      <p class="text-[20px] md:text-[22px] leading-relaxed max-w-[850px] mx-auto">
+        Au-delà du bâtiment, <strong class="text-white font-heavy">AIAE dispose d'une expertise de haut niveau en
+          ouvrages d'art<br class="hidden md:inline"> et
+          structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br class="hidden md:inline"> d'expérience en
+        calcul des structures et béton précontraint.
       </p>
     </div>
   </section>
 
-  <!-- ================= SECTION DIVISIONS DÉTAILLÉES ================= -->
-  <section class="py-10 bg-[#f3f3f3]">
+  <!-- ================= EXPERTISE GRID ================= -->
+  <section class="bg-[#f2f3f5] py-20">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-20">
+      <div class="grid md:grid-cols-2 gap-x-20 gap-y-14">
+
+        <!-- ITEM 1 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            01</div>
+          <div>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">PONTS
+              ET<br class="hidden md:block"> PASSERELLES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">en béton armé ou<br class="hidden md:block"> précontraint</p>
+          </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            02</div>
+          <div>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">MURS
+              DE<br class="hidden md:block"> SOUTÈNEMENT</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">parois moulées,<br class="hidden md:block"> gabions, terre armée</p>
+          </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            03</div>
+          <div>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              BÉTON<br class="hidden md:block"> PRÉCONTRAINT</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">portiques grandes portées,<br class="hidden md:block"> structures spéciales</p>
+          </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            04</div>
+          <div>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              OUVRAGES<br class="hidden md:block"> HYDRAULIQUES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">châteaux d'eau,<br class="hidden md:block"> réservoirs, stations</p>
+          </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            05</div>
+          <div>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              STRUCTURES<br class="hidden md:block"> SPÉCIALES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">tribunes, halls<br class="hidden md:block"> industriels, coupoles</p>
+          </div>
+        </div>
+
+        <!-- ITEM 6 (Text Box) -->
+        <div class="flex items-center pt-2">
+          <div class="text-primary text-[18px] xl:text-[25px] italic leading-snug">
+            Cette expertise permet également de<br class="hidden md:block"> répondre aux <strong class="font-heavy text-primary">appels
+              d'offres publics<br class="hidden md:block"> pour les infrastructures de transport<br class="hidden md:block"> et les équipements collectifs.</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 ÉTAPES HERO ================= -->
+  <section class="bg-darkBlue py-5 text-left md:text-center text-white">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <h2 class="text-[50px] md:text-[60px] font-heavy mb-6">Votre Projet En <span
+          class="text-secondary text-[50px] md:text-[60px]">06</span> Étapes</h2>
+      <p class="text-[22px] md:text-[27px] leading-relaxed max-w-[850px] mx-auto font-light">
+        De la première prise de contact à la remise des clés, <strong class="text-white">chaque étape est<br class="hidden md:inline"> définie,
+          planifiée et suivie</strong>. Vous savez toujours où en est votre projet.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ÉTAPES DETAILS ================= -->
+  <section class="bg-[#f2f3f5] py-16">
     <div class="max-w-[1100px] mx-auto px-6">
 
-      <!-- Ligne 1 - Construction -->
-      <div class="grid md:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 md:items-stretch">
-        <img src="{{ asset('aiae-frontend/Images/Constr.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center">
-        <div class="flex flex-col justify-center h-full gap-5 py-4">
-          <div>
-            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">CONSTRUCTION</h3>
-            <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong>
-              <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel, tertiaire, industriel, agricole, ouvrages d'art.
-            </p>
-          </div>
-          <div>
-            <span class="inline-block bg-[#05482C] text-white px-8 py-2 md:px-10 border-[4px] border-[#00a651] rounded-[50px] text-[20px] md:text-[22px] font-book mt-2 shadow-sm">Opérationnelle</span>
-          </div>
+      <!-- TABS CONTAINER ÉTAPES -->
+      <div
+        class="w-full max-w-5xl mx-auto grid grid-cols-2 lg:flex gap-[2px] bg-white rounded-xl overflow-hidden shadow-md">
+
+        <!-- Plus de détails -->
+        <button id="toggleStepsDetails"
+          class="col-span-2 lg:flex-none flex items-center justify-center gap-3 px-6 py-4 bg-secondary text-white transition-colors hover:bg-secondary/90">
+          <img src="{{ asset('aiae-frontend/Images/plus.png') }}" alt="" id="steps-icon" class="w-8 h-8 transition-transform duration-300">
+          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">Plus de détails</span>
+        </button>
+
+        <!-- Headers style standardized -->
+        <div
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide">
+          ÉTAPES
+        </div>
+        <div
+          class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide">
+          DURÉE
+        </div>
+        <div
+          class="col-span-2 lg:flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide border-t lg:border-t-0 border-white/10">
+          DESCRIPTION
         </div>
       </div>
 
-      <div class="border-t border-gray-300 my-8 md:my-16"></div>
+      <!-- PANNEAU DÉTAILS ÉTAPES -->
+      <div id="steps-panel" class="hidden mt-8">
 
-      <!-- Ligne 2 - Énergie -->
-      <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
-        <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
-          <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">ÉNERGIE</h3>
-            <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              Solutions <strong class="font-heavy text-gray-800">d'autonomie énergétique</strong> pour vos installations.<br>
-              Solaire C&I, systèmes hybrides, sites isolés.
-            </p>
-          </div>
-          <div>
-            <p class="text-gray-600 text-[22px] md:text-[26px] mt-2">Lancement <span class="font-black text-gray-800">2026</span></p>
+        <!-- En-tête panneau -->
+        <div class="bg-[#111d4a] rounded-t-[20px] px-8 py-6">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">Détail du parcours
+            client</h2>
+        </div>
+
+        <!-- Contenu panneau -->
+        <div class="bg-[#111d4a] rounded-b-[20px] px-6 pb-8 pt-4">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">01. Études préliminaires</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 2-4 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Visite terrain, analyse des besoins, faisabilité technique, esquisse architecturale, estimation
+                budgétaire préliminaire.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">02. Études techniques</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 3-6 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Plans architecturaux définitifs, calculs de structure, devis détaillé basé sur le BPU, planning
+                contractuel, obtention du permis de construire.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">03. Préparation chantier</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 1-2 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Installation de chantier, approvisionnement matériaux, mobilisation des équipes, implantation de
+                l’ouvrage.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">04. Gros œuvre</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 8-16 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Fondations, structure (poteaux, poutres, dalles), maçonnerie, charpente et couverture. Rapports
+                d’avancement réguliers.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">05. Second œuvre</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 6-12 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Électricité, plomberie, menuiseries, enduits, revêtements de sol, peinture, équipements sanitaires.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-[15px] p-6 shadow-lg">
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">06. Finitions & Réception</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 2-4 sem.</p>
+              <p class="text-gray-700 text-[18px] leading-relaxed">
+                Aménagements extérieurs, réserves, procès-verbal de réception, remise des clés, documentation technique.
+              </p>
+            </div>
+
           </div>
         </div>
-        <img src="{{ asset('aiae-frontend/Images/solair.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center order-first md:order-last">
       </div>
+    </div>
+  </section>
 
-      <div class="border-t border-gray-300 my-8 md:my-16"></div>
+  <!-- ================= ENGAGEMENTS HERO ================= -->
+  <section class="bg-primary py-8 text-center text-white">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <h2 class="text-[50px] md:text-[60px] font-heavy">Nos Engagements Construction</h2>
+    </div>
+  </section>
 
-      <!-- Ligne 3 - Sécurité -->
-      <div class="grid md:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-12 md:items-stretch">
-        <img src="{{ asset('aiae-frontend/Images/coffre.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center">
-        <div class="flex flex-col justify-center h-full gap-5 py-4">
+  <!-- ================= ENGAGEMENTS GRID ================= -->
+  <section class="bg-[#f2f3f5] py-10">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-20">
+      <div class="grid md:grid-cols-2 gap-x-20 gap-y-14">
+        <!-- ITEM 1 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            01</div>
           <div>
-            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">SÉCURITÉ</h3>
-            <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Protection haute performance</strong> pour vos biens et vos personnes. Chambres fortes EN 1143-1, safe rooms, armureries, contrôle d'accès.
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              DEVIS GRATUIT<br class="hidden md:block"> DÉTAILLÉ</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Basé sur notre Bordereau des Prix Unitaires (BPU).
+              <strong class="text-gray-800 font-heavy">Chaque ligne de votre devis est justifiée.</strong>
             </p>
           </div>
+        </div>
+        <!-- ITEM 2 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            02</div>
           <div>
-            <p class="text-[#05482C] text-[22px] md:text-[26px] mt-2">Prochainement</p>
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              PLANNING<br class="hidden md:block"> CONTRACTUEL</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Les délais sont inscrits au contrat. <strong
+                class="text-gray-800 font-heavy">Pénalités en cas de retard de notre fait.</strong></p>
+          </div>
+        </div>
+        <!-- ITEM 3 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            03</div>
+          <div>
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              GARANTIE<br class="hidden md:block"> DÉCENNALE</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Solidité de l'ouvrage <strong
+                class="text-gray-800 font-heavy">garantie 10 ans</strong>, conformément à la loi.</p>
+          </div>
+        </div>
+        <!-- ITEM 4 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            04</div>
+          <div>
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              SUIVI RÉGULIER
+            </h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">Rapports
+                hebdomadaires</strong> avec photos/vidéos. <strong
+                class="text-gray-800 font-heavy">Visioconférences</strong> pour
+              les clients à distance.</p>
+          </div>
+        </div>
+        <!-- ITEM 5 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            05</div>
+          <div>
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              TRANSPARENCE<br class="hidden md:block"> TOTALE</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">Aucun coût
+                caché.</strong> Facturation par étapes selon l'avancement.</p>
+          </div>
+        </div>
+        <!-- ITEM 6 -->
+        <div class="flex gap-6">
+          <div
+            class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
+            06</div>
+          <div>
+            <h3
+              class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
+              CONFIDENTIALITÉ
+            </h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong
+                class="text-gray-800 font-heavy">Secret professionnel
+                contractualisé</strong> sur tous nos projets.</p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="border-t border-gray-300 my-8 md:my-16"></div>
-
-      <!-- Ligne 4 - Préfabrication -->
-      <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
-        <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
-          <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">PRÉFABRICATION</h3>
-            <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Production industrielle</strong> d'éléments de construction. BTC, béton précontraint, poutrelles. -15 à -25% sur les coûts.
-            </p>
-          </div>
-          <div>
-            <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">Prochainement</p>
-          </div>
+  <!-- ================= SIMULATEUR CTA ================= -->
+  <section class="bg-[#f2f3f5] py-16">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <div class="bg-primary rounded-[20px] p-10 md:p-14 text-left md:text-center shadow-lg">
+        <h3
+          class="text-white text-[25px] md:text-[30px] font-heavy mb-8 flex flex-row items-center md:justify-center justify-start gap-4">
+          <img src="{{ asset('aiae-frontend/Images/etage.png') }}" alt="" class="h-8 md:h-12 object-contain shrink-0">
+          <span>Estimez Le Coût De Votre Projet En 2 Minutes</span>
+        </h3>
+        <p class="text-white border-none md:mx-auto text-[18px] md:text-[20px] font-medium max-w-[800px] mb-8">
+          Notre simulateur en ligne vous donne une estimation instantanée selon votre type de<br class="hidden md:inline"> projet, votre standing
+          et votre localisation.
+        </p>
+        <div class="flex md:justify-center justify-start mt-8">
+          <a href="{{ route('simulator.v1') }}" class="inline-block text-center w-full max-w-[550px] bg-secondary text-white font-heavy text-[23px] md:text-[27px] py-5 rounded-[20px]
+         shadow-lg hover:bg-[#b05d04] transition-colors tracking-wider">
+            Accéder au simulateur
+          </a>
         </div>
-        <img src="{{ asset('aiae-frontend/Images/Préfabrication.png') }}" class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center order-first md:order-last">
       </div>
-
     </div>
   </section>
 
   <!-- ================= SECTION CTA ================= -->
-  <section class="bg-[#e5e5e5] py-10 relative z-20">
+  <section class="bg-[#e5e5e5] py-10">
     <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
-      <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">Prêt À Construire ?</h2>
+      <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">
+        Prêt À Construire ?
+      </h2>
+
       <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
         Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block">
         gratuit et sans engagement.
       </p>
       <div class="flex flex-col md:flex-row justify-center">
-        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+         <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
           DEMANDER UN DEVIS GRATUIT
-          <span class="block text-sm font-light text-white">Réponse sous 48h</span>
+           <span class="block text-sm font-light text-white">
+            Réponse sous 48h
+          </span>
         </a>
-        <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy">
+        <a href="#" class="bg-primary text-white px-10 py-5 text-center font-heavy">
           PRENDRE RENDEZ-VOUS
-          <span class="block text-sm font-light text-white">En personne ou en visio</span>
+          <span class="block text-sm font-light text-white">
+            En personne ou en visio
+          </span>
         </a>
       </div>
     </div>
   </section>
 
-@endsection
+  <!-- ================= RÉSEAUX SOCIAUX ================= -->
+  <section class="w-full">
+    <!-- BARRE VERTE -->
+    <div class="bg-[#0b4a2b] text-white py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6">
+        <!-- ICÔNES -->
+        <div class="flex items-center gap-6">
+          <!-- TikTok -->
+          <a href="#" aria-label="TikTok">
+            <img src="{{ asset('aiae-frontend/Images/TiktokLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram">
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook">
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+          </a>
+
+          <!-- YouTube -->
+
+        </div>
+
+        <!-- TEXTE DROIT -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
+          <p class="text-lg text-gray-300 font-light">
+            Suivez nous, <strong class="font-heavy text-gray-300">Abonnez vous</strong> &
+            <strong class="font-heavy text-gray-300">Likez nos post</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRE CLAIRE -->
+    <div class="bg-[#f5f5f5] py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
+        <!-- WhatsApp Icon -->
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+
+        <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
+          <p class="text-2xl md:text-3xl text-left">
+            +228 <span class="font-bold">XX XX XX XX</span>
+          </p>
+
+          <p class="text-xs md:text-sm font-book text-left">
+            <strong class="font-heavy text-primary">Écrivez-nous</strong> pour toutes<br />
+            <strong class="font-heavy text-primary">informations</strong> supplémentaires
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#e6e6e6] pt-20">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-16">
+
+        <!-- LOGO + DESCRIPTION -->
+        <div>
+
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
+
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+            <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
+            <strong class="font-heavy">Equipements.</strong> De La Conception<br>
+            À La Réalisation.
+          </p>
+
+        </div>
+
+
+        <!-- DIVISIONS -->
+        <div>
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Nos divisions
+          </h3>
+
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Construction</li>
+            <li>Énergie</li>
+            <li>Sécurité</li>
+            <li>Préfabrication</li>
+
+          </ul>
+        </div>
+
+
+        <!-- CONTACT -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Contact
+          </h3>
+
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</li>
+            <li>+228 90 03 54 16</li>
+            <li>contact@aiae.services</li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- ACCEDER -->
+        <div>
+
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            Accéder à
+          </h3>
+
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Demander un devis
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                Prendre rendez-vous
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="hover:text-darkBlue transition">
+                FAQ
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ route('mentions-legales') }}" class="hover:text-primary transition">
+                Mentions légales
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+    <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
+
+      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+
+    </div>
+
+  </footer>
+
+  <!-- ================= JS ================= -->
+  <script>
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+
+          // Counter animation
+          if (entry.target.querySelector('[data-count]')) {
+            const counter = entry.target.querySelector('[data-count]');
+            const target = parseInt(counter.dataset.count);
+            animateCounter(counter, target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation function
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 30);
+    }
+
+    // Parallax effect for hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('section:first-of-type');
+      if (hero) {
+        const scrolled = window.scrollY;
+        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+      }
+    });
+    // plus de details 
+    const btn = document.getElementById("toggleDetails");
+    const panel = document.getElementById("details-panel");
+    const icon = document.getElementById("details-icon");
+
+    if (btn && panel && icon) {
+      btn.addEventListener("click", () => {
+        panel.classList.toggle("hidden");
+        icon.classList.toggle("rotate");
+      });
+    }
+
+    // plus de details pour les étapes
+    const btnSteps = document.getElementById("toggleStepsDetails");
+    const panelSteps = document.getElementById("steps-panel");
+    const iconSteps = document.getElementById("steps-icon");
+
+    if (btnSteps && panelSteps && iconSteps) {
+      btnSteps.addEventListener("click", () => {
+        panelSteps.classList.toggle("hidden");
+        iconSteps.classList.toggle("rotate-180");
+      });
+    }
+  </script>
+</body>
+
+</html>

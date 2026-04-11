@@ -34,20 +34,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 @endsection
 
+
 @section('content')
 <div id="root"></div>
-
-<!-- Scripts React & Babel -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script>
     window.AIAE_CONFIG = {
         secteur: "{{ $secteur }}",
         saveRoute: "{{ route('simulator.save') }}",
-        csrfToken: "{{ csrf_token() }}"
+        csrfToken: "{{ csrf_token() }}",
+        DATA: @json($config)
     };
 </script>
-<script type="text/babel" src="{{ asset('aiae-frontend/js/simulateur_ultimate.js') }}"></script>
+<script src="{{ asset('aiae-frontend/js/simulateur_ultimate.js') }}"></script>
 @endsection

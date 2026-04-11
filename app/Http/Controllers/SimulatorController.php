@@ -23,20 +23,77 @@ class SimulatorController extends Controller
         $secteur = $request->query('secteur', 'residentiel');
         
         // Fetch reference data for the simulator
-        $zones = Zone::all();
-        $sols = Sol::all();
-        $typeBatiments = TypeBatiment::all();
-        $standings = Standing::all();
-        $equipementOptions = EquipementOption::all();
+        $zones = Zone::all()->mapWithKeys(function ($z) {
+            return [$z->code => [
+                'name' => $z->nom,
+                'coef' => $z->coefficient,
+                'forage' => $z->profondeur_forage,
+                'foncier' => $z->prix_foncier_m2
+            ]];
+        });
 
-        return view('frontend.simulateur_v1', compact(
-            'secteur', 
-            'zones', 
-            'sols', 
-            'typeBatiments', 
-            'standings',
-            'equipementOptions'
-        ));
+        $sols = Sol::all()->mapWithKeys(function ($s) {
+            return [$s->code => [
+                'name' => $s->nom,
+                'coef' => $s->coefficient,
+                'prixFond' => $s->prix_fondation_m2,
+                'fondation' => $s->description ?? 'À définir',
+                'risque' => ($s->coefficient > 1.25) ? 'élevé' : 'faible'
+            ]];
+        });
+
+        $standings = Standing::all()->mapWithKeys(function ($st) {
+            return [$st->code => [
+                'name' => $st->name,
+                'prix' => $st->prix_m2_min,
+                'emprise' => ($st->emprise_max / 100),
+                'hsp' => $st->hsp,
+                'desc' => "Jusqu'à R+" . ($st->niveaux_max - 1)
+            ]];
+        });
+
+        $typeBatiments = TypeBatiment::all()->groupBy('secteur')->map(function ($items) {
+            return $items->map(function ($t) {
+                return [
+                    'id' => $t->code,
+                    'name' => $t->nom,
+                    'icon' => $t->icone,
+                    'max' => 5 // Default max levels if not in DB
+                ];
+            });
+        });
+
+        $options = EquipementOption::all();
+        $solaires = $options->where('categorie', 'solaire')->map(function ($o) {
+            return [
+                'id' => $o->code,
+                'kw' => (int) filter_var($o->puissance, FILTER_SANITIZE_NUMBER_INT),
+                'prix' => $o->prix_min
+            ];
+        })->values();
+
+        $groupes = $options->where('categorie', 'groupe')->map(function ($o) {
+            return [
+                'id' => $o->code,
+                'kva' => (int) filter_var($o->puissance, FILTER_SANITIZE_NUMBER_INT),
+                'prix' => $o->prix_min
+            ];
+        })->values();
+
+        $config = [
+            'ZONES' => $zones,
+            'SOLS' => $sols,
+            'STANDINGS' => $standings,
+            'TYPES' => $typeBatiments,
+            'SOLAIRES' => $solaires,
+            'GROUPES' => $groupes
+        ];
+
+        return view('frontend.simulateur_v1', [
+            'secteur' => $secteur,
+            'config' => $config,
+            'hideHeaderFooter' => true
+        ]);
     }
 
     public function profile()

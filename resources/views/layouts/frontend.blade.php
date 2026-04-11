@@ -7,6 +7,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>@yield('title', 'AIAE')</title>
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
+
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
