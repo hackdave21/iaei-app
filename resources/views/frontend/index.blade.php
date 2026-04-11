@@ -32,20 +32,20 @@
         <!-- BOUTONS -->
         <div class="flex flex-col sm:flex-row items-center gap-4 w-full mt-8">
           <!-- BOUTON GAUCHE -->
-          <button
-            class="bg-primary text-white px-6 py-3 rounded-lg text-sm shadow-lg whitespace-nowrap w-full sm:w-auto">
+          <a href="{{ route('contact') }}"
+            class="bg-primary text-white px-6 py-3 rounded-lg text-sm shadow-lg whitespace-nowrap w-full sm:w-auto text-center">
             Prendre rendez-vous maintenant
-          </button>
+          </a>
 
           <!-- BOUTON MILIEU -->
-          <div class="flex items-center bg-white rounded-full shadow-lg p-1 w-full sm:w-auto">
+          <a href="{{ route('contact') }}" class="flex items-center bg-white rounded-full shadow-lg p-1 w-full sm:w-auto">
             <span class="px-6 py-2 text-black text-sm whitespace-nowrap flex-1 text-center sm:text-left">
               Demander un devis gratuit
             </span>
             <div class="w-10 h-10 flex items-center justify-center bg-white rounded-full shrink-0">
               <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-5" />
             </div>
-          </div>
+          </a>
 
           <!-- TEXTE DROITE -->
           <div class="flex items-start text-white sm:ml-auto">
@@ -235,11 +235,11 @@
               </span>
             </p>
 
-            <button
-              class="bg-[#0b5b3a] text-white px-5 py-2 mt-10 rounded-lg text-sm flex items-center gap-2 whitespace-nowrap">
+            <a href="{{ route('about') }}"
+              class="bg-[#0b5b3a] text-white px-5 py-2 mt-10 rounded-lg text-sm flex items-center gap-2 whitespace-nowrap w-fit">
               En savoir plus sur nous
               <img src="{{ asset('aiae-frontend/Images/Arrow4Expertises.svg') }}" class="w-4" />
-            </button>
+            </a>
 
             <p class="text-xs text-gray-500 mt-10">
               Cliquez <span class="underline font-semibold">Simulation</span>
@@ -301,36 +301,36 @@
         <div class="relative group">
           <img src="{{ asset('aiae-frontend/Images/familles.png') }}" class="w-full h-full object-cover" />
 
-          <button class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
+          <a href="{{ route('contact') }}" class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
             Contactez-nous
-          </button>
+          </a>
         </div>
 
         <!-- DIASPORA -->
         <div class="relative group">
           <img src="{{ asset('aiae-frontend/Images/diaspora.png') }}" class="w-full h-full object-cover" />
 
-          <button class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
+          <a href="{{ route('contact') }}" class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
             Contactez-nous
-          </button>
+          </a>
         </div>
 
         <!-- ENTREPRISES -->
         <div class="relative group">
           <img src="{{ asset('aiae-frontend/Images/entreprises.png') }}" class="w-full h-full object-cover" />
 
-          <button class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
+          <a href="{{ route('contact') }}" class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
             Contactez-nous
-          </button>
+          </a>
         </div>
 
         <!-- INSTITUTIONS -->
         <div class="relative group">
           <img src="{{ asset('aiae-frontend/Images/institutions.png') }}" class="w-full h-full object-cover" />
 
-          <button class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
+          <a href="{{ route('contact') }}" class="absolute bottom-6 right-6 bg-white/20 backdrop-blur text-white text-xs px-4 py-1 rounded-full">
             Contactez-nous
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -447,15 +447,15 @@
   <!-- ================= BARRE ACTIONS ================= -->
   <div class="w-full bg-[#e9e9e9] py-4">
     <div class="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between px-6 sm:px-16 gap-4">
-      <button class="bg-[#0b5b3a] text-white px-10 py-3 rounded-lg text-[16px] font-medium hover:opacity-90 transition w-full sm:w-auto">
+      <a href="{{ route('contact') }}" class="bg-[#0b5b3a] text-white px-10 py-3 rounded-lg text-[16px] font-medium hover:opacity-90 transition w-full sm:w-auto text-center">
         Prendre rendez-vous maintenant
-      </button>
-      <button class="flex items-center justify-center text-[16px] bg-[#ffffff] gap-3 border border-black px-10 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition w-full sm:w-auto">
+      </a>
+      <a href="{{ route('contact') }}" class="flex items-center justify-center text-[16px] bg-[#ffffff] gap-3 border border-black px-10 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition w-full sm:w-auto">
         Demander un devis gratuit
         <span class="flex items-center justify-center w-7 h-7 border border-black rounded-full shrink-0">
           <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
         </span>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -818,12 +818,12 @@
         <div class="flex flex-col gap-6 justify-center">
 
           <!-- bouton RDV -->
-          <button class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit">
+          <a href="{{ route('contact') }}" class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit text-center">
             Prendre rendez-vous maintenant
-          </button>
+          </a>
 
           <!-- bouton devis -->
-          <button class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
+          <a href="{{ route('contact') }}" class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
 
             Demander un devis gratuit
 
@@ -831,7 +831,7 @@
               <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
             </span>
 
-          </button>
+          </a>
 
         </div>
 
@@ -995,12 +995,12 @@
         <div class="flex flex-col gap-6 justify-center">
 
           <!-- bouton RDV -->
-          <button class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit">
+          <a href="{{ route('contact') }}" class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit text-center">
             Prendre rendez-vous maintenant
-          </button>
+          </a>
 
           <!-- bouton devis -->
-          <button class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
+          <a href="{{ route('contact') }}" class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
 
             Demander un devis gratuit
 
@@ -1008,7 +1008,7 @@
               <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
             </span>
 
-          </button>
+          </a>
 
         </div>
 
@@ -1130,11 +1130,11 @@
               nous<br> nous adaptons à votre<br> fuseau horaire.
             </p>
 
-            <button class="bg-[#b7ff00] text-black px-6 py-3 rounded-lg w-fit mb-4">
+            <a href="{{ route('contact') }}" class="bg-[#b7ff00] text-black px-6 py-3 rounded-lg w-fit mb-4 font-bold text-center">
               Prendre rendez-vous maintenant
-            </button>
+            </a>
 
-            <button class="flex items-center gap-3 border border-white px-6 py-3 rounded-full text-sm w-fit">
+            <a href="{{ route('contact') }}" class="flex items-center gap-3 border border-white px-6 py-3 rounded-full text-sm w-fit">
 
               Demander un devis gratuit
 
@@ -1142,7 +1142,7 @@
                 <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
               </span>
 
-            </button>
+            </a>
 
           </div>
 
@@ -1451,7 +1451,7 @@
       <div class="flex flex-col md:flex-row justify-center">
 
         <!-- BOUTON 1 -->
-        <a href="#" class="bg-[#1a1f4d] text-white px-10 py-5 text-center font-semibold">
+        <a href="{{ route('contact') }}" class="bg-[#1a1f4d] text-white px-10 py-5 text-center font-semibold">
 
           DEMANDER UN DEVIS GRATUIT
           <span class="block text-sm font-normal opacity-80">
@@ -1461,7 +1461,7 @@
         </a>
 
         <!-- BOUTON 2 -->
-        <a href="#" class="bg-[#0a4f2c] text-white px-10 py-5 text-center font-semibold">
+        <a href="{{ route('contact') }}" class="bg-[#0a4f2c] text-white px-10 py-5 text-center font-semibold">
 
           PRENDRE RENDEZ-VOUS
           <span class="block text-sm font-normal opacity-80">

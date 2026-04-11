@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\EquipementOptionController;
 use App\Http\Controllers\Auth\FrontendAuthController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SimulatorController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::get('/divisions', [FrontendController::class, 'divisions'])->name('divisi
 Route::get('/clients', [FrontendController::class, 'clients'])->name('clients');
 Route::get('/projects', [FrontendController::class, 'projects'])->name('projects');
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/diaspora', [FrontendController::class, 'diaspora'])->name('diaspora');
+Route::get('/mentions-legales', [FrontendController::class, 'mentionsLegales'])->name('mentions-legales');
 
 // Frontend Auth Routes
 Route::middleware('guest')->group(function () {
@@ -90,6 +94,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('type-batiments', TypeBatimentController::class);
         Route::resource('templates-projets', TemplateProjetController::class);
         Route::resource('equipement-options', EquipementOptionController::class);
+
+        // User Management
+        Route::get('users', function() { return view('admin.users.index'); })->name('users.index');
+        Route::get('users/create', function() { return view('admin.users.create'); })->name('users.create');
+        Route::get('users/{user}/edit', function(\App\Models\User $user) { return view('admin.users.edit', compact('user')); })->name('users.edit');
+        Route::apiResource('users.api', UserController::class)->parameters(['users.api' => 'user']);
+        Route::post('users.api/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.api.toggle-status');
 
         Route::get('/help', [HelpController::class, 'index'])->name('help');
     });

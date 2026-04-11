@@ -85,6 +85,7 @@
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.divisions.index') }}">Divisions</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sectors.index') }}">Secteurs</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.sector-types.index') }}">Types de Secteur</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.users.index') }}">Utilisateurs</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">

@@ -2,21 +2,21 @@
   <header id="navBar"
     class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-[28px] overflow-hidden transition-all duration-300">
     <nav class="flex items-center justify-between px-4 sm:px-6 py-3">
-      <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE BLANC.png') }}" alt="logo"
-        class="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain" />
+      <a href="{{ route('home') }}">
+        <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE BLANC.png') }}" alt="logo"
+          class="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain" />
+      </a>
       <ul class="hidden lg:flex items-center gap-2 text-sm font-medium font-FuturaStdLight">
         <li>
           <a href="{{ route('home') }}" class="px-4 py-2 rounded-full @if(Route::is('home')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">Accueil</a>
         </li>
 
         <li>
-          <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">À
-            propos</a>
+          <a href="{{ route('about') }}" class="px-4 py-2 rounded-full @if(Route::is('about')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">À propos</a>
         </li>
 
         <li>
-          <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">Nos
-            divisions</a>
+          <a href="{{ route('divisions') }}" class="px-4 py-2 rounded-full @if(Route::is('divisions')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">Nos divisions</a>
         </li>
 
         <li>
@@ -24,14 +24,12 @@
             class="px-4 py-2 rounded-full @if(Route::is('simulator.index') || Route::is('simulator.v1')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">Simulateurs</a>
         </li>
 
-
         <li>
-          <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">Projets
-            & Réalisations</a>
+          <a href="{{ route('projects') }}" class="px-4 py-2 rounded-full @if(Route::is('projects')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">Projets & Réalisations</a>
         </li>
 
         <li>
-          <a href="#" class="px-4 py-2 rounded-full bg-glassDark text-white block whitespace-nowrap">FAQ</a>
+          <a href="{{ route('faq') }}" class="px-4 py-2 rounded-full @if(Route::is('faq')) bg-white shadow @else bg-glassDark text-white @endif block whitespace-nowrap">FAQ</a>
         </li>
       </ul>
 
@@ -39,9 +37,9 @@
         <a href="{{ route('profile') }}" class="w-11 h-11 rounded-full bg-glassDark flex items-center justify-center hover:bg-white/20 transition-colors">
           <img src="{{ asset('aiae-frontend/Images/Contact blanc.svg') }}" alt="Profile" height="25" width="25" />
         </a>
-        <button class="hidden sm:block px-5 py-2 rounded-full bg-white text-black">
+        <a href="{{ route('contact') }}" class="hidden sm:block px-5 py-2 rounded-full bg-white text-black hover:bg-gray-100 transition-colors">
           Contact
-        </button>
+        </a>
         <button id="burger" class="lg:hidden text-2xl rounded-full bg-glassDark p-2">
           <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -62,10 +60,10 @@
       </button>
 
       <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg @if(Route::is('home')) bg-white @else bg-glassDark @endif">Accueil</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">À propos</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Nos divisions</a>
+      <a href="{{ route('about') }}" class="block px-4 py-2 rounded-lg @if(Route::is('about')) bg-white @else bg-glassDark @endif">À propos</a>
+      <a href="{{ route('divisions') }}" class="block px-4 py-2 rounded-lg @if(Route::is('divisions')) bg-white @else bg-glassDark @endif">Nos divisions</a>
       <a href="{{ route('simulator.index') }}" class="block px-4 py-2 rounded-lg @if(Route::is('simulator.index')) bg-white @else bg-glassDark @endif">Simulateurs</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Diaspora</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">FAQ</a>
+      <a href="{{ route('contact') }}" class="block px-4 py-2 rounded-lg @if(Route::is('contact')) bg-white @else bg-glassDark @endif">Contact</a>
+      <a href="{{ route('faq') }}" class="block px-4 py-2 rounded-lg @if(Route::is('faq')) bg-white @else bg-glassDark @endif">FAQ</a>
     </div>
   </header>

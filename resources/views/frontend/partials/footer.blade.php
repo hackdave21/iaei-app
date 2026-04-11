@@ -44,7 +44,7 @@
         <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-12 w-12" />
 
         <p class="text-3xl">
-          +228 <span class="font-bold">9X 8X 7X 6X</span>
+          +228 <span class="font-bold">90 03 54 16</span>
         </p>
 
         <p class="text-sm">
@@ -83,10 +83,10 @@
 
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
-            <li>Construction</li>
-            <li>Énergie</li>
-            <li>Sécurité</li>
-            <li>Préfabrication</li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Construction</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Énergie</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Sécurité</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Préfabrication</a></li>
 
           </ul>
         </div>
@@ -103,7 +103,7 @@
 
             <li>Lomé, Togo</li>
             <li>Interventions sur tout le territoire</li>
-            <li>+228 XX XX XX XX</li>
+            <li>+228 90 03 54 16</li>
             <li>contact@aiae.services</li>
 
           </ul>
@@ -121,25 +121,25 @@
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
             <li>
-              <a href="#" class="hover:text-[#1a1f4d] transition">
+              <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
                 Demander un devis
               </a>
             </li>
 
             <li>
-              <a href="#" class="hover:text-[#1a1f4d] transition">
+              <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
                 Prendre rendez-vous
               </a>
             </li>
 
             <li>
-              <a href="#" class="hover:text-[#1a1f4d] transition">
+              <a href="{{ route('faq') }}" class="hover:text-[#1a1f4d] transition">
                 FAQ
               </a>
             </li>
 
             <li>
-              <a href="#" class="hover:text-[#1a1f4d] transition">
+              <a href="{{ route('mentions-legales') }}" class="hover:text-[#1a1f4d] transition">
                 Mentions légales
               </a>
             </li>

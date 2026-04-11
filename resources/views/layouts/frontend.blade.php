@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>@yield('title', 'AIAE')</title>
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
 
@@ -19,9 +20,20 @@
             futura: ["Futura", "sans-serif"],
             futuraCondensed: ["Futura Condensed", "sans-serif"],
           },
+          fontWeight: {
+            light: "300",
+            book: "400",
+            normal: "400",
+            medium: "500",
+            bold: "700",
+            heavy: "800",
+            extrabold: "800",
+            black: "900",
+          },
           colors: {
-            primary: "#0b5b3a",
-            secondary: "#d97706",
+            primary: "#05482C",
+            secondary: "#CC6A00",
+            darkBlue: "#121a44",
             glass: "rgba(255,255,255,0.55)",
             glassDark: "rgba(255,255,255,0.35)",
           },

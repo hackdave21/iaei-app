@@ -13,26 +13,41 @@ class FrontendController extends Controller
 
     public function about()
     {
-        return view('frontend.placeholder');
+        return view('frontend.about');
     }
 
     public function divisions()
     {
-        return view('frontend.placeholder');
+        return view('frontend.divisions');
     }
 
     public function clients()
     {
-        return view('frontend.placeholder');
+        return view('frontend.clients');
     }
 
     public function projects()
     {
-        return view('frontend.placeholder');
+        return view('frontend.projects');
     }
 
     public function faq()
     {
-        return view('frontend.placeholder');
+        return view('frontend.faq');
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+
+    public function diaspora()
+    {
+        return view('frontend.diaspora');
+    }
+
+    public function mentionsLegales()
+    {
+        return view('frontend.mentions-legales');
     }
 }
