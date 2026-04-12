@@ -51,9 +51,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.simulations.show', $quotation->simulation_id) }}" class="badge bg-soft-info text-info">
-                                                {{ $quotation->simulation->reference_id ?? 'SIM-' . $quotation->simulation_id }}
-                                            </a>
+                                            @if($quotation->simulation_id)
+                                                <a href="{{ route('admin.simulations.show', $quotation->simulation_id) }}" class="badge bg-soft-info text-info">
+                                                    {{ $quotation->simulation->reference_id ?? 'SIM-' . $quotation->simulation_id }}
+                                                </a>
+                                            @else
+                                                <span class="badge bg-soft-secondary text-secondary">Demande Directe</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <span class="text-{{ $quotation->valid_until->isPast() ? 'danger' : 'muted' }}">

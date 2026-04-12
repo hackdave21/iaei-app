@@ -41,12 +41,28 @@
                                     @endif
                                 </span>
                             </li>
+                            @if($quotation->lead && $quotation->lead->phone)
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted">Téléphone</span>
+                                <span class="fw-medium text-dark">{{ $quotation->lead->phone }}</span>
+                            </li>
+                            @endif
+                            @if($quotation->lead && $quotation->lead->pays_residence)
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted">Pays de résidence</span>
+                                <span class="fw-medium text-dark">{{ $quotation->lead->pays_residence }}</span>
+                            </li>
+                            @endif
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                 <span class="text-muted">Simulation</span>
                                 <span class="fw-medium text-dark">
-                                    <a href="{{ route('admin.simulations.show', $quotation->simulation_id) }}">
-                                        {{ $quotation->simulation->reference_id ?? 'SIM-' . $quotation->simulation_id }}
-                                    </a>
+                                    @if($quotation->simulation_id)
+                                        <a href="{{ route('admin.simulations.show', $quotation->simulation_id) }}">
+                                            {{ $quotation->simulation->reference_id ?? 'SIM-' . $quotation->simulation_id }}
+                                        </a>
+                                    @else
+                                        <span class="text-muted italic">Aucune (Demande Directe)</span>
+                                    @endif
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
@@ -99,8 +115,9 @@
                 </div>
             </div>
 
-            <!-- Linked Simulation Detailed Results -->
+            <!-- Linked Simulation or Contact Request Detailed Info -->
             <div class="col-xxl-8 col-lg-7">
+                @if($quotation->simulation_id)
                 <div class="card stretch stretch-full">
                     <div class="card-header">
                         <h5 class="card-title">Résumé de la Simulation Associée</h5>
@@ -159,6 +176,56 @@
                         Voir la simulation complète <i class="feather-arrow-right ms-2"></i>
                     </a>
                 </div>
+                @endif
+
+                @if($quotation->lead)
+                <div class="card stretch stretch-full">
+                    <div class="card-header">
+                        <h5 class="card-title">Détails de la demande client</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-muted fs-11 text-uppercase mb-1">Type de projet</h6>
+                                <p class="fw-bold text-dark">{{ $quotation->lead->type_projet ?: 'Non spécifié' }}</p>
+                            </div>
+                            <div class="col-md-6 text-sm-end">
+                                <h6 class="text-muted fs-11 text-uppercase mb-1">Budget estimé</h6>
+                                <p class="fw-bold text-primary fs-16">{{ number_format($quotation->lead->budget_estime, 0, ',', ' ') }} XOF</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted fs-11 text-uppercase mb-1">Délai souhaité</h6>
+                                <p class="fw-bold text-dark">{{ $quotation->lead->delai_souhaite ?: 'Non spécifié' }}</p>
+                            </div>
+                            <div class="col-md-6 text-sm-end">
+                                <h6 class="text-muted fs-11 text-uppercase mb-1">Localisation du projet</h6>
+                                <p class="fw-bold text-dark">{{ $quotation->lead->localisation_projet ?: 'Non spécifié' }}</p>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <h6 class="text-muted fs-11 text-uppercase mb-1 text-primary border-bottom pb-1">Description du projet</h6>
+                                <p class="text-dark bg-light p-3 rounded" style="white-space: pre-line;">{{ $quotation->lead->description_projet ?: $quotation->lead->message ?: 'Aucune description fournie.' }}</p>
+                            </div>
+                            
+                            @if($quotation->pdf_path)
+                            <div class="col-12 mt-4">
+                                <div class="bg-soft-info p-3 rounded d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <i class="feather-paperclip fs-4 text-info me-3"></i>
+                                        <div>
+                                            <h6 class="mb-0">Pièce jointe du client</h6>
+                                            <small class="text-muted">Document ou croquis fourni lors de la demande</small>
+                                        </div>
+                                    </div>
+                                    <a href="{{ asset('storage/' . $quotation->pdf_path) }}" class="btn btn-info btn-sm" target="_blank">
+                                        <i class="feather-external-link me-1"></i> Voir le document
+                                    </a>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

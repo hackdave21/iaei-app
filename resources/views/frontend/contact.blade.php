@@ -366,19 +366,20 @@
   <!-- ================= SECTION FORMULAIRE ================= -->
   <section class="bg-[#f4f5f7] py-5 w-full">
     <div class="max-w-[950px] mx-auto px-6">
-      <form class="space-y-6">
+      <form id="quotationForm" action="{{ route('quotation.request') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        @csrf
 
         <!-- Nom complet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Nom complet</label>
-          <input type="text" placeholder="Votre nom complet"
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Nom complet <span class="text-red-500">*</span></label>
+          <input type="text" name="full_name" required placeholder="Votre nom complet"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
         <!-- Adresse e-mail -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Adresse e-mail</label>
-          <input type="email" placeholder="nomprenom@gmail.com"
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Adresse e-mail <span class="text-red-500">*</span></label>
+          <input type="email" name="email" required placeholder="nomprenom@gmail.com"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
@@ -397,8 +398,9 @@
               </svg>
             </div>
 
-            <input type="tel" id="phoneInput" placeholder="XX XX XX XX"
+            <input type="tel" id="phoneInput" placeholder="XX XX XX XX" required
               class="bg-transparent pl-4 w-full outline-none text-gray-700 placeholder-gray-400">
+            <input type="hidden" name="phone" id="fullPhone">
           </div>
 
           <!-- Country Dropdown -->
@@ -417,7 +419,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Pays de résidence</label>
           <div class="relative">
-            <select id="countryResidenceSelect"
+            <select id="countryResidenceSelect" name="country_residence"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>Sélectionnez votre pays de résidence</option>
             </select>
@@ -432,7 +434,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Type de projet</label>
           <div class="relative">
-            <select id="projectTypeSelect"
+            <select id="projectTypeSelect" name="project_type"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>Sélectionnez le type de projet</option>
               <option value="residentiel">Résidentiel (Villas, immeubles)</option>
@@ -451,7 +453,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Sélectionnez un délai</label>
           <div class="relative">
-            <select
+            <select name="delay"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>Quel délai souhaitez vous pour finaliser votre projet ? Sélectionnez.
               </option>
@@ -468,8 +470,8 @@
 
         <!-- Votre projet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Votre projet</label>
-          <textarea rows="4" placeholder="Décrivez brièvement votre projet..."
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Votre projet <span class="text-red-500">*</span></label>
+          <textarea rows="4" name="project_description" required placeholder="Décrivez brièvement votre projet..."
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 resize-none"></textarea>
         </div>
 
@@ -477,7 +479,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Localisation du projet</label>
           <div class="relative">
-            <input type="text" placeholder="Quel est le lieu de votre projet ?"
+            <input type="text" name="location" placeholder="Quel est le lieu de votre projet ?"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
@@ -486,7 +488,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Budget estimé</label>
           <div class="relative">
-            <input type="text" placeholder="Quel budget envisagez-vous ?"
+            <input type="text" name="budget" placeholder="Quel budget envisagez-vous ?"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
@@ -495,7 +497,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Comment avez-vous connu AIAE ?</label>
           <div class="relative">
-            <select
+            <select name="source_discovery"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>Par quel moyen avez vous entendu parler de nous ? Sélectionnez.
               </option>
@@ -514,8 +516,8 @@
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Pièce jointe</label>
           <div
             class="relative flex items-center justify-between border border-gray-400 rounded-xl px-5 py-4 bg-transparent cursor-pointer hover:border-secondary focus-within:border-secondary transition-colors overflow-hidden">
-            <input type="file" id="file_upload" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-            <span class="text-gray-400 pointer-events-none">
+            <input type="file" name="attachment" id="file_upload" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+            <span id="file_name_display" class="text-gray-400 pointer-events-none">
               Ajoutez vos plans, photos terrain ou croquis (PDF, JPG, PNG). <span
                 class="italic text-gray-300">Facultatif</span>
             </span>
@@ -1016,7 +1018,122 @@
     }
 
     fetchCountries();
+
+    // --- Quotation Form Submission ---
+    (function() {
+      // Use a self-executing function to avoid scope issues
+      const initForm = () => {
+        const form = document.getElementById('quotationForm');
+        const fileUpload = document.getElementById('file_upload');
+        const fileNameDisplay = document.getElementById('file_name_display');
+
+        console.log("Initializing Quotation Form Handler");
+
+        if (fileUpload && fileNameDisplay) {
+          fileUpload.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+              const name = this.files[0].name;
+              fileNameDisplay.textContent = name;
+              fileNameDisplay.classList.remove('text-gray-400');
+              fileNameDisplay.classList.add('text-[#FF8400]', 'font-bold');
+              console.log("File selected:", name);
+            }
+          });
+        }
+
+        if (form) {
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log("Form submit triggered");
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            
+            // Combine dial code and phone number
+            const dialCodeEl = document.getElementById('dialCodeText');
+            const phoneInput = document.getElementById('phoneInput');
+            const fullPhoneHidden = document.getElementById('fullPhone');
+            
+            if (dialCodeEl && phoneInput && fullPhoneHidden) {
+              fullPhoneHidden.value = dialCodeEl.textContent.trim() + ' ' + phoneInput.value.trim();
+            }
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'CHARGEMENT...';
+            submitBtn.style.opacity = '0.7';
+
+            const formData = new FormData(this);
+
+            try {
+              const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'X-Requested-With': 'XMLHttpRequest',
+                  'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+              });
+
+              const result = await response.json();
+              console.log("Server response:", result);
+
+              if (response.ok && result.success) {
+                if (typeof Swal !== 'undefined') {
+                  Swal.fire({
+                    title: 'Succès !',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonColor: '#111736',
+                    confirmButtonText: 'OK'
+                  }).then(() => {
+                    form.reset();
+                    if (fileNameDisplay) {
+                      fileNameDisplay.textContent = 'Ajoutez vos plans, photos terrain ou croquis (PDF, JPG, PNG). Facultatif';
+                      fileNameDisplay.classList.replace('text-[#FF8400]', 'text-gray-400');
+                      fileNameDisplay.classList.remove('font-bold');
+                    }
+                  });
+                } else {
+                  alert(result.message);
+                  form.reset();
+                }
+              } else {
+                throw new Error(result.message || 'Une erreur est survenue lors de l\'envoi.');
+              }
+            } catch (error) {
+              console.error('Submission Error:', error);
+              if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                  title: 'Oups...',
+                  text: error.message,
+                  icon: 'error',
+                  confirmButtonColor: '#FF8400'
+                });
+              } else {
+                alert('Erreur: ' + error.message);
+              }
+            } finally {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalBtnText;
+              submitBtn.style.opacity = '1';
+            }
+          });
+        } else {
+          console.error("Form #quotationForm not found!");
+        }
+      };
+
+      // Run on load and also check if already loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initForm);
+      } else {
+        initForm();
+      }
+    })();
   </script>
+  <!-- SweatAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
