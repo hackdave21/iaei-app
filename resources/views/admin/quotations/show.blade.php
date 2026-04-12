@@ -102,12 +102,12 @@
                             </form>
                             
                             @if($quotation->pdf_path)
-                                <a href="{{ asset($quotation->pdf_path) }}" class="btn btn-primary" target="_blank">
-                                    <i class="feather-download me-2"></i>Télécharger le PDF
+                                <a href="{{ asset('storage/' . $quotation->pdf_path) }}" class="btn btn-primary" target="_blank">
+                                    <i class="feather-download me-2"></i>Télécharger le Document
                                 </a>
                             @else
                                 <button class="btn btn-light disabled">
-                                    <i class="feather-slash me-2"></i>PDF non disponible
+                                    <i class="feather-slash me-2"></i>Document non disponible
                                 </button>
                             @endif
                         </div>
@@ -199,7 +199,13 @@
                             </div>
                             <div class="col-md-6 text-sm-end">
                                 <h6 class="text-muted fs-11 text-uppercase mb-1">Localisation du projet</h6>
-                                <p class="fw-bold text-dark">{{ $quotation->lead->localisation_projet ?: 'Non spécifié' }}</p>
+                                @if($quotation->lead->localisation_projet)
+                                    <a href="https://www.google.com/maps/search/{{ urlencode($quotation->lead->localisation_projet) }}" target="_blank" class="fw-bold text-info text-decoration-underline">
+                                        <i class="feather-map-pin me-1"></i>{{ $quotation->lead->localisation_projet }}
+                                    </a>
+                                @else
+                                    <p class="fw-bold text-dark">Non spécifié</p>
+                                @endif
                             </div>
                             <div class="col-12 mt-4">
                                 <h6 class="text-muted fs-11 text-uppercase mb-1 text-primary border-bottom pb-1">Description du projet</h6>

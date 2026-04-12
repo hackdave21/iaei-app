@@ -654,7 +654,7 @@
 
       <div class="flex flex-col md:flex-row justify-center w-full max-w-[950px] mx-auto shadow-2xl overflow-hidden rounded-sm">
         <!-- Bouton Orange -->
-        <a href="#" class="flex-1 bg-secondary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
+        <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="flex-1 bg-secondary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
           <span class="block text-[22px] md:text-[28px] font-heavy tracking-wide mb-3 uppercase">
             RENDEZ-VOUS SUR PLACE
           </span>
@@ -664,7 +664,7 @@
         </a>
 
         <!-- Bouton Vert -->
-        <a href="#" class="flex-1 bg-primary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
+        <a href="javascript:void(0)" onclick="openRdvModal('en_ligne')" class="flex-1 bg-primary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
           <span class="block text-[22px] md:text-[28px] font-heavy tracking-wide mb-3 uppercase">
             RENDEZ-VOUS EN LIGNE
           </span>
@@ -803,7 +803,7 @@
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
+              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition">
                 Prendre rendez-vous
               </a>
             </li>
@@ -963,7 +963,7 @@
       if (countryResidenceSelect) {
         countries.forEach(c => {
           const opt = document.createElement('option');
-          opt.value = c.iso;
+          opt.value = c.name;
           opt.textContent = c.name;
           countryResidenceSelect.appendChild(opt);
         });
@@ -1132,6 +1132,7 @@
       }
     })();
   </script>
+  @include('frontend.partials.rdv-modal')
   <!-- SweatAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

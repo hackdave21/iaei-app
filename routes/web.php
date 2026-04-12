@@ -54,6 +54,7 @@ Route::get('/simulator', [SimulatorController::class, 'index'])->name('simulator
 Route::get('/simulator/v1', [SimulatorController::class, 'simulatorV1'])->name('simulator.v1');
 Route::get('/simulator/results', [SimulatorController::class, 'results'])->name('simulator.results');
 Route::post('/quotation-request', [\App\Http\Controllers\QuotationRequestController::class, 'store'])->name('quotation.request');
+Route::post('/appointment-request', [\App\Http\Controllers\AppointmentRequestController::class, 'store'])->name('appointment.request')->middleware('auth');
 
 // Energy Calculator Routes
 Route::get('/energie/calculateur', [\App\Http\Controllers\EnergieController::class, 'calculator'])->name('energie.calculator');

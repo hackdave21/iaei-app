@@ -151,7 +151,7 @@
         <!-- BOUTONS -->
         <div class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 lg:gap-0 w-full mt-6 sm:mt-10 lg:mt-16">
           <!-- BOUTON GAUCHE -->
-          <div class="flex items-center bg-primary rounded-full shadow-lg p-1 w-full lg:w-fit">
+          <div onclick="openRdvModal('physique')" class="flex items-center bg-primary rounded-full shadow-lg p-1 w-full lg:w-fit cursor-pointer hover:opacity-90 transition">
             <span class="px-4 py-1.5 sm:px-6 sm:py-2 text-white whitespace-normal sm:whitespace-nowrap flex-1 text-center lg:text-left font-light text-xs sm:text-base">
               Prendre rendez-vous maintenant
             </span>
@@ -648,7 +648,7 @@
     <div class="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between px-6 sm:px-16 gap-4">
 
       <!-- Bouton RDV -->
-      <button class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-fit hover:opacity-90 transition">
+      <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-fit hover:opacity-90 transition">
         <span class="px-6 py-2 text-white text-center font-light">
           Prendre rendez-vous maintenant
         </span>
@@ -828,7 +828,7 @@
         <div class="flex flex-col justify-center gap-14">
 
           <!-- bouton RDV -->
-          <button class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               Prendre rendez-vous maintenant
             </span>
@@ -1376,7 +1376,7 @@
     
 
           <!-- bouton RDV -->
-          <button class="flex items-center justify-center bg-primary border-2 border-white rounded-full shadow-lg p-1 mb-6 w-full sm:w-[350px] hover:opacity-90 transition">
+          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary border-2 border-white rounded-full shadow-lg p-1 mb-6 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               Prendre rendez-vous maintenant
             </span>
@@ -1711,7 +1711,7 @@
         </a>
 
         <!-- BOUTON 2 -->
-        <a href="#" class="bg-primary text-white px-10 py-5 text-center font-heavy">
+        <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="bg-primary text-white px-10 py-5 text-center font-heavy cursor-pointer">
 
           PRENDRE RENDEZ-VOUS
           <span class="block text-sm font-light text-white">
@@ -1856,7 +1856,7 @@
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
+              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition cursor-pointer">
                 Prendre rendez-vous
               </a>
             </li>
@@ -1942,6 +1942,8 @@
     openStand.onclick = () => togglePanel(openStand, standPanel);
     openOptions.onclick = () => togglePanel(openOptions, optionsPanel);
   </script>
+  @include('frontend.partials.rdv-modal')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
