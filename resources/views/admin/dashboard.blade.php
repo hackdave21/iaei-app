@@ -15,73 +15,7 @@
                         <li class="breadcrumb-item">Tableau de bord</li>
                     </ul>
                 </div>
-                <div class="page-header-right ms-auto">
-                    <div class="page-header-right-items">
-                        <div class="d-flex d-md-none">
-                            <a href="javascript:void(0)" class="page-header-right-close-toggle">
-                                <i class="feather-arrow-left me-2"></i>
-                                <span>Retour</span>
-                            </a>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                            <div id="reportrange" class="reportrange-picker d-flex align-items-center">
-                                <span class="reportrange-picker-field"></span>
-                            </div>
-                            <div class="dropdown filter-dropdown">
-                                <a class="btn btn-md btn-light-brand" data-bs-toggle="dropdown" data-bs-offset="0, 10" data-bs-auto-close="outside">
-                                    <i class="feather-filter me-2"></i>
-                                    <span>Filtrer</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Role" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Role">Rôle</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Team" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Team">Équipe</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Email" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Email">E-mail</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Member" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Member">Membre</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Recommendation" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Recommendation">Recommandation</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="feather-plus me-3"></i>
-                                        <span>Créer nouveau</span>
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="feather-filter me-3"></i>
-                                        <span>Gérer les filtres</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-md-none d-flex align-items-center">
-                        <a href="javascript:void(0)" class="page-header-right-open-toggle">
-                            <i class="feather-align-right fs-20"></i>
-                        </a>
-                    </div>
-                </div>
+            
             </div>
             <!-- [ page-header ] end -->
             <!-- [ Main Content ] start -->
@@ -105,18 +39,6 @@
                                         <i class="feather-more-vertical"></i>
                                     </a>
                                 </div>
-                                <div class="pt-4">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Factures en attente </a>
-                                        <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">{{ number_format(5569, 0, ',', ' ') }} FCFA</span>
-                                            <span class="fs-11 text-muted">(56%)</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress mt-2 ht-3">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 56%"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,18 +60,6 @@
                                     <a href="javascript:void(0);" class="">
                                         <i class="feather-more-vertical"></i>
                                     </a>
-                                </div>
-                                <div class="pt-4">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="{{ route('admin.leads.index') }}" class="fs-12 fw-medium text-muted text-truncate-1-line">Leads convertis </a>
-                                        <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">52 Terminés</span>
-                                            <span class="fs-11 text-muted">(63%)</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress mt-2 ht-3">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 63%"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -173,18 +83,6 @@
                                         <i class="feather-more-vertical"></i>
                                     </a>
                                 </div>
-                                <div class="pt-4">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Projets en cours </a>
-                                        <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">16 Terminés</span>
-                                            <span class="fs-11 text-muted">(78%)</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress mt-2 ht-3">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 78%"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,18 +104,6 @@
                                     <a href="javascript:void(0);" class="">
                                         <i class="feather-more-vertical"></i>
                                     </a>
-                                </div>
-                                <div class="pt-4">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line"> Taux de conversion </a>
-                                        <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">{{ number_format(2254, 0, ',', ' ') }} FCFA</span>
-                                            <span class="fs-11 text-muted">(46%)</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress mt-2 ht-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 46%"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

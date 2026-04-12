@@ -96,18 +96,116 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            @if($simulation->configuration_data && (is_array($simulation->configuration_data) || is_object($simulation->configuration_data)))
-                                @foreach($simulation->configuration_data as $key => $value)
-                                    <div class="col-sm-6 mb-3">
-                                        <div class="p-3 border rounded">
-                                            <span class="text-muted d-block fs-12 mb-1 text-uppercase">{{ str_replace('_', ' ', $key) }}</span>
-                                            <span class="fw-bold text-dark">{{ is_array($value) ? json_encode($value) : $value }}</span>
+                            @php
+                                $config = $simulation->configuration_data;
+                            @endphp
+
+                            @if($config && is_array($config))
+                                <!-- 1. Section Terrain & Localisation -->
+                                <div class="col-sm-6 col-xxl-4 mb-4">
+                                    <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
+                                        <i class="feather-map-pin me-2"></i>Terrain & Zone
+                                    </h6>
+                                    <div class="space-y-2">
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Type de Sol :</span>
+                                            <span class="fw-bold text-dark">{{ $lookup['sols'][$config['sol'] ?? ''] ?? $config['sol'] ?? 'N/A' }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Zone :</span>
+                                            <span class="fw-bold text-dark">{{ $lookup['zones'][$config['zone'] ?? ''] ?? $config['zone'] ?? 'N/A' }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Terrain Disponible :</span>
+                                            <span class="fw-bold text-dark">{{ ($config['terrainDispo'] ?? '') === 'oui' ? 'Oui' : 'Non / À acquérir' }}</span>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
+
+                                <!-- 2. Section Caractéristiques Bâtiment -->
+                                <div class="col-sm-6 col-xxl-4 mb-4 border-start-md">
+                                    <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
+                                        <i class="feather-home me-2"></i>Architecture
+                                    </h6>
+                                    <div class="space-y-2">
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Type Bâtiment :</span>
+                                            <span class="fw-bold text-dark">{{ $lookup['types'][$config['typeBat'] ?? ''] ?? $config['typeBat'] ?? 'N/A' }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Standing :</span>
+                                            <span class="fw-bold text-dark text-capitalize">{{ $lookup['standings'][$config['standing'] ?? ''] ?? $config['standing'] ?? 'Standard' }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Niveaux (H.S) :</span>
+                                            <span class="fw-bold text-dark">{{ $config['dimensions']['niveaux'] ?? $config['niveaux'] ?? 1 }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Sous-sol :</span>
+                                            <span class="fw-bold text-dark">{{ $config['dimensions']['ssSol'] ?? $config['ssSol'] ?? 0 }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Section Dimensions & Surfaces -->
+                                <div class="col-sm-6 col-xxl-4 mb-4 border-start-xxl">
+                                    <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
+                                        <i class="feather-maximize me-2"></i>Dimensions
+                                    </h6>
+                                    <div class="space-y-2">
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Forme :</span>
+                                            <span class="fw-bold text-dark">{{ ucfirst($config['dimensions']['forme'] ?? $config['forme'] ?? 'N/A') }}</span>
+                                        </div>
+                                        @if(isset($config['dimensions']['dimA']) || isset($config['dimA']))
+                                            <div class="d-flex justify-content-between py-1">
+                                                <span class="text-muted">L / Côté :</span>
+                                                <span class="fw-bold text-dark">{{ $config['dimensions']['dimA'] ?? $config['dimA'] }} m</span>
+                                            </div>
+                                        @endif
+                                        @if(isset($config['dimensions']['dimB']) || isset($config['dimB']))
+                                            <div class="d-flex justify-content-between py-1">
+                                                <span class="text-muted">Largeur :</span>
+                                                <span class="fw-bold text-dark">{{ $config['dimensions']['dimB'] ?? $config['dimB'] }} m</span>
+                                            </div>
+                                        @endif
+                                        <div class="d-flex justify-content-between py-1">
+                                            <span class="text-muted">Surface Bâtie :</span>
+                                            <span class="fw-bold text-primary">{{ number_format($config['dimensions']['surfaceBatie'] ?? 0, 0, ',', ' ') }} m²</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 4. Section Options Équipements -->
+                                <div class="col-12 mt-2">
+                                    <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
+                                        <i class="feather-plus-circle me-2"></i>Équipements Additionnels
+                                    </h6>
+                                    <div class="row">
+                                        @php
+                                            $opts = $config['options'] ?? [];
+                                        @endphp
+                                        <div class="col-md-4">
+                                            <small class="text-muted d-block mb-1">Énergie Solaire</small>
+                                            <p class="fw-bold">{{ $opts['solaire'] ? 'Inclus (' . strtoupper($opts['solaire']) . ')' : 'Non inclus' }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <small class="text-muted d-block mb-1">Groupe Électrogène</small>
+                                            <p class="fw-bold">{{ $opts['groupe'] ? 'Inclus (' . strtoupper($opts['groupe']) . ')' : 'Non inclus' }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <small class="text-muted d-block mb-1">Autres (Piscine/Forage)</small>
+                                            <p class="fw-bold">
+                                                {{ !empty($opts['piscine']) ? 'Piscine' : '' }}
+                                                {{ !empty($opts['forage']) ? ( !empty($opts['piscine']) ? ' + ' : '' ) . 'Forage' : '' }}
+                                                {{ empty($opts['piscine']) && empty($opts['forage']) ? 'Aucun' : '' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             @else
                                 <div class="col-12">
-                                    <p class="text-muted">Aucune donnée de configuration spécifique.</p>
+                                    <p class="text-muted text-center py-4">Aucune donnée de configuration détaillée n'a été trouvée pour cette simulation.</p>
                                 </div>
                             @endif
                         </div>

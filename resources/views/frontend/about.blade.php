@@ -395,10 +395,7 @@
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[18px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">
-        « Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire,
-        équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »
-      </p>
+      <p class="text-[18px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">« Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »</p>
 
     </div>
   </section>

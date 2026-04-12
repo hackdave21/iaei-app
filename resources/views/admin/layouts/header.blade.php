@@ -28,9 +28,6 @@
                     </a>
                 </div>
                 <!--! [End] nxl-lavel-mega-menu-toggle !-->
-                <!--! [Start] nxl-lavel-mega-menu !-->
-
-                <!--! [End] nxl-lavel-mega-menu !-->
             </div>
             <!--! [End] Header Left !-->
             <!--! [Start] Header Right !-->
@@ -128,27 +125,9 @@
                                             <span>Désactivé</span>
                                         </span>
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <span class="hstack">
-                                            <i class="wd-10 ht-10 border border-2 border-gray-1 bg-primary rounded-circle me-2"></i>
-                                            <span>Personnalisation</span>
-                                        </span>
-                                    </a>
+                                   
                                 </div>
                             </div>
-                            <div class="dropdown-divider"></div>
-                            
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="feather-user"></i>
-                                <span>Profil</span>
-                            </a>
-                           
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="feather-settings"></i>
-                                <span>Paramètres</span>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0);" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="feather-log-out"></i>

@@ -25,6 +25,13 @@
     .input-field { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s; }
     .input-field:focus { border-color: var(--orange); }
 
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
     /* Custom Navbar from index.html / header.js style */
     header { background: white; border-bottom: 1px solid #e2e8f0; }
   </style>
@@ -204,7 +211,9 @@
 
     window.addEventListener('DOMContentLoaded', () => {
         if (typeof AIAEEnergySimulator !== 'undefined') {
-            new AIAEEnergySimulator(AIAE_ENERGY_CONFIG);
+            const simulator = new AIAEEnergySimulator(AIAE_ENERGY_CONFIG);
+            // On peut exposer le simulateur si besoin
+            window.AIAE_ENERGY_APP = simulator;
         }
     });
   </script>

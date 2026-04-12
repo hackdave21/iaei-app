@@ -116,10 +116,6 @@
       }
     }
 
-    .nav-scrolled {
-      backdrop-filter: blur(18px);
-      background: rgba(22, 32, 100, 0.2);
-    }
   </style>
   <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
 </head>

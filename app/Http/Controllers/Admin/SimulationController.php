@@ -61,6 +61,20 @@ class SimulationController extends Controller
     {
         $simulation->load(['user', 'lead', 'sectorType', 'result', 'simulationOptions.option']);
 
+        // Reference data mapping for the view
+        $lookup = [
+            'sols' => \App\Models\Sol::all()->pluck('nom', 'code')->toArray(),
+            'zones' => \App\Models\Zone::all()->pluck('nom', 'code')->toArray(),
+            'types' => \App\Models\TypeBatiment::all()->pluck('nom', 'code')->toArray(),
+            'standings' => \App\Models\Standing::all()->pluck('name', 'code')->toArray(),
+            'secteurs' => [
+                'residentiel' => 'Résidentiel',
+                'tertiaire' => 'Tertiaire / Services',
+                'industriel' => 'Industriel',
+                'agricole' => 'Agricole'
+            ]
+        ];
+
         if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
@@ -68,7 +82,7 @@ class SimulationController extends Controller
             ]);
         }
 
-        return view('admin.simulations.show', compact('simulation'));
+        return view('admin.simulations.show', compact('simulation', 'lookup'));
     }
 
     /**

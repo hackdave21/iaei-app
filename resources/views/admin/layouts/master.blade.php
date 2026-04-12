@@ -75,13 +75,53 @@
             color: #162064 !important;
         }
         .nxl-navigation .m-header .logo-lg {
-            max-height: 50px !important;
+            max-height: 80px !important;
             width: auto !important;
         }
 
         .nxl-navigation .m-header .logo-sm {
-            max-height: 40px !important;
+            max-height: 50px !important;
             width: auto !important;
+        }
+
+        /* Logo Display Logic (Light vs Dark AND Full vs Mini) */
+        
+        /* 1. Hide Dark logos in Light Mode */
+        html:not(.app-navigation-dark):not(.app-skin-dark) .logo-dark-mode {
+            display: none !important;
+        }
+        
+        /* 2. Hide Light logos in Dark Mode */
+        html.app-navigation-dark .logo-light-mode,
+        html.app-skin-dark .logo-light-mode {
+            display: none !important;
+        }
+
+        /* 3. Handle Sidebar State (Respects current theme mode) */
+        /* Hide Large logos when sidebar is collapsed */
+        html.minimenu .logo-lg {
+            display: none !important;
+        }
+        
+        /* Hide Small logos when sidebar is expanded */
+        html:not(.minimenu) .logo-sm {
+            display: none !important;
+        }
+
+        /* Active Menu Items - Dark Mode Orange Highlights */
+        html.app-navigation-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link,
+        html.app-skin-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link,
+        html.app-navigation-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link,
+        html.app-skin-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link {
+            color: #FF8400 !important;
+            background-color: rgba(255, 132, 0, 0.1) !important;
+        }
+
+        html.app-navigation-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link .nxl-micon,
+        html.app-skin-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.active > .nxl-link .nxl-micon,
+        html.app-navigation-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link .nxl-micon,
+        html.app-skin-dark .nxl-navigation .navbar-content .nxl-navbar .nxl-item.nxl-hasmenu.active > .nxl-link .nxl-micon {
+            color: #FF8400 !important;
         }
 
         .b-brand {

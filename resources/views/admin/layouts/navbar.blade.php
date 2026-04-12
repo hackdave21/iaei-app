@@ -2,9 +2,14 @@
         <div class="navbar-wrapper">
             <div class="m-header">
                 <a href="{{ route('admin.dashboard') }}" class="b-brand">
-                    <!-- ========   change your logo hear   ============ -->
-                    <img src="{{ asset('admin-assets/assets/images/Logos/LOGO_AIAE_FINAL.png') }}" alt="AIAE Logo" class="logo logo-lg" />
-                    <img src="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE Logo" class="logo logo-sm" />
+                    <!-- ========  logos   ============ -->
+                    <!-- Light Mode Logos -->
+                    <img src="{{ asset('admin-assets/assets/images/Logos/LOGO_AIAE_FINAL.png') }}" alt="AIAE Logo" class="logo logo-lg logo-light-mode" />
+                    <img src="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE Logo" class="logo logo-sm logo-light-mode" />
+                    
+                    <!-- Dark Mode Logos -->
+                    <img src="{{ asset('admin-assets/assets/images/Logos/LOGO_AIAE_BLANC.png') }}" alt="AIAE Logo" class="logo logo-lg logo-dark-mode" />
+                    <img src="{{ asset('admin-assets/assets/images/Logos/Symbole_AIAE_FINAL.png') }}" alt="AIAE Logo" class="logo logo-sm logo-dark-mode" />
                 </a>
             </div>
             <div class="navbar-content">
@@ -66,7 +71,7 @@
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-box"></i></span>
-                            <span class="nxl-mtext">Immobilier Pro</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                            <span class="nxl-mtext">Reglages du Simulateur</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.zones.index') }}">Zones (Togo)</a></li>

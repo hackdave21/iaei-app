@@ -26,6 +26,26 @@
     ];
 @endphp
 
+<style>
+    .nav-scrolled {
+        background: rgba(18, 26, 68, 0.8) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @if($config['mode'] === 'floating')
+    #navBar {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #navBar.nav-scrolled {
+        top: 1rem !important;
+        width: 90% !important;
+    }
+    @endif
+</style>
+
 <!-- ================= NAVBAR ================= -->
 <header id="navBar" 
     @if($config['mode'] === 'floating')
@@ -118,5 +138,17 @@
                 mobileMenu.classList.add('hidden');
             });
         });
+
+        // Scroll effect for floating navbar
+        const navBar = document.getElementById('navBar');
+        if (navBar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navBar.classList.add('nav-scrolled');
+                } else {
+                    navBar.classList.remove('nav-scrolled');
+                }
+            });
+        }
     });
 </script>
