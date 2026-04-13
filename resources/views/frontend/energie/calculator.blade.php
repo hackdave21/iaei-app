@@ -44,6 +44,7 @@
         equipements: @json($equipements),
         zones: @json($zones)
     };
+    window.SIMULATOR_URL = "{{ route('simulator.index') }}";
 </script>
 <script type="text/babel">
 @verbatim
@@ -198,15 +199,13 @@
         {/* EN-TÊTE */}
         <header className="flex items-center justify-between mb-10 no-print">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white" style={{background: 'var(--vert)'}}>
-              <Icon name="Zap" size={24} />
-            </div>
+            <img src="/aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png" className="w-12 h-12 object-contain" alt="AIAE Logo" />
             <div>
               <h1 className="text-2xl font-bold" style={{color: 'var(--bleu)'}}>Simulateur Solaire AIAE</h1>
               <p className="text-gray-500 text-sm">Dimensionnement autonome & Estimation financière</p>
             </div>
           </div>
-          <a href="/" className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-2">
+          <a href={window.SIMULATOR_URL} className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-2">
             <Icon name="ArrowLeft" size={16} /> Retour
           </a>
         </header>

@@ -52,6 +52,7 @@
     window.SAVE_ROUTE = "{{ route('simulator.save') }}";
     window.BACK_ROUTE = "{{ route('simulator.index') }}";
     window.SIMULATEUR_CONFIG = @json($config);
+    window.QUICK_START = @json($quickStart ?? null);
 </script>
 <script type="text/babel">
 @verbatim
@@ -168,16 +169,22 @@ const App=()=>{
   const DOMOTIQUE_OPTS = libConfig.DOMOTIQUE || [];
 
   // ÉTAT
-  const [page,setPage]=useState(window.INITIAL_SECTEUR ? 'sim' : 'accueil');
-  const [etape,setEtape]=useState(1);
-  const [secteur,setSecteur]=useState(window.INITIAL_SECTEUR || '');
+  const qs = window.QUICK_START || {};
+  const initSecteur = qs.secteur || window.INITIAL_SECTEUR || '';
+  
+  const [page,setPage]=useState(initSecteur ? 'sim' : 'accueil');
+  const [etape,setEtape]=useState(initSecteur ? 2 : 1);
+  const [secteur,setSecteur]=useState(initSecteur);
   const [typeBat,setTypeBat]=useState('');
-  const [standing,setStanding]=useState('confort');
+  const [standing,setStanding]=useState(qs.standing || 'confort');
   const [catHotel,setCatHotel]=useState('3s');
   const [forme,setForme]=useState('rect');
-  const [dimA,setDimA]=useState(30);
-  const [dimB,setDimB]=useState(20);
-  const [surfManuelle,setSurfManuelle]=useState(600);
+  
+  const initialSurf = qs.surface || 600;
+  const [dimA,setDimA]=useState(Math.sqrt(initialSurf));
+  const [dimB,setDimB]=useState(Math.sqrt(initialSurf));
+  const [surfManuelle,setSurfManuelle]=useState(initialSurf);
+  
   const [terrainDispo,setTerrainDispo]=useState('oui');
   const [zone,setZone]=useState('zone1');
   const [sol,setSol]=useState('');
@@ -185,8 +192,8 @@ const App=()=>{
   const [ssSol,setSsSol]=useState(0);
   const [hspRdc,setHspRdc]=useState(3.0);
   const [hspEtage,setHspEtage]=useState(2.8);
-  const [nbChambres,setNbChambres]=useState(30);
-  const [espacesHotel,setEspacesHotel]=useState([]);
+  const [nbChambres,setNbChambres]=useState(qs.nb_beds ? parseInt(qs.nb_beds) : 3);
+  const [espacesHotel,setEspacesHotel]=useState(qs.espaces_communs === "1" ? ['accueil'] : []);
   const [hauteurLibre,setHauteurLibre]=useState(8);
   const [pontRoulant,setPontRoulant]=useState(false);
   const [pontCap,setPontCap]=useState(5);
@@ -196,18 +203,22 @@ const App=()=>{
   const [surfExploit,setSurfExploit]=useState(5);
   const [nbAsc,setNbAsc]=useState(0);
   const [nbQuais,setNbQuais]=useState(2);
-  const [solaire,setSolaire]=useState('');
+
+  // Options mapping Logic
+  const hasOpt = (key) => qs.options && qs.options.includes(key);
+
+  const [solaire,setSolaire]=useState(hasOpt('solaire') ? (SOLAIRES[0]?.id || '') : '');
   const [groupe,setGroupe]=useState('');
   const [alarme,setAlarme]=useState('');
   const [nbZones,setNbZones]=useState(6);
   const [video,setVideo]=useState('');
   const [acces,setAcces]=useState('');
   const [nbPortes,setNbPortes]=useState(2);
-  const [cloture,setCloture]=useState(false);
+  const [cloture,setCloture]=useState(hasOpt('cloture'));
   const [clotureH,setClotureH]=useState(2);
   const [portail,setPortail]=useState('');
-  const [piscine,setPiscine]=useState('');
-  const [forage,setForage]=useState(false);
+  const [piscine,setPiscine]=useState(hasOpt('piscine') ? 'piscine_8x4' : '');
+  const [forage,setForage]=useState(hasOpt('forage'));
   const [forageProf,setForageProf]=useState(30);
   const [parkType,setParkType]=useState('');
   const [parkPlaces,setParkPlaces]=useState(0);
@@ -553,9 +564,7 @@ const App=()=>{
     <header className="bg-white border-b sticky top-0 z-50 no-print">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <button onClick={()=>setPage('accueil')} className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#05482C]">
-            <svg viewBox="0 0 40 40" className="w-6 h-6" fill="white"><rect x="8" y="16" width="5" height="18"/><rect x="17" y="10" width="5" height="24"/><rect x="26" y="13" width="5" height="21"/></svg>
-          </div>
+          <img src="/aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png" className="w-12 h-12 object-contain" alt="AIAE Logo" />
           <div>
             <div className="font-bold text-sm" style={{color:'var(--bleu)'}}>AIAE SARL</div>
             <div className="text-xs text-gray-500">Simulateur v{VERSION}</div>
@@ -615,9 +624,7 @@ const App=()=>{
       <div className="min-h-screen" style={{background:'var(--bleu)'}}>
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 bg-[#05482C]">
-              <svg viewBox="0 0 40 40" className="w-12 h-12" fill="white"><rect x="8" y="16" width="5" height="18"/><rect x="17" y="10" width="5" height="24"/><rect x="26" y="13" width="5" height="21"/></svg>
-            </div>
+            <img src="/aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png" className="w-20 h-20 object-contain mb-6" alt="AIAE Logo" />
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Simulateur d'Estimation</h1>
             <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY</p>
           </div>

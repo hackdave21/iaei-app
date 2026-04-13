@@ -130,9 +130,21 @@ class SimulatorController extends Controller
             'DOMOTIQUE' => $domotique
         ];
 
+        $quickStartConfig = [
+            'secteur' => $request->query('secteur', 'residentiel'),
+            'surface' => $request->query('surface'),
+            'surface_terrain' => $request->query('surface_terrain'),
+            'standing' => $request->query('standing'),
+            'espaces_communs' => $request->query('espaces_communs'),
+            'nb_baths' => $request->query('nb_baths'),
+            'nb_beds' => $request->query('nb_beds'),
+            'options' => $request->query('options') ? explode(',', $request->query('options')) : []
+        ];
+
         return view('frontend.simulateur_v1', [
             'secteur' => $secteur,
             'config' => $simulatorData,
+            'quickStart' => $quickStartConfig,
             'hideHeaderFooter' => true
         ]);
     }

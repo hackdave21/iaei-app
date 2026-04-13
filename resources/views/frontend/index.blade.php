@@ -186,40 +186,39 @@
       <!-- Onglets -->
       <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 mb-4" id="categoryButtons">
         <div class="flex flex-wrap gap-2">
-          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-white text-xs sm:text-sm shadow">
+          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="residentiel" class="tabBtn px-3 py-2 rounded-lg bg-white text-xs sm:text-sm shadow">
             Résidentiel
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="tertiaire" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Tertiaire
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="industriel" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Industriel
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="agricole" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Agricole
           </button>
         </div>
 
-        <button class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm">
+        <button onclick="window.location.href='{{ route('energie.calculator') }}'" class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm">
           Calculateur Énergies
         </button>
       </div>
 
       <!-- Formulaire -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
-        <!-- Surface Dispo -->
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
-          <input class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm" placeholder="Surface Disponible (m²)" />
+          <input id="surfaceDispo" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm" placeholder="Surface Disponible (m²)" />
         </div>
 
         <!-- Surface Bâtie -->
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
-          <input class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm"
+          <input id="surfaceBatie" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm"
             placeholder="Surface Bâtie Souhaitée (m²)" />
         </div>
 
@@ -234,7 +233,7 @@
           <div id="configPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-2 z-20">
             <label class="flex justify-between items-center text-xs sm:text-sm">
-              Espaces Communs <input type="checkbox" />
+              Espaces Communs <input type="checkbox" id="checkEspaces" />
             </label>
 
             <div class="flex justify-between items-center text-xs sm:text-sm">
@@ -279,16 +278,16 @@
 
           <div id="standPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-1 z-20">
-            <button class="block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
+            <button data-value="prestige" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
               Prestige
             </button>
-            <button class="block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
+            <button data-value="premium" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
               Premium
             </button>
-            <button class="block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
+            <button data-value="confort" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1 bg-gray-100">
               Confort
             </button>
-            <button class="block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
+            <button data-value="standard" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
               Standard
             </button>
           </div>
@@ -304,13 +303,13 @@
 
           <div id="optionsPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-2 z-20">
-            <label class="flex justify-between text-xs sm:text-sm">Forage <input type="checkbox" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Clôture <input type="checkbox" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">Forage <input type="checkbox" id="checkForage" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">Clôture <input type="checkbox" id="checkCloture" /></label>
             <label class="flex justify-between text-xs sm:text-sm">Aménagement Paysager <input
-                type="checkbox" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Domotique <input type="checkbox" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Solaire <input type="checkbox" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Piscine <input type="checkbox" /></label>
+                type="checkbox" id="checkPaysage" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">Domotique <input type="checkbox" id="checkDomotique" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">Solaire <input type="checkbox" id="checkSolaire" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">Piscine <input type="checkbox" id="checkPiscine" /></label>
 
             <button class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
               Valider
@@ -320,6 +319,7 @@
 
         <!-- BOUTON FINAL -->
         <button
+          onclick="startSimulation()"
           class="col-span-1 sm:col-span-2 md:col-span-2 w-full h-10 px-4 flex items-center justify-center bg-primary text-white rounded-lg text-xs sm:text-sm hover:bg-opacity-90">
           Poursuivre La Simulation
         </button>
@@ -1892,14 +1892,15 @@
   </footer>
   <!-- ================= JS ================= -->
   <script>
-
     // changement d'image dans le hero
     const buttons = document.querySelectorAll(".tabBtn");
     const hero = document.getElementById("heroImage");
+    let selectedSecteur = "residentiel";
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         hero.src = btn.dataset.img;
+        selectedSecteur = btn.dataset.secteur;
 
         buttons.forEach((b) => {
           b.classList.remove("bg-white", "shadow");
@@ -1909,10 +1910,50 @@
         btn.classList.add("bg-white", "shadow");
       });
     });
-    // ---------------- CONFIG DROPDOWN ------------------
-    openConfig.onclick = () => configPanel.classList.toggle("hidden");
-    openStand.onclick = () => standPanel.classList.toggle("hidden");
-    openOptions.onclick = () => optionsPanel.classList.toggle("hidden");
+
+    // ---------------- STANDING SELECTION ------------------
+    let selectedStanding = "confort";
+    const standOptions = document.querySelectorAll(".standOption");
+    standOptions.forEach(opt => {
+        opt.onclick = (e) => {
+            e.stopPropagation();
+            selectedStanding = opt.dataset.value;
+            standOptions.forEach(o => o.classList.remove("bg-gray-100"));
+            opt.classList.add("bg-gray-100");
+            standPanel.classList.add("hidden");
+            openStand.querySelector(".arrow").classList.remove("rotate-180");
+        };
+    });
+
+    // ---------------- DROPDOWN LOGIC ------------------
+    function togglePanel(button, panel) {
+      const isHidden = panel.classList.contains("hidden");
+      
+      // Close all first
+      [configPanel, standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
+      document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate-180"));
+
+      if (isHidden) {
+        panel.classList.remove("hidden");
+        const arrow = button.querySelector(".arrow");
+        arrow.classList.add("rotate-180");
+      }
+    }
+
+    openConfig.onclick = (e) => { e.stopPropagation(); togglePanel(openConfig, configPanel); };
+    openStand.onclick = (e) => { e.stopPropagation(); togglePanel(openStand, standPanel); };
+    openOptions.onclick = (e) => { e.stopPropagation(); togglePanel(openOptions, optionsPanel); };
+
+    // Prevent panel clicks from closing themselves
+    [configPanel, standPanel, optionsPanel].forEach(p => {
+        p.onclick = (e) => e.stopPropagation();
+    });
+
+    // Clic extérieur pour fermer
+    document.addEventListener("click", () => {
+      [configPanel, standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
+      document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate-180"));
+    });
 
     // Salles de bain counter
     document.querySelector(".plusBath").onclick = () => {
@@ -1932,15 +1973,34 @@
         bedCount.textContent = Number(bedCount.textContent) - 1;
     };
 
-    function togglePanel(button, panel) {
-      panel.classList.toggle("hidden");
-      const arrow = button.querySelector(".arrow");
-      arrow.classList.toggle("rotate-180");
-    }
+    // ---------------- START SIMULATION ------------------
+    function startSimulation() {
+        const params = new URLSearchParams();
+        params.append("secteur", selectedSecteur);
+        params.append("surface", document.getElementById("surfaceBatie").value || "");
+        params.append("surface_terrain", document.getElementById("surfaceDispo").value || "");
+        params.append("standing", selectedStanding);
+        
+        // Configuration
+        params.append("espaces_communs", document.getElementById("checkEspaces").checked ? 1 : 0);
+        params.append("nb_baths", bathCount.textContent);
+        params.append("nb_beds", bedCount.textContent);
 
-    openConfig.onclick = () => togglePanel(openConfig, configPanel);
-    openStand.onclick = () => togglePanel(openStand, standPanel);
-    openOptions.onclick = () => togglePanel(openOptions, optionsPanel);
+        // Options
+        const options = [];
+        if (document.getElementById("checkForage").checked) options.push("forage");
+        if (document.getElementById("checkCloture").checked) options.push("cloture");
+        if (document.getElementById("checkPaysage").checked) options.push("paysager");
+        if (document.getElementById("checkDomotique").checked) options.push("domotique");
+        if (document.getElementById("checkSolaire").checked) options.push("solaire");
+        if (document.getElementById("checkPiscine").checked) options.push("piscine");
+        
+        if (options.length > 0) {
+            params.append("options", options.join(","));
+        }
+
+        window.location.href = "{{ route('simulator.v1') }}?" + params.toString();
+    }
   </script>
   @include('frontend.partials.rdv-modal')
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
