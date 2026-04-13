@@ -17,6 +17,13 @@
         border-radius: 99px;
     }
     #navBar { background-color: #162064 !important; }
+    
+    @media print {
+        body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; background-color: white !important; }
+        header, footer, nav, #navBar, .no-print { display: none !important; }
+        .min-h-screen { padding-top: 0 !important; padding-bottom: 0 !important; min-height: auto !important; }
+        .bg-gray-50 { background-color: transparent !important; }
+    }
 </style>
 @endsection
 
@@ -24,7 +31,7 @@
 <div class="min-h-screen pt-40 pb-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
         <!-- Back Button & Title -->
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center justify-between mb-8 print:hidden">
             <a href="{{ route('profile') }}" class="flex items-center gap-2 text-gray-500 hover:text-[#162064] transition-colors font-bold">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 Retour à l'historique

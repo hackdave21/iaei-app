@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculateur Energie - AIAE</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -193,6 +194,101 @@
       }));
     };
 
+    const fetchCsrfToken = () => {
+      const token = document.querySelector('meta[name="csrf-token"]');
+      return token ? token.getAttribute('content') : '';
+    };
+
+    const handleQuoteRequest = async () => {
+      const authEmail = "{{ auth()->check() ? auth()->user()->email : '' }}";
+      const authName = "{{ auth()->check() ? auth()->user()->name : '' }}";
+
+      const { value: formValues } = await window.Swal.fire({
+        title: 'Demande de devis formel',
+        html: `
+          <div class="text-left space-y-4">
+            <p class="text-sm text-gray-500 mb-4">Laissez-nous vos coordonnées pour recevoir votre devis détaillé basé sur cette configuration solaire.</p>
+            <input id="swal-name" class="swal2-input !mt-0 !w-[100%] !max-w-[100%]" placeholder="Nom Complet *" value="${authName}" ${authName ? 'disabled' : ''}>
+            <input id="swal-email" type="email" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="Email *" value="${authEmail}" ${authEmail ? 'disabled' : ''}>
+            <input id="swal-phone" type="tel" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="Téléphone *">
+            <input id="swal-location" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="Ville du projet (ex: Lomé)">
+          </div>
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Envoyer ma demande',
+        cancelButtonText: 'Annuler',
+        confirmButtonColor: 'var(--orange)',
+        preConfirm: () => {
+          const name = document.getElementById('swal-name').value;
+          const email = document.getElementById('swal-email').value;
+          const phone = document.getElementById('swal-phone').value;
+          const location = document.getElementById('swal-location').value;
+          
+          if (!name || !email || !phone) {
+            window.Swal.showValidationMessage('Veuillez remplir les champs obligatoires (*)');
+            return false;
+          }
+          return { full_name: name, email: email, phone: phone, location: location };
+        }
+      });
+
+      if (formValues) {
+        // Préparation du résumé du projet ("project_description")
+        const detailsInv = monInventaire.map(e => `- ${e.qty}x ${e.label} (${e.h}h/j)`).join('\n');
+        
+        const summary = `DEMANDE DE DEVIS - SYSTÈME SOLAIRE AIAE\n\n` + 
+        `Configuration :\n` +
+        `- Mode : ${mode}\n` +
+        `- Consommation estimée : ${resultats.consoKwhJ.toFixed(1)} kWh/jour\n` +
+        `- Panneaux recommandés : ${resultats.panneauxKwc} kWc\n` +
+        `- Batteries recommandées : ${resultats.batteriesKwh} kWh\n` +
+        `- Puissance Onduleur : ${resultats.puissanceOnduleur} kVA\n\n` +
+        `Inventaire :\n${detailsInv}`;
+
+        window.Swal.fire({ title: 'Génération en cours...', allowOutsideClick: false });
+        window.Swal.showLoading();
+
+        try {
+          const formData = new FormData();
+          formData.append('full_name', formValues.full_name);
+          formData.append('email', formValues.email);
+          formData.append('phone', formValues.phone);
+          formData.append('location', formValues.location);
+          formData.append('project_type', 'Energie Solaire');
+          formData.append('project_description', summary);
+          formData.append('budget', resultats.coutMin.toString());
+
+          const res = await fetch('{{ route("quotation.request") }}', {
+            method: 'POST',
+            headers: {
+              'X-CSRF-TOKEN': fetchCsrfToken()
+            },
+            body: formData
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            window.Swal.fire({
+              icon: 'success',
+              title: 'Demande envoyée !',
+              text: data.message,
+              confirmButtonColor: 'var(--bleu)'
+            });
+          } else {
+            throw new Error(data.message || 'Erreur lors de l\'envoi');
+          }
+        } catch (err) {
+          window.Swal.fire({
+            icon: 'error',
+            title: 'Oups...',
+            text: err.message,
+            confirmButtonColor: 'var(--orange)'
+          });
+        }
+      }
+    };
+
     return (
       <div className="min-h-screen py-8 px-4 md:px-8 max-w-6xl mx-auto">
         
@@ -341,7 +437,7 @@
             <div className="sticky top-6 space-y-4">
               
               {/* CARTE RÉSULTAT TECHNIQUE */}
-              <div className="card p-6" style={{background: 'linear-gradient(145deg, #1e293b 0%, #0f172a 100%)', color: 'white'}}>
+              <div className="card p-6" style={{background: 'var(--bleu)', color: 'white'}}>
                 <h3 className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-6">Configuration Recommandée</h3>
                 
                 <div className="space-y-6">
@@ -400,8 +496,8 @@
                 </div>
 
                 <div className="space-y-2">
-                  <button className="btn-primary w-full py-3 rounded-xl font-bold uppercase tracking-wide shadow-lg shadow-orange-200 flex items-center justify-center gap-2">
-                    <Icon name="ClipboardList" size={18} /> Demander un devis formel
+                  <button onClick={handleQuoteRequest} className="btn-primary w-full py-3 rounded-xl font-bold uppercase tracking-wide shadow-lg shadow-orange-200 flex items-center justify-center gap-2">
+                     Demander un devis formel
                   </button>
                   <button onClick={() => window.print()} className="w-full py-3 text-sm text-gray-500 hover:text-[var(--bleu)] transition-colors flex items-center justify-center gap-2">
                     <Icon name="Download" size={14} /> Télécharger la fiche PDF

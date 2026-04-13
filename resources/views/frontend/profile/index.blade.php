@@ -65,7 +65,6 @@
                             {{ substr($user->name, 0, 1) }}
                         </div>
                         <h2 class="text-xl font-bold text-[#162064]">{{ $user->name }}</h2>
-                        <p class="text-gray-500 text-sm italic">Client Privilège</p>
                     </div>
 
                     <nav class="space-y-2">
