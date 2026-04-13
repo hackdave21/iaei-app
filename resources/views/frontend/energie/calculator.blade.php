@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulateur Solaire Autonome - AIAE Energy</title>
-  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <title>Calculateur Energie - AIAE</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* Charte Graphique AIAE simplifiée */
     :root {
       --bleu: #0E1540;
       --vert: #05482C;
@@ -19,204 +24,407 @@
     body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: #1e293b; }
     .mono { font-family: 'JetBrains Mono', monospace; }
     
+    /* Composants UI personnalisés */
     .card { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; overflow: hidden; }
     .btn-primary { background: var(--orange); color: white; transition: 0.2s; }
     .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .tab-active { border-bottom: 3px solid var(--orange); color: var(--bleu); font-weight: 600; }
+    .tab-inactive { color: #64748b; }
     .input-field { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s; }
-    .input-field:focus { border-color: var(--orange); }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in { animation: fadeIn 0.4s ease-out; }
-
-    /* Custom Navbar from index.html / header.js style */
-    header { background: white; border-bottom: 1px solid #e2e8f0; }
+    .input-field:focus { border-color: var(--orange); ring: 2px solid #ffedc2; }
   </style>
+  <script src="js/tailwind-config.js"></script>
 </head>
 <body>
 
-<div class="min-h-screen py-8 px-4 md:px-8 max-w-6xl mx-auto">
+<div id="root"></div>
+
+<script>
+    window.AIAE_ENERGY_CONFIG = {
+        equipements: @json($equipements),
+        zones: @json($zones)
+    };
+</script>
+<script type="text/babel">
+@verbatim
+  const { useState, useEffect, useMemo, useRef } = React;
+
+  // COMPOSANT ICONES LUCIDE
+  const Icon = ({name, size=20, className="", ...props}) => {
+    const iconRef = useRef(null);
+    useEffect(() => {
+      if (window.lucide && iconRef.current) {
+        const kebabName = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+        iconRef.current.innerHTML = `<i data-lucide="${kebabName}"></i>`;
+        try {
+          window.lucide.createIcons({
+            attrs: { width: size, height: size, 'stroke-width': 1.5, class: className, stroke: 'currentColor' },
+            nameAttr: 'data-lucide'
+          });
+        } catch (e) { console.error("Lucide error:", e); }
+      }
+    }, [name, size, className]);
+    return <span ref={iconRef} className="inline-flex items-center justify-center" style={{minWidth:size, minHeight:size, lineHeight:0}}></span>;
+  };
+
+  // --- DONNÉES DE RÉFÉRENCE ---
+  const config = window.AIAE_ENERGY_CONFIG || { equipements: [], zones: [] };
+  
+  const REFERENTIEL = {
+    prixKwhReseau: 140,
+    ensoleillement: config.zones?.[0]?.hsp_heures || 4.8, 
+    perteSysteme: 0.25,
+    ratioBatterie: 1.5,
+    prixInstallationWc: 1200,
     
-    <!-- EN-TÊTE -->
-    <header class="flex items-center gap-4 mb-10 bg-transparent border-0 p-0">
-      <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white text-2xl" style="background: var(--vert)">⚡</div>
-      <div>
-        <h1 class="text-2xl font-bold" style="color: var(--bleu)">Simulateur Solaire AIAE</h1>
-        <p class="text-gray-500 text-sm">Dimensionnement autonome & Estimation financière</p>
-      </div>
-      <div class="ml-auto">
-          <a href="{{ route('home') }}" class="text-sm font-bold text-gray-400 hover:text-gray-600">← Retour</a>
-      </div>
-    </header>
+    // Mapping des icônes par code d'équipement (Noms Lucide officiels)
+    icons: {
+        'clim': 'Snowflake', 'frigo': 'Thermometer', 'congel': 'IceCream', 'tv': 'Tv',
+        'eclairage': 'Lightbulb', 'ventilo': 'Wind', 'ordi': 'Laptop', 'pompe': 'Droplets',
+        'chauffe_eau': 'Thermometer', 'moteur': 'Zap', 'defaut': 'Zap'
+    },
 
-    <div class="grid lg:grid-cols-12 gap-8">
-      
-      <!-- COLONNE GAUCHE : SAISIE (7/12) -->
-      <div class="lg:col-span-7 space-y-6">
-        
-        <!-- SÉLECTEUR DE MODE -->
-        <div class="card p-2 flex">
-          <button id="btn-mode-facture" class="flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all">
-            🧾 D'après ma facture
-          </button>
-          <button id="btn-mode-equipements" class="flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all">
-            ❄️ D'après mes appareils
-          </button>
-        </div>
+    equipements: config.equipements.map(e => ({
+      id: e.code || e.id,
+      label: e.designation,
+      puis: e.puissance_watts,
+      h: e.usage_heures_jour || 8,
+      icon: e.code ? e.code.split('_')[0].toLowerCase() : 'Zap'
+    }))
+  };
 
-        <!-- CONTENU MODE FACTURE -->
-        <div id="mode-facture-content" class="card p-6">
-          <h2 class="text-lg font-bold mb-4">Montant mensuel électricité</h2>
-          <label class="block text-sm text-gray-500 mb-2">Combien payez-vous en moyenne par mois (CEET/CIE) ?</label>
-          <div class="flex items-center gap-4">
-            <input 
-              id="input-bill-range"
-              type="range" 
-              min="5000" max="500000" step="5000" 
-              value="50000"
-              class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[var(--orange)]"
-            />
-            <div class="w-40">
-              <div class="relative">
-                <input 
-                  id="input-bill-number"
-                  type="number" 
-                  value="50000"
-                  class="input-field text-right font-bold mono text-lg pr-12"
-                />
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">FCFA</span>
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 p-4 bg-orange-50 rounded-lg border border-orange-100 text-sm text-orange-800">
-            <p>💡 <strong>Note :</strong> Ce mode estime vos besoins globaux. Pour une précision technique (surtout pour les batteries), le mode "Appareils" est recommandé.</p>
-          </div>
-        </div>
+  // Fallback si la base est vide
+  if (REFERENTIEL.equipements.length === 0) {
+    REFERENTIEL.equipements = [
+      { id: 'clim1', label: 'Climatiseur 1 CV', puis: 900, h: 8, icon: 'clim' },
+      { id: 'frigo', label: 'Réfrigérateur A+', puis: 150, h: 12, icon: 'frigo' },
+      { id: 'tv', label: 'Télévision LED', puis: 100, h: 5, icon: 'tv' },
+      { id: 'eclairage', label: 'Éclairage LED', puis: 100, h: 6, icon: 'eclairage' }
+    ];
+  }
 
-        <!-- CONTENU MODE ÉQUIPEMENTS -->
-        <div id="mode-equipements-content" class="card p-6 hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold">Inventaire des appareils</h2>
-            <div id="total-conso-label" class="text-xs bg-gray-100 px-2 py-1 rounded">Total estimé : 0.00 kWh/j</div>
-          </div>
+  // --- UTILITAIRES DE FORMATAGE ---
+  const fmt = (n) => new Intl.NumberFormat('fr-FR').format(Math.round(n));
+  const fmtM = (n) => n >= 1000000 ? (n/1000000).toFixed(2) + ' M' : fmt(n);
 
-          <!-- Liste active -->
-          <div id="list-inventaire" class="space-y-3 mb-6"></div>
+  const App = () => {
+    // État principal
+    const [mode, setMode] = useState('facture'); // 'facture' ou 'equipements'
+    const [factureMensuelle, setFactureMensuelle] = useState(50000);
+    const [monInventaire, setMonInventaire] = useState([
+      { ...REFERENTIEL.equipements[0], qty: 1 }, // Défaut: 1 Clim
+      { ...REFERENTIEL.equipements[3], qty: 1 }, // Défaut: 1 Frigo
+      { ...REFERENTIEL.equipements[6], qty: 1 }, // Défaut: Lumières
+    ]);
 
-          <!-- Ajout rapide -->
-          <div>
-            <label class="text-sm font-semibold text-gray-700 block mb-2">Ajouter un équipement :</label>
-            <div id="add-fast-container" class="flex flex-wrap gap-2"></div>
-          </div>
-        </div>
-      </div>
+    // --- MOTEUR DE CALCUL ---
+    const resultats = useMemo(() => {
+      let consoJournaliereWh = 0;
+      let puissanceCreteW = 0; // Puissance instantanée max nécessaire
 
-      <!-- COLONNE DROITE : RÉSULTATS (5/12) -->
-      <div class="lg:col-span-5">
-        <div class="sticky top-6 space-y-4">
-          
-          <!-- CARTE RÉSULTAT TECHNIQUE -->
-          <div class="card p-6" style="background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); color: white">
-            <h3 class="text-orange-400 text-sm font-bold uppercase tracking-wider mb-6">Configuration Recommandée</h3>
-            
-            <div class="space-y-6">
-              <!-- Solaire -->
-              <div class="flex items-center justify-between border-b border-gray-700 pb-4">
-                <div class="flex items-center gap-3">
-                  <div class="text-2xl">☀️</div>
-                  <div>
-                    <div class="text-sm text-gray-400">Champ Solaire</div>
-                    <div id="res-panneaux" class="font-bold text-lg">0.0 kWc</div>
-                  </div>
-                </div>
-                <div id="res-nb-panneaux" class="text-right text-xs text-gray-500">~0 panneaux<br/>de 500Wc</div>
-              </div>
-
-              <!-- Onduleur -->
-              <div class="flex items-center justify-between border-b border-gray-700 pb-4">
-                <div class="flex items-center gap-3">
-                  <div class="text-2xl">⚡</div>
-                  <div>
-                    <div class="text-sm text-gray-400">Onduleur Hybride</div>
-                    <div id="res-onduleur" class="font-bold text-lg">0 kVA</div>
-                  </div>
-                </div>
-                <div class="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">Monophasé</div>
-              </div>
-
-              <!-- Batteries -->
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="text-2xl">🔋</div>
-                  <div>
-                    <div class="text-sm text-gray-400">Stockage Lithium</div>
-                    <div id="res-batterie" class="font-bold text-lg">0.0 kWh</div>
-                  </div>
-                </div>
-                <div class="text-right text-xs text-gray-500">Autonomie<br/>Nuit + Secours</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARTE ESTIMATION FINANCIÈRE -->
-          <div class="card p-6 border-t-4 border-[var(--orange)]">
-            <h3 class="font-bold text-gray-800 mb-2">Estimation Budget Clé en Main</h3>
-            <p class="text-xs text-gray-500 mb-4">Inclut : Matériel, Pose, Protection et Mise en service.</p>
-            
-            <div class="text-center py-4 bg-gray-50 rounded-lg mb-4">
-              <div id="res-prix-moyen" class="text-3xl font-bold mono" style="color:var(--bleu)">0 F</div>
-              <div id="res-prix-range" class="text-xs text-gray-400 mt-1">Fourchette : 0 - 0 FCFA</div>
-            </div>
-
-            <div class="space-y-2">
-              <button class="btn-primary w-full py-3 rounded-lg font-semibold shadow-lg shadow-orange-200">
-                Demander un devis formel
-              </button>
-              <button onclick="window.print()" class="w-full py-3 text-sm text-gray-500 hover:text-gray-800 underline">
-                Télécharger la fiche PDF
-              </button>
-            </div>
-          </div>
-
-          <!-- NOTE DE BAS DE PAGE -->
-          <div class="text-xs text-gray-400 text-center leading-relaxed">
-            *Cette simulation est indicative et non contractuelle. Les prix peuvent varier selon la complexité de l'installation et la marque du matériel (Victron, Huawei, etc.).
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="{{ asset('aiae-frontend/js/simulateur_energy_vanilla.js') }}"></script>
-  <script>
-    @php
-        $mappedEquipements = $equipements->map(function($e) {
-            return [
-                'id' => $e->id,
-                'label' => $e->designation,
-                'puis' => $e->puissance_watts,
-                'h' => $e->usage_heures_jour ?? 8
-            ];
+      if (mode === 'facture') {
+        // Méthode 1: Rétro-ingénierie depuis la facture
+        const kwhMois = factureMensuelle / REFERENTIEL.prixKwhReseau;
+        consoJournaliereWh = (kwhMois * 1000) / 30;
+        // Estimation de la pointe (empirique : on estime que 20% des appareils tournent en même temps au max, ou ratio fixe)
+        puissanceCreteW = consoJournaliereWh / 4; // Ratio approximatif pour dimensionner l'onduleur
+      } else {
+        // Méthode 2: Somme des équipements
+        monInventaire.forEach(item => {
+          consoJournaliereWh += item.puis * item.qty * item.h;
+          // On considère un facteur de simultanéité de 70% pour la pointe
+          puissanceCreteW += item.puis * item.qty * 0.7;
         });
-    @endphp
-    
-    // Injection des données depuis Laravel
-    const AIAE_ENERGY_CONFIG = {
-        equipements: @json($mappedEquipements)
+      }
+
+      // Dimensionnement Solaire (Panneaux)
+      // Formule : Besoin / (Ensoleillement * (1 - Pertes))
+      const besoinPanneauxWc = consoJournaliereWh / (REFERENTIEL.ensoleillement * (1 - REFERENTIEL.perteSysteme));
+      
+      // Dimensionnement Batteries (Stockage)
+      // On vise à couvrir 50% de la conso la nuit + réserve de sécurité
+      const besoinBatterieWh = (consoJournaliereWh * 0.5) * REFERENTIEL.ratioBatterie;
+
+      // Estimation Prix
+      // Prix dégressif selon la taille
+      let coutEstime = besoinPanneauxWc * REFERENTIEL.prixInstallationWc;
+      // Ajout part fixe (tableau, câblage de base)
+      coutEstime += 500000;
+      // Ajout coût batterie (lithium estimé à 250F/Wh)
+      coutEstime += besoinBatterieWh * 250;
+
+      return {
+        consoKwhJ: consoJournaliereWh / 1000,
+        puissanceOnduleur: Math.ceil((puissanceCreteW * 1.2) / 1000), // +20% marge sécu
+        panneauxKwc: (besoinPanneauxWc / 1000).toFixed(1),
+        batteriesKwh: (besoinBatterieWh / 1000).toFixed(1),
+        coutMin: Math.round(coutEstime * 0.9),
+        coutMax: Math.round(coutEstime * 1.15)
+      };
+    }, [mode, factureMensuelle, monInventaire]);
+
+    // --- GESTIONNAIRES D'ÉVÉNEMENTS ---
+    const ajouterEquipement = (id) => {
+      const ref = REFERENTIEL.equipements.find(e => e.id === id);
+      const existe = monInventaire.find(e => e.id === id);
+      if (existe) {
+        setMonInventaire(monInventaire.map(e => e.id === id ? { ...e, qty: e.qty + 1 } : e));
+      } else {
+        setMonInventaire([...monInventaire, { ...ref, qty: 1 }]);
+      }
     };
 
-    window.addEventListener('DOMContentLoaded', () => {
-        if (typeof AIAEEnergySimulator !== 'undefined') {
-            const simulator = new AIAEEnergySimulator(AIAE_ENERGY_CONFIG);
-            // On peut exposer le simulateur si besoin
-            window.AIAE_ENERGY_APP = simulator;
-        }
-    });
-  </script>
-  @include('frontend.partials.rdv-modal')
+    const retirerEquipement = (id) => {
+      setMonInventaire(monInventaire.filter(e => e.id !== id));
+    };
+
+    const changerQte = (id, delta) => {
+      setMonInventaire(monInventaire.map(e => {
+        if (e.id === id) return { ...e, qty: Math.max(1, e.qty + delta) };
+        return e;
+      }));
+    };
+
+    const changerHeures = (id, val) => {
+      setMonInventaire(monInventaire.map(e => {
+        if (e.id === id) return { ...e, h: Math.min(24, Math.max(0, parseFloat(val))) };
+        return e;
+      }));
+    };
+
+    return (
+      <div className="min-h-screen py-8 px-4 md:px-8 max-w-6xl mx-auto">
+        
+        {/* EN-TÊTE */}
+        <header className="flex items-center justify-between mb-10 no-print">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white" style={{background: 'var(--vert)'}}>
+              <Icon name="Zap" size={24} />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold" style={{color: 'var(--bleu)'}}>Simulateur Solaire AIAE</h1>
+              <p className="text-gray-500 text-sm">Dimensionnement autonome & Estimation financière</p>
+            </div>
+          </div>
+          <a href="/" className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-2">
+            <Icon name="ArrowLeft" size={16} /> Retour
+          </a>
+        </header>
+
+        <div className="grid lg:grid-cols-12 gap-8">
+          
+          {/* COLONNE GAUCHE : SAISIE (7/12) */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* SÉLECTEUR DE MODE */}
+            <div className="card p-2 flex">
+              <button 
+                onClick={() => setMode('facture')}
+                className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 ${mode === 'facture' ? 'bg-white text-[var(--orange)] shadow-sm' : 'text-gray-500 hover:bg-white/50'}`}
+                style={mode === 'facture' ? {border: '1px solid #fed7aa'} : {}}
+              >
+                <Icon name="Receipt" size={18} /> D'après ma facture
+              </button>
+              <button 
+                onClick={() => setMode('equipements')}
+                className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 ${mode === 'equipements' ? 'bg-white text-[var(--orange)] shadow-sm' : 'text-gray-500 hover:bg-white/50'}`}
+                style={mode === 'equipements' ? {border: '1px solid #fed7aa'} : {}}
+              >
+                <Icon name="Settings" size={18} /> D'après mes appareils
+              </button>
+            </div>
+
+            {/* CONTENU MODE FACTURE */}
+            {mode === 'facture' && (
+              <div className="card p-6 animate-fade-in">
+                <h2 className="text-lg font-bold mb-4">Montant mensuel électricité</h2>
+                <label className="block text-sm text-gray-500 mb-2">Combien payez-vous en moyenne par mois (CEET/CIE) ?</label>
+                <div className="flex items-center gap-4">
+                  <input 
+                    type="range" 
+                    min="5000" max="500000" step="5000" 
+                    value={factureMensuelle} 
+                    onChange={(e) => setFactureMensuelle(Number(e.target.value))}
+                    className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[var(--orange)]"
+                  />
+                  <div className="w-40">
+                    <div className="relative">
+                      <input 
+                        type="number" 
+                        value={factureMensuelle} 
+                        onChange={(e) => setFactureMensuelle(Number(e.target.value))}
+                        className="input-field text-right font-bold mono text-lg pr-12"
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">FCFA</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-orange-50 rounded-lg border border-orange-100 text-sm text-orange-800">
+                  <p>💡 <strong>Note :</strong> Ce mode estime vos besoins globaux. Pour une précision technique (surtout pour les batteries), le mode "Appareils" est recommandé.</p>
+                </div>
+              </div>
+            )}
+
+            {/* CONTENU MODE ÉQUIPEMENTS */}
+            {mode === 'equipements' && (
+              <div className="card p-6 animate-fade-in">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-bold">Inventaire des appareils</h2>
+                  <div className="text-xs bg-gray-100 px-2 py-1 rounded">Total estimé : {fmt(resultats.consoKwhJ)} kWh/j</div>
+                </div>
+
+                {/* Liste active */}
+                <div className="space-y-3 mb-6">
+                  {monInventaire.map((item, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 border rounded-lg bg-white hover:border-[var(--vert)] transition-colors shadow-sm">
+                      <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-[var(--vert)]">
+                        <Icon name={REFERENTIEL.icons[item.icon] || 'Zap'} size={20} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-sm text-[var(--bleu)]">{item.label}</div>
+                        <div className="text-xs text-gray-400">{item.puis} W</div>
+                      </div>
+                      
+                      {/* Contrôle Heures */}
+                      <div className="flex flex-col items-center px-2 border-l border-r border-gray-100">
+                        <label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">Utilisation</label>
+                        <div className="flex items-center gap-1">
+                            <input 
+                              type="number" min="0" max="24" step="0.5"
+                              value={item.h} 
+                              onChange={(e) => changerHeures(item.id, e.target.value)}
+                              className="w-10 text-center font-bold text-sm bg-transparent outline-none"
+                            />
+                            <span className="text-[10px] text-gray-400">h/j</span>
+                        </div>
+                      </div>
+
+                      {/* Contrôle Quantité */}
+                      <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
+                        <button onClick={() => changerQte(item.id, -1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-red-500 transition-colors">
+                          <Icon name="Minus" size={12} />
+                        </button>
+                        <span className="w-6 text-center text-sm font-bold text-[var(--bleu)]">{item.qty}</span>
+                        <button onClick={() => changerQte(item.id, 1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-[var(--vert)] transition-colors">
+                          <Icon name="Plus" size={12} />
+                        </button>
+                      </div>
+
+                      <button onClick={() => retirerEquipement(item.id)} className="text-gray-300 hover:text-red-500 transition-colors ml-1">
+                        <Icon name="Trash2" size={16} />
+                      </button>
+                    </div>
+                  ))}
+                  {monInventaire.length === 0 && <div className="text-center py-8 text-gray-400 border-2 border-dashed rounded-lg">Aucun équipement ajouté</div>}
+                </div>
+
+                {/* Ajout rapide */}
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 block mb-2">Ajouter un équipement :</label>
+                  <div className="flex flex-wrap gap-2">
+                    {REFERENTIEL.equipements.filter(e => !monInventaire.find(m => m.id === e.id)).map(e => (
+                      <button 
+                        key={e.id}
+                        onClick={() => ajouterEquipement(e.id)}
+                        className="px-3 py-1.5 text-xs bg-white hover:bg-[var(--vert)] hover:text-white rounded-lg border border-gray-200 transition-all flex items-center gap-2 shadow-sm"
+                      >
+                        <Icon name={REFERENTIEL.icons[e.icon] || 'Plus'} size={12} /> {e.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* COLONNE DROITE : RÉSULTATS (5/12) */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-6 space-y-4">
+              
+              {/* CARTE RÉSULTAT TECHNIQUE */}
+              <div className="card p-6" style={{background: 'linear-gradient(145deg, #1e293b 0%, #0f172a 100%)', color: 'white'}}>
+                <h3 className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-6">Configuration Recommandée</h3>
+                
+                <div className="space-y-6">
+                  {/* Solaire */}
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-orange-400/20 flex items-center justify-center text-orange-400">
+                        <Icon name="Sun" size={20} />
+                      </div>
+                      <div>
+                        <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Champ Solaire</div>
+                        <div className="font-bold text-lg">{resultats.panneauxKwc} kWc</div>
+                      </div>
+                    </div>
+                    <div className="text-right text-xs text-gray-500">~{Math.ceil(resultats.panneauxKwc * 2)} panneaux<br/>de 500Wc</div>
+                  </div>
+
+                  {/* Onduleur */}
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center text-blue-400">
+                        <Icon name="Cpu" size={20} />
+                      </div>
+                      <div>
+                        <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Onduleur Hybride</div>
+                        <div className="font-bold text-lg">{resultats.puissanceOnduleur} kVA</div>
+                      </div>
+                    </div>
+                    <div className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full border border-blue-500/30 uppercase font-bold">Monophasé</div>
+                  </div>
+
+                  {/* Batteries */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-green-400/20 flex items-center justify-center text-green-400">
+                        <Icon name="BatteryCharging" size={20} />
+                      </div>
+                      <div>
+                        <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Stockage Lithium</div>
+                        <div className="font-bold text-lg">{resultats.batteriesKwh} kWh</div>
+                      </div>
+                    </div>
+                    <div className="text-right text-xs text-gray-500">Autonomie<br/><span className="text-green-400">Nuit + Secours</span></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CARTE ESTIMATION FINANCIÈRE */}
+              <div className="card p-6 border-t-4 border-[var(--orange)]">
+                <h3 className="font-bold text-gray-800 mb-2">Estimation Budget Clé en Main</h3>
+                <p className="text-xs text-gray-500 mb-4">Inclut : Matériel, Pose, Protection et Mise en service.</p>
+                
+                <div className="text-center py-4 bg-gray-50 rounded-lg mb-4">
+                  <div className="text-3xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtM((resultats.coutMin + resultats.coutMax)/2)} F</div>
+                  <div className="text-xs text-gray-400 mt-1">Fourchette : {fmtM(resultats.coutMin)} - {fmtM(resultats.coutMax)} FCFA</div>
+                </div>
+
+                <div className="space-y-2">
+                  <button className="btn-primary w-full py-3 rounded-xl font-bold uppercase tracking-wide shadow-lg shadow-orange-200 flex items-center justify-center gap-2">
+                    <Icon name="ClipboardList" size={18} /> Demander un devis formel
+                  </button>
+                  <button onClick={() => window.print()} className="w-full py-3 text-sm text-gray-500 hover:text-[var(--bleu)] transition-colors flex items-center justify-center gap-2">
+                    <Icon name="Download" size={14} /> Télécharger la fiche PDF
+                  </button>
+                </div>
+              </div>
+
+              {/* NOTE DE BAS DE PAGE */}
+              <div className="text-xs text-gray-400 text-center leading-relaxed">
+                *Cette simulation est indicative et non contractuelle. Les prix peuvent varier selon la complexité de l'installation et la marque du matériel (Victron, Huawei, etc.).
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+@endverbatim
+</script>
+
 </body>
 </html>
