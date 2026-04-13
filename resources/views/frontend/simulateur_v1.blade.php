@@ -171,9 +171,10 @@ const App=()=>{
   // ÉTAT
   const qs = window.QUICK_START || {};
   const initSecteur = qs.secteur || window.INITIAL_SECTEUR || '';
+  const fromHomePage = !!qs.standing;
   
   const [page,setPage]=useState(initSecteur ? 'sim' : 'accueil');
-  const [etape,setEtape]=useState(initSecteur ? 2 : 1);
+  const [etape,setEtape]=useState(initSecteur ? (fromHomePage ? 2 : 1) : 1);
   const [secteur,setSecteur]=useState(initSecteur);
   const [typeBat,setTypeBat]=useState('');
   const [standing,setStanding]=useState(qs.standing || 'confort');
@@ -883,7 +884,7 @@ const App=()=>{
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card p-5">
-                <h3 className="font-semibold text-gray-700 mb-4">🔒 Sécurité</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">Sécurité</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm text-gray-600">Alarme</label>
@@ -917,14 +918,14 @@ const App=()=>{
               </div>
               {secteur!=='agricole'&&(
                 <div className="card p-5">
-                  <h3 className="font-semibold text-gray-700 mb-4">🛗 Ascenseurs</h3>
+                  <h3 className="font-semibold text-gray-700 mb-4"> Ascenseurs</h3>
                   <InputNum value={nbAsc} onChange={setNbAsc} min={0} max={10} label="Nombre"/>
                   {nbAsc>0&&<p className="text-xs text-gray-500 mt-2">Obligatoire si ERP et R+1</p>}
                 </div>
               )}
             </div>
             <div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">🏡 Extérieurs</h3>
+              <h3 className="font-semibold text-gray-700 mb-4">Extérieurs</h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <div>
                   <label className="flex items-center gap-2 cursor-pointer">
