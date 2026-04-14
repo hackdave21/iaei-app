@@ -17,12 +17,12 @@
     $config = $pageConfigs[$routeName] ?? ['mode' => 'fullwidth', 'bg' => 'bg-darkBlue', 'color' => '#121a44'];
     
     $menuItems = [
-        ['label' => 'Accueil', 'route' => 'home'],
-        ['label' => 'À propos', 'route' => 'about'],
-        ['label' => 'Nos Divisions', 'route' => 'divisions'],
-        ['label' => 'Simulateurs', 'route' => 'simulator.index'],
-        ['label' => 'Diaspora', 'route' => 'diaspora'],
-        ['label' => 'FAQ', 'route' => 'faq'],
+        ['label' => __('Accueil'), 'route' => 'home'],
+        ['label' => __('À propos'), 'route' => 'about'],
+        ['label' => __('Nos Divisions'), 'route' => 'divisions'],
+        ['label' => __('Simulateurs'), 'route' => 'simulator.index'],
+        ['label' => __('Diaspora'), 'route' => 'diaspora'],
+        ['label' => __('FAQ'), 'route' => 'faq'],
     ];
 @endphp
 
@@ -76,11 +76,27 @@
         </ul>
 
         <div class="flex items-center gap-3">
+            <div class="relative group cursor-pointer">
+                <div class="flex items-center gap-1 px-3 h-10 rounded-full bg-glassDark justify-center hover:bg-white/20 transition-colors">
+                    <span class="text-white font-bold text-sm">{{ strtoupper(app()->getLocale()) }}</span>
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                
+                <div class="absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60] overflow-hidden">
+                    <a href="{{ route('lang.switch', 'fr') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'fr' ? 'font-bold bg-gray-50' : '' }}">
+                        Français
+                    </a>
+                    <a href="{{ route('lang.switch', 'en') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'en' ? 'font-bold bg-gray-50' : '' }}">
+                        English
+                    </a>
+                </div>
+            </div>
+
             <a href="{{ route('profile') }}" class="w-10 h-10 rounded-full bg-glassDark flex items-center justify-center hover:bg-white/20 transition-colors">
                 <img src="{{ asset('aiae-frontend/Images/Contact blanc.svg') }}" alt="Profile" class="h-5 w-5" />
             </a>
             <a href="{{ route('contact') }}" class="hidden sm:block px-5 py-2 rounded-full bg-white text-[{{ $config['color'] }}] shadow hover:bg-gray-100 transition-colors">
-                Contact
+                {{ __('Contact') }}
             </a>
             <button id="burger" class="lg:hidden text-2xl rounded-full bg-glassDark p-2" aria-label="Menu">
                 <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -107,7 +123,7 @@
         @endforeach
         
         <a href="{{ route('contact') }}" class="block px-4 py-3 rounded-lg bg-white text-center text-[{{ $config['color'] }}] sm:hidden">
-            Contact
+            {{ __('Contact') }}
         </a>
     </div>
 </header>

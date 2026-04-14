@@ -30,8 +30,8 @@
         <div class="flex flex-col items-start">
           <p class="text-4xl font-bold">@Afrika_AIAE</p>
           <p class="text-sm opacity-80">
-            Suivez nous, <span class="font-bold">Abonnez vous</span> &
-            <span class="font-bold">Likez nos post</span>
+            {{ __('Suivez nous,') }} <span class="font-bold">{{ __('Abonnez vous') }}</span> {{ __('&') }}
+            <span class="font-bold">{{ __('Likez nos post') }}</span>
           </p>
         </div>
       </div>
@@ -48,8 +48,8 @@
         </p>
 
         <p class="text-sm">
-          <span class="font-extrabold">Écrivez nous</span> pour toutes<br />
-          <span class="font-extrabold">informations</span> supplémentaires
+          <span class="font-extrabold">{{ __('Écrivez nous') }}</span> {{ __('pour toutes') }}<br />
+          <span class="font-extrabold">{{ __('informations') }}</span> {{ __('supplémentaires') }}
         </p>
       </div>
     </div>
@@ -69,7 +69,7 @@
 
           <p class="text-[#1a1f4d] text-[22px] leading-relaxed max-w-md">
             <strong>AIAE : Afrika Infrastructures And Equipments.</strong>
-            De la conception à la réalisation.
+            {{ __('De la conception à la réalisation.') }}
           </p>
 
         </div>
@@ -78,15 +78,15 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Nos divisions
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Construction</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Énergie</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Sécurité</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Préfabrication</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Construction') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Énergie') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Préfabrication') }}</a></li>
 
           </ul>
         </div>
@@ -96,13 +96,13 @@
         <div>
 
           <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Contact
+            {{ __('Contact') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
-            <li>Lomé, Togo</li>
-            <li>Interventions sur tout le territoire</li>
+            <li>{{ __('Lomé, Togo') }}</li>
+            <li>{{ __('Interventions sur tout le territoire') }}</li>
             <li>+228 90 03 54 16</li>
             <li>contact@aiae.services</li>
 
@@ -115,32 +115,32 @@
         <div>
 
           <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Accéder à
+            {{ __('Accéder à') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
             <li>
               <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
-                Demander un devis
+                {{ __('Demander un devis') }}
               </a>
             </li>
 
             <li>
               <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
-                Prendre rendez-vous
+                {{ __('Prendre rendez-vous') }}
               </a>
             </li>
 
             <li>
               <a href="{{ route('faq') }}" class="hover:text-[#1a1f4d] transition">
-                FAQ
+                {{ __('FAQ') }}
               </a>
             </li>
 
             <li>
               <a href="{{ route('mentions-legales') }}" class="hover:text-[#1a1f4d] transition">
-                Mentions légales
+                {{ __('Mentions légales') }}
               </a>
             </li>
 
@@ -153,10 +153,9 @@
     </div>
 
 
-    <!-- COPYRIGHT -->
     <div class="bg-[#1a1f4d] text-white text-center mt-20 py-2 text-sm">
 
-      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 

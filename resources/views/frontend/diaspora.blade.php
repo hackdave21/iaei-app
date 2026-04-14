@@ -321,7 +321,7 @@
       <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
 
         <!-- IMAGE -->
-        <img src="{{ asset('aiae-frontend/Images/home.png') }}" class="w-full h-[600px] sm:h-[500px] md:h-[400px] object-cover">
+        <img src="{{ asset('aiae-frontend/Images/etranger.png') }}" class="w-full h-[600px] sm:h-[500px] md:h-[400px] object-cover">
 
         <!-- OVERLAY -->
         <div class="absolute inset-0 bg-black/70"></div>

@@ -28,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Frontend Routes
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fr'])) {
+        session()->put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/divisions', [FrontendController::class, 'divisions'])->name('divisions');
