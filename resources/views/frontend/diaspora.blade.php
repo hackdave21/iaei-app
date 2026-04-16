@@ -652,8 +652,9 @@
   <section class="bg-[#e6e6e6] py-5 w-full">
     <div class="max-w-[1200px] mx-auto px-6 text-center">
       <h2 class="text-[32px] md:text-[60px] font-black uppercase leading-tight">
-        <span class="text-primary">QUESTIONS<br> FRÉQUENTES</span>
-        <span class="text-primary">DE LA<br></span> <span class="text-darkBlue">DIASPORA</span>
+        <span class="text-primary">{!! __('QUESTIONS<br> FRÉQUENTES') !!}</span>
+  <span class="text-primary">{!! __('DE LA<br>') !!}</span> 
+  <span class="text-darkBlue">{{ __('DIASPORA') }}</span>
       </h2>
     </div>
   </section>
@@ -670,15 +671,13 @@
                 01
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Puis-je lancer un projet sans être physiquement au Togo ?
+                {{ __('Puis-je lancer un projet sans être physiquement au Togo ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            Oui, absolument. Tout le processus est conçu pour être géré à distance : études, contrat, paiements,
-            suivi. Votre présence est souhaitable uniquement pour la réception finale, et même cette étape peut se
-            faire par vidéo.
+             {{ __('Oui, absolument. Tout le processus est conçu pour être géré à distance : études, contrat, paiements, suivi. Votre présence est souhaitable uniquement pour la réception finale, et même cette étape peut se faire par vidéo.') }}
           </div>
         </details>
 
@@ -690,14 +689,13 @@
                 02
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Dans quels pays avez-vous des clients de la diaspora ?
+              {{ __('Dans quels pays avez-vous des clients de la diaspora ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            Nous accompagnons des clients résidant en France, au Canada, aux États-Unis, en Allemagne, en Belgique, en
-            Suisse, au Royaume-Uni et dans d’autres pays. Notre organisation est adaptée à tous les fuseaux horaires.
+           {{ __('Nous accompagnons des clients résidant en France, au Canada, aux États-Unis, en Allemagne, en Belgique, en Suisse, au Royaume-Uni et dans d’autres pays. Notre organisation est adaptée à tous les fuseaux horaires.') }}
           </div>
         </details>
 
@@ -709,15 +707,13 @@
                 03
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Quel est le budget minimum pour un projet ?
+              {{ __('Quel est le budget minimum pour un projet ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            Pour une villa Standard de 100 m² en zone Grand Lomé, comptez à partir de 33 millions FCFA (environ 50 000
-            €) pour la construction seule. Ce montant varie selon le standing, la surface et la localisation. Utilisez
-            notre simulateur en ligne pour une estimation personnalisée.
+           {{ __('Pour une villa Standard de 100 m² en zone Grand Lomé, comptez à partir de 33 millions FCFA (environ 50 000 €) pour la construction seule. Ce montant varie selon le standing, la surface et la localisation. Utilisez notre simulateur en ligne pour une estimation personnalisée.') }}
           </div>
         </details>
 
@@ -729,14 +725,13 @@
                 04
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Combien de temps dure la construction ?
+              {{ __('Combien de temps dure la construction ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            De 8 à 18 mois selon la surface et le standing. Une villa Standard de 150 m² prend environ 8-12 mois. Les
-            délais sont contractuels.
+           {{ __('De 8 à 18 mois selon la surface et le standing. Une villa Standard de 150 m² prend environ 8-12 mois. Les délais sont contractuels.') }}
           </div>
         </details>
 
@@ -748,15 +743,13 @@
                 05
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Puis-je combiner construction et énergie solaire ?
+              {{ __('Puis-je combiner construction et énergie solaire ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            Oui, c’est même l’un de nos atouts majeurs. Notre Division Énergie (lancement 2026) permet d’intégrer une
-            installation solaire dès la conception de votre bâtiment. Un seul interlocuteur, un seul contrat, une
-            maison autonome en énergie.
+              {{ __('Oui, c’est même l’un de nos atouts majeurs. Notre Division Énergie (lancement 2026) permet d’intégrer une installation solaire dès la conception de votre bâtiment. Un seul interlocuteur, un seul contrat, une maison autonome en énergie.') }}
           </div>
         </details>
 
@@ -768,15 +761,13 @@
                 06
               </span>
               <p class="font-heavy text-3xl text-primary">
-                Avez-vous un représentant en France / Europe ?
+              {{ __('Avez-vous un représentant en France / Europe ?') }}
               </p>
             </div>
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-            Nous n’avons pas de bureau physique en Europe, mais des rendez-vous en personne peuvent être organisés
-            ponctuellement lors de déplacements de notre équipe en Europe. En dehors de ces périodes, la
-            visioconférence reste notre mode de communication principal
+           {{ __('Nous n’avons pas de bureau physique en Europe, mais des rendez-vous en personne peuvent être organisés ponctuellement lors de déplacements de notre équipe en Europe. En dehors de ces périodes, la visioconférence reste notre mode de communication principal') }}
           </div>
         </details>
 
