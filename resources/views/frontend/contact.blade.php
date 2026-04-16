@@ -354,11 +354,10 @@
   <section class="bg-[#e6e6e6] pt-10 pb-10">
     <div class="max-w-[1000px] mx-auto text-left md:text-center px-6">
       <h1 class="text-[34px] sm:text-[45px] md:text-[70px] font-extrabold text-darkBlue mb-4 leading-tight whitespace-nowrap">
-        Demandez <span class="text-secondary">Un Devis</span> Gratuit
+       {!! __('Demandez <span class="text-secondary">Un Devis</span> Gratuit') !!}
       </h1>
       <p class="text-[18px] sm:text-[22px] md:text-[40px] text-[#4a4a4a] font-light leading-snug">
-        Réponse <strong class="text-darkBlue">personnalisée</strong> sous <strong
-          class="text-darkBlue">48h</strong> ouvrées.
+       {!! __('Réponse <strong class="text-darkBlue">personnalisée</strong> sous <strong class="text-darkBlue">48h</strong> ouvrées.') !!}
       </p>
     </div>
   </section>
@@ -371,21 +370,21 @@
 
         <!-- Nom complet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Nom complet <span class="text-red-500">*</span></label>
-          <input type="text" name="full_name" required placeholder="Votre nom complet"
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Nom complet') }} <span class="text-red-500">*</span></label>
+          <input type="text" name="full_name" required placeholder="{{ __('Votre nom complet') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
         <!-- Adresse e-mail -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Adresse e-mail <span class="text-red-500">*</span></label>
-          <input type="email" name="email" required placeholder="nomprenom@gmail.com"
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Adresse e-mail') }} <span class="text-red-500">*</span></label>
+          <input type="email" name="email" required placeholder="{{ __('nomprenom@gmail.com') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
         <!-- Téléphone -->
         <div class="relative" id="phoneContainer">
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Téléphone</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Téléphone') }}</label>
           <div
             class="flex items-center w-full border border-gray-400 rounded-xl px-4 py-3 bg-transparent focus-within:border-secondary overflow-hidden">
             
@@ -406,7 +405,7 @@
           <!-- Country Dropdown -->
           <div id="countryDropdown" class="country-dropdown">
             <div class="p-2 sticky top-0 bg-white border-b">
-              <input type="text" id="countrySearch" placeholder="Rechercher un pays..." 
+              <input type="text" id="countrySearch" placeholder="{{ __('Rechercher un pays...') }}" 
                 class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:border-secondary">
             </div>
             <div id="countryList">
@@ -417,11 +416,11 @@
 
         <!-- Pays de résidence -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Pays de résidence</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Pays de résidence') }}</label>
           <div class="relative">
             <select id="countryResidenceSelect" name="country_residence"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
-              <option value="" disabled selected>Sélectionnez votre pays de résidence</option>
+              <option value="" disabled selected>{{ __('Sélectionnez votre pays de résidence') }}</option>
             </select>
             <div
               class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">
@@ -432,15 +431,15 @@
 
         <!-- Type de projet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Type de projet</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Type de projet') }}</label>
           <div class="relative">
             <select id="projectTypeSelect" name="project_type"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
-              <option value="" disabled selected>Sélectionnez le type de projet</option>
-              <option value="residentiel">Résidentiel (Villas, immeubles)</option>
-              <option value="tertiaire">Tertiaire (Bureaux, hôtels)</option>
-              <option value="industriel">Industriel (Usines, entrepôts)</option>
-              <option value="agricole">Agricole (Élevage, stockage)</option>
+              <option value="" disabled selected>{{ __('Sélectionnez le type de projet') }}</option>
+              <option value="residentiel">{{ __('Résidentiel (Villas, immeubles)') }}</option>
+              <option value="tertiaire">{{ __('Tertiaire (Bureaux, hôtels)') }}</option>
+              <option value="industriel">{{ __('Industriel (Usines, entrepôts)') }}</option>
+              <option value="agricole">{{ __('Agricole (Élevage, stockage)') }}</option>
             </select>
             <div
               class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">
@@ -451,15 +450,15 @@
 
         <!-- Sélectionnez un délai -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Sélectionnez un délai</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Sélectionnez un délai') }}</label>
           <div class="relative">
             <select name="delay"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
-              <option value="" disabled selected>Quel délai souhaitez vous pour finaliser votre projet ? Sélectionnez.
+              <option value="" disabled selected>{{ __('Quel délai souhaitez vous pour finaliser votre projet ? Sélectionnez.') }}
               </option>
-              <option value="urgent">Urgent</option>
-              <option value="3mois">Dans les 3 mois</option>
-              <option value="6mois">Dans les 6 mois</option>
+              <option value="urgent">{{ __('Urgent') }}</option>
+              <option value="3mois">{{ __('Dans les 3 mois') }}</option>
+              <option value="6mois">{{ __('Dans les 6 mois') }}</option>
             </select>
             <div
               class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">
@@ -470,39 +469,39 @@
 
         <!-- Votre projet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Votre projet <span class="text-red-500">*</span></label>
-          <textarea rows="4" name="project_description" required placeholder="Décrivez brièvement votre projet..."
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Votre projet') }} <span class="text-red-500">*</span></label>
+          <textarea rows="4" name="project_description" required placeholder="{{ __('Décrivez brièvement votre projet...') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 resize-none"></textarea>
         </div>
 
         <!-- Localisation du projet -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Localisation du projet</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Localisation du projet') }}</label>
           <div class="relative">
-            <input type="text" name="location" placeholder="Quel est le lieu de votre projet ?"
+            <input type="text" name="location" placeholder="{{ __('Quel est le lieu de votre projet ?') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
 
         <!-- Budget estimé -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Budget estimé</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Budget estimé') }}</label>
           <div class="relative">
-            <input type="text" name="budget" placeholder="Quel budget envisagez-vous ?"
+            <input type="text" name="budget" placeholder="{{ __('Quel budget envisagez-vous ?') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
 
         <!-- Comment avez-vous connu AIAE ? -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Comment avez-vous connu AIAE ?</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Comment avez-vous connu AIAE ?') }}</label>
           <div class="relative">
             <select name="source_discovery"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
-              <option value="" disabled selected>Par quel moyen avez vous entendu parler de nous ? Sélectionnez.
+              <option value="" disabled selected>{{ __('Par quel moyen avez vous entendu parler de nous ? Sélectionnez.') }}
               </option>
-              <option value="reseaux">Réseaux Sociaux</option>
-              <option value="recherche">Recherche Google</option>
+              <option value="reseaux">{{ __('Réseaux Sociaux') }}</option>
+              <option value="recherche">{{ __('Recherche Google') }}</option>
             </select>
             <div
               class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">
@@ -513,13 +512,13 @@
 
         <!-- Pièce jointe -->
         <div>
-          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">Pièce jointe</label>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Pièce jointe') }}</label>
           <div
             class="relative flex items-center justify-between border border-gray-400 rounded-xl px-5 py-4 bg-transparent cursor-pointer hover:border-secondary focus-within:border-secondary transition-colors overflow-hidden">
             <input type="file" name="attachment" id="file_upload" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
             <span id="file_name_display" class="text-gray-400 pointer-events-none">
-              Ajoutez vos plans, photos terrain ou croquis (PDF, JPG, PNG). <span
-                class="italic text-gray-300">Facultatif</span>
+              {{ __('Ajoutez vos plans, photos terrain ou croquis (PDF, JPG, PNG).') }} <span
+                class="italic text-gray-300">{{ __('Facultatif') }}</span>
             </span>
             <div class="text-[#4a4a4a] pointer-events-none shrink-0 border-l border-gray-400 pl-4 ml-4">
               <!-- Paperclip SVG -->
@@ -542,9 +541,7 @@
             </svg>
           </div>
           <p class="text-[20px] md:text-[22px] text-black font-heavy leading-snug">
-            J'accepte que mes données soient traitées par AIAE SARL<br>
-            dans le cadre de ma demande (voir politique de<br>
-            confidentialité).
+           {!! __("J'accepte que mes données soient traitées par AIAE SARL<br> dans le cadre de ma demande (voir politique de<br> confidentialité).") !!}
           </p>
         </div>
 
@@ -552,7 +549,7 @@
         <div class="pt-4 pb-12">
           <button type="submit"
             class="block w-full bg-[#111736] text-white py-5 rounded-xl font-bold text-[18px] md:text-[20px] tracking-wide hover:bg-darkBlue transition-colors outline-none cursor-pointer">
-            ENVOYER MA DEMANDE
+            {{ __('ENVOYER MA DEMANDE') }}
           </button>
         </div>
 
@@ -568,7 +565,7 @@
       <!-- Badge Titre -->
       <div
         class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-[#FF8400] text-white px-10 py-2 rounded-xl text-[22px] md:text-[26px] font-heavy border-2 border-primary z-10 text-center uppercase tracking-wider mb-2">
-        Nos Coordonnées
+        {{ __('Nos Coordonnées') }}
       </div>
 
       <!-- Encadré vert -->
@@ -581,18 +578,18 @@
           <div class="flex flex-col gap-5 md:pl-10">
             <div class="flex items-start gap-3">
               <img src="{{ asset('aiae-frontend/Images/localisation.png') }}" alt="Localisation" class="w-6 h-8 shrink-0 object-contain mt-1" />
-              <p><strong class="font-heavy text-white">Siège social :</strong> Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</p>
+              <p><strong class="font-heavy text-white">{{ __('Siège social :') }}</strong> {{ __('Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo') }}</p>
             </div>
             <div class="flex items-start gap-3">
               <img src="{{ asset('aiae-frontend/Images/mail.png') }}" alt="Email" class="w-7 h-5 shrink-0 object-contain mt-1.5" />
-              <p><strong class="font-heavy text-white">Email :</strong> contact@aiae.services</p>
+              <p><strong class="font-heavy text-white">{{ __('Email :') }}</strong> contact@aiae.services</p>
             </div>
           </div>
 
           <div class="flex flex-col gap-5 md:pl-10">
             <div class="flex items-start gap-3">
               <img src="{{ asset('aiae-frontend/Images/telephone.png') }}" alt="Téléphone" class="w-6 h-6 shrink-0 object-contain mt-1" />
-              <p><strong class="font-heavy text-white">Téléphone :</strong> +228 90 03 54 16</p>
+              <p><strong class="font-heavy text-white">{{ __('Téléphone :') }}</strong> +228 90 03 54 16</p>
             </div>
             <div class="flex items-start gap-3">
               <img src="{{ asset('aiae-frontend/Images/Whatsapp.png') }}" alt="WhatsApp" class="w-7 h-7 shrink-0 object-contain mt-1" />
@@ -606,16 +603,14 @@
         <div class="text-left md:text-center font-light leading-[1.8] border-t border-white/20 pt-10">
           <div class="flex items-center justify-start md:justify-center gap-4 mb-6">
             <img src="{{ asset('aiae-frontend/Images/heure.png') }}" alt="Horaires" class="w-7 h-7 object-contain" />
-            <h3 class="font-heavy text-[22px] md:text-[24px] tracking-wide">Horaires :</h3>
+            <h3 class="font-heavy text-[22px] md:text-[24px] tracking-wide">{{ __('Horaires :') }}</h3>
           </div>
 
           <div class="space-y-2">
-            <p><strong class="font-heavy tracking-wide text-white">Lundi à Vendredi :</strong> 8h00 — 18h00 (GMT+0)</p>
-            <p><strong class="font-heavy tracking-wide text-white">Samedi :</strong> 8h00 — 13h00</p>
-            <p><strong class="font-heavy tracking-wide text-white">Dimanche :</strong> Fermé (urgences par téléphone
-              uniquement)</p>
-            <p class="pt-2"><strong class="font-heavy tracking-wide text-white">Diaspora :</strong> RDV en soirée et week-end sur
-              demande (visioconférence)</p>
+            <p><strong class="font-heavy tracking-wide text-white">{{ __('Lundi à Vendredi :') }}</strong> 8h00 — 18h00 (GMT+0)</p>
+            <p><strong class="font-heavy tracking-wide text-white">{{ __('Samedi :') }}</strong> 8h00 — 13h00</p>
+            <p><strong class="font-heavy tracking-wide text-white">{{ __('Dimanche :') }}</strong> {{ __('Fermé (urgences par téléphone uniquement)') }}</p>
+            <p class="pt-2"><strong class="font-heavy tracking-wide text-white">{{ __('Diaspora :') }}</strong> {{ __('RDV en soirée et week-end sur demande (visioconférence)') }}</p>
           </div>
         </div>
 
@@ -646,30 +641,30 @@
     <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
 
       <h2 class="text-black text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
-        Prenez Rendez-Vous
+         {{ __('Prenez Rendez-Vous') }}
       </h2>
       <p class="text-gray-600 leading-relaxed font-light mb-10 text-[16px] md:text-[27px] max-w-[700px] md:mx-auto">
-        Deux modalités proposées au visiteur
+        {{ __('Deux modalités proposées au visiteur') }}
       </p>
 
       <div class="flex flex-col md:flex-row justify-center w-full max-w-[950px] mx-auto shadow-2xl overflow-hidden rounded-sm">
         <!-- Bouton Orange -->
         <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="flex-1 bg-secondary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
           <span class="block text-[22px] md:text-[28px] font-heavy tracking-wide mb-3 uppercase">
-            RENDEZ-VOUS SUR PLACE
+            {{ __('RENDEZ-VOUS SUR PLACE') }}
           </span>
           <span class="block text-[11px] md:text-[15px] text-white/90 leading-relaxed max-w-[320px] mx-auto">
-            Visitez notre siège à Lomé pour discuter de votre projet.
+            {{ __('Visitez notre siège à Lomé pour discuter de votre projet.') }}
           </span>
         </a>
 
         <!-- Bouton Vert -->
         <a href="javascript:void(0)" onclick="openRdvModal('en_ligne')" class="flex-1 bg-primary text-white px-10 py-5 text-center transition-all duration-300 hover:brightness-110 group">
           <span class="block text-[22px] md:text-[28px] font-heavy tracking-wide mb-3 uppercase">
-            RENDEZ-VOUS EN LIGNE
+            {{ __('RENDEZ-VOUS EN LIGNE') }}
           </span>
           <span class="block text-[11px] md:text-[15px]  text-white/90 leading-relaxed max-w-[350px] mx-auto">
-            Pour la diaspora ou contraintes de temps, <span class="font-light">nous<br> proposons des visioconférences.</span>
+            {!! __('Pour la diaspora ou contraintes de temps, <span class="font-light">nous<br> proposons des visioconférences.</span>') !!}
           </span>
         </a>
       </div>
@@ -677,7 +672,7 @@
     </div>
   </section>
 
-  <!-- ================= RÉSEAUX SOCIAUX ================= -->
+    <!-- ================= RÉSEAUX SOCIAUX ================= -->
   <section class="w-full">
     <!-- BARRE VERTE -->
     <div class="bg-[#0b4a2b] text-white py-6">
