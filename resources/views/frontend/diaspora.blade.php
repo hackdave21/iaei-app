@@ -780,7 +780,7 @@
   <section class="bg-darkBlue py-5 w-full">
     <div class="max-w-[1200px] mx-auto px-6 text-center">
       <h2 class="text-[35px] md:text-[55px] font-heavy text-white mb-6 leading-tight">
-        Pourquoi Nous Faire Confiance
+        {{ __('Pourquoi Nous Faire Confiance') }}
       </h2>
       <p class="text-white text-[18px] md:text-[26px] font-light max-w-4xl mx-auto leading-relaxed">
         Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br>
@@ -800,10 +800,10 @@
             01</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              ENTREPRISE ENREGISTRÉE
+              {{ __('ENTREPRISE ENREGISTRÉE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              AIAE SARL, immatriculée au Togo,<br> avec siège social à Lomé. Statuts<br> disponibles sur demande.
+               {!! __('AIAE SARL, immatriculée au Togo,<br> avec siège social à Lomé. Statuts<br> disponibles sur demande.') !!}
             </p>
           </div>
         </div>
@@ -815,11 +815,10 @@
             02</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              CONTRAT SIGNABLE<br> DEVANT NOTAIRE
+              {{ __('CONTRAT SIGNABLE DEVANT NOTAIRE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Pour une sécurité juridique maximale,<br> votre contrat peut être signé devant un<br> notaire togolais. Un
-              mandataire peut<br> agir en votre nom.
+               {!! __('Pour une sécurité juridique maximale,<br> votre contrat peut être signé devant un<br> notaire togolais. Un mandataire peut<br> agir en votre nom.') !!}
             </p>
           </div>
         </div>
@@ -831,10 +830,10 @@
             03</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              DEVIS TRANSPARENT (BPU)
+              {{ __('DEVIS TRANSPARENT (BPU)') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Chaque franc est justifié, ligne par ligne.<br> Pas de forfait opaque.
+               {!! __('Chaque franc est justifié, ligne par ligne.<br> Pas de forfait opaque.') !!}
             </p>
           </div>
         </div>
@@ -846,10 +845,10 @@
             04</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              PAIEMENT PAR ÉTAPES
+              {{ __('PAIEMENT PAR ÉTAPES') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Vous ne payez que sur constat<br> d’avancement, validé par preuves<br> visuelles. Jamais d’intégralité en<br> avance.
+               {!! __('Vous ne payez que sur constat<br> d’avancement, validé par preuves<br> visuelles. Jamais d’intégralité en<br> avance.') !!}
             </p>
           </div>
         </div>
@@ -861,10 +860,10 @@
             05</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              GARANTIE DÉCENNALE
+              {{ __('GARANTIE DÉCENNALE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              10 ans sur la structure, 1 an de<br> parfait achèvement. Inscrites au<br> contrat.
+               {!! __('10 ans sur la structure, 1 an de<br> parfait achèvement. Inscrites au<br> contrat.') !!}
             </p>
           </div>
         </div>
@@ -876,10 +875,10 @@
             06</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              SUIVI VÉRIFIABLE
+              {{ __('SUIVI VÉRIFIABLE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Rapports photos/vidéos<br> hebdomadaires, visioconférences de<br> suivi. Vous voyez votre chantier en<br> temps réel.
+               {!! __('Rapports photos/vidéos<br> hebdomadaires, visioconférences de<br> suivi. Vous voyez votre chantier en<br> temps réel.') !!}
             </p>
           </div>
         </div>
@@ -891,10 +890,10 @@
             07</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              COMPTE BANCAIRE VÉRIFIÉ
+              {{ __('COMPTE BANCAIRE VÉRIFIÉ') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Virement international vers le<br>  compte de l’entreprise AIAE SARL.<br> Reçu émis pour chaque versement.
+               {!! __('Virement international vers le<br>  compte de l’entreprise AIAE SARL.<br> Reçu émis pour chaque versement.') !!}
             </p>
           </div>
         </div>
@@ -906,10 +905,10 @@
             08</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              RÉFÉRENCES SUR DEMANDE
+              {{ __('RÉFÉRENCES SUR DEMANDE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
-              Lors de votre premier rendez-vous, nous<br> partageons des références vérifiables de<br> projets réalisés.
+               {!! __('Lors de votre premier rendez-vous, nous<br> partageons des références vérifiables de<br> projets réalisés.') !!}
             </p>
           </div>
         </div>
@@ -923,28 +922,26 @@
     <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
 
       <h2 class="text-black text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
-        Prêt À Lancer Votre Projet <br>
-        Depuis L’étranger ?
+       {!! __('Prêt À Lancer Votre Projet <br> Depuis L’étranger ?') !!}
       </h2>
       <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px] max-w-[700px] md:mx-auto">
-        Prenez 30 minutes pour un premier échange gratuit et sans<br>
-        engagement. Nous nous adaptons à votre fuseau horaire.
+       {!! __('Prenez 30 minutes pour un premier échange gratuit et sans<br> engagement. Nous nous adaptons à votre fuseau horaire.') !!}
       </p>
 
       <div class="flex flex-col md:flex-row justify-center">
         <!-- Bouton Orange -->
         <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
-          PRENDRE RDV EN VISIO
+          {{ __('PRENDRE RDV EN VISIO') }}
           <span class="block text-sm font-light text-white">
-            Gratuit et sans engagement
+             {{ __('Gratuit et sans engagement') }}
           </span>
         </a>
 
         <!-- Bouton Vert -->
         <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy">
-          DEMANDER UN DEVIS GRATUIT
+         {{ __('DEMANDER UN DEVIS GRATUIT') }}
           <span class="block text-sm font-light text-white">
-            Réponse sous 48h
+             {{ __('Réponse sous 48h') }}
           </span>
         </a>
       </div>
