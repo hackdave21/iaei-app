@@ -783,8 +783,7 @@
         {{ __('Pourquoi Nous Faire Confiance') }}
       </h2>
       <p class="text-white text-[18px] md:text-[26px] font-light max-w-4xl mx-auto leading-relaxed">
-        Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br>
-        concrets et vérifiables qui fondent notre engagement :</strong>
+        {!! __('Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br> concrets et vérifiables qui fondent notre engagement :</strong>') !!}
       </p>
     </div>
   </section>
@@ -815,7 +814,7 @@
             02</div>
           <div class="">
             <h3 class="text-[20px] text-darkBlue md:text-[24px] font-black uppercase mb-3 leading-tight tracking-wide">
-              {{ __('CONTRAT SIGNABLE DEVANT NOTAIRE') }}
+              {!! __('CONTRAT SIGNABLE<br> DEVANT NOTAIRE') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed whitespace-normal md:whitespace-nowrap">
                {!! __('Pour une sécurité juridique maximale,<br> votre contrat peut être signé devant un<br> notaire togolais. Un mandataire peut<br> agir en votre nom.') !!}
