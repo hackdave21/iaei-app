@@ -594,7 +594,7 @@
   <!-- ================= SECTION TITRE SIMULATEUR EN LIGNE ================= -->
   <section class="bg-[#084c2e] py-10 w-full text-center">
     <h2 class="text-white text-[50px] md:text-[60px] font-heavy tracking-wide uppercase">
-      SIMULATEUR EN LIGNE
+      {{ __('SIMULATEUR EN LIGNE') }}
     </h2>
   </section>
 
@@ -610,15 +610,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Le résultat du simulateur est-il un devis ?
+              {{ __('Le résultat du simulateur est-il un devis ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Non. Le simulateur fournit une estimation budgétaire indicative sous forme de fourchette (montant minimum —
-            montant maximum). Il ne remplace pas un devis détaillé établi après étude technique sur site. Pour obtenir
-            un devis engageant, contactez-nous.</p>
+          <p>{{ __('Non. Le simulateur fournit une estimation budgétaire indicative sous forme de fourchette (montant minimum — montant maximum). Il ne remplace pas un devis détaillé établi après étude technique sur site. Pour obtenir un devis engageant, contactez-nous.') }}</p>
         </div>
       </details>
 
@@ -630,15 +628,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Comment est calculée l'estimation ?
+              {{ __('Comment est calculée l\'estimation ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>L'estimation est basée sur nos prix de référence au m² par standing, ajustés par des coefficients
-            géographiques (logistique) et géotechniques (type de sol). Les équipements optionnels (solaire, forage,
-            piscine, etc.) sont ajoutés avec leurs propres fourchettes de prix.</p>
+          <p>{{ __('L\'estimation est basée sur nos prix de référence au m² par standing, ajustés par des coefficients géographiques (logistique) et géotechniques (type de sol). Les équipements optionnels (solaire, forage, piscine, etc.) sont ajoutés avec leurs propres fourchettes de prix.') }}</p>
         </div>
       </details>
 
@@ -650,15 +646,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Puis-je sauvegarder ma simulation ?
+              {{ __('Puis-je sauvegarder ma simulation ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Oui. En créant un compte gratuit, vous pouvez sauvegarder vos simulations, les comparer entre elles et les
-            reprendre plus tard. Vous pourrez également télécharger un PDF récapitulatif (fonctionnalité en cours de
-            déploiement).</p>
+          <p>{{ __('Oui. En créant un compte gratuit, vous pouvez sauvegarder vos simulations, les comparer entre elles et les reprendre plus tard. Vous pourrez également télécharger un PDF récapitulatif (fonctionnalité en cours de déploiement).') }}</p>
         </div>
       </details>
 
@@ -670,15 +664,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Pourquoi le résultat est-il une fourchette et non un prix fixe ?
+              {{ __('Pourquoi le résultat est-il une fourchette et non un prix fixe ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Parce que le coût réel dépend de choix de matériaux, de la complexité architecturale et des conditions du
-            marché. La fourchette vous donne un cadre budgétaire réaliste : le minimum correspond à des choix
-            économiques, le maximum à des choix haut de gamme au sein du standing choisi.</p>
+          <p>{{ __('Parce que le coût réel dépend de choix de matériaux, de la complexité architecturale et des conditions du marché. La fourchette vous donne un cadre budgétaire réaliste : le minimum correspond à des choix économiques, le maximum à des choix haut de gamme au sein du standing choisi.') }}</p>
         </div>
       </details>
 
@@ -690,14 +682,13 @@
               05
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Le simulateur couvre-t-il les bâtiments non résidentiels ?
+              {{ __('Le simulateur couvre-t-il les bâtiments non résidentiels ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Oui. Le simulateur propose 4 secteurs : résidentiel (villas), tertiaire (bureaux, commerces), industriel
-            (entrepôts, ateliers) et agricole (fermes). Chaque secteur a ses propres paramètres et grilles de prix.</p>
+          <p>{{ __('Oui. Le simulateur propose 4 secteurs : résidentiel (villas), tertiaire (bureaux, commerces), industriel (entrepôts, ateliers) et agricole (fermes). Chaque secteur a ses propres paramètres et grilles de prix.') }}</p>
         </div>
       </details>
     </div>
@@ -706,7 +697,7 @@
   <!-- ================= SECTION TITRE ÉNERGIE & ÉQUIPEMENTS ================= -->
   <section class="bg-darkBlue py-10 w-full text-center">
     <h2 class="text-white text-[50px] md:text-[60px] font-heavy tracking-wide uppercase">
-      ÉNERGIE & ÉQUIPEMENTS
+      {{ __('ÉNERGIE & ÉQUIPEMENTS') }}
     </h2>
   </section>
 
@@ -722,16 +713,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Proposez-vous des installations solaires ?
+              {{ __('Proposez-vous des installations solaires ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Oui. Notre Division Énergie (opérationnelle en 2026) propose des kits solaires hybrides de 3 kWc à 50 kWc
-            pour les entreprises et les bâtiments à usage professionnel (C&I — Commercial & Industrial). Des solutions
-            résidentielles peuvent être intégrées dans le cadre d'un projet de construction. Chaque installation
-            comprend panneaux, onduleur hybride, batteries LiFePO4, câblage complet et mise en service.</p>
+          <p>{{ __('Oui. Notre Division Énergie (opérationnelle en 2026) propose des kits solaires hybrides de 3 kWc à 50 kWc pour les entreprises et les bâtiments à usage professionnel (C&I — Commercial & Industrial). Des solutions résidentielles peuvent être intégrées dans le cadre d\'un projet de construction. Chaque installation comprend panneaux, onduleur hybride, batteries LiFePO4, câblage complet et mise en service.') }}</p>
         </div>
       </details>
 
@@ -743,15 +731,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Pouvez-vous installer un forage ?
+              {{ __('Pouvez-vous installer un forage ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Oui. Nous proposons des forages de 30 à 120 mètres selon la profondeur de la nappe dans votre zone. Le
-            forfait comprend le forage, le tubage, la pompe immergée, le tableau de commande et un château d'eau de 2
-            m³. Le simulateur recommande automatiquement la profondeur adaptée à votre zone géographique.</p>
+          <p>{{ __('Oui. Nous proposons des forages de 30 à 120 mètres selon la profondeur de l\'nappe dans votre zone. Le forfait comprend le forage, le tubage, la pompe immergée, le tableau de commande et un château d\'eau de 2 m³. Le simulateur recommande automatiquement la profondeur adaptée à votre zone géographique.') }}</p>
         </div>
       </details>
 
@@ -763,15 +749,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Quels équipements optionnels proposez-vous ?
+              {{ __('Quels équipements optionnels proposez-vous ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Énergie (solaire, groupes électrogènes), sécurité (alarme, vidéosurveillance, contrôle d'accès), extérieurs
-            (clôture, portail, forage, piscine, aménagement paysager), confort (domotique, volets roulants, citerne eau
-            de pluie). Tous les prix sont en fourchette min-max et consultables dans le simulateur.</p>
+          <p>{{ __('Énergie (solaire, groupes électrogènes), sécurité (alarme, vidéosurveillance, contrôle d\'accès), extérieurs (clôture, portail, forage, piscine, aménagement paysager), confort (domotique, volets roulants, citerne eau de pluie). Tous les prix sont en fourchette min-max et consultables dans le simulateur.') }}</p>
         </div>
       </details>
 
@@ -783,15 +767,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Les équipements sont-ils inclus dans le prix au m² ?
+              {{ __('Les équipements sont-ils inclus dans le prix au m² ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Non. Le prix au m² couvre la construction du bâtiment (gros œuvre + second œuvre + finitions). Tous les
-            équipements sont des options chiffrées séparément avec des fourchettes de prix transparentes. Vous composez
-            votre projet à la carte.</p>
+          <p>{{ __('Non. Le prix au m² couvre la construction du bâtiment (gros œuvre + second œuvre + finitions). Tous les équipements sont des options chiffrées séparément avec des fourchettes de prix transparentes. Vous composez votre projet à la carte.') }}</p>
         </div>
       </details>
     </div>
