@@ -293,7 +293,7 @@
   <!-- ================= SECTION TITRE HERO ================= -->
   <section class="bg-[#161c42] pt-40 pb-10 w-full text-center">
     <h1 class="text-white text-[45px] md:text-[65px] font-heavy tracking-wide uppercase">
-      Construction & Prix
+      {{ __('Construction & Prix') }}
     </h1>
   </section>
 
@@ -309,27 +309,23 @@
               01
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Combien coûte la construction d'une maison au Togo ?
+              {{ __('Combien coûte la construction d\'une maison au Togo ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p class="mb-6">Le coût dépend du standing choisi et de la surface. Nos fourchettes de prix de base au mètre
-            carré sont :</p>
+          <p class="mb-6">{{ __('Le coût dépend du standing choisi et de la surface. Nos fourchettes de prix de base au mètre carré sont :') }}</p>
           <ul class="space-y-1 mb-6">
-            <li><strong class="font-heavy text-[#343434]">Standard : </strong> 180 000 - 250 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">Confort : </strong> 280 000 - 380 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">Premium : </strong> 420 000 - 550 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">Prestige : </strong> 600 000 - 900 000 FCFA</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Standard : ') }}</strong> 180 000 - 250 000 FCFA</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Confort : ') }}</strong> 280 000 - 380 000 FCFA</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Premium : ') }}</strong> 420 000 - 550 000 FCFA</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Prestige : ') }}</strong> 600 000 - 900 000 FCFA</li>
           </ul>
-          <p class="text-[18px] italic text-gray-500 mb-6 font-book">* Prix de base hors coefficients géographiques, géotechniques
-            et hors frais d'études. L'estimation réelle de votre projet est obtenue via le simulateur en ligne ou par
-            devis détaillé.</p>
-          <p><strong class="font-heavy text-[#343434]">Ces prix couvrent le bâtiment</strong> (gros œuvre + finitions).
-            <strong class="font-heavy text-[#343434]">Les équipements</strong> (solaire, forage, piscine, etc.) <strong
-              class="font-heavy text-[#343434]">sont chiffrés séparément</strong>. Utilisez notre simulateur en ligne
-            pour une estimation personnalisée, ou demandez un devis gratuit.</p>
+          <p class="text-[18px] italic text-gray-500 mb-6 font-book">{{ __('* Prix de base hors coefficients géographiques, géotechniques et hors frais d\'études. L\'estimation réelle de votre projet est obtenue via le simulateur en ligne ou par devis détaillé.') }}</p>
+          <p><strong class="font-heavy text-[#343434]">{{ __('Ces prix couvrent le bâtiment') }}</strong> {{ __('(gros œuvre + finitions).') }}
+            <strong class="font-heavy text-[#343434]">{{ __('Les équipements') }}</strong> {{ __('(solaire, forage, piscine, etc.)') }} <strong
+              class="font-heavy text-[#343434]">{{ __('sont chiffrés séparément') }}</strong>{{ __('. Utilisez notre simulateur en ligne pour une estimation personnalisée, ou demandez un devis gratuit.') }}</p>
         </div>
       </details>
 
@@ -341,19 +337,19 @@
               02
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Quels sont les délais de construction ?
+              {{ __('Quels sont les délais de construction ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p class="mb-4">Les délais dépendent de la surface et du standing :</p>
+          <p class="mb-4">{{ __('Les délais dépendent de la surface et du standing :') }}</p>
           <ul class="list-disc pl-5 space-y-1 mb-4">
-            <li><strong class="font-heavy text-[#343434]">Villa Standard 100-150 m² :</strong> 8-12 mois.</li>
-            <li><strong class="font-heavy text-[#343434]">Villa Confort/Premium 200-400 m² :</strong> 12-18 mois.</li>
-            <li><strong class="font-heavy text-[#343434]">Villa Prestige 400 m²+ :</strong> 16-22 mois.</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Villa Standard 100-150 m² :') }}</strong> {{ __('8-12 mois.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Villa Confort/Premium 200-400 m² :') }}</strong> {{ __('12-18 mois.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Villa Prestige 400 m²+ :') }}</strong> {{ __('16-22 mois.') }}</li>
           </ul>
-          <p>Les délais sont contractuels et inscrits au contrat.</p>
+          <p>{{ __('Les délais sont contractuels et inscrits au contrat.') }}</p>
         </div>
       </details>
 
@@ -365,15 +361,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Intervenez-vous en dehors de Lomé ?
+              {{ __('Intervenez-vous en dehors de Lomé ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Oui. Nous intervenons sur tout le territoire togolais : Grand Lomé, Maritime, Plateaux, Centrale, Kara et
-            Savanes. Un coefficient géographique est appliqué pour refléter les coûts logistiques spécifiques à chaque
-            zone.</p>
+          <p>{{ __('Oui. Nous intervenons sur tout le territoire togolais : Grand Lomé, Maritime, Plateaux, Centrale, Kara et Savanes. Un coefficient géographique est appliqué pour refléter les coûts logistiques spécifiques à chaque zone.') }}</p>
         </div>
       </details>
 
@@ -385,22 +379,18 @@
               04
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Quelle est la différence entre les standings ?
+              {{ __('Quelle est la différence entre les standings ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p class="mb-4">Chaque standing correspond à un niveau de finition et de confort :</p>
+          <p class="mb-4">{{ __('Chaque standing correspond à un niveau de finition et de confort :') }}</p>
           <ul class="space-y-3">
-            <li><strong class="font-heavy text-[#343434]">Standard :</strong> fonctionnel et solide. Carrelage local,
-              menuiseries alu standard, peinture vinylique. Idéal pour primo-accédants.</li>
-            <li><strong class="font-heavy text-[#343434]">Confort :</strong> qualité supérieure. Carrelage grès cérame,
-              menuiseries alu renforcées, peinture acrylique, meilleure isolation. Notre cœur de gamme.</li>
-            <li><strong class="font-heavy text-[#343434]">Premium :</strong> haut de gamme. Faïence importée, baies
-              vitrées, domotique partielle, hauteur sous plafond 3m. Pour les exigeants.</li>
-            <li><strong class="font-heavy text-[#343434]">Prestige :</strong> sur-mesure, matériaux nobles. Architecture
-              personnalisée, domotique complète, finitions exceptionnelles. Chaque projet est unique.</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Standard :') }}</strong> {{ __('fonctionnel et solide. Carrelage local, menuiseries alu standard, peinture vinylique. Idéal pour primo-accédants.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Confort :') }}</strong> {{ __('qualité supérieure. Carrelage grès cérame, menuiseries alu renforcées, peinture acrylique, meilleure isolation. Notre cœur de gamme.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Premium :') }}</strong> {{ __('haut de gamme. Faïence importée, baies vitrées, domotique partielle, hauteur sous plafond 3m. Pour les exigeants.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Prestige :') }}</strong> {{ __('sur-mesure, matériaux nobles. Architecture personnalisée, domotique complète, finitions exceptionnelles. Chaque projet est unique.') }}</li>
           </ul>
         </div>
       </details>
@@ -413,15 +403,13 @@
               05
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Proposez-vous des facilités de paiement ?
+              {{ __('Proposez-vous des facilités de paiement ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Oui. Le paiement se fait par étapes, au fur et à mesure de l'avancement des travaux. L'échéancier est
-            défini ensemble avant le démarrage. Vous ne payez que sur constat d'avancement, validé par des preuves
-            visuelles (photos/vidéos). Jamais d'intégralité en avance.</p>
+          <p>{{ __('Oui. Le paiement se fait par étapes, au fur et à mesure de l\'avancement des travaux. L\'échéancier est défini ensemble avant le démarrage. Vous ne payez que sur constat d\'avancement, validé par des preuves visuelles (photos/vidéos). Jamais d\'intégralité en avance.') }}</p>
         </div>
       </details>
 
@@ -433,15 +421,13 @@
               06
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Quelles garanties offrez-vous ?
+              {{ __('Quelles garanties offrez-vous ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Garantie décennale (10 ans) sur la structure portante, garantie de parfait achèvement (1 an) sur l'ensemble
-            des travaux, assurance responsabilité civile professionnelle. Tous nos engagements sont formalisés dans le
-            contrat.</p>
+          <p>{{ __('Garantie décennale (10 ans) sur la structure portante, garantie de parfait achèvement (1 an) sur l\'ensemble des travaux, assurance responsabilité civile professionnelle. Tous nos engagements sont formalisés dans le contrat.') }}</p>
         </div>
       </details>
 
@@ -453,15 +439,13 @@
               07
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Le terrain est-il inclus dans le prix ?
+              {{ __('Le terrain est-il inclus dans le prix ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Non. Nos prix au mètre carré concernent la construction uniquement (hors terrain). Le coût du terrain
-            dépend de la localité et n'est pas estimé par le simulateur. Contactez-nous pour un accompagnement dans
-            votre recherche foncière.</p>
+          <p>{{ __('Non. Nos prix au mètre carré concernent la construction uniquement (hors terrain). Le coût du terrain dépend de la localité et n\'est pas estimé par le simulateur. Contactez-nous pour un accompagnement dans votre recherche foncière.') }}</p>
         </div>
       </details>
 
@@ -473,15 +457,13 @@
               08
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Construisez-vous aussi des bâtiments commerciaux ou industriels ?
+              {{ __('Construisez-vous aussi des bâtiments commerciaux ou industriels ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>Oui. AIAE intervient dans 4 secteurs : résidentiel (villas, immeubles), tertiaire (bureaux, commerces,
-            hôtels), industriel (entrepôts, ateliers, usines) et agricole (fermes avicoles, exploitations intégrées).
-            Chaque secteur dispose de ses propres grilles tarifaires.</p>
+          <p>{{ __('Oui. AIAE intervient dans 4 secteurs : résidentiel (villas, immeubles), tertiaire (bureaux, commerces, hôtels), industriel (entrepôts, ateliers, usines) et agricole (fermes avicoles, exploitations intégrées). Chaque secteur dispose de ses propres grilles tarifaires.') }}</p>
         </div>
       </details>
     </div>
@@ -490,7 +472,7 @@
   <!-- ================= SECTION TITRE DIASPORA ================= -->
   <section class="bg-secondary py-6 md:py-8 w-full text-center">
     <h2 class="text-white text-[50px] md:text-[60px] font-heavy tracking-wide uppercase">
-      Diaspora
+      {{ __('Diaspora') }}
     </h2>
   </section>
 
@@ -506,15 +488,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Puis-je lancer un projet sans être au Togo ?
+              {{ __('Puis-je lancer un projet sans être au Togo ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui, absolument. Tout le processus est conçu pour être géré à distance : études, contrat, paiements, suivi.
-            Votre présence est souhaitable uniquement pour la réception finale, et même cette étape peut se faire par
-            vidéoconférence.</p>
+          <p>{{ __('Oui, absolument. Tout le processus est conçu pour être géré à distance : études, contrat, paiements, suivi. Votre présence est souhaitable uniquement pour la réception finale, et même cette étape peut se faire par vidéoconférence.') }}</p>
         </div>
       </details>
 
@@ -526,15 +506,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Comment suivre mon chantier depuis l'étranger ?
+              {{ __('Comment suivre mon chantier depuis l\'étranger ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Rapports photos/vidéos hebdomadaires, visioconférences de suivi selon vos disponibilités et votre fuseau
-            horaire. Un chef de projet dédié est votre interlocuteur unique. Alertes instantanées quand une décision est
-            nécessaire.</p>
+          <p>{{ __('Rapports photos/vidéos hebdomadaires, visioconférences de suivi selon vos disponibilités et votre fuseau horaire. Un chef de projet dédié est votre interlocuteur unique. Alertes instantanées quand une décision est nécessaire.') }}</p>
         </div>
       </details>
 
@@ -546,18 +524,14 @@
               03
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Quel budget minimum pour un projet diaspora ?
+              {{ __('Quel budget minimum pour un projet diaspora ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p class="mb-4">Le budget dépend du standing, de la surface et de la zone géographique. À titre indicatif,
-            pour une villa Standard de 100 m² en Grand Lomé, comptez à partir de 25 millions FCFA (environ 38 000 €)
-            pour la construction seule, hors équipements optionnels.</p>
-          <p>Ce montant inclut les coefficients géographiques et géotechniques, les frais d'études et la marge de
-            gestion. Il peut varier significativement selon les spécificités de votre projet. Notre simulateur en ligne
-            vous donne une estimation personnalisée en 2 minutes.</p>
+          <p class="mb-4">{{ __('Le budget dépend du standing, de la surface et de la zone géographique. À titre indicatif, pour une villa Standard de 100 m² en Grand Lomé, comptez à partir de 25 millions FCFA (environ 38 000 €) pour la construction seule, hors équipements optionnels.') }}</p>
+          <p>{{ __('Ce montant inclut les coefficients géographiques et géotechniques, les frais d\'études et la marge de gestion. Il peut varier significativement selon les spécificités de votre projet. Notre simulateur en ligne vous donne une estimation personnalisée en 2 minutes.') }}</p>
         </div>
       </details>
 
@@ -569,15 +543,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Les paiements sont-ils sécurisés ?
+              {{ __('Les paiements sont-ils sécurisés ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui. Virements internationaux vers le compte bancaire vérifié de AIAE SARL. Reçu émis pour chaque
-            versement. Paiement par étapes sur constat d'avancement. Contrat signable devant notaire pour une sécurité
-            juridique maximale.</p>
+          <p>{{ __('Oui. Virements internationaux vers le compte bancaire vérifié de AIAE SARL. Reçu émis pour chaque versement. Paiement par étapes sur constat d\'avancement. Contrat signable devant notaire pour une sécurité juridique maximale.') }}</p>
         </div>
       </details>
 
@@ -589,15 +561,13 @@
               05
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Puis-je combiner construction et énergie solaire ?
+              {{ __('Puis-je combiner construction et énergie solaire ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui, c'est l'un de nos atouts majeurs. Notre Division Énergie (opérationnelle en 2026) intègre une
-            installation solaire dès la conception de votre bâtiment. Un seul interlocuteur, un seul contrat, une maison
-            autonome en énergie.</p>
+          <p>{{ __('Oui, c\'est l\'un de nos atouts majeurs. Notre Division Énergie (opérationnelle en 2026) intègre une installation solaire dès la conception de votre bâtiment. Un seul interlocuteur, un seul contrat, une maison autonome en énergie.') }}</p>
         </div>
       </details>
 
@@ -609,15 +579,13 @@
               06
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Avez-vous un bureau en France / Europe ?
+              {{ __('Avez-vous un bureau en France / Europe ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Nous n'avons pas de bureau physique en Europe, mais des rendez-vous en personne peuvent être organisés lors
-            de déplacements de notre équipe. La visioconférence reste notre mode principal, adaptée à votre fuseau
-            horaire.</p>
+          <p>{{ __('Nous n\'avons pas de bureau physique en Europe, mais des rendez-vous en personne peuvent être organisés lors de déplacements de notre équipe. La visioconférence reste notre mode principal, adaptée à votre fuseau horaire.') }}</p>
         </div>
       </details>
     </div>
