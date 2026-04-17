@@ -385,26 +385,19 @@
           </div>
           <div class="text-left">
             <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
-              RÉSIDENTIEL
+               {{ __('RÉSIDENTIEL') }}
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Villas individuelles, immeubles<br>d’habitation, duplex, résidences<br>gardées. <strong
-                class="text-[#333] font-heavy">Du standing Standard au<br>Prestige, nous adaptons chaque projet<br>à
-                votre budget
-                et vos exigences.</strong>
+              {!! __('Villas individuelles, immeubles<br>d’habitation, duplex, résidences<br>gardées. <strong class="text-[#333] font-heavy">Du standing Standard au<br>Prestige, nous adaptons chaque projet<br>à votre budget et vos exigences.</strong>') !!}
             </p>
           </div>
         </div>
         <div class="flex justify-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li><strong class="text-[#333]  font-heavy">Villas de 80 à 600 m²</strong> : tous standings (Standard,
-              Confort, Premium,
-              Prestige)</li>
-            <li><strong class="text-[#333] font-heavy">Immeubles d’habitation</strong> : R+2 à R+5 (Confort à Premium)
-            </li>
-            <li><strong class="text-[#333] font-heavy">Duplex</strong> : 150 à 400 m² (Confort à Prestige)</li>
-            <li><strong class="text-[#333] font-heavy">Résidences gardées</strong> : ensembles sécurisés (Confort à
-              Prestige)</li>
+            <li>{!! __('<strong class="text-[#333]  font-heavy">Villas de 80 à 600 m²</strong> : tous standings (Standard, Confort, Premium, Prestige)') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Immeubles d’habitation</strong> : R+2 à R+5 (Confort à Premium)') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Duplex</strong> : 150 à 400 m² (Confort à Prestige)') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Résidences gardées</strong> : ensembles sécurisés (Confort à Prestige)') !!}</li>
           </ul>
         </div>
       </div>
@@ -419,21 +412,19 @@
           </div>
           <div class="text-left">
             <h3 class="text-secondary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
-              TERTIAIRE
+              {{ __('TERTIAIRE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Bureaux, commerces, hôtels, cliniques<br>et établissements recevant du public.<br><strong
-                class="text-[#333] font-heavy">Conception fonctionnelle optimisée<br>pour votre activité.</strong>
+              {!! __('Bureaux, commerces, hôtels, cliniques<br>et établissements recevant du public.<br><strong class="text-[#333] font-heavy">Conception fonctionnelle optimisée<br>pour votre activité.</strong>') !!}
             </p>
           </div>
         </div>
         <div class="flex justify-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li><strong class="text-[#333] font-heavy">Bureaux et espaces de travail</strong> : PME, sièges sociaux</li>
-            <li><strong class="text-[#333] font-heavy">Locaux commerciaux</strong> : boutiques, showrooms, centres
-              commerciaux</li>
-            <li><strong class="text-[#333] font-heavy">Hôtellerie</strong> : hôtels 2★ à 5★, résidences meublées</li>
-            <li><strong class="text-[#333] font-heavy">Santé</strong> : cliniques, cabinets médicaux, pharmacies</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Bureaux et espaces de travail</strong> : PME, sièges sociaux') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Locaux commerciaux</strong> : boutiques, showrooms, centres commerciaux') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Hôtellerie</strong> : hôtels 2★ à 5★, résidences meublées') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Santé</strong> : cliniques, cabinets médicaux, pharmacies') !!}</li>
           </ul>
         </div>
       </div>
@@ -448,21 +439,18 @@
           </div>
           <div class="text-left">
             <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
-              INDUSTRIEL
+              {{ __('INDUSTRIEL') }}
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Entrepôts, usines, ateliers de<br>production. <strong
-                class="text-[#333] font-heavy">Structures<br>optimisées pour la
-                logistique<br>et la production.</strong>
+              {!! __('Entrepôts, usines, ateliers de<br>production. <strong class="text-[#333] font-heavy">Structures<br>optimisées pour la logistique<br>et la production.</strong>') !!}
             </p>
           </div>
         </div>
         <div class="flex justify-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li><strong class="text-[#333] font-heavy">Entrepôts</strong> : de 200 à 5 000 m²</li>
-            <li><strong class="text-[#333] font-heavy">Usines et ateliers</strong> : structures métalliques ou béton</li>
-            <li><strong class="text-[#333] font-heavy">Plateformes logistiques</strong> : quais de chargement, zones de
-              stockage</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Entrepôts</strong> : de 200 à 5 000 m²') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Usines et ateliers</strong> : structures métalliques ou béton') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Plateformes logistiques</strong> : quais de chargement, zones de stockage') !!}</li>
           </ul>
         </div>
       </div>
@@ -477,45 +465,26 @@
           </div>
           <div class="text-left">
             <h3 class="text-secondary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
-              AGRICOLE
+              {{ __('AGRICOLE') }}
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Infrastructures agricoles et d'élevage<br>adaptées aux conditions tropicales. AIAE<br>conçoit des
-              bâtiments fonctionnels,<br>durables et conformes aux normes<br>sanitaires en vigueur. <strong
-                class="text-[#333] font-heavy">Solutions intégrées<br>avec notre Division Énergie pour
-                des<br>exploitations
-                autonomes.</strong>
+              {!! __('Infrastructures agricoles et d\'élevage<br>adaptées aux conditions tropicales. AIAE<br>conçoit des bâtiments fonctionnels,<br>durables et conformes aux normes<br>sanitaires en vigueur. <strong class="text-[#333] font-heavy">Solutions intégrées<br>avec notre Division Énergie pour des<br>exploitations autonomes.</strong>') !!}
             </p>
           </div>
         </div>
         <div class="flex flex-col items-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li><strong class="text-[#333] font-heavy">Élevage avicole</strong> : Poulaillers ventilés (pondeuses, chair),
-              couvoir,
-              unités d'aliments de bétail</li>
-            <li><strong class="text-[#333] font-heavy">Élevage porcin</strong> : Porcheries avec système de gestion des
-              effluents,
-              maternité, engraissement</li>
-            <li><strong class="text-[#333] font-heavy">Élevage bovin</strong> : Parcs d'embouche, étables laitières, aires
-              d'abattage, couloirs de contention, abreuvoirs bétonnés</li>
-            <li><strong class="text-[#333] font-heavy">Pisciculture</strong> : Bassins en béton armé, étangs aménagés,
-              raceways,
-              écloseries, systèmes de recirculation (RAS)</li>
-            <li><strong class="text-[#333] font-heavy">Apiculture</strong> : Mielleries, ateliers d'extraction et de
-              conditionnement,
-              locaux de stockage aux normes</li>
-            <li><strong class="text-[#333] font-heavy">Stockage agricole</strong> : Silos, magasins ventilés, chambres
-              froides, aires
-              de séchage</li>
-            <li><strong class="text-[#333] font-heavy">Serres et pépinières</strong> : Tunnels, multi-chapelles, systèmes
-              d'irrigation intégrés</li>
-            <li><strong class="text-[#333] font-heavy">Transformation</strong> : Huileries, décortiqueries, unités de
-              séchage,
-              abattoirs aux normes</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Élevage avicole</strong> : Poulaillers ventilés (pondeuses, chair), couvoir, unités d\'aliments de bétail') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Élevage porcin</strong> : Porcheries avec système de gestion des effluents, maternité, engraissement') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Élevage bovin</strong> : Parcs d\'embouche, étables laitières, aires d\'abattage, couloirs de contention, abreuvoirs bétonnés') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Pisciculture</strong> : Bassins en béton armé, étangs aménagés, raceways, écloseries, systèmes de recirculation (RAS)') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Apiculture</strong> : Mielleries, ateliers d\'extraction et de conditionnement, locaux de stockage aux normes') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Stockage agricole</strong> : Silos, magasins ventilés, chambres froides, aires de séchage') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Serres et pépinières</strong> : Tunnels, multi-chapelles, systèmes d\'irrigation intégrés') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Transformation</strong> : Huileries, décortiqueries, unités de séchage, abattoirs aux normes') !!}</li>
           </ul>
           <p class="text-[#333] font-light italic text-[16px] sm:text-[18px] md:text-[24px] leading-relaxed md:ml-6 mt-6 md:mt-4 max-w-[800px] whitespace-normal text-left">
-            Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br>éclairage, froid) pour
-            des exploitations autonomes en énergie, particulièrement en zones<br>rurales non raccordées.
+            {!! __('Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br>éclairage, froid) pour des exploitations autonomes en énergie, particulièrement en zones<br>rurales non raccordées.') !!}
           </p>
         </div>
       </div>
@@ -530,22 +499,19 @@
           </div>
           <div class="text-left">
             <h3 class="text-primary font-bold text-[35px] sm:text-[40px] md:text-[50px] uppercase tracking-tight mb-4 md:mb-6 leading-tight md:leading-none">
-              RÉHABILITATION ET EXTENSION
+              {{ __('RÉHABILITATION ET EXTENSION') }}
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Vous disposez d’un bâtiment existant<br>à remettre en état ou à agrandir ?<br><strong
-                class="text-[#333] font-heavy">Nous réalisons des diagnostics structurels<br>et proposons des solutions
-                adaptées.</strong>
+              {!! __('Vous disposez d’un bâtiment existant<br>à remettre en état ou à agrandir ?<br><strong class="text-[#333] font-heavy">Nous réalisons des diagnostics structurels<br>et proposons des solutions adaptées.</strong>') !!}
             </p>
           </div>
         </div>
         <div class="flex justify-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li><strong class="text-[#333] font-heavy">Diagnostic</strong> structurel et étude de faisabilité</li>
-            <li><strong class="text-[#333] font-heavy">Renforcement de structures</strong> (poteaux, poutres, fondations)
-            </li>
-            <li><strong class="text-[#333] font-heavy">Extension</strong> horizontale ou verticale</li>
-            <li><strong class="text-[#333] font-heavy">Rénovation complète</strong> intérieure et extérieure</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Diagnostic</strong> structurel et étude de faisabilité') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Renforcement de structures</strong> (poteaux, poutres, fondations)') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Extension</strong> horizontale ou verticale') !!}</li>
+            <li>{!! __('<strong class="text-[#333] font-heavy">Rénovation complète</strong> intérieure et extérieure') !!}</li>
           </ul>
         </div>
       </div>
@@ -563,15 +529,13 @@
       <div class="flex items-center justify-start md:justify-center gap-4 md:gap-8 mb-6 md:mb-10">
         <span class="text-[80px] md:text-[140px] font-heavy leading-none text-secondary shrink-0">04</span>
         <h2 class="text-white font-heavy text-[32px] sm:text-[45px] md:text-[65px] leading-[1.05] text-left">
-          Niveaux De Qualité<br>Pour Votre Projet
+            {!! __('Niveaux De Qualité<br>Pour Votre Projet') !!}
         </h2>
       </div>
 
       <!-- PARAGRAPHE -->
       <p class="text-white text-[16px] sm:text-[20px] md:text-[28px] leading-relaxed text-left md:text-center">
-        <span class="font-light">AIAE propose quatre niveaux de standing pour la construction résidentielle.</span><br>
-        Chaque niveau définit des caractéristiques techniques minimales garanties<br>
-        : matériaux, dimensions, équipements, finitions.
+      {!! __('<span class="font-light">AIAE propose quatre niveaux de standing pour la construction résidentielle.</span><br>Chaque niveau définit des caractéristiques techniques minimales garanties<br>: matériaux, dimensions, équipements, finitions.') !!}
       </p>
 
     </div>
@@ -592,25 +556,25 @@
 
           <img src="{{ asset('aiae-frontend/Images/plus.png') }}" alt="" id="details-icon" class="w-8 h-8 transition-transform duration-300">
 
-          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">Plus de détails</span>
+          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">{{ __('Plus de détails') }}</span>
         </button>
 
         <!-- Tabs style standardized -->
         <button
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
-          STANDARD
+          {{ __('STANDARD') }}
         </button>
         <button
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
-          CONFORT
+          {{ __('CONFORT') }}
         </button>
         <button
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
-          PREMIUM
+          {{ __('PREMIUM') }}
         </button>
         <button
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[13px] md:text-[16px] hover:bg-[#16205a] transition-colors">
-          PRESTIGE
+          {{ __('PRESTIGE') }}
         </button>
 
       </div>
@@ -620,7 +584,7 @@
 
         <!-- En-tête panneau -->
         <div class="bg-[#111d4a] rounded-t-[20px] px-8 py-6">
-          <h3 class="text-white text-[28px] font-bold">Détail par standing</h3>
+          <h3 class="text-white text-[28px] font-bold">{{ __('Détail par standing') }}</h3>
         </div>
 
         <!-- Contenu panneau -->
@@ -633,23 +597,19 @@
             <div id="card-standard"
               class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
               <div class="bg-darkBlue px-6 py-5 text-white">
-                <h4 class="text-[30px] leading-snug"><span class="font-heavy">STANDARD</span> :
-                  <span>Conception<br>économique et fonctionnelle</span></h4>
+                <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">STANDARD</span> : <span>Conception<br>économique et fonctionnelle</span>') !!}</h4>
               </div>
               <div class="p-6 text-gray-800 text-[18px] flex-1">
                 <p class="mb-5 leading-relaxed">
-                  Le standing Standard offre un logement <strong class="font-heavy">fonctionnel et durable à prix
-                    optimisé</strong>. Idéal
-                  pour un premier investissement immobilier ou un projet locatif.
+                  {!! __('Le standing Standard offre un logement <strong class="font-heavy">fonctionnel et durable à prix optimisé</strong>. Idéal pour un premier investissement immobilier ou un projet locatif.') !!}
                 </p>
                 <ul class="space-y-2 list-disc pl-5">
-                  <li><strong class="font-heavy">Matériaux</strong> : Parpaings 15 cm, dalles 16+4, enduit lissé,
-                    peinture économique</li>
-                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium anodisé standard, simple vitrage</li>
-                  <li><strong class="font-heavy">Sols</strong> : Carrelage 40x40 cm standard</li>
-                  <li><strong class="font-heavy">Sanitaires</strong> : Gamme économique, robinetterie chrome</li>
-                  <li><strong class="font-heavy">Électricité</strong> : Installation standard, tableau 1 rangée</li>
-                  <li><strong class="font-heavy">Cuisine</strong> : Plan de travail carrelé, meubles basiques</li>
+                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Parpaings 15 cm, dalles 16+4, enduit lissé, peinture économique') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium anodisé standard, simple vitrage') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage 40x40 cm standard') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Gamme économique, robinetterie chrome') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Installation standard, tableau 1 rangée') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Cuisine</strong> : Plan de travail carrelé, meubles basiques') !!}</li>
                 </ul>
               </div>
             </div>
@@ -658,26 +618,19 @@
             <div id="card-confort"
               class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
               <div class="bg-darkBlue px-6 py-5 text-white">
-                <h4 class="text-[30px] leading-snug"><span class="font-heavy">CONFORT</span> :
-                  <span>Équilibre<br>qualité-prix optimal</span></h4>
+                <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">CONFORT</span> : <span>Équilibre<br>qualité-prix optimal</span>') !!}</h4>
               </div>
               <div class="p-6 text-gray-800 text-[18px] flex-1">
                 <p class="mb-5 leading-relaxed">
-                  Le standing Confort constitue le <strong class="font-heavy">meilleur rapport
-                    qualité-prix</strong>.<br>Finitions
-                  soignées, espaces généreux, équipements complets.
+                  {!! __('Le standing Confort constitue le <strong class="font-heavy">meilleur rapport qualité-prix</strong>.<br>Finitions soignées, espaces généreux, équipements complets.') !!}
                 </p>
                 <ul class="space-y-2 list-disc pl-5">
-                  <li><strong class="font-heavy">Matériaux</strong> : Parpaings 20 cm, dalles 20+5, enduit gratté,
-                    peinture qualité</li>
-                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium laqué, double vitrage zones exposées
-                  </li>
-                  <li><strong class="font-heavy">Sols</strong> : Carrelage grès cérame 60x60</li>
-                  <li><strong class="font-heavy">Sanitaires</strong> : Gamme design, robinetterie qualité, eau chaude
-                  </li>
-                  <li><strong class="font-heavy">Électricité</strong> : Tableau 2 rangées, prises RJ45, pré-câblage
-                    domotique</li>
-                  <li><strong class="font-heavy">Cuisine</strong> : Plan granit/quartz, meubles MDF stratifié</li>
+                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Parpaings 20 cm, dalles 20+5, enduit gratté, peinture qualité') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium laqué, double vitrage zones exposées') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage grès cérame 60x60') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Gamme design, robinetterie qualité, eau chaude') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Tableau 2 rangées, prises RJ45, pré-câblage domotique') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Cuisine</strong> : Plan granit/quartz, meubles MDF stratifié') !!}</li>
                 </ul>
               </div>
             </div>
@@ -686,28 +639,19 @@
             <div id="card-premium"
               class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
               <div class="bg-darkBlue px-6 py-5 text-white">
-                <h4 class="text-[30px] leading-snug"><span class="font-heavy">PREMIUM</span> : <span>Excellence
-                    et<br>personnalisation</span></h4>
+                <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">PREMIUM</span> : <span>Excellence et<br>personnalisation</span>') !!}</h4>
               </div>
               <div class="p-6 text-gray-800 text-[18px] flex-1">
                 <p class="mb-5 leading-relaxed">
-                  Le standing Premium offre des prestations <strong class="font-heavy">haut de gamme avec
-                    personnalisation
-                    poussée</strong>. Piscine incluse, garage 2 véhicules, bureau et salle multimédia.
+                  {!! __('Le standing Premium offre des prestations <strong class="font-heavy">haut de gamme avec personnalisation poussée</strong>. Piscine incluse, garage 2 véhicules, bureau et salle multimédia.') !!}
                 </p>
                 <ul class="space-y-2 list-disc pl-5">
-                  <li><strong class="font-heavy">Matériaux</strong> : Béton banché ou agglos 20 cm, isolation thermique,
-                    enduit décoratif
-                  </li>
-                  <li><strong class="font-heavy">Menuiseries</strong> : Aluminium à rupture thermique, double vitrage
-                    intégral</li>
-                  <li><strong class="font-heavy">Sols</strong> : Carrelage rectifié haut de gamme, parquet chambres</li>
-                  <li><strong class="font-heavy">Sanitaires</strong> : Baignoire + douche suite, double vasque,
-                    robinetterie design</li>
-                  <li><strong class="font-heavy">Électricité</strong> : Domotique partielle, éclairage architectural,
-                    parafoudre</li>
-                  <li><strong class="font-heavy">Piscine</strong> : 8x4 m minimum, local technique, pool house 20-25 m²
-                  </li>
+                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Béton banché ou agglos 20 cm, isolation thermique, enduit décoratif') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium à rupture thermique, double vitrage intégral') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage rectifié haut de gamme, parquet chambres') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Baignoire + douche suite, double vasque, robinetterie design') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Domotique partielle, éclairage architectural, parafoudre') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Piscine</strong> : 8x4 m minimum, local technique, pool house 20-25 m²') !!}</li>
                 </ul>
               </div>
             </div>
@@ -716,30 +660,20 @@
             <div id="card-prestige"
               class="standing-card bg-white rounded-[20px] overflow-hidden opacity-100 flex flex-col shadow-lg border border-gray-100">
               <div class="bg-darkBlue px-6 py-5 text-white">
-                <h4 class="text-[30px] leading-snug"><span class="font-heavy">PRESTIGE</span> : <span>Luxe
-                    et<br>exclusivité sans compromis</span></h4>
+                <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">PRESTIGE</span> : <span>Luxe et<br>exclusivité sans compromis</span>') !!}</h4>
               </div>
               <div class="p-6 text-gray-800 text-[18px] flex-1">
                 <p class="mb-5 leading-relaxed">
-                  Le standing Prestige représente l'<strong class="font-heavy">excellence absolue</strong>. Villa
-                  d'architecte avec des
-                  matériaux d'exception, domotique complète et équipements de luxe.
+                  {!! __('Le standing Prestige représente l\'<strong class="font-heavy">excellence absolue</strong>. Villa d\'architecte avec des matériaux d\'exception, domotique complète et équipements de luxe.') !!}
                 </p>
                 <ul class="space-y-2 list-disc pl-5">
-                  <li><strong class="font-heavy">Matériaux</strong> : Béton architectonique, pierre naturelle, isolation
-                    haute performance
-                  </li>
-                  <li><strong class="font-heavy">Menuiseries</strong> : Sur mesure importées, triple vitrage, motorisées
-                  </li>
-                  <li><strong class="font-heavy">Sols</strong> : Marbre, travertin ou parquet massif importé</li>
-                  <li><strong class="font-heavy">Sanitaires</strong> : Marques designer, robinetterie prestige, spa
-                    privatif</li>
-                  <li><strong class="font-heavy">Électricité</strong> : Domotique complète (KNX/Loxone), groupe
-                    électrogène intégré</li>
-                  <li><strong class="font-heavy">Piscine</strong> : 12x5 m à débordement, chauffée, pool house bar</li>
-                  <li><strong class="font-heavy">Sécurité</strong> : Vidéosurveillance 16 caméras, alarme périmétrique,
-                    safe room
-                    optionnelle (Division Sécurité).</li>
+                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Béton architectonique, pierre naturelle, isolation haute performance') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Sur mesure importées, triple vitrage, motorisées') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Marbre, travertin ou parquet massif importé') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Marques designer, robinetterie prestige, spa privatif') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Domotique complète (KNX/Loxone), groupe électrogène intégré') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Piscine</strong> : 12x5 m à débordement, chauffée, pool house bar') !!}</li>
+                  <li>{!! __('<strong class="font-heavy">Sécurité</strong> : Vidéosurveillance 16 caméras, alarme périmétrique, safe room optionnelle (Division Sécurité).') !!}</li>
                 </ul>
               </div>
             </div>
@@ -752,24 +686,20 @@
       <!-- RÉSUMÉ MOBILE (visible par défaut sur mobile) -->
       <div class="md:hidden mt-6 space-y-4">
         <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
-          <h4 class="text-darkBlue text-[18px] font-bold">STANDARD</h4>
-          <p class="text-gray-600 text-[13px] mt-2">Le standing Standard offre un logement fonctionnel et durable à prix
-            optimisé.</p>
+          <h4 class="text-darkBlue text-[18px] font-bold">{{ __('STANDARD') }}</h4>
+          <p class="text-gray-600 text-[13px] mt-2">{{ __('Le standing Standard offre un logement fonctionnel et durable à prix optimisé.') }}</p>
         </div>
         <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
-          <h4 class="text-darkBlue text-[18px] font-bold">CONFORT</h4>
-          <p class="text-gray-600 text-[13px] mt-2">Le standing Confort constitue le meilleur rapport qualité-prix.
-            Finitions soignées et équipements complets.</p>
+          <h4 class="text-darkBlue text-[18px] font-bold">{{ __('CONFORT') }}</h4>
+          <p class="text-gray-600 text-[13px] mt-2">{{ __('Le standing Confort constitue le meilleur rapport qualité-prix. Finitions soignées et équipements complets.') }}</p>
         </div>
         <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
-          <h4 class="text-darkBlue text-[18px] font-bold">PREMIUM</h4>
-          <p class="text-gray-600 text-[13px] mt-2">Le standing Premium offre des prestations haut de gamme avec
-            personnalisation poussée.</p>
+          <h4 class="text-darkBlue text-[18px] font-bold">{{ __('PREMIUM') }}</h4>
+          <p class="text-gray-600 text-[13px] mt-2">{{ __('Le standing Premium offre des prestations haut de gamme avec personnalisation poussée.') }}</p>
         </div>
         <div class="bg-white rounded-[12px] border border-gray-200 p-5 shadow-sm">
-          <h4 class="text-darkBlue text-[18px] font-bold">PRESTIGE</h4>
-          <p class="text-gray-600 text-[13px] mt-2">Le standing Prestige représente l'excellence absolue. Villa
-            d'architecte avec des matériaux d'exception.</p>
+          <h4 class="text-darkBlue text-[18px] font-bold">{{ __('PRESTIGE') }}</h4>
+          <p class="text-gray-600 text-[13px] mt-2">{{ __('Le standing Prestige représente l\'excellence absolue. Villa d\'architecte avec des matériaux d\'exception.') }}</p>
         </div>
       </div>
 
