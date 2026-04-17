@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foire Aux Questions - AIAE</title>
+  <title>{{ __('Foire Aux Questions - AIAE') }}</title>
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -737,7 +737,7 @@
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>{{ __('Oui. Nous proposons des forages de 30 à 120 mètres selon la profondeur de l\'nappe dans votre zone. Le forfait comprend le forage, le tubage, la pompe immergée, le tableau de commande et un château d\'eau de 2 m³. Le simulateur recommande automatiquement la profondeur adaptée à votre zone géographique.') }}</p>
+          <p>{{ __('Oui. Nous proposons des forages de 30 à 120 mètres selon la profondeur de la nappe dans votre zone. Le forfait comprend le forage, le tubage, la pompe immergée, le tableau de commande et un château d\'eau de 2 m³. Le simulateur recommande automatiquement la profondeur adaptée à votre zone géographique.') }}</p>
         </div>
       </details>
 
@@ -782,7 +782,7 @@
   <!-- ================= SECTION TITRE PROCESSUS & CONTRAT ================= -->
   <section class="bg-secondary py-6 md:py-8 w-full text-center">
     <h2 class="text-white text-[50px] md:text-[60px] font-heavy tracking-wide uppercase">
-      PROCESSUS & CONTRAT
+      {{ __('PROCESSUS & CONTRAT') }}
     </h2>
   </section>
 
@@ -798,15 +798,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Comment se déroule un projet avec AIAE ?
+              {{ __('Comment se déroule un projet avec AIAE ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>6 étapes : (1) Premier contact et recueil de vos besoins. (2) Étude technique et devis détaillé. (3)
-            Signature du contrat et de l'échéancier de paiement. (4) Construction avec suivi régulier. (5) Réception et
-            remise des clés avec procès-verbal. (6) Suivi post-livraison (garanties).</p>
+          <p>{{ __('6 étapes : (1) Premier contact et recueil de vos besoins. (2) Étude technique et devis détaillé. (3) Signature du contrat et de l\'échéancier de paiement. (4) Construction avec suivi régulier. (5) Réception et remise des clés avec procès-verbal. (6) Suivi post-livraison (garanties).') }}</p>
         </div>
       </details>
 
@@ -818,14 +816,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Puis-je voir des exemples de vos réalisations ?
+              {{ __('Puis-je voir des exemples de vos réalisations ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Par respect pour la confidentialité de nos clients, nous ne publions pas de photos de nos chantiers. Nous
-            pouvons cependant fournir des références vérifiables sur demande lors d'un rendez-vous.</p>
+          <p>{{ __('Par respect pour la confidentialité de nos clients, nous ne publions pas de photos de nos chantiers. Nous pouvons cependant fournir des références vérifiables sur demande lors d\'un rendez-vous.') }}</p>
         </div>
       </details>
 
@@ -837,15 +834,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Fournissez-vous les plans architecturaux ?
+              {{ __('Fournissez-vous les plans architecturaux ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui. Le devis inclut la conception architecturale (plans, coupes, façades) et les études techniques
-            nécessaires. Vous recevez un dossier complet à la livraison : plans d'exécution, rapports techniques,
-            certificats de garantie.</p>
+          <p>{{ __('Oui. Le devis inclut la conception architecturale (plans, coupes, façades) et les études techniques nécessaires. Vous recevez un dossier complet à la livraison : plans d\'exécution, rapports techniques, certificats de garantie.') }}</p>
         </div>
       </details>
 
@@ -857,14 +852,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Le contrat peut-il être signé devant notaire ?
+              {{ __('Le contrat peut-il être signé devant notaire ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui. Pour une sécurité juridique maximale, le contrat peut être signé devant un notaire togolais. Un
-            mandataire peut agir en votre nom si vous n'êtes pas au Togo.</p>
+          <p>{{ __('Oui. Pour une sécurité juridique maximale, le contrat peut être signé devant un notaire togolais. Un mandataire peut agir en votre nom si vous n\'êtes pas au Togo.') }}</p>
         </div>
       </details>
 
@@ -876,15 +870,13 @@
               05
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              Que se passe-t-il en cas de retard ?
+              {{ __('Que se passe-t-il en cas de retard ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Les délais sont contractuels. En cas de retard imputable à AIAE, des pénalités sont prévues au contrat. En
-            cas de force majeure (intempéries exceptionnelles, pénurie de matériaux), le délai est prolongé d'une durée
-            équivalente, documentée et communiquée.</p>
+          <p>{{ __('Les délais sont contractuels. En cas de retard imputable à AIAE, des pénalités sont prévues au contrat. En cas de force majeure (intempéries exceptionnelles, pénurie de matériaux), le délai est prolongé d\'une durée équivalente, documentée et communiquée.') }}</p>
         </div>
       </details>
 
@@ -896,15 +888,13 @@
               06
             </span>
             <p class="font-heavy text-3xl text-secondary">
-              AIAE est-elle assurée ?
+              {{ __('AIAE est-elle assurée ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>Oui. AIAE SARL dispose d'une assurance responsabilité civile professionnelle couvrant les dommages
-            éventuels liés à nos activités, et d'une garantie décennale couvrant la structure portante pendant 10 ans
-            après réception. Les attestations d'assurance sont disponibles sur demande lors d'un rendez-vous.</p>
+          <p>{{ __('Oui. AIAE SARL dispose d\'une assurance responsabilité civile professionnelle couvrant les dommages éventuels liés à nos activités, et d\'une garantie décennale couvrant la structure portante pendant 10 ans après réception. Les attestations d\'assurance sont disponibles sur demande lors d\'un rendez-vous.') }}</p>
         </div>
       </details>
     </div>
@@ -913,7 +903,7 @@
   <!-- ================= SECTION TITRE À PROPOS D'AIAE ================= -->
   <section class="bg-[#084c2e] py-10 w-full text-center">
     <h2 class="text-white text-[50px] md:text-[60px] font-heavy tracking-wide uppercase">
-      À PROPOS D'AIAE
+      {{ __('À PROPOS D\'AIAE') }}
     </h2>
   </section>
 
@@ -929,17 +919,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Comment AIAE se compare-t-elle aux grandes entreprises étrangères ?
+              {{ __('Comment AIAE se compare-t-elle aux grandes entreprises étrangères ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Nous offrons une expertise technique de niveau international avec un ancrage local fort. Réactivité,
-            connaissance approfondie du terrain togolais (géologie, climat, logistique régionale), et des prix justes
-            sans les surcoûts liés aux équipes expatriées. Notre fondateur cumule plus de 18 ans d'expérience en génie
-            civil, formé aux standards européens tout en maîtrisant parfaitement les réalités du terrain en Afrique de
-            l'Ouest.</p>
+          <p>{{ __('Nous offrons une expertise technique de niveau international avec un ancrage local fort. Réactivité, connaissance approfondie du terrain togolais (géologie, climat, logistique régionale), et des prix justes sans les surcoûts liés aux équipes expatriées. Notre fondateur cumule plus de 18 ans d\'expérience en génie civil, formé aux standards européens tout en maîtrisant parfaitement les réalités du terrain en Afrique de l\'Ouest.') }}</p>
         </div>
       </details>
 
@@ -951,15 +937,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-primary">
-              AIAE est-elle une entreprise récente ?
+              {{ __('AIAE est-elle une entreprise récente ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>AIAE SARL a été créée en 2025, mais l'expertise de son fondateur remonte à 2007. Plus de 18 ans
-            d'expérience en conception et réalisation d'ouvrages de génie civil, dont de nombreux projets complexes.
-            L'entreprise est le fruit d'un parcours professionnel solide, pas une aventure improvisée.</p>
+          <p>{{ __('AIAE SARL a été créée en 2025, mais l\'expertise de son fondateur remonte à 2007. Plus de 18 ans d\'expérience en conception et réalisation d\'ouvrages de génie civil, dont de nombreux projets complexes. L\'entreprise est le fruit d\'un parcours professionnel solide, pas une aventure improvisée.') }}</p>
         </div>
       </details>
 
@@ -971,15 +955,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Quelles sont vos valeurs ?
+              {{ __('Quelles sont vos valeurs ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Cinq valeurs non négociables : (1) La qualité est primordiale — nous construisons pour des générations. (2)
-            La parole donnée est sacrée. (3) L'honnêteté envers le client. (4) Le respect des sous-traitants et
-            ouvriers. (5) Le respect des délais et des coûts.</p>
+          <p>{{ __('Cinq valeurs non négociables : (1) La qualité est primordiale — nous construisons pour des générations. (2) La parole donnée est sacrée. (3) L\'honnêteté envers le client. (4) Le respect des sous-traitants et ouvriers. (5) Le respect des délais et des coûts.') }}</p>
         </div>
       </details>
 
@@ -991,15 +973,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-primary">
-              Quelles sont les divisions de AIAE ?
+              {{ __('Quelles sont les divisions de AIAE ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-primary pt-6">
-          <p>Construction (opérationnelle) : résidentiel, tertiaire, industriel, agricole. Énergie (lancement 2026) :
-            installations solaires C&I. Sécurité (lancement 2027) : coffres-forts, chambres fortes, panic rooms.
-            Préfabrication (lancement 2027-2028) : briques en terre compressée, éléments en béton précontraint.</p>
+          <p>{{ __('Construction (opérationnelle) : résidentiel, tertiaire, industriel, agricole. Énergie (lancement 2026) : installations solaires C&I. Sécurité (lancement 2027) : coffres-forts, chambres fortes, panic rooms. Préfabrication (lancement 2027-2028) : briques en terre compressée, éléments en béton précontraint.') }}</p>
         </div>
       </details>
     </div>
@@ -1010,27 +990,26 @@
     <div class="max-w-[1100px] mx-auto text-left md:text-center px-6">
 
       <h2 class="text-[#1d1d1b] text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
-        Vous ne trouvez pas la réponse à<br> votre question ?
+        {!! __('Vous ne trouvez pas la réponse à<br> votre question ?') !!}
       </h2>
       <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px] max-w-[800px] md:mx-auto">
-        Notre équipe est à votre écoute. Contactez-nous<br> directement ou demandez un devis
-        gratuit.
+        {!! __('Notre équipe est à votre écoute. Contactez-nous<br> directement ou demandez un devis gratuit.') !!}
       </p>
 
       <div class="flex flex-col md:flex-row justify-center">
         <!-- Bouton Orange -->
         <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy uppercase tracking-wider">
-          Demander un devis gratuit
+          {{ __('Demander un devis gratuit') }}
           <span class="block text-sm font-light text-white normal-case">
-            Réponse sous 48h
+            {{ __('Réponse sous 48h') }}
           </span>
         </a>
 
         <!-- Bouton Vert -->
         <a href="{{ route('contact') }}" class="bg-primary text-white px-10 py-5 text-center font-heavy uppercase tracking-wider">
-          Prendre rendez-vous
+          {{ __('Prendre rendez-vous') }}
           <span class="block text-sm font-light text-white normal-case">
-            En personne ou en visio
+            {{ __('En personne ou en visio') }}
           </span>
         </a>
       </div>
@@ -1110,8 +1089,8 @@
           <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
 
           <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
-            <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
-            <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
+            <strong class="font-heavy">{{ __('AIAE : Afrika Infrastructures And') }}</strong><br>
+            <strong class="font-heavy">{{ __('Equipements.') }}</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
 
         </div>
