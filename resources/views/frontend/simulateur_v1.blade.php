@@ -247,6 +247,33 @@ $simTranslations =[
     'Semelles + compactage' => __('Semelles + compactage'),
     'Pieux profonds' => __('Pieux profonds'),
     'Ancrages roche' => __('Ancrages roche'),
+    // Reference Data from Database
+    'Duplex / Triplex' => __('Duplex / Triplex'),
+    'Hangar / Bâtiment agricole' => __('Hangar / Bâtiment agricole'),
+    'Qualité Standard' => __('Qualité Standard'),
+    'Qualité Confort' => __('Qualité Confort'),
+    'Qualité Premium' => __('Qualité Premium'),
+    'Qualité Prestige' => __('Qualité Prestige'),
+    'Grand Lomé (Lomé, Baguida, Agoè, Adidogomé)' => __('Grand Lomé (Lomé, Baguida, Agoè, Adidogomé)'),
+    'Principales villes de la zone' => __('Principales villes de la zone'),
+    'Région Maritime (Tsévié, Aného, Vogan, Kpémé)' => __('Région Maritime (Tsévié, Aného, Vogan, Kpémé)'),
+    'Région des Plateaux (Atakpamé, Kpalimé, Badou)' => __('Région des Plateaux (Atakpamé, Kpalimé, Badou)'),
+    'Région Centrale (Sokodé, Tchamba, Blitta)' => __('Région Centrale (Sokodé, Tchamba, Blitta)'),
+    'Région Kara et Savanes (Kara, Dapaong, Mango)' => __('Région Kara et Savanes (Kara, Dapaong, Mango)'),
+    'Alarme basique (4 détecteurs)' => __('Alarme basique (4 détecteurs)'),
+    'Alarme avancée (6 détect. + GSM)' => __('Alarme avancée (6 détect. + GSM)'),
+    'Alarme complète connectée' => __('Alarme complète connectée'),
+    '4 caméras HD' => __('4 caméras HD'),
+    '8 caméras HD' => __('8 caméras HD'),
+    '16 caméras HD' => __('16 caméras HD'),
+    'Portail métallique simple 3m' => __('Portail métallique simple 3m'),
+    'Portail métallique double 5m' => __('Portail métallique double 5m'),
+    'Portail coulissant motorisé 5m' => __('Portail coulissant motorisé 5m'),
+    'Piscine béton carrelée 6x3m' => __('Piscine béton carrelée 6x3m'),
+    'Piscine béton carrelée 8x4m' => __('Piscine béton carrelée 8x4m'),
+    'Piscine béton carrelée 10x5m' => __('Piscine béton carrelée 10x5m'),
+    'Piscine à débordement 12x5m' => __('Piscine à débordement 12x5m'),
+    'Piscine plage immergée 8x4m' => __('Piscine plage immergée 8x4m'),
 ];
 @endphp
 <div id="root"></div>
@@ -622,7 +649,7 @@ const App=()=>{
     let fond=surface*emprise*(solData?.prixFond||45000);
     if(secteur==='industriel')fond*=1.3;
     if(ssSol>0)fond+=ssSol*surface*emprise*85000;
-    add('2',t('Terrassements et fondations'),solData?.fondation||t('À définir'),fond);
+    add('2',t('Terrassements et fondations'),t(solData?.fondation||'À définir'),fond);
     // Gros œuvre 38%
     add('3',t('Gros œuvre'),t('Structure, maçonnerie, planchers'),surfaceBatie*prixM2*coefTotal*0.38);
     // Second œuvre 25%
@@ -881,8 +908,8 @@ const App=()=>{
                     <div className={`mb-3 p-2 rounded-lg w-fit ${typeBat===t_bat.id?'bg-white/20':'bg-gray-50'}`}>
                       <Icon name={t_bat.icon} size={24} />
                     </div>
-                    <div className="font-medium text-gray-800">{t_bat.name}</div>
-                    <div className="text-xs text-gray-500 mt-1">Max R+{t_bat.max-1}</div>
+                    <div className="font-medium text-gray-800">{t(t_bat.name)}</div>
+                    <div className="text-xs text-gray-500 mt-1">{t('Max')} R+{t_bat.max-1}</div>
                   </button>
                 ))}
               </div>
@@ -896,8 +923,8 @@ const App=()=>{
                       <div className={`mb-3 p-2 rounded-lg w-fit ${standing===id?'bg-white/20':'bg-gray-50'}`}>
                         <Icon name={d.icon} size={24} />
                       </div>
-                      <div className="font-semibold text-gray-800">{d.name}</div>
-                      <div className="text-xs text-gray-500 mt-1">{d.desc}</div>
+                      <div className="font-semibold text-gray-800">{t(d.name)}</div>
+                      <div className="text-xs text-gray-500 mt-1">{t(d.desc)}</div>
                     </button>
                   ))}
                 </div>
@@ -964,8 +991,8 @@ const App=()=>{
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {Object.entries(ZONES).map(([id,z])=>(
                   <button key={id} onClick={()=>setZone(id)} className={`option-btn ${zone===id?'selected':''}`}>
-                    <div className="font-medium">{z.name}</div>
-                    <div className="text-xs text-gray-500">{z.localites}</div>
+                    <div className="font-medium">{t(z.name)}</div>
+                    <div className="text-xs text-gray-500">{t(z.localites)}</div>
                     <span className="badge badge-blue mt-2">×{Number(z.coef || 0).toFixed(2)}</span>
                   </button>
                 ))}
@@ -978,9 +1005,9 @@ const App=()=>{
                   <button key={id} onClick={()=>setSol(id)} className={`option-btn ${sol===id?'selected':''} ${s.risque==='élevé'||s.risque==='très élevé'?'border-orange-300':''}`}>
                     <div className="flex justify-between items-start">
                       <div>
-                        <div className="font-medium">{s.name}</div>
-                        <div className="text-xs text-gray-500 mt-1">{t('Portance:')} {s.portance}</div>
-                        <div className="text-xs text-gray-500">{s.fondation}</div>
+                        <div className="font-medium">{t(s.name)}</div>
+                        <div className="text-xs text-gray-500 mt-1">{t('Portance:')} {t(s.portance)}</div>
+                        <div className="text-xs text-gray-500">{t(s.fondation)}</div>
                       </div>
                       <span className={`badge ${s.risque==='faible'?'badge-green':s.risque==='moyen'?'badge-blue':'badge-orange'}`}>×{Number(s.coef || 0).toFixed(2)}</span>
                     </div>
