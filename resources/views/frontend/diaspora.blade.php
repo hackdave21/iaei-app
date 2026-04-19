@@ -392,17 +392,17 @@
       <h2 class="uppercase leading-[1.0]">
 
         <!-- Ligne 1 -->
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] text-[#121a44] whitespace-nowrap">
+        <span class="block text-[22px] sm:text-[35px] font-bold md:text-[55px] text-[#121a44] whitespace-nowrap">
           {{ __('ON SAIT CE QUI VOUS') }}
         </span>
 
         <!-- Ligne 2 -->
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] whitespace-nowrap">
+        <span class="block text-[22px] sm:text-[35px] font-bold md:text-[55px] whitespace-nowrap">
           <span class="text-[#121a44]">{{ __('INQUIÈTE.') }}</span> <span class="text-primary">{{ __('VOICI NOS') }}</span>
         </span>
 
         <!-- Ligne 3 -->
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] text-primary whitespace-nowrap">
+        <span class="block text-[22px] sm:text-[35px] font-bold md:text-[55px] text-primary whitespace-nowrap">
           {{ __('RÉPONSES.') }}
         </span>
 

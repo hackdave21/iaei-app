@@ -42,7 +42,7 @@
                     <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">{{ __('Nom Complet') }}</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}"
                         class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#162064] focus:ring-2 focus:ring-[#162064]/20 outline-none transition-all"
-                        placeholder="John Doe" required>
+                        placeholder="{{ __('Votre nom') }}" required>
                     @error('name')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror

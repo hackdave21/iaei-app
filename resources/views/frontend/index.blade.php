@@ -221,51 +221,7 @@
             placeholder="{{ __('Surface Bâtie Souhaitée (m²)') }}" />
         </div>
 
-        <!-- CONFIGURATION -->
-        <div class="relative col-span-1 sm:col-span-2 md:col-span-2">
-          <button id="openConfig"
-            class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
-            {{ __('Configuration') }}
-            <span><img src="{{ asset('aiae-frontend/Images/Flèche haut.svg') }}" class="arrow transition-transform duration-200" alt="" /></span>
-          </button>
 
-          <div id="configPanel"
-            class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-2 z-20">
-            <label class="flex justify-between items-center text-xs sm:text-sm">
-              {{ __('Espaces Communs') }} <input type="checkbox" id="checkEspaces" />
-            </label>
-
-            <div class="flex justify-between items-center text-xs sm:text-sm">
-              {{ __('Salles De Bain') }}
-              <div class="flex items-center gap-2">
-                <button class="minusBath bg-gray-200 rounded-full w-6 h-6">
-                  -
-                </button>
-                <span id="bathCount">1</span>
-                <button class="plusBath bg-gray-200 rounded-full w-6 h-6">
-                  +
-                </button>
-              </div>
-            </div>
-
-            <div class="flex justify-between items-center text-xs sm:text-sm">
-              {{ __('Chambres') }}
-              <div class="flex items-center gap-2">
-                <button class="minusBed bg-gray-200 rounded-full w-6 h-6">
-                  -
-                </button>
-                <span id="bedCount">1</span>
-                <button class="plusBed bg-gray-200 rounded-full w-6 h-6">
-                  +
-                </button>
-              </div>
-            </div>
-
-            <button class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
-              {{ __('Valider') }}
-            </button>
-          </div>
-        </div>
 
         <!-- STANDING -->
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
@@ -1993,7 +1949,7 @@
       const isHidden = panel.classList.contains("hidden");
       
       // Close all first
-      [configPanel, standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
+      [standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
       document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate-180"));
 
       if (isHidden) {
@@ -2003,38 +1959,22 @@
       }
     }
 
-    openConfig.onclick = (e) => { e.stopPropagation(); togglePanel(openConfig, configPanel); };
+
     openStand.onclick = (e) => { e.stopPropagation(); togglePanel(openStand, standPanel); };
     openOptions.onclick = (e) => { e.stopPropagation(); togglePanel(openOptions, optionsPanel); };
 
     // Prevent panel clicks from closing themselves
-    [configPanel, standPanel, optionsPanel].forEach(p => {
+    [standPanel, optionsPanel].forEach(p => {
         p.onclick = (e) => e.stopPropagation();
     });
 
     // Clic extérieur pour fermer
     document.addEventListener("click", () => {
-      [configPanel, standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
+      [standPanel, optionsPanel].forEach(p => p.classList.add("hidden"));
       document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate-180"));
     });
 
-    // Salles de bain counter
-    document.querySelector(".plusBath").onclick = () => {
-      bathCount.textContent = Number(bathCount.textContent) + 1;
-    };
-    document.querySelector(".minusBath").onclick = () => {
-      if (Number(bathCount.textContent) > 0)
-        bathCount.textContent = Number(bathCount.textContent) - 1;
-    };
 
-    // Chambres counter
-    document.querySelector(".plusBed").onclick = () => {
-      bedCount.textContent = Number(bedCount.textContent) + 1;
-    };
-    document.querySelector(".minusBed").onclick = () => {
-      if (Number(bedCount.textContent) > 0)
-        bedCount.textContent = Number(bedCount.textContent) - 1;
-    };
 
     // ---------------- START SIMULATION ------------------
     function startSimulation() {
@@ -2045,9 +1985,9 @@
         params.append("standing", selectedStanding);
         
         // Configuration
-        params.append("espaces_communs", document.getElementById("checkEspaces").checked ? 1 : 0);
-        params.append("nb_baths", bathCount.textContent);
-        params.append("nb_beds", bedCount.textContent);
+        params.append("espaces_communs", 0);
+        params.append("nb_baths", 1);
+        params.append("nb_beds", 1);
 
         // Options
         const options = [];
