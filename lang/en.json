@@ -1079,6 +1079,14 @@
     "Moyenne": "Medium",
     "Bonne": "Good",
     "Très bonne": "Very good",
-    "Excellente": "Excellent"
+    "Excellente": "Excellent",
+    "Connexion requise": "Login Required",
+    "Vous devez être connecté pour prendre un rendez-vous.": "You must be logged in to book an appointment.",
+    "Se connecter": "Login",
+    "S'inscrire": "Register",
+    "Vous devez être connecté pour prendre un rendez-vous. Voulez-vous vous connecter ?": "You must be logged in to book an appointment. Would you like to log in?",
+    "ENVOI EN COURS...": "SENDING IN PROGRESS...",
+    "Demande envoyée !": "Request sent!",
+    "Oups...": "Oops..."
 }
 

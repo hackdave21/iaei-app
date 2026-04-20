@@ -201,26 +201,28 @@
             {{ __('Agricole') }}
           </button>
         </div>
+
+        <button onclick="window.location.href='{{ route('energie.calculator') }}'" class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm shadow hover:bg-opacity-90">
+          {{ __('Calculateur Énergies') }}
+        </button>
       </div>
 
       <!-- Formulaire -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
-        <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="relative col-span-1 sm:col-span-1 md:col-span-1">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
           <input id="surfaceDispo" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm" placeholder="{{ __('Surface Disponible (m²)') }}" />
         </div>
 
         <!-- Surface Bâtie -->
-        <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
+        <div class="relative col-span-1 sm:col-span-1 md:col-span-1">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
           <input id="surfaceBatie" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm"
             placeholder="{{ __('Surface Bâtie Souhaitée (m²)') }}" />
         </div>
 
-
-
         <!-- STANDING -->
-        <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
+        <div class="relative col-span-1 sm:col-span-1 md:col-span-1">
           <button id="openStand"
             class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
             {{ __('Standing') }}
@@ -245,7 +247,7 @@
         </div>
 
         <!-- OPTIONS -->
-        <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
+        <div class="relative col-span-1 sm:col-span-1 md:col-span-1">
           <button id="openOptions"
             class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
             {{ __('Options') }}
@@ -268,11 +270,10 @@
           </div>
         </div>
 
-
         <!-- BOUTON FINAL -->
         <button
           onclick="startSimulation()"
-          class="col-span-1 sm:col-span-2 md:col-span-2 w-full h-10 px-4 flex items-center justify-center bg-primary text-white rounded-lg text-xs sm:text-sm hover:bg-opacity-90">
+          class="col-span-1 sm:col-span-2 md:col-span-1 w-full h-10 px-4 flex items-center justify-center bg-primary text-white rounded-lg text-xs sm:text-sm hover:bg-opacity-90">
           {{ __('Poursuivre La Simulation') }}
         </button>
 
