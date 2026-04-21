@@ -646,64 +646,62 @@
   </div>
 
   <!-- ================= SECTION POURQUOI AIAE ================= -->
-  <section class="relative w-full bg-primary overflow-hidden">
+<section class="relative w-full bg-primary">
 
-    <div class="max-w-[1600px] mx-auto px-8 lg:px-[100px] pt-10">
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-[100px] py-10 sm:py-14 lg:py-16">
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center text-center lg:text-left">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-        <!-- GAUCHE : TEXTE -->
-        <div class="text-white relative flex justify-center lg:justify-end">
+      <!-- GAUCHE : TITRE -->
+      <div class="text-white flex justify-center lg:justify-end text-center lg:text-left">
+       <h2 class="text-[36px] sm:text-[38px] md:text-[38px] lg:text-[80px] font-heavy leading-[1.1]">
+  {!! __('Pourquoi<br> Choisir AIAE ?') !!}
+</h2>
+      </div>
 
-          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-[1.1] mb-4 lg:mb-10 text-center lg:text-left lg:translate-x-10 z-10">
-            {!! __('Pourquoi<br> Choisir AIAE ?') !!}
-          </h2>
+      <!-- DROITE : CARTE -->
+      <div class="flex justify-center">
+        <div class="w-fit bg-primary rounded-[20px]
+                    shadow-[8px_8px_30px_rgba(0,0,0,0.35)]
+                    px-6 sm:px-10 pt-6 sm:pt-8 pb-8 sm:pb-10">
 
-        </div>
+          <div class="flex flex-col gap-3 sm:gap-4 text-white font-heavy">
 
-        <!-- DROITE : IMAGE -->
-        <div class="relative flex justify-center lg:justify-start">
-          <div class="relative w-full max-w-[450px]">
-            <img src="{{ asset('aiae-frontend/Images/Pourquoi choisir.png') }}" alt="bloc glass" class="w-full h-auto">
-            
-            <!-- Text Overlays -->
-            <div class="absolute inset-0 pointer-events-none flex items-center pl-[15%] sm:pl-[28%] pr-[5%]">
-              <div class="flex flex-col gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 text-white font-heavy text-left leading-tight">
-                <!-- Item 1 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
-                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                  <span class="whitespace-nowrap">{!! __('Un Interlocuteur Unique') !!}</span>
-                </div>
-                <!-- Item 2 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
-                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                  <span class="whitespace-nowrap">{!! __('Expertise Technique Avancée') !!}</span>
-                </div>
-                <!-- Item 3 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
-                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                  <span class="whitespace-nowrap">{!! __('Des Engagements Tenus') !!}</span>
-                </div>
-                <!-- Item 4 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
-                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                  <span class="whitespace-nowrap">{!! __('Transparence Totale') !!}</span>
-                </div>
-                <!-- Item 5 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
-                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                  <span class="whitespace-nowrap">{!! __('Solutions Intégrées Uniques') !!}</span>
-                </div>
-              </div>
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{{ __('Un Interlocuteur Unique') }}</span>
             </div>
-          </div>
-        </div>
 
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{{ __('Expertise Technique Avancée') }}</span>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{{ __('Des Engagements Tenus') }}</span>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{{ __('Transparence Totale') }}</span>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{{ __('Solutions Intégrées Uniques') }}</span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
   <!-- ================= SECTION AVANTAGES ================= -->
   <section class="bg-[#f3f3f3] py-20">
@@ -844,84 +842,77 @@
 
   </section>
 
-  <!-- ================= SECTION ENGAGEMENTS================= -->
-  <section class="relative w-full bg-darkBlue overflow-hidden">
+    <!-- ================= SECTION ENGAGEMENTS================= -->
+<section class="relative w-full bg-darkBlue">
 
-    <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px] pt-10">
+  <div class="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-[100px] py-10 sm:py-14 lg:py-16">
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center text-center lg:text-left">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-        <!-- GAUCHE : TEXTE -->
-        <div class="text-white relative mx-auto lg:ml-20 max-w-xl">
+      <!-- GAUCHE : TEXTE -->
+      <div class="text-white mx-auto lg:ml-20 max-w-xl text-center lg:text-left">
+        <h2 class="text-[36px] sm:text-5xl lg:text-6xl font-heavy leading-tight mb-4 lg:mb-10">
+          {!! __('Nos<br> Engagements<br> Concrets') !!}
+        </h2>
+      </div>
 
-          <h2 class="text-[40px] sm:text-5xl lg:text-6xl font-heavy leading-tight mb-4 lg:mb-10 text-center lg:text-left">
-            {!! __('Nos<br> Engagements<br> Concrets') !!}
-          </h2>
+      <!-- DROITE : CARTE -->
+<div class="flex justify-center lg:justify-end lg:mr-10">
+  <div class="w-fit sm:w-full sm:max-w-[460px] bg-[#121a44] rounded-[20px]
+              shadow-[8px_8px_30px_rgba(0,0,0,0.5)]
+              px-6 sm:px-10 pt-6 sm:pt-8 pb-8 sm:pb-10">
 
+    <!-- Deux colonnes fixes -->
+    <div class="flex gap-6 sm:gap-10 text-white font-heavy">
+
+      <!-- Colonne 1 -->
+      <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Devis Gratuit Détaillé') }}</span>
         </div>
-
-        <!-- DROITE : IMAGE -->
-      <!-- DROITE : IMAGE -->
-        <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-          
-          <!-- CORRECTION : Suppression des "scale-" et utilisation de largeurs fixes adaptatives (w-...) -->
-          <div class="relative w-[350px] sm:w-[500px] md:w-[600px] lg:w-[650px] max-w-full">
-            <img src="{{ asset('aiae-frontend/Images/Nos engagements.png') }}" alt="bloc glass" class="w-full h-auto drop-shadow-2xl">
-            
-            <!-- Text Overlays (2 Columns) -->
-            <!-- CORRECTION : centrage vertical avec padding ajusté en % pour éviter l'icône main -->
-            <div class="absolute inset-0 pointer-events-none flex items-center justify-center pl-[18%] pr-[8%]">
-              <div class="flex gap-x-[8%] sm:gap-x-[12%] w-full text-white font-heavy text-left leading-tight">
-                
-                <!-- Column 1 -->
-                <!-- Utilisation de gap (espacement vertical) proportionnel -->
-                <div class="flex flex-col gap-2 sm:gap-3 md:gap-4 whitespace-nowrap">
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Devis Gratuit Détaillé') !!}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Planning Contractuel') !!}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Garantie Décennale') !!}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Assurance RC Pro') !!}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Paiement Par Étapes') !!}</span>
-                  </div>
-                </div>
-
-                <!-- Column 2 -->
-                <div class="flex flex-col gap-2 sm:gap-3 md:gap-4 whitespace-nowrap">
-                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Confidentialité') !!}</span>
-                  </div>
-                  
-                  <!-- CORRECTION ICI : items-start au lieu de items-center pour que le point blanc reste en haut du texte à 2 lignes -->
-                  <div class="flex items-start gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
-                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0 mt-1 sm:mt-1.5"></span>
-                    <span class="leading-tight">{!! __('Accompagnement<br> Financement') !!}</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Planning Contractuel') }}</span>
         </div>
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Garantie Décennale') }}</span>
+        </div>
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Assurance RC Pro') }}</span>
+        </div>
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Paiement Par Étapes') }}</span>
+        </div>
+      </div>
 
+      <!-- Colonne 2 -->
+      <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+          <span>{{ __('Confidentialité') }}</span>
+        </div>
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1"></span>
+          <span class="leading-snug max-w-[90px] sm:max-w-[130px]">
+            {{ __('Accompagnement Financement') }}
+          </span>
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </div>
+</div>
+
+    </div>
+
+  </div>
+
+</section>
 
   <!-- ================= SECTION GARANTIES ================= -->
   <section class="bg-[#f3f3f3] py-20">
