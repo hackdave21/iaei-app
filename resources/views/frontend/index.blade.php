@@ -264,7 +264,7 @@
             <label class="flex justify-between text-xs sm:text-sm">{{ __('Solaire') }} <input type="checkbox" id="checkSolaire" /></label>
             <label class="flex justify-between text-xs sm:text-sm">{{ __('Piscine') }} <input type="checkbox" id="checkPiscine" /></label>
 
-            <button class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
+            <button onclick="optionsPanel.classList.add('hidden'); openOptions.querySelector('.arrow').classList.remove('rotate-180')" class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
               {{ __('Valider') }}
             </button>
           </div>
@@ -670,27 +670,27 @@
             <div class="absolute inset-0 pointer-events-none flex items-center pl-[15%] sm:pl-[28%] pr-[5%]">
               <div class="flex flex-col gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 text-white font-heavy text-left leading-tight">
                 <!-- Item 1 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
                   <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                   <span class="whitespace-nowrap">{!! __('Un Interlocuteur Unique') !!}</span>
                 </div>
                 <!-- Item 2 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
                   <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                   <span class="whitespace-nowrap">{!! __('Expertise Technique Avancée') !!}</span>
                 </div>
                 <!-- Item 3 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
                   <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                   <span class="whitespace-nowrap">{!! __('Des Engagements Tenus') !!}</span>
                 </div>
                 <!-- Item 4 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
                   <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                   <span class="whitespace-nowrap">{!! __('Transparence Totale') !!}</span>
                 </div>
                 <!-- Item 5 -->
-                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                <div class="flex items-center gap-2 sm:gap-3 text-[24px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
                   <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                   <span class="whitespace-nowrap">{!! __('Solutions Intégrées Uniques') !!}</span>
                 </div>
@@ -861,47 +861,57 @@
         </div>
 
         <!-- DROITE : IMAGE -->
-        <div class="relative lg:mr-20 flex justify-center scale-100 sm:scale-105 md:scale-125 lg:scale-150 transform transition duration-300">
-          <div class="relative w-full">
-            <img src="{{ asset('aiae-frontend/Images/Nos engagements.png') }}" alt="bloc glass" class="ml-0 lg:ml-20 w-full h-auto">
+      <!-- DROITE : IMAGE -->
+        <div class="relative lg:mr-20 flex justify-center lg:justify-end">
+          
+          <!-- CORRECTION : Suppression des "scale-" et utilisation de largeurs fixes adaptatives (w-...) -->
+          <div class="relative w-[350px] sm:w-[500px] md:w-[600px] lg:w-[650px] max-w-full">
+            <img src="{{ asset('aiae-frontend/Images/Nos engagements.png') }}" alt="bloc glass" class="w-full h-auto drop-shadow-2xl">
             
             <!-- Text Overlays (2 Columns) -->
-            <div class="absolute inset-0 pointer-events-none flex items-center pl-[20%] sm:pl-[38%] pr-[5%]">
-              <div class="flex gap-x-[15%] w-full text-white font-heavy text-left leading-tight">
+            <!-- CORRECTION : centrage vertical avec padding ajusté en % pour éviter l'icône main -->
+            <div class="absolute inset-0 pointer-events-none flex items-center justify-center pl-[18%] pr-[8%]">
+              <div class="flex gap-x-[8%] sm:gap-x-[12%] w-full text-white font-heavy text-left leading-tight">
+                
                 <!-- Column 1 -->
-                <div class="flex flex-col gap-0.5 sm:gap-1 md:gap-1.5 whitespace-nowrap">
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                <!-- Utilisation de gap (espacement vertical) proportionnel -->
+                <div class="flex flex-col gap-2 sm:gap-3 md:gap-4 whitespace-nowrap">
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Devis Gratuit Détaillé') !!}</span>
                   </div>
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Planning Contractuel') !!}</span>
                   </div>
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Garantie Décennale') !!}</span>
                   </div>
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Assurance RC Pro') !!}</span>
                   </div>
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Paiement Par Étapes') !!}</span>
                   </div>
                 </div>
+
                 <!-- Column 2 -->
-                <div class="flex flex-col gap-0.5 sm:gap-1 md:gap-1.5 whitespace-nowrap">
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                <div class="flex flex-col gap-2 sm:gap-3 md:gap-4 whitespace-nowrap">
+                  <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
                     <span>{!! __('Confidentialité') !!}</span>
                   </div>
-                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
-                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
-                    <span>{!! __('Accompagnement<br> Financement') !!}</span>
+                  
+                  <!-- CORRECTION ICI : items-start au lieu de items-center pour que le point blanc reste en haut du texte à 2 lignes -->
+                  <div class="flex items-start gap-1.5 sm:gap-2 text-[9px] min-[400px]:text-[11px] sm:text-[13px] md:text-[15px] lg:text-[9px]">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full shrink-0 mt-1 sm:mt-1.5"></span>
+                    <span class="leading-tight">{!! __('Accompagnement<br> Financement') !!}</span>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -1108,46 +1118,51 @@
             {{ __('Nos Valeurs') }}
           </h2>
 
-          <p class="text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
-            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
-          </p>
+         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light whitespace-nowrap">
+    {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
+</p>
 
         </div>
 
-        <!-- DROITE : BLOC VALEURS -->
+       <!-- DROITE : BLOC VALEURS -->
         <div class="relative lg:mr-20 flex justify-center lg:justify-end">
           <div class="relative w-[350px] sm:w-[420px] max-w-full">
             <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE" class="w-full h-auto drop-shadow-2xl">
             
             <!-- Text Overlays -->
-            <div class="absolute inset-0 pointer-events-none flex items-center px-[22%] sm:px-[25%]">
-              <div class="flex flex-col gap-0.5 sm:gap-2 md:gap-3 text-white font-heavy text-left leading-tight">
+            <!-- CORRECTION ICI : pl-[22%] (au lieu de 12%) pour repousser le texte vers la droite à l'intérieur du cadre -->
+            <div class="absolute inset-0 pointer-events-none flex flex-col justify-evenly py-[14%] pl-[22%] pr-[12%]">
+              
                 <!-- Item 1 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Qualité Est Primordiale') !!}</span>
                 </div>
+
                 <!-- Item 2 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
                 </div>
+
                 <!-- Item 3 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
                 </div>
+
                 <!-- Item 4 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Équipes') !!}</span>
                 </div>
+
                 <!-- Item 5 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
                 </div>
-              </div>
+                
             </div>
           </div>
         </div>

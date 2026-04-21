@@ -58,7 +58,8 @@
                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror
             </div>
-
+            <div>
+                <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">{{ __('Mot de passe') }}</label>
                 <div class="relative">
                     <input type="password" name="password" id="password" 
                         class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#162064] focus:ring-2 focus:ring-[#162064]/20 outline-none transition-all pr-12"
