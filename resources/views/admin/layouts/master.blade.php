@@ -25,15 +25,42 @@
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/theme.min.css') }}" />
     <style>
+        /* ================= FONTS ================= */
+        @font-face {
+            font-family: "Futura";
+            src: url("{{ asset('aiae-frontend/fonts/FuturaStdLight.otf') }}");
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: "Futura";
+            src: url("{{ asset('aiae-frontend/fonts/FuturaStdHeavy.otf') }}");
+            font-weight: 800;
+        }
+
         :root {
             --bs-primary: #162064;
             --bs-primary-rgb: 22, 32, 100;
             --primary-color: #162064;
         }
 
-        body, h1, h2, h3, h4, h5, h6, .nxl-mtext, .btn, .form-control {
+        body, .nxl-mtext, .btn, .form-control {
             font-family: 'Futura', 'Inter', sans-serif !important;
+            font-weight: 300 !important;
+            font-size: 15.5px !important;
         }
+
+        h1, h2, h3, h4, h5, h6, strong {
+            font-family: 'Futura', 'Inter', sans-serif !important;
+            font-weight: 800 !important;
+        }
+
+        h1 { font-size: 2.25rem !important; }
+        h2 { font-size: 1.85rem !important; }
+        h3 { font-size: 1.55rem !important; }
+        h4 { font-size: 1.35rem !important; }
+        h5 { font-size: 1.15rem !important; }
+        h6 { font-size: 1rem !important; }
 
         .bg-primary {
             background-color: #162064 !important;
