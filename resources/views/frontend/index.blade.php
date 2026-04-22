@@ -301,11 +301,11 @@
             </h2>
 
             <p class="text-[24px] text-darkBlue leading-relaxed mb-6 font-light">
-              {!! __('AIAE (<span class="font-medium text-darkBlue">Afrika Infrastructures And Equipements</span>) est<br> une entreprise togolaise <span class="font-medium text-darkBlue">fondée par des<br> experts avec plus de 18 ans d\'expérience en<br> génie civil</span>, avec une ambition claire :<br> <span class="font-medium text-darkBlue">transformer le secteur de la construction en<br> Afrique de l\'Ouest</span>.') !!}
+              {!! __('AIAE (<span class="font-medium text-darkBlue">Afrika Infrastructures And Equipements</span>) est une entreprise togolaise <span class="font-medium text-darkBlue">fondée par des experts avec plus de 18 ans d\'expérience en génie civil</span>, avec une ambition claire : <span class="font-medium text-darkBlue">transformer le secteur de la construction en Afrique de l\'Ouest</span>.') !!}
             </p>
 
             <p class="text-[18px] text-darkBlue leading-relaxed mb-6 font-book">
-              {!! __('Face à un marché où le client doit coordonner lui-même architecte, bureau d\'études, constructeur et installateurs,<br> <span class="font-medium text-primary">AIAE propose un modèle intégré : de la conception<br> jusqu\'à la remise des clés, en passant par l\'autonomie<br> énergétique et la sécurisation des installations</span>') !!}
+              {!! __('Face à un marché où le client doit coordonner lui-même architecte, bureau d\'études, constructeur et installateurs, <span class="font-medium text-primary">AIAE propose un modèle intégré : de la conception jusqu\'à la remise des clés, en passant par l\'autonomie énergétique et la sécurisation des installations</span>') !!}
             </p>
 
             <button class="bg-primary text-white px-6 py-2.5 rounded-lg flex items-center gap-3 hover:bg-opacity-90 transition-all font-book">
@@ -665,27 +665,27 @@
 
           <div class="flex flex-col gap-3 sm:gap-4 text-white font-heavy">
 
-            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
               <span>{{ __('Un Interlocuteur Unique') }}</span>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
               <span>{{ __('Expertise Technique Avancée') }}</span>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
               <span>{{ __('Des Engagements Tenus') }}</span>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
               <span>{{ __('Transparence Totale') }}</span>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] whitespace-nowrap">
+            <div class="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
               <span>{{ __('Solutions Intégrées Uniques') }}</span>
             </div>
@@ -865,23 +865,23 @@
 
       <!-- Colonne 1 -->
       <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Devis Gratuit Détaillé') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Planning Contractuel') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Garantie Décennale') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Assurance RC Pro') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Paiement Par Étapes') }}</span>
         </div>
@@ -889,7 +889,7 @@
 
       <!-- Colonne 2 -->
       <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
           <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
           <span>{{ __('Confidentialité') }}</span>
         </div>
@@ -1103,11 +1103,11 @@
         <!-- GAUCHE : TEXTE -->
         <div class="text-white lg:ml-20 max-w-xl text-left">
 
-          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8 whitespace-nowrap">
+          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
             {{ __('Nos Valeurs') }}
           </h2>
 
-         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light whitespace-nowrap">
+         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
     {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
 </p>
 
@@ -1123,31 +1123,31 @@
             <div class="absolute inset-0 pointer-events-none flex flex-col justify-evenly py-[14%] pl-[22%] pr-[12%]">
               
                 <!-- Item 1 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                   <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Qualité Est Primordiale') !!}</span>
                 </div>
 
                 <!-- Item 2 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                   <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
                 </div>
 
                 <!-- Item 3 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                   <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
                 </div>
 
                 <!-- Item 4 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                   <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Équipes') !!}</span>
                 </div>
 
                 <!-- Item 5 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                   <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
                 </div>
@@ -1414,7 +1414,7 @@
 
           <!-- bouton RDV -->
           <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary border-2 border-white rounded-full shadow-lg p-auto mb-6 w-full sm:w-[350px] hover:opacity-90 transition">
-            <span class="px-2 py-2 text-white text-center font-light whitespace-nowrap">
+            <span class="px-2 py-2 text-white text-center font-light">
               {{ __('Prendre rendez-vous maintenant') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
@@ -1818,7 +1818,7 @@
 
           <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
 
-          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg">
             <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
             <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
