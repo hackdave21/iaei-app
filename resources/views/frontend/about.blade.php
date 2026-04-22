@@ -255,43 +255,43 @@
   @include('frontend.partials.navbar')
 
   <!-- ================= HERO ================= -->
-<section class="pt-20 md:pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
-  <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+  <section class="pt-20 md:pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
+    <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
-    <!-- TEXTE -->
-    <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0">
+      <!-- TEXTE -->
+      <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0">
 
-      <div class="mt-4">
-        <!-- TITRE -->
-        <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 break-words">
-          {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
-        </h2>
+        <div class="mt-4">
+          <!-- TITRE -->
+          <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 break-words">
+            {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
+          </h2>
 
-        <!-- PARAGRAPHE 1 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-          {!! __('AIAE est née d\'une observation simple : <strong>en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong>sans garantie de cohérence ni de respect des engagements.</strong>') !!}
-        </p>
+          <!-- PARAGRAPHE 1 -->
+          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
+            {!! __('AIAE est née d\'une observation simple : <strong>en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong>sans garantie de cohérence ni de respect des engagements.</strong>') !!}
+          </p>
 
-        <!-- PARAGRAPHE 2 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-          {!! __('Fort de <strong>plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong>enseignant-chercheur</strong> et d\'une solide <strong>formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong>une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
-        </p>
+          <!-- PARAGRAPHE 2 -->
+          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
+            {!! __('Fort de <strong>plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong>enseignant-chercheur</strong> et d\'une solide <strong>formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong>une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
+          </p>
 
-        <!-- PARAGRAPHE 3 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-          {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong>solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
-        </p>
+          <!-- PARAGRAPHE 3 -->
+          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
+            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong>solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- IMAGE -->
+      <div class="w-full rounded-[18px] overflow-hidden order-1 lg:order-2 px-2 md:px-0">
+        <img src="{{ asset('aiae-frontend/Images/about.png') }}" class="w-full h-auto lg:h-[500px] object-cover" />
       </div>
 
     </div>
-
-    <!-- IMAGE -->
-    <div class="w-full rounded-[18px] overflow-hidden order-1 lg:order-2 px-2 md:px-0">
-      <img src="{{ asset('aiae-frontend/Images/about.png') }}" class="w-full h-auto lg:h-[500px] object-cover" />
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- ================= EXPERTISE ================= -->
   <section class="bg-[#e5e5e5] pt-5 pb-10">
@@ -532,16 +532,16 @@
         <!-- Texte -->
         <div class="flex flex-col justify-center h-full gap-5 py-4">
           <div>
-            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+            <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-2 leading-none">
               {{ __('CONSTRUCTION') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong> <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel, tertiaire, industriel, agricole, ouvrages d’art.') !!}
+              {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong> <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel,<br> tertiaire, industriel, agricole, ouvrages<br> d’art.') !!}
             </p>
           </div>
           <div>
             <span
-              class="inline-block bg-[#05482C] text-white px-8 py-2 md:px-10 border-[4px] border-[#00a651] rounded-[50px] text-[20px] md:text-[22px] font-book mt-2 shadow-sm">
+              class="inline-block bg-[#05482C] text-white px-5 py-1 md:px-6 md:py-1 border-[2px] border-[#00a651] rounded-full text-[14px] md:text-[16px] font-book mt-2 shadow-sm">
               {{ __('Opérationnelle') }}
             </span>
           </div>
@@ -555,13 +555,13 @@
       <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
 
         <!-- Texte énergie -->
-        <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
+        <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-2">
           <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-2 leading-none">
               {{ __('ÉNERGIE') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('Solutions <strong class="font-heavy text-gray-800">d’autonomie énergétique</strong> pour vos installations. Solaire C&I, systèmes hybrides, sites isolés.') !!}
+              {!! __('Solutions <strong class="font-heavy text-gray-800">d’autonomie<br> énergétique</strong> pour vos installations.<br> Solaire C&I, systèmes hybrides, sites<br> isolés.') !!}
             </p>
           </div>
           <div>
@@ -592,7 +592,7 @@
               {{ __('SÉCURITÉ') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('<strong class="font-heavy text-gray-800">Protection haute performance</strong> pour vos biens et vos personnes. Chambres fortes EN 1143-1, safe rooms, armureries, contrôle d’accès.') !!}
+              {!! __('<strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d’accès.') !!}
             </p>
           </div>
           <div>
@@ -608,29 +608,30 @@
       <div class="border-t border-gray-300 my-8 md:my-16"></div>
 
       <!-- Ligne 4 -->
-      <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
+   <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-6 md:gap-12 md:items-stretch">
 
-        <!-- Texte prefabrication -->
-        <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
-          <div>
-            <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
-              {{ __('PRÉFABRICATION') }}
-            </h3>
-            <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('<strong class="font-heavy text-gray-800">Production industrielle</strong> d’éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.') !!}
-            </p>
-          </div>
-          <div>
-            <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">
-              {{ __('Prochainement') }}
-            </p>
-          </div>
-        </div>
+  <!-- Texte prefabrication -->
+  <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
+    <div>
+      <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
+        {{ __('PRÉFABRICATION') }}
+      </h3>
+      <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
+        {!! __('<strong class="font-heavy text-gray-800">Production industrielle</strong> d\'éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.') !!}
+      </p>
+    </div>
+    <div>
+      <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">
+        {{ __('Prochainement') }}
+      </p>
+    </div>
+  </div>
 
-        <img src="{{ asset('aiae-frontend/Images/Préfabrication.png') }}"
-          class="rounded-[20px] w-full h-auto max-h-[300px] md:h-full md:max-h-none object-contain object-center order-first md:order-last">
+  <!-- Image -->
+  <img src="{{ asset('aiae-frontend/Images/fabrik.png') }}"
+    class="rounded-[20px] w-full h-auto object-contain object-center order-first md:order-last self-center">
 
-      </div>
+</div>
 
     </div>
 
@@ -669,7 +670,7 @@
                 {!! __('Direction Générale<br><span class="hidden md:inline">&nbsp;</span>') !!}
               </div>
               <div class="bg-white p-4 lg:p-5 text-[16px] xl:text-[18px] text-gray-700 flex-1">
-                {!! __('En charge de la gestion opérationnelle quotidienne, de la<br> coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en<br> gestion de projets BTP et coordination multi-lots.</strong>') !!}
+                {!! __('En charge de la gestion opérationnelle quotidienne, de la coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en gestion de projets BTP et coordination multi-lots.</strong>') !!}
               </div>
             </div>
 
@@ -686,7 +687,7 @@
             <!-- TEXTE (Bottom Right) -->
             <div
               class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              {!! __('Notre équipe s’appuie<br> également sur <strong class="text-white font-heavy">un réseau de<br> partenaires techniques qualifiés</strong><br> (architectes, géotechniciens,<br> topographes, bureaux de<br> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br> besoins de chaque projet.</strong>') !!}
+              {!! __('Notre équipe s’appuie également sur <strong class="text-white font-heavy">un réseau de partenaires techniques qualifiés</strong> (architectes, géotechniciens, topographes, bureaux de contrôle) <strong class="text-white font-heavy">mobilisés selon les besoins de chaque projet.</strong>') !!}
             </div>
 
           </div>
@@ -700,81 +701,68 @@
   </section>
 
   <!-- ================= SECTION VALEURS ================= -->
-  <section class="relative w-full bg-secondary overflow-hidden pt-10">
+ <section class="relative w-full bg-secondary overflow-hidden pt-10 pb-14">
 
-    <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
+  <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-center lg:text-left">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-center lg:text-left">
 
-        <!-- GAUCHE : TEXTE -->
-        <div class="text-white lg:ml-20 max-w-xl text-left">
+      <!-- GAUCHE : TEXTE -->
+      <div class="text-white lg:ml-20 max-w-xl text-left">
 
-          <h2
-            class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
-            {{ __('Nos Valeurs') }}
-          </h2>
+        <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
+          {{ __('Nos Valeurs') }}
+        </h2>
 
-          <p
-            class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
-            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
-          </p>
+        <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
+          {!! __('Ces valeurs constituent l\'ADN d\'AIAE. Elles ne sont pas négociables, quelles que soient les circonstances.') !!}
+        </p>
 
-        </div>
+      </div>
 
-        <!-- DROITE : BLOC VALEURS -->
-        <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-          <div class="relative w-[350px] sm:w-[420px] max-w-full">
-            <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE"
-              class="w-full h-auto drop-shadow-2xl">
+      <!-- DROITE : BLOC VALEURS -->
+      <div class="relative lg:mr-20 flex justify-center lg:justify-end pb-6">
+        <div class="relative w-[350px] sm:w-[420px] max-w-full">
 
-            <!-- Text Overlays -->
-            <!-- CORRECTION ICI : pl-[22%] (au lieu de 12%) pour repousser le texte vers la droite à l'intérieur du cadre -->
-            <div class="absolute inset-0 pointer-events-none flex flex-col justify-evenly py-[14%] pl-[22%] pr-[12%]">
+          <!-- CARTE -->
+          <div class="bg-[#C17520] rounded-2xl px-10 py-10 flex flex-col gap-5"
+            style="box-shadow: 6px 12px 30px rgba(0,0,0,0.5);">
 
-              <!-- Item 1 -->
-              <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                <span>{!! __('La Qualité Est Primordiale') !!}</span>
-              </div>
-
-              <!-- Item 2 -->
-              <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
-              </div>
-
-              <!-- Item 3 -->
-              <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
-              </div>
-
-              <!-- Item 4 -->
-              <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                <span>{!! __('Respect Des Équipes') !!}</span>
-              </div>
-
-              <!-- Item 5 -->
-              <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
-              </div>
-
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('La Qualité Est Primordiale') !!}</span>
             </div>
-          </div>
-        </div>
 
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Respect Des Équipes') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
   <div class="relative">

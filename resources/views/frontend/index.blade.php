@@ -1093,74 +1093,69 @@
 
   </section>
 
-  <!-- ================= SECTION VALEURS ================= -->
-  <section class="relative w-full bg-secondary overflow-hidden pt-10">
+   <!-- ================= SECTION VALEURS ================= -->
+ <section class="relative w-full bg-secondary overflow-hidden pt-10 pb-14">
 
-    <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
+  <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-center lg:text-left">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-center lg:text-left">
 
-        <!-- GAUCHE : TEXTE -->
-        <div class="text-white lg:ml-20 max-w-xl text-left">
+      <!-- GAUCHE : TEXTE -->
+      <div class="text-white lg:ml-20 max-w-xl text-left">
 
-          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
-            {{ __('Nos Valeurs') }}
-          </h2>
+        <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
+          {{ __('Nos Valeurs') }}
+        </h2>
 
-         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
-    {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
-</p>
+        <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
+          {!! __('Ces valeurs constituent l\'ADN d\'AIAE. Elles ne sont pas négociables, quelles que soient les circonstances.') !!}
+        </p>
 
-        </div>
+      </div>
 
-       <!-- DROITE : BLOC VALEURS -->
-        <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-          <div class="relative w-[350px] sm:w-[420px] max-w-full">
-            <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE" class="w-full h-auto drop-shadow-2xl">
-            
-            <!-- Text Overlays -->
-            <!-- CORRECTION ICI : pl-[22%] (au lieu de 12%) pour repousser le texte vers la droite à l'intérieur du cadre -->
-            <div class="absolute inset-0 pointer-events-none flex flex-col justify-evenly py-[14%] pl-[22%] pr-[12%]">
-              
-                <!-- Item 1 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                  <span>{!! __('La Qualité Est Primordiale') !!}</span>
-                </div>
+      <!-- DROITE : BLOC VALEURS -->
+      <div class="relative lg:mr-20 flex justify-center lg:justify-end pb-6">
+        <div class="relative w-[350px] sm:w-[420px] max-w-full">
 
-                <!-- Item 2 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                  <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
-                </div>
+          <!-- CARTE -->
+          <div class="bg-[#C17520] rounded-2xl px-10 py-10 flex flex-col gap-5"
+            style="box-shadow: 6px 12px 30px rgba(0,0,0,0.5);">
 
-                <!-- Item 3 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                  <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                  <span>{!! __('Respect Des Équipes') !!}</span>
-                </div>
-
-                <!-- Item 5 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
-                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
-                  <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
-                </div>
-                
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('La Qualité Est Primordiale') !!}</span>
             </div>
-          </div>
-        </div>
 
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Respect Des Équipes') !!}</span>
+            </div>
+
+            <div class="flex items-center gap-3 text-white font-heavy text-[15px] sm:text-[16px]">
+              <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+              <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
   <!-- ================= SECTION VALEURS DETAILS ================= -->
   <section class="bg-[#f3f3f3] py-20">

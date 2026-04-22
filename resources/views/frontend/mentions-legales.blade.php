@@ -115,7 +115,7 @@
   <!-- HERO -->
   <section class="pt-40 pb-20 bg-darkBlue text-white">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-4xl md:text-6xl font-heavy mb-4 uppercase tracking-tighter">
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-heavy mb-4 uppercase tracking-tighter">
         Mentions <span class="text-[#FF8400]">Légales</span>
       </h2>
       <p class="text-lg opacity-80 font-light max-w-2xl mx-auto">
@@ -144,7 +144,7 @@
 
       <!-- SOMMAIRE (MOBILE) -->
       <div class="lg:hidden bg-white p-6 rounded-2xl shadow-sm mb-8">
-        <h2 class="font-bold text-darkBlue mb-4 text-lg">Sommaire</h2>
+        <h2 class="font-bold text-darkBlue mb-4 text-[18px]">Sommaire</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-medium">
           <a href="#mentions" class="text-primary hover:underline">1. Mentions Légale</a>
           <a href="#cgu" class="text-primary hover:underline">2. CGU</a>
@@ -296,7 +296,7 @@
           <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5"
             alt="AIAE Logo">
 
-          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg">
             <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
             <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
