@@ -380,8 +380,8 @@
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[14px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95 whitespace-nowrap">
-        {!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}
+      <p class="text-[14px] md:text-[20px] lg:text-[30px] leading-[1.6] font-light opacity-95 max-w-4xl mx-auto">
+        {!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures, avec des engagements tenus et une transparence totale. »') !!}
       </p>
 
     </div>
@@ -710,12 +710,12 @@
         <div class="text-white lg:ml-20 max-w-xl text-left">
 
           <h2
-            class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8 whitespace-nowrap">
+            class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
             {{ __('Nos Valeurs') }}
           </h2>
 
           <p
-            class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light whitespace-nowrap">
+            class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
             {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
           </p>
 
@@ -733,35 +733,35 @@
 
               <!-- Item 1 -->
               <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                 <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                 <span>{!! __('La Qualité Est Primordiale') !!}</span>
               </div>
 
               <!-- Item 2 -->
               <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                 <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                 <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
               </div>
 
               <!-- Item 3 -->
               <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                 <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                 <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
               </div>
 
               <!-- Item 4 -->
               <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                 <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                 <span>{!! __('Respect Des Équipes') !!}</span>
               </div>
 
               <!-- Item 5 -->
               <div
-                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left">
                 <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                 <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
               </div>
@@ -1001,7 +1001,7 @@
           <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5"
             alt="AIAE Logo">
 
-          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg">
             <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
             <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
