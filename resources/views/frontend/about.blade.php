@@ -264,22 +264,22 @@
         <div class="mt-4">
           <!-- TITRE -->
           <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 break-words">
-            {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
+            {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
           </h2>
 
           <!-- PARAGRAPHE 1 -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('AIAE est née d\'une observation simple : <strong>en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong>sans garantie de cohérence ni de respect des engagements.</strong>') !!}
+            {!! __('AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br> souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br> architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br> cohérence ni de respect des engagements.</strong>') !!}
           </p>
 
           <!-- PARAGRAPHE 2 -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('Fort de <strong>plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong>enseignant-chercheur</strong> et d\'une solide <strong>formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong>une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
+            {!! __('Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br> d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br> entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br> <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br> réalisation.</strong>') !!}
           </p>
 
           <!-- PARAGRAPHE 3 -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong>solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
+            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br> Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br> sécurité et de préfabrication.</strong>') !!}
           </p>
         </div>
 
@@ -381,7 +381,7 @@
 
       <!-- TEXTE -->
       <p class="text-[14px] md:text-[20px] lg:text-[30px] leading-[1.6] font-light opacity-95 max-w-4xl mx-auto">
-        {!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures, avec des engagements tenus et une transparence totale. »') !!}
+        {!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}
       </p>
 
     </div>
@@ -536,7 +536,7 @@
               {{ __('CONSTRUCTION') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong> <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel,<br> tertiaire, industriel, agricole, ouvrages<br> d’art.') !!}
+              {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Coeur de metier.</strong> <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel, tertiaire, industriel, agricole, ouvrages d’art.') !!}
             </p>
           </div>
           <div>
@@ -617,7 +617,7 @@
         {{ __('PRÉFABRICATION') }}
       </h3>
       <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-        {!! __('<strong class="font-heavy text-gray-800">Production industrielle</strong> d\'éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.') !!}
+        {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Production industrielle</strong> d’éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.') !!}
       </p>
     </div>
     <div>
@@ -670,7 +670,7 @@
                 {!! __('Direction Générale<br><span class="hidden md:inline">&nbsp;</span>') !!}
               </div>
               <div class="bg-white p-4 lg:p-5 text-[16px] xl:text-[18px] text-gray-700 flex-1">
-                {!! __('En charge de la gestion opérationnelle quotidienne, de la coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en gestion de projets BTP et coordination multi-lots.</strong>') !!}
+                {!! __('En charge de la gestion opérationnelle quotidienne, de la<br> coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en<br> gestion de projets BTP et coordination multi-lots.</strong>') !!}
               </div>
             </div>
 
@@ -687,7 +687,7 @@
             <!-- TEXTE (Bottom Right) -->
             <div
               class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              {!! __('Notre équipe s’appuie également sur <strong class="text-white font-heavy">un réseau de partenaires techniques qualifiés</strong> (architectes, géotechniciens, topographes, bureaux de contrôle) <strong class="text-white font-heavy">mobilisés selon les besoins de chaque projet.</strong>') !!}
+              {!! __('Notre équipe s’appuie<br> également sur <strong class="text-white font-heavy">un réseau de<br> partenaires techniques qualifiés</strong><br> (architectes, géotechniciens,<br> topographes, bureaux de<br> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br> besoins de chaque projet.</strong>') !!}
             </div>
 
           </div>
@@ -715,7 +715,7 @@
         </h2>
 
         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
-          {!! __('Ces valeurs constituent l\'ADN d\'AIAE. Elles ne sont pas négociables, quelles que soient les circonstances.') !!}
+          {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
         </p>
 
       </div>
