@@ -76,13 +76,13 @@
         </ul>
 
         <div class="flex items-center gap-3">
-            <div class="relative group cursor-pointer">
-                <div class="flex items-center gap-1 px-3 h-10 rounded-full bg-glassDark justify-center hover:bg-white/20 transition-colors">
+            <div class="relative lang-switcher cursor-pointer">
+                <div id="langBtn" class="flex items-center gap-1 px-3 h-10 rounded-full bg-glassDark justify-center hover:bg-white/20 transition-colors">
                     <span class="text-white font-bold text-sm">{{ strtoupper(app()->getLocale()) }}</span>
-                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-3 h-3 text-white transition-transform duration-300" id="langArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 
-                <div class="absolute left-0 top-full mt-2 w-max min-w-[140px] bg-white rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60] border border-gray-100">
+                <div id="langDropdown" class="absolute left-0 top-full mt-2 w-max min-w-[140px] bg-white rounded-xl shadow-lg opacity-0 invisible transition-all duration-300 z-[100] border border-gray-100">
                     <a href="{{ route('lang.switch', 'fr') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'fr' ? 'font-bold bg-gray-50' : '' }} whitespace-nowrap">
                         Français
                     </a>
@@ -154,6 +154,31 @@
                 mobileMenu.classList.add('hidden');
             });
         });
+
+        // Language Switcher Logic
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const langArrow = document.getElementById('langArrow');
+
+        if (langBtn && langDropdown) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isVisible = !langDropdown.classList.contains('invisible');
+                if (isVisible) {
+                    langDropdown.classList.add('invisible', 'opacity-0');
+                    langArrow?.classList.remove('rotate-180');
+                } else {
+                    langDropdown.classList.remove('invisible', 'opacity-0');
+                    langArrow?.classList.add('rotate-180');
+                }
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', () => {
+                langDropdown.classList.add('invisible', 'opacity-0');
+                langArrow?.classList.remove('rotate-180');
+            });
+        }
 
         // Scroll effect for floating navbar
         const navBar = document.getElementById('navBar');
