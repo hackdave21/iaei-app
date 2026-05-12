@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur AIAE</title>
+  <link rel="icon" type="image/png" href="Images/logos/Symbole AIAE FINAL.png">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            futura: ["Futura", "sans-serif"],
+            futuraCondensed: ["Futura Condensed", "sans-serif"],
+          },
+          colors: {
+            primary: "#05482C",
+            secondary: "#CC6A00",
+            glass: "rgba(255,255,255,0.55)",
+            glassDark: "rgba(255,255,255,0.35)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ================= FONTS ================= -->
+  <style>
+    @font-face {
+      font-family: "Futura";
+      src: url("/fonts/FuturaStdLight.otf");
+      font-weight: 300;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("/fonts/FuturaStdMedium.otf");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("/fonts/FuturaStdBold.otf");
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: "Futura";
+      src: url("/fonts/FuturaStdHeavy.otf");
+      font-weight: 800;
+    }
+
+    /* Condensed */
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("/fonts/FuturaStdCondensed.otf");
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: "Futura Condensed";
+      src: url("/fonts/FuturaStdCondensedBold.otf");
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+
+      body,
+      html {
+        overflow-x: hidden !important;
+      }
+
+      section,
+      div,
+      img {
+        max-width: 100% !important;
+      }
+    }
+
+    .nav-scrolled {
+      backdrop-filter: blur(18px);
+      background: rgba(22, 32, 100, 0.2);
+    }
+  </style>
+  <script src="js/tailwind-config.js"></script>
+</head>
+
+<body class="font-futura bg-gray-100 overflow-x-hidden">
+  <!-- ================= NAVBAR (injected by js/header.js) ================= -->
+  <div id="header-placeholder"></div>
+
+  <!-- ================= HERO SIMULATEUR ================= -->
+  <section class="min-h-screen pt-28 pb-10 text-white relative overflow-hidden"
+    style="background-image:url('Images/sim1.png'); background-size:cover; background-position:center;">
+
+    <div class="max-w-6xl mx-auto px-6 text-center">
+
+      <h1 class="text-4xl md:text-5xl font-bold mb-3">
+        Simulateur d'Estimation
+      </h1>
+
+      <p class="text-sm sm:text-base opacity-80 mb-10 tracking-wide break-words font-light">
+        AFRIKA INFRASTRUCTURE AND EQUIPEMENTS
+      </p>
+
+      <!-- CARD -->
+      <div class="relative max-w-5xl mx-auto bg-[#8c93a9]/60 backdrop-blur-md rounded-[40px] p-6 md:p-8">
+
+        <div class="absolute -top-4 left-6 bg-white text-black px-5 py-1.5 rounded-full text-[18px] ">
+          Sélectionnez votre secteur
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <!-- RESIDENTIEL -->
+          <a href="simulateur_aiae_v8_1_ultimate.html?secteur=residentiel"
+            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+
+            <img src="Images/resid.png" alt="Résidentiel" class="h-12 w-auto mb-4 object-contain">
+
+            <h3 class="text-[28px] font-heavy">Résidentiel</h3>
+            <p class="text-[18px] text-gray-500 font-light">Villas, immeubles</p>
+
+          </a>
+
+          <!-- TERTIAIRE -->
+          <a href="simulateur_aiae_v8_1_ultimate.html?secteur=tertiaire"
+             class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+
+            <img src="Images/tert.png" alt="Tertiaire" class="h-12 w-auto mb-4 object-contain">
+
+            <h3 class="text-[28px] font-heavy">Tertiaire</h3>
+            <p class="text-[18px] text-gray-500 font-light">Bureaux, hôtels</p>
+
+          </a>
+
+          <!-- INDUSTRIEL -->
+          <a href="simulateur_aiae_v8_1_ultimate.html?secteur=industriel"
+            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+
+            <img src="Images/indus.png" alt="Industriel" class="h-12 w-auto mb-4 object-contain">
+
+            <h3 class="text-[28px] font-heavy">Industriel</h3>
+            <p class="text-[18px] text-gray-500 font-light">Usines, entrepôts</p>
+
+          </a>
+
+          <!-- AGRICOLE -->
+          <a href="simulateur_aiae_v8_1_ultimate.html?secteur=agricole"
+            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+
+            <img src="Images/agri.png" alt="Agricole" class="h-12 w-auto mb-4 object-contain">
+
+            <h3 class="text-[28px] font-heavy">Agricole</h3>
+            <p class="text-[18px] text-gray-500 font-light">Élevage, stockage</p>
+
+          </a>
+
+        </div>
+      </div>
+
+      <!-- BOUTON -->
+      <div class="mt-10 flex justify-center w-full">
+
+        <a href="#"
+          class="bg-[#f78b0c] hover:bg-orange-600 transition text-white text-xl sm:text-2xl font-heavy px-6 sm:px-8 py-4 rounded-full flex items-center justify-center gap-3 w-full sm:w-auto">
+          Calculateur Énergie
+
+          <img src="Images/envoiblanc.png" alt="" class="flex-shrink-0 w-10 h-10 object-contain">
+
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= JS ================= -->
+  <script src="js/header.js"></script>
+  <script>
+
+    // changement d'image dans le hero
+    const buttons = document.querySelectorAll(".tabBtn");
+    const hero = document.getElementById("heroImage");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        hero.src = btn.dataset.img;
+
+        buttons.forEach((b) => {
+          b.classList.remove("bg-white", "shadow");
+          b.classList.add("bg-glassDark");
+        });
+        btn.classList.remove("bg-glassDark");
+        btn.classList.add("bg-white", "shadow");
+      });
+    });
+    // ---------------- CONFIG DROPDOWN ------------------
+    openConfig.onclick = () => configPanel.classList.toggle("hidden");
+    openStand.onclick = () => standPanel.classList.toggle("hidden");
+    openOptions.onclick = () => optionsPanel.classList.toggle("hidden");
+
+    // Salles de bain counter
+    document.querySelector(".plusBath").onclick = () => {
+      bathCount.textContent = Number(bathCount.textContent) + 1;
+    };
+    document.querySelector(".minusBath").onclick = () => {
+      if (Number(bathCount.textContent) > 0)
+        bathCount.textContent = Number(bathCount.textContent) - 1;
+    };
+
+    // Chambres counter
+    document.querySelector(".plusBed").onclick = () => {
+      bedCount.textContent = Number(bedCount.textContent) + 1;
+    };
+    document.querySelector(".minusBed").onclick = () => {
+      if (Number(bedCount.textContent) > 0)
+        bedCount.textContent = Number(bedCount.textContent) - 1;
+    };
+
+    function togglePanel(button, panel) {
+      panel.classList.toggle("hidden");
+      const arrow = button.querySelector(".arrow");
+      arrow.classList.toggle("rotate-180");
+    }
+
+    openConfig.onclick = () => togglePanel(openConfig, configPanel);
+    openStand.onclick = () => togglePanel(openStand, standPanel);
+    openOptions.onclick = () => togglePanel(openOptions, optionsPanel);
+  </script>
+</body>
+
+</html>

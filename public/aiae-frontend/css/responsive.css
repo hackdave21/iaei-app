@@ -1,0 +1,131 @@
+/* ============================================================
+   AIAE — Responsive Fixes (mobile & tablet ONLY)
+   Desktop (>1024px) is NOT affected by any rule here.
+   ============================================================ */
+
+/* ---------- GLOBAL OVERFLOW FIX ---------- */
+html, body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- CONSISTENT LOGO ---------- */
+.aiae-header-logo {
+  height: 5rem;   /* 80px — base for lg+ */
+  width: auto;
+  object-fit: contain;
+}
+
+/* ---------- TABLET (≤1024px) ---------- */
+@media (max-width: 1024px) {
+  .aiae-header-logo {
+    height: 4rem; /* 64px */
+  }
+}
+
+/* ---------- MOBILE (≤640px) ---------- */
+@media (max-width: 640px) {
+  .aiae-header-logo {
+    height: 3.25rem; /* 52px */
+  }
+
+  /* Prevent ANY child from breaking the viewport */
+  section, div, img, video, iframe, table {
+    max-width: 100% !important;
+  }
+
+  img {
+    height: auto;
+  }
+}
+
+/* ---------- FLUID TYPOGRAPHY ----------
+   Uses clamp() so sizes scale smoothly between mobile and desktop.
+   The desktop maximum matches what already exists, keeping
+   the desktop experience pixel-perfect.
+   ---------------------------------------- */
+
+/* Hero / Page titles (was 55-65px desktop) */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 3.5rem) !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 4.5vw, 3rem) !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 3.5vw, 1.75rem) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* ---------- FOOTER RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  footer .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  footer .grid ul {
+    font-size: 1rem !important;
+  }
+
+  footer .grid img {
+    max-width: 200px;
+  }
+}
+
+/* ---------- SOCIAL BAR RESPONSIVE ---------- */
+@media (max-width: 640px) {
+  .text-4xl {
+    font-size: 1.5rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* ---------- CTA BUTTONS RESPONSIVE ---------- */
+@media (max-width: 640px) {
+  /* Prevent CTA section buttons from overflowing */
+  a[class*="min-w-"] {
+    min-width: 0 !important;
+    width: 100%;
+  }
+}
+
+/* ---------- MOBILE MENU STYLES ---------- */
+#aiae-mobile-menu {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#aiae-mobile-menu.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+#aiae-mobile-menu:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ---------- CONTACT PAGE FIX ---------- */
+@media (max-width: 640px) {
+  /* Fix the subtitle font-size on contact page (was text-[47px]) */
+  section p[class*="text-[47px]"] {
+    font-size: 1.125rem !important;
+  }
+}
