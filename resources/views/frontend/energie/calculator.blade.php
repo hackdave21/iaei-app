@@ -13,6 +13,7 @@
    <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     /* Charte Graphique AIAE simplifiée */
@@ -34,7 +35,7 @@
     .input-field { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s; }
     .input-field:focus { border-color: var(--orange); ring: 2px solid #ffedc2; }
   </style>
-  <script src="js/tailwind-config.js"></script>
+  <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
 </head>
 <body>
 
@@ -131,6 +132,10 @@ $calcTranslations = [
     window.SIMULATOR_URL = "{{ route('simulator.index') }}";
 
     window.AIAE_TRANSLATIONS = @json($calcTranslations);
+    window.AIAE_USER = {
+        name: "{{ auth()->check() ? auth()->user()->name : '' }}",
+        email: "{{ auth()->check() ? auth()->user()->email : '' }}"
+    };
 </script>
 <script type="text/babel">
 @verbatim
@@ -287,8 +292,8 @@ $calcTranslations = [
     };
 
     const handleQuoteRequest = async () => {
-      const authEmail = "{{ auth()->check() ? auth()->user()->email : '' }}";
-      const authName = "{{ auth()->check() ? auth()->user()->name : '' }}";
+      const authEmail = window.AIAE_USER?.email || '';
+      const authName = window.AIAE_USER?.name || '';
 
       const { value: formValues } = await window.Swal.fire({
         title: t('Demande de devis formel'),
@@ -382,7 +387,7 @@ $calcTranslations = [
         {/* EN-TÊTE */}
         <header className="flex items-center justify-between mb-10 no-print">
           <div className="flex items-center gap-4">
-            <img src="/aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png" className="w-12 h-12 object-contain" alt="AIAE Logo" />
+            <img src="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL Clr.png') }}" className="w-12 h-12 object-contain" alt="AIAE Logo" />
             <div>
               <h1 className="text-2xl font-bold" style={{color: 'var(--bleu)'}}>{t('Simulateur Solaire AIAE')}</h1>
               <p className="text-gray-500 text-sm">{t('Dimensionnement autonome & Estimation financière')}</p>
