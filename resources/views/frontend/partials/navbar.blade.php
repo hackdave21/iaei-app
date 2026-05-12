@@ -51,7 +51,7 @@
     @if($config['mode'] === 'floating')
         class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-[28px] overflow-visible transition-all duration-300"
     @else
-        class="fixed top-0 left-0 w-full z-50 {{ $config['bg'] }} transition-all duration-300"
+        class="fixed top-0 left-0 w-full z-50 {{ $config['bg'] }} overflow-visible transition-all duration-300"
     @endif
 >
     <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">

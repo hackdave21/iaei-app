@@ -118,33 +118,6 @@
 
   <!-- ================= JS ================= -->
   <script>
-    // Menu burger en mobile
-    const burger = document.getElementById("burger");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const closeMobile = document.getElementById("closeMobile");
-
-    if (burger) {
-        burger.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-        });
-    }
-
-    if (closeMobile) {
-        closeMobile.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
-        });
-    }
-
-    const navBar = document.getElementById("navBar");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 30) {
-        navBar?.classList.add("nav-scrolled");
-      } else {
-        navBar?.classList.remove("nav-scrolled");
-      }
-    });
-
     function togglePanel(button, panel) {
       panel.classList.toggle("hidden");
       const arrow = button.querySelector(".arrow");
