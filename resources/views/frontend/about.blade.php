@@ -387,7 +387,9 @@
 
       <!-- TEXTE -->
       <p class="text-[14px] md:text-[20px] lg:text-[30px] leading-[1.6] font-light opacity-95 max-w-4xl mx-auto">
-        {!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}
+        « {!! __('Offre à chaque client particulier, entreprise ou institution un partenaire unique') !!}<br>
+        {!! __('capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,') !!}<br>
+        {!! __('avec des engagements tenus et une transparence totale.') !!} »
       </p>
 
     </div>

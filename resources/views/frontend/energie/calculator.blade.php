@@ -302,7 +302,7 @@ $calcTranslations = [
         {/* EN-TÊTE */}
         <header className="flex items-center justify-between mb-10 no-print">
           <div className="flex items-center gap-4">
-            <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL.png') }}" className="h-12 object-contain" alt="AIAE Logo" />
+            <img src="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}" className="w-12 h-12 object-contain" alt="AIAE Logo" />
             <div>
               <h1 className="text-2xl font-bold" style={{color: 'var(--bleu)'}}>{t('Simulateur Solaire AIAE')}</h1>
               <p className="text-gray-500 text-sm">{t('Dimensionnement autonome & Estimation financière')}</p>
