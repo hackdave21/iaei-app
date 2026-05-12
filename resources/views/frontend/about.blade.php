@@ -254,44 +254,50 @@
 <body class="font-futura bg-gray-100 overflow-x-hidden">
   @include('frontend.partials.navbar')
 
-  <!-- ================= HERO ================= -->
-  <section class="pt-20 md:pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
-    <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+<!-- ================= HERO ================= -->
+<section class="pt-20 md:pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
+  <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
-      <!-- TEXTE -->
-      <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0 lg:pr-8">
+    <!-- TEXTE -->
+    <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0 lg:pr-8">
+      <div class="mt-4">
 
-        <div class="mt-4">
-          <!-- TITRE -->
-          <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[26px] lg:text-[30px] xl:text-[34px] leading-[1.1] mb-8 break-words">
-            {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
-          </h2>
+        <!-- TITRE -->
+        <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[26px] lg:text-[30px] xl:text-[34px] leading-[1.1] mb-8">
+          {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
+        </h2>
 
-          <!-- PARAGRAPHE 1 -->
-          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br> souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br> architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br> cohérence ni de respect des engagements.</strong>') !!}
-          </p>
+        <!-- PARAGRAPHE 1 -->
+        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
+          {!! __('AIAE est née d\'une observation simple : <strong>en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong>sans garantie de cohérence ni de respect des engagements.</strong>') !!}
+        </p>
 
-          <!-- PARAGRAPHE 2 -->
-          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br> d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br> entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br> <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br> réalisation.</strong>') !!}
-          </p>
+        <!-- PARAGRAPHE 2 -->
+        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
+          {!! __('Fort de <strong>plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong>enseignant-chercheur</strong> et d\'une solide <strong>formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong>une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
+        </p>
 
-          <!-- PARAGRAPHE 3 -->
-          <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br> Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br> sécurité et de préfabrication.</strong>') !!}
-          </p>
-        </div>
+        <!-- PARAGRAPHE 3 -->
+        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
+          {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong>solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
+        </p>
 
       </div>
-
-      <!-- IMAGE -->
-      <div class="w-full rounded-[18px] overflow-hidden order-1 lg:order-2 px-2 md:px-0">
-        <img src="{{ asset('aiae-frontend/Images/about.png') }}" class="w-full h-auto lg:h-[500px] object-cover" />
-      </div>
-
     </div>
-  </section>
+
+    <!-- IMAGE -->
+    <div class="w-full order-1 lg:order-2 px-2 md:px-0">
+      <div class="w-full aspect-[4/3] rounded-[18px] overflow-hidden">
+        <img
+          src="{{ asset('aiae-frontend/Images/about.png') }}"
+          class="w-full h-full object-cover"
+          alt="Équipe AIAE"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ================= EXPERTISE ================= -->
   <section class="bg-[#e5e5e5] pt-5 pb-10">
