@@ -13,8 +13,8 @@
 /.zed
 /auth.json
 /node_modules
-/public/build
-/public/hot
+# /public/build — assets compilés commitées (cPanel sans Node.js)
+# /public/hot — désactivé aussi en prod
 /public/storage
 /storage/*.key
 /storage/pail
