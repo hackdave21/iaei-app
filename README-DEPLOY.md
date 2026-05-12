@@ -59,7 +59,7 @@ Voir le tableau ci-dessus.
 
 ```bash
 # Se connecter au serveur
-ssh -p 22 user@185.146.167.203
+ssh -p 22 aiae.services@ssh.us.stackcp.com
 
 # Aller dans le repo
 cd /home/sites/42a/d/dbb41a432c/aiae-app
