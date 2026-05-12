@@ -263,23 +263,23 @@
       <div class="mt-4">
 
         <!-- TITRE -->
-        <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[26px] lg:text-[30px] xl:text-[34px] leading-[1.1] mb-8">
+        <h2 class="text-darkBlue font-bold text-[18px] min-[400px]:text-[20px] sm:text-[24px] md:text-[24px] lg:text-[26px] xl:text-[28px] leading-tight mb-8 whitespace-nowrap">
           {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
         </h2>
 
         <!-- PARAGRAPHE 1 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('AIAE est née d\'une observation simple : <strong>en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong>sans garantie de cohérence ni de respect des engagements.</strong>') !!}
+          {!! __('AIAE est née d\'une observation simple : <strong class="font-heavy">en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong class="font-heavy">sans garantie de cohérence ni de respect des engagements.</strong>') !!}
         </p>
 
         <!-- PARAGRAPHE 2 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('Fort de <strong>plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong>enseignant-chercheur</strong> et d\'une solide <strong>formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong>une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
+          {!! __('Fort de <strong class="font-heavy">plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong class="font-heavy">enseignant-chercheur</strong> et d\'une solide <strong class="font-heavy">formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong class="font-heavy">une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
         </p>
 
         <!-- PARAGRAPHE 3 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong>solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
+          {!! __('<strong class="font-heavy">Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong class="font-heavy">solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
         </p>
 
       </div>
