@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>À propos - AIAE</title>
-  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
   <!-- Tailwind CDN -->
@@ -263,7 +263,7 @@
       <div class="mt-4">
 
         <!-- TITRE -->
-        <h2 class="text-darkBlue font-bold text-[18px] min-[400px]:text-[20px] sm:text-[24px] md:text-[24px] lg:text-[26px] xl:text-[28px] leading-tight mb-8 whitespace-nowrap">
+        <h2 class="text-darkBlue font-bold text-[16px] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-tight mb-8 whitespace-nowrap">
           {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
         </h2>
 
@@ -386,10 +386,8 @@
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[14px] md:text-[20px] lg:text-[30px] leading-[1.6] font-light opacity-95 max-w-4xl mx-auto">
-        « {!! __('Offre à chaque client particulier, entreprise ou institution un partenaire unique') !!}<br>
-        {!! __('capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,') !!}<br>
-        {!! __('avec des engagements tenus et une transparence totale.') !!} »
+      <p class="text-[14px] md:text-[20px] lg:text-[30px] leading-[1.6] font-light opacity-95 max-w-3xl mx-auto">
+        {!! __('« Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}
       </p>
 
     </div>

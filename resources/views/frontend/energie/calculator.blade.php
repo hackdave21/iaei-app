@@ -10,7 +10,7 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
+   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -302,7 +302,7 @@ $calcTranslations = [
         {/* EN-TÊTE */}
         <header className="flex items-center justify-between mb-10 no-print">
           <div className="flex items-center gap-4">
-            <img src="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}" className="w-12 h-12 object-contain" alt="AIAE Logo" />
+            <img src="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}" className="w-12 h-12 object-contain" alt="AIAE Logo" />
             <div>
               <h1 className="text-2xl font-bold" style={{color: 'var(--bleu)'}}>{t('Simulateur Solaire AIAE')}</h1>
               <p className="text-gray-500 text-sm">{t('Dimensionnement autonome & Estimation financière')}</p>
