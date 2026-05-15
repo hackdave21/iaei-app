@@ -11,19 +11,23 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     /* Charte Graphique AIAE simplifiée */
+    @font-face { font-family: "Futura"; src: url("/aiae-frontend/fonts/FuturaStdLight.otf"); font-weight: 300; }
+    @font-face { font-family: "Futura"; src: url("/aiae-frontend/fonts/FuturaStdMedium.otf"); font-weight: 500; }
+    @font-face { font-family: "Futura"; src: url("/aiae-frontend/fonts/FuturaStdBold.otf"); font-weight: 700; }
+    @font-face { font-family: "Futura"; src: url("/aiae-frontend/fonts/FuturaStdHeavy.otf"); font-weight: 800; }
     :root {
       --bleu: #0E1540;
       --vert: #05482C;
       --orange: #CC6A00;
       --bg-page: #f0f4f8;
     }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: #1e293b; }
+    body { font-family: 'Futura', sans-serif; background-color: var(--bg-page); color: #1e293b; }
     .mono { font-family: 'JetBrains Mono', monospace; }
     
     /* Composants UI personnalisés */

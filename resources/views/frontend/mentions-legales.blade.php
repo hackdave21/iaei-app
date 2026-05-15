@@ -188,16 +188,21 @@
           </div>
         </div>
 
-        <div class="legal-card">
-          <h2 class="legal-title text-2xl">2. Hébergeur</h2>
-          <div class="bg-gray-50 border-l-4 border-primary p-6 rounded-r-lg">
-            <p class="text-gray-500 italic mb-2">Note : En attente de confirmation finale</p>
-            <p class="text-gray-700 font-medium">Hostinger International Ltd.</p>
-            <p class="text-gray-600 font-light">61 Lordou Vironos St., 6023 Larnaca, Chypre</p>
-            <a href="https://www.hostinger.com"
-              class="text-primary hover:underline text-sm mt-2 block">www.hostinger.com</a>
-          </div>
-        </div>
+      <div class="legal-card">
+  <h2 class="legal-title text-2xl">2. Hébergeur</h2>
+  <div class="bg-gray-50 border-l-4 border-primary p-6 rounded-r-lg">
+    <p class="text-gray-700 font-medium">TRIOOTI Web Association</p>
+    <p class="text-gray-600 font-light">Avenue de Souza, Hôtel de la Paix, Bè – Lomé, Togo</p>
+    <p class="text-gray-600 font-light mt-1">
+      Tél : <a href="tel:+22898674198" class="text-primary hover:underline">(+228) 98 67 41 98</a>
+    </p>
+    <p class="text-gray-600 font-light">
+      Présent au Togo, Bénin et Ghana
+    </p>
+    <a href="https://triooti.com/corporate/"
+      class="text-primary hover:underline text-sm mt-2 block">www.triooti.com</a>
+  </div>
+</div>
 
         <div class="legal-card">
           <h2 class="legal-title text-2xl">3. Conception et développement</h2>
