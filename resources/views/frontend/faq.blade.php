@@ -315,17 +315,15 @@
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p class="mb-6">{{ __('Le coût dépend du standing choisi et de la surface. Nos fourchettes de prix de base au mètre carré sont :') }}</p>
-          <ul class="space-y-1 mb-6">
-            <li><strong class="font-heavy text-[#343434]">{{ __('Standard : ') }}</strong> 180 000 - 250 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">{{ __('Confort : ') }}</strong> 280 000 - 380 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">{{ __('Premium : ') }}</strong> 420 000 - 550 000 FCFA</li>
-            <li><strong class="font-heavy text-[#343434]">{{ __('Prestige : ') }}</strong> 600 000 - 900 000 FCFA</li>
+          <p class="mb-6">{{ __('Le coût de construction dépend principalement de la surface, du type de projet et du standing choisi.') }}</p>
+          <ul class="list-disc pl-5 space-y-2 mb-6">
+            <li><strong class="font-heavy text-[#343434]">{{ __('Standard :') }}</strong> {{ __('Fonctionnel et solide, idéal pour les budgets maîtrisés.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Confort :') }}</strong> {{ __('Matériaux de qualité supérieure, notre cœur de gamme.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Premium :') }}</strong> {{ __('Finitions haut de gamme et équipements modernes.') }}</li>
+            <li><strong class="font-heavy text-[#343434]">{{ __('Prestige :') }}</strong> {{ __('Sur-mesure total avec des matériaux nobles et exceptionnels.') }}</li>
           </ul>
-          <p class="text-[18px] italic text-gray-500 mb-6 font-book">{{ __('* Prix de base hors coefficients géographiques, géotechniques et hors frais d\'études. L\'estimation réelle de votre projet est obtenue via le simulateur en ligne ou par devis détaillé.') }}</p>
-          <p><strong class="font-heavy text-[#343434]">{{ __('Ces prix couvrent le bâtiment') }}</strong> {{ __('(gros œuvre + finitions).') }}
-            <strong class="font-heavy text-[#343434]">{{ __('Les équipements') }}</strong> {{ __('(solaire, forage, piscine, etc.)') }} <strong
-              class="font-heavy text-[#343434]">{{ __('sont chiffrés séparément') }}</strong>{{ __('. Utilisez notre simulateur en ligne pour une estimation personnalisée, ou demandez un devis gratuit.') }}</p>
+          <p class="text-[18px] italic text-gray-500 mb-6 font-book">{{ __('* Le prix final de la construction varie également selon les coefficients géographiques (zone), géotechniques (type de sol) et les frais d\'études.') }}</p>
+          <p><strong class="font-heavy text-[#343434]">{{ __('Pour obtenir une estimation précise') }}</strong>{{ __(', nous vous invitons à utiliser notre simulateur en ligne gratuit. Il calculera automatiquement le budget de votre bâtiment (gros œuvre et finitions) ainsi que de vos équipements optionnels (solaire, forage, piscine, etc.).') }}</p>
         </div>
       </details>
 
