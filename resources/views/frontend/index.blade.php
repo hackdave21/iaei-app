@@ -1946,7 +1946,7 @@
           { id: "checkGroupeElectrogene", label: "{{ __('Groupe électrogène') }}" },
           { id: "checkAlarme", label: "{{ __('Alarme') }}" },
           { id: "checkVideosurveillance", label: "{{ __('Vidéosurveillance') }}" },
-          { id: "checkControleAcces", label: "{{ __('Contrôle d\\'accès') }}" }
+          { id: "checkControleAcces", label: "{{ __('Contrôle d\'accès') }}" }
         ]
       },
       industriel: {
@@ -1965,7 +1965,7 @@
           { id: "checkGroupeElectrogene", label: "{{ __('Groupe électrogène') }}" },
           { id: "checkAlarme", label: "{{ __('Alarme') }}" },
           { id: "checkVideosurveillance", label: "{{ __('Vidéosurveillance') }}" },
-          { id: "checkControleAcces", label: "{{ __('Contrôle d\\'accès') }}" },
+          { id: "checkControleAcces", label: "{{ __('Contrôle d\'accès') }}" },
           { id: "checkQuaiChargement", label: "{{ __('Quai de chargement') }}" },
           { id: "checkPorteSectionnelle", label: "{{ __('Porte sectionnelle') }}" },
           { id: "checkPontRoulant5T", label: "{{ __('Pont roulant 5T') }}" },
