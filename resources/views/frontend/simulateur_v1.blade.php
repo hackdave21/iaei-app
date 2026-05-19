@@ -433,6 +433,9 @@ const App=()=>{
   const[espacesHotel,setEspacesHotel]=useState(qs.espaces_communs === "1" ? ['accueil'] : []);
   const SPECIFIQUES = libConfig.SPECIFIQUE || [];
 
+  // Options mapping Logic
+  const hasOpt = (key) => qs.options && qs.options.includes(key);
+
   const [hauteurLibre,setHauteurLibre]=useState(8);
   const [pontRoulant,setPontRoulant]=useState(hasOpt('pont_roulant_5t') || hasOpt('pont_roulant_10t'));
   const [pontCap,setPontCap]=useState(hasOpt('pont_roulant_10t') ? 10 : 5);
@@ -443,9 +446,6 @@ const App=()=>{
   const [surfExploit,setSurfExploit]=useState(5);
   const[nbAsc,setNbAsc]=useState(0);
   const [nbQuais,setNbQuais]=useState(hasOpt('quai_chargement') ? 2 : 0);
-
-  // Options mapping Logic
-  const hasOpt = (key) => qs.options && qs.options.includes(key);
 
   const [solaire,setSolaire]=useState(hasOpt('solaire') ? (SOLAIRES[0]?.id || '') : '');
   const [groupe,setGroupe]=useState('');
