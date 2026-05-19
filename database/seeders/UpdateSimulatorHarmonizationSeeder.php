@@ -78,6 +78,7 @@ class UpdateSimulatorHarmonizationSeeder extends Seeder
                     'categorie' => $opt['categorie'],
                     'designation' => $opt['designation'],
                     'prix_min' => $opt['prix_min'],
+                    'prix_max' => $opt['prix_min'], // Ajout du prix_max obligatoire
                     'unite' => $opt['unite'],
                     'actif' => true
                 ]
