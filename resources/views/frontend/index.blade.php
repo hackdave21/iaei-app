@@ -1908,10 +1908,189 @@
   </footer>
   <!-- ================= JS ================= -->
   <script>
-    // changement d'image dans le hero
+    const secteurConfig = {
+      residentiel: {
+        standingLabel: "{{ __('Standing') }}",
+        standings: [
+          { value: "prestige", label: "{{ __('Prestige') }}" },
+          { value: "premium", label: "{{ __('Premium') }}" },
+          { value: "confort", label: "{{ __('Confort') }}" },
+          { value: "standard", label: "{{ __('Standard') }}" }
+        ],
+        options: [
+          { id: "checkForage", label: "{{ __('Forage') }}" },
+          { id: "checkCloture", label: "{{ __('Clôture') }}" },
+          { id: "checkPaysage", label: "{{ __('Aménagement Paysager') }}" },
+          { id: "checkDomotique", label: "{{ __('Domotique') }}" },
+          { id: "checkSolaire", label: "{{ __('Solaire') }}" },
+          { id: "checkPiscine", label: "{{ __('Piscine') }}" }
+        ]
+      },
+      tertiaire: {
+        standingLabel: "{{ __('Type de bâtiment') }}",
+        standings: [
+          { value: "bureaux", label: "{{ __('Bureaux') }}" },
+          { value: "commerce", label: "{{ __('Commerce') }}" },
+          { value: "restaurant", label: "{{ __('Restaurant') }}" },
+          { value: "centre_commercial", label: "{{ __('Centre Commercial') }}" },
+          { value: "hotel_1", label: "{{ __('Hôtel 1★') }}" },
+          { value: "hotel_2", label: "{{ __('Hôtel 2★') }}" },
+          { value: "hotel_3", label: "{{ __('Hôtel 3★') }}" },
+          { value: "hotel_4", label: "{{ __('Hôtel 4★') }}" },
+          { value: "hotel_5", label: "{{ __('Hôtel 5★') }}" }
+        ],
+        options: [
+          { id: "checkForage", label: "{{ __('Forage') }}" },
+          { id: "checkCloture", label: "{{ __('Clôture') }}" },
+          { id: "checkSolaire", label: "{{ __('Solaire') }}" },
+          { id: "checkGroupeElectrogene", label: "{{ __('Groupe électrogène') }}" },
+          { id: "checkAlarme", label: "{{ __('Alarme') }}" },
+          { id: "checkVideosurveillance", label: "{{ __('Vidéosurveillance') }}" },
+          { id: "checkControleAcces", label: "{{ __('Contrôle d\\'accès') }}" }
+        ]
+      },
+      industriel: {
+        standingLabel: "{{ __('Type de bâtiment') }}",
+        standings: [
+          { value: "entrepot", label: "{{ __('Entrepôt') }}" },
+          { value: "usine", label: "{{ __('Usine') }}" },
+          { value: "atelier", label: "{{ __('Atelier') }}" },
+          { value: "hangar", label: "{{ __('Hangar') }}" },
+          { value: "chambre_froide", label: "{{ __('Chambre froide') }}" }
+        ],
+        options: [
+          { id: "checkForage", label: "{{ __('Forage') }}" },
+          { id: "checkCloture", label: "{{ __('Clôture') }}" },
+          { id: "checkSolaire", label: "{{ __('Solaire') }}" },
+          { id: "checkGroupeElectrogene", label: "{{ __('Groupe électrogène') }}" },
+          { id: "checkAlarme", label: "{{ __('Alarme') }}" },
+          { id: "checkVideosurveillance", label: "{{ __('Vidéosurveillance') }}" },
+          { id: "checkControleAcces", label: "{{ __('Contrôle d\\'accès') }}" },
+          { id: "checkQuaiChargement", label: "{{ __('Quai de chargement') }}" },
+          { id: "checkPorteSectionnelle", label: "{{ __('Porte sectionnelle') }}" },
+          { id: "checkPontRoulant5T", label: "{{ __('Pont roulant 5T') }}" },
+          { id: "checkPontRoulant10T", label: "{{ __('Pont roulant 10T') }}" }
+        ]
+      },
+      agricole: {
+        standingLabel: "{{ __('Type de bâtiment') }}",
+        standings: [
+          { value: "elevage_bovins", label: "{{ __('Bâtiment élevage bovins') }}" },
+          { value: "elevage_ovins", label: "{{ __('Bâtiment élevage ovins') }}" },
+          { value: "poulailler", label: "{{ __('Poulailler') }}" },
+          { value: "serre", label: "{{ __('Serre') }}" },
+          { value: "silo", label: "{{ __('Silo de stockage') }}" },
+          { value: "hangar_agricole", label: "{{ __('Hangar agricole') }}" }
+        ],
+        options: [
+          { id: "checkForage", label: "{{ __('Forage') }}" },
+          { id: "checkCloture", label: "{{ __('Clôture') }}" },
+          { id: "checkSolaire", label: "{{ __('Solaire') }}" },
+          { id: "checkGroupeElectrogene", label: "{{ __('Groupe électrogène') }}" },
+          { id: "checkIrrigationGoutte", label: "{{ __('Irrigation goutte-à-goutte') }}" },
+          { id: "checkIrrigationAspersion", label: "{{ __('Irrigation aspersion') }}" },
+          { id: "checkBassin500", label: "{{ __('Bassin rétention 500m³') }}" },
+          { id: "checkBassin1000", label: "{{ __('Bassin rétention 1000m³') }}" }
+        ]
+      }
+    };
+
     const buttons = document.querySelectorAll(".tabBtn");
     const hero = document.getElementById("heroImage");
     let selectedSecteur = "residentiel";
+    let selectedStanding = "confort";
+
+    function updateSimulatorPanel(secteur) {
+      const config = secteurConfig[secteur];
+      if (!config) return;
+
+      const arrowHtml = '<span><img src="{{ asset("aiae-frontend/Images/Flèche haut.svg") }}" class="arrow transition-transform duration-200" alt="" /></span>';
+      const openStand = document.getElementById("openStand");
+      const standPanel = document.getElementById("standPanel");
+      const optionsPanel = document.getElementById("optionsPanel");
+
+      // Reset selectedStanding to first option or specific default
+      if(config.standings.length > 0) {
+        if (secteur === "residentiel") {
+            selectedStanding = "confort";
+        } else {
+            selectedStanding = config.standings[0].value;
+        }
+      }
+
+      // Rebuild standPanel
+      standPanel.innerHTML = "";
+      config.standings.forEach((stand, index) => {
+        const btn = document.createElement("button");
+        btn.dataset.value = stand.value;
+        btn.className = "standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1";
+        if (stand.value === selectedStanding) {
+          btn.classList.add("bg-gray-100");
+          openStand.innerHTML = stand.label + ' ' + arrowHtml;
+        }
+        btn.textContent = stand.label;
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          selectedStanding = stand.value;
+          
+          standPanel.querySelectorAll(".standOption").forEach(o => o.classList.remove("bg-gray-100"));
+          btn.classList.add("bg-gray-100");
+          
+          openStand.innerHTML = stand.label + ' ' + arrowHtml;
+          standPanel.classList.add("hidden");
+          const arrow = openStand.querySelector(".arrow");
+          if(arrow) arrow.classList.remove("rotate-180");
+          
+          // Special logic for Tertiaire Hotel 3/4/5 stars
+          if (secteur === "tertiaire") {
+            const hasPiscine = ["hotel_3", "hotel_4", "hotel_5"].includes(stand.value);
+            const piscineLabel = document.getElementById("labelPiscine");
+            if (piscineLabel) {
+              piscineLabel.style.display = hasPiscine ? "flex" : "none";
+              if (!hasPiscine) {
+                  const checkPiscine = document.getElementById("checkPiscine");
+                  if(checkPiscine) checkPiscine.checked = false;
+              }
+            }
+          }
+        };
+        standPanel.appendChild(btn);
+      });
+
+      // Rebuild optionsPanel
+      optionsPanel.innerHTML = "";
+      
+      config.options.forEach(opt => {
+        const label = document.createElement("label");
+        label.className = "flex justify-between text-xs sm:text-sm";
+        label.innerHTML = opt.label + ' <input type="checkbox" id="' + opt.id + '" />';
+        optionsPanel.appendChild(label);
+      });
+
+      // Add Piscine option hidden by default for Tertiaire
+      if (secteur === "tertiaire") {
+        const labelPiscine = document.createElement("label");
+        labelPiscine.id = "labelPiscine";
+        labelPiscine.className = "flex justify-between text-xs sm:text-sm";
+        const hasPiscine = ["hotel_3", "hotel_4", "hotel_5"].includes(selectedStanding);
+        labelPiscine.style.display = hasPiscine ? "flex" : "none";
+        labelPiscine.innerHTML = '{{ __("Piscine") }} <input type="checkbox" id="checkPiscine" />';
+        optionsPanel.appendChild(labelPiscine);
+      }
+
+      // Add Validate button
+      const validerBtn = document.createElement("button");
+      validerBtn.className = "w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm";
+      validerBtn.textContent = "{{ __('Valider') }}";
+      validerBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        optionsPanel.classList.add('hidden'); 
+        const arrow = document.getElementById("openOptions").querySelector('.arrow');
+        if(arrow) arrow.classList.remove('rotate-180');
+      };
+      optionsPanel.appendChild(validerBtn);
+    }
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -1924,24 +2103,17 @@
         });
         btn.classList.remove("bg-glassDark");
         btn.classList.add("bg-white", "shadow");
+
+        updateSimulatorPanel(selectedSecteur);
       });
     });
 
-    // ---------------- STANDING SELECTION ------------------
-    let selectedStanding = "confort";
-    const standOptions = document.querySelectorAll(".standOption");
-    standOptions.forEach(opt => {
-        opt.onclick = (e) => {
-            e.stopPropagation();
-            selectedStanding = opt.dataset.value;
-            standOptions.forEach(o => o.classList.remove("bg-gray-100"));
-            opt.classList.add("bg-gray-100");
-            standPanel.classList.add("hidden");
-            openStand.querySelector(".arrow").classList.remove("rotate-180");
-        };
-    });
-
     // ---------------- DROPDOWN LOGIC ------------------
+    const openStand = document.getElementById("openStand");
+    const standPanel = document.getElementById("standPanel");
+    const openOptions = document.getElementById("openOptions");
+    const optionsPanel = document.getElementById("optionsPanel");
+
     function togglePanel(button, panel) {
       const isHidden = panel.classList.contains("hidden");
       
@@ -1952,10 +2124,9 @@
       if (isHidden) {
         panel.classList.remove("hidden");
         const arrow = button.querySelector(".arrow");
-        arrow.classList.add("rotate-180");
+        if(arrow) arrow.classList.add("rotate-180");
       }
     }
-
 
     openStand.onclick = (e) => { e.stopPropagation(); togglePanel(openStand, standPanel); };
     openOptions.onclick = (e) => { e.stopPropagation(); togglePanel(openOptions, optionsPanel); };
@@ -1971,7 +2142,10 @@
       document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate-180"));
     });
 
-
+    // Initialisation
+    document.addEventListener("DOMContentLoaded", () => {
+      updateSimulatorPanel(selectedSecteur);
+    });
 
     // ---------------- START SIMULATION ------------------
     function startSimulation() {
@@ -1988,12 +2162,33 @@
 
         // Options
         const options = [];
-        if (document.getElementById("checkForage").checked) options.push("forage");
-        if (document.getElementById("checkCloture").checked) options.push("cloture");
-        if (document.getElementById("checkPaysage").checked) options.push("paysager");
-        if (document.getElementById("checkDomotique").checked) options.push("domotique");
-        if (document.getElementById("checkSolaire").checked) options.push("solaire");
-        if (document.getElementById("checkPiscine").checked) options.push("piscine");
+        const possibleOptions = [
+            { id: "checkForage", value: "forage" },
+            { id: "checkCloture", value: "cloture" },
+            { id: "checkPaysage", value: "paysager" },
+            { id: "checkDomotique", value: "domotique" },
+            { id: "checkSolaire", value: "solaire" },
+            { id: "checkPiscine", value: "piscine" },
+            { id: "checkGroupeElectrogene", value: "groupe_electrogene" },
+            { id: "checkAlarme", value: "alarme" },
+            { id: "checkVideosurveillance", value: "videosurveillance" },
+            { id: "checkControleAcces", value: "controle_acces" },
+            { id: "checkQuaiChargement", value: "quai_chargement" },
+            { id: "checkPorteSectionnelle", value: "porte_sectionnelle" },
+            { id: "checkPontRoulant5T", value: "pont_roulant_5t" },
+            { id: "checkPontRoulant10T", value: "pont_roulant_10t" },
+            { id: "checkIrrigationGoutte", value: "irrigation_goutte" },
+            { id: "checkIrrigationAspersion", value: "irrigation_aspersion" },
+            { id: "checkBassin500", value: "bassin_500" },
+            { id: "checkBassin1000", value: "bassin_1000" }
+        ];
+
+        possibleOptions.forEach(opt => {
+            const el = document.getElementById(opt.id);
+            if (el && el.checked) {
+                options.push(opt.value);
+            }
+        });
         
         if (options.length > 0) {
             params.append("options", options.join(","));
