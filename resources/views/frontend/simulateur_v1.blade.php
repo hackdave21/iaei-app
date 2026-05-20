@@ -32,6 +32,14 @@
     .input-num button{width:40px;height:40px;border:none;background:#f8fafc;cursor:pointer;font-size:18px}
     .input-num button:hover{background:#e2e8f0}
     .input-num .value{flex:1;text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;min-width:60px}
+    .input-num input::-webkit-outer-spin-button,
+    .input-num input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .input-num input[type=number] {
+      -moz-appearance: textfield;
+    }
     .option-btn{padding:16px;border:2px solid #e2e8f0;border-radius:10px;text-align:left;cursor:pointer;transition:all 0.2s;background:white}
     .option-btn:hover{border-color:#cbd5e1;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)}
     .option-btn.selected{border-color:var(--bleu);background:#f0f7ff}
@@ -809,9 +817,29 @@ const App=()=>{
     <div className="flex flex-col">
       {label&&<label className="text-xs text-gray-500 mb-1">{label}</label>}
       <div className="input-num">
-        <button onClick={()=>onChange(Math.max(min,value-step))}>−</button>
-        <div className="value">{typeof value==='number'&&value%1!==0?value.toFixed(1):value}{unit&&<span className="text-xs text-gray-500 ml-1">{unit}</span>}</div>
-        <button onClick={()=>onChange(Math.min(max,value+step))}>+</button>
+        <button onClick={()=>onChange(Math.max(min, (parseFloat(value) || 0) - step))}>−</button>
+        <div className="flex-1 flex items-center justify-center min-w-[70px]">
+          <input 
+            type="number"
+            value={value}
+            min={min}
+            max={max}
+            step="any"
+            onChange={(e) => {
+              const val = e.target.value;
+              onChange(val === '' ? '' : parseFloat(val));
+            }}
+            onBlur={() => {
+              let val = parseFloat(value);
+              if (isNaN(val)) val = min;
+              onChange(Math.min(max, Math.max(min, val)));
+            }}
+            className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          />
+          {unit&&<span className="text-xs text-gray-500 mr-2">{unit}</span>}
+        </div>
+        <button onClick={()=>onChange(Math.min(max, (parseFloat(value) || 0) + step))}>+</button>
       </div>
     </div>
   );
