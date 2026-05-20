@@ -303,45 +303,59 @@ $simTranslations =[
 const {useState,useMemo}=React;
 const t = (key) => window.AIAE_SIM_TRANSLATIONS ? (window.AIAE_SIM_TRANSLATIONS[key] || key) : key;
 
-const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>(
-  <div className="flex flex-col">
-    {label&&<label className="text-xs text-gray-500 mb-1">{label}</label>}
-    <div className="input-num">
-      <button onClick={()=>{
-        const current = parseFloat(value) || 0;
-        const next = Math.max(min, current - step);
-        onChange(Math.round(next * 100) / 100);
-      }}>−</button>
-      <div className="flex-1 flex items-center justify-center min-w-[70px]">
-        <input 
-          type="number"
-          value={value}
-          min={min}
-          max={max}
-          step="any"
-          onChange={(e) => {
-            const val = e.target.value;
-            onChange(val === '' ? '' : parseFloat(val));
-          }}
-          onBlur={() => {
-            let val = parseFloat(value);
-            if (isNaN(val)) val = min;
-            const rounded = Math.round(val * 100) / 100;
-            onChange(Math.min(max, Math.max(min, rounded)));
-          }}
-          className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
-          style={{ fontFamily: 'JetBrains Mono, monospace' }}
-        />
-        {unit&&<span className="text-xs text-gray-500 mr-2">{unit}</span>}
+const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
+  const isDecimal = step % 1 !== 0 || min % 1 !== 0;
+
+  return (
+    <div className="flex flex-col">
+      {label&&<label className="text-xs text-gray-500 mb-1">{label}</label>}
+      <div className="input-num">
+        <button onClick={()=>{
+          const current = parseFloat(value) || 0;
+          const next = Math.max(min, current - step);
+          onChange(isDecimal ? Math.round(next * 100) / 100 : Math.round(next));
+        }}>−</button>
+        <div className="flex-1 flex items-center justify-center min-w-[70px]">
+          <input 
+            type="number"
+            value={value}
+            min={min}
+            max={max}
+            step={isDecimal ? "any" : "1"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === '') {
+                onChange('');
+              } else {
+                if (!isDecimal) {
+                  const parsed = parseInt(val, 10);
+                  if (!isNaN(parsed)) onChange(parsed);
+                } else {
+                  const parsed = parseFloat(val);
+                  if (!isNaN(parsed)) onChange(parsed);
+                }
+              }
+            }}
+            onBlur={() => {
+              let val = parseFloat(value);
+              if (isNaN(val)) val = min;
+              const rounded = isDecimal ? Math.round(val * 100) / 100 : Math.round(val);
+              onChange(Math.min(max, Math.max(min, rounded)));
+            }}
+            className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          />
+          {unit&&<span className="text-xs text-gray-500 mr-2">{unit}</span>}
+        </div>
+        <button onClick={()=>{
+          const current = parseFloat(value) || 0;
+          const next = Math.min(max, current + step);
+          onChange(isDecimal ? Math.round(next * 100) / 100 : Math.round(next));
+        }}>+</button>
       </div>
-      <button onClick={()=>{
-        const current = parseFloat(value) || 0;
-        const next = Math.min(max, current + step);
-        onChange(Math.round(next * 100) / 100);
-      }}>+</button>
     </div>
-  </div>
-);
+  );
+};
 
 const App=()=>{
   const VERSION='8.1';
@@ -467,8 +481,8 @@ const App=()=>{
   const[forme,setForme]=useState('rect');
   
   const initialSurf = qs.surface || 600;
-  const [dimA,setDimA]=useState(Math.sqrt(initialSurf));
-  const[dimB,setDimB]=useState(Math.sqrt(initialSurf));
+  const [dimA,setDimA]=useState(Math.round(Math.sqrt(initialSurf)));
+  const[dimB,setDimB]=useState(Math.round(Math.sqrt(initialSurf)));
   const[surfManuelle,setSurfManuelle]=useState(initialSurf);
   
   const [terrainDispo,setTerrainDispo]=useState('oui');
