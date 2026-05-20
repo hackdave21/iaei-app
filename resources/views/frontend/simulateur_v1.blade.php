@@ -941,7 +941,6 @@ const App=()=>{
                       <Icon name={t_bat.icon} size={24} />
                     </div>
                     <div className="font-medium text-gray-800">{t(t_bat.name)}</div>
-                    <div className="text-xs text-gray-500 mt-1">{t('Max')} R+{t_bat.max-1}</div>
                   </button>
                 ))}
               </div>
