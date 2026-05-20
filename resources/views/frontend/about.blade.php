@@ -269,12 +269,12 @@
 
         <!-- PARAGRAPHE 1 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 text-justify">
-          {!! __('AIAE SARL (Afrika Infrastructures And Equipements) est une entreprise togolaise spécialisée dans la conception et la réalisation d\'infrastructures de qualité. Basée à Lomé, notre société intervient sur l\'ensemble du territoire national avec une ambition claire : devenir le partenaire de référence pour les projets d\'infrastructure stratégique en Afrique de l\'Ouest.') !!}
+          {!! __('AIAE SARL (Afrika Infrastructures And Equipements) est une entreprise togolaise spécialisée dans la <strong class="font-heavy">conception et la réalisation d\'infrastructures de qualité</strong>. Basée à Lomé, notre société intervient sur l\'ensemble du territoire national avec une ambition claire : devenir le <strong class="font-heavy">partenaire de référence pour les projets d\'infrastructure stratégique en Afrique de l\'Ouest</strong>.') !!}
         </p>
 
         <!-- PARAGRAPHE 2 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 text-justify">
-          {!! __('Notre direction technique est assurée par un Docteur Ingénieur en génie civil, spécialisé dans les structures complexes et les technologies du béton précontraint, avec plus de 18 ans d\'expérience terrain. Cette expertise de haut niveau garantit une maîtrise complète de la chaîne conception-réalisation, la capacité à traiter des projets techniquement exigeants et un dialogue de haut niveau avec vos services d\'ingénierie, dans le strict respect des normes internationales.') !!}
+          {!! __('Notre direction technique est assurée par un <strong class="font-heavy">Docteur Ingénieur en génie civil</strong>, spécialisé dans les structures complexes et les technologies du béton précontraint, avec <strong class="font-heavy">plus de 18 ans d\'expérience terrain</strong>. Cette expertise de haut niveau garantit une <strong class="font-heavy">maîtrise complète de la chaîne conception-réalisation</strong>, la capacité à traiter des projets techniquement exigeants et un dialogue de haut niveau avec vos services d\'ingénierie, dans le <strong class="font-heavy">strict respect des normes internationales</strong>.') !!}
         </p>
 
       </div>
