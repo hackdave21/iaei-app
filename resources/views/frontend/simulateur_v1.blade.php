@@ -1024,7 +1024,6 @@ const App=()=>{
                   <button key={id} onClick={()=>setZone(id)} className={`option-btn ${zone===id?'selected':''}`}>
                     <div className="font-medium">{t(z.name)}</div>
                     <div className="text-xs text-gray-500">{t(z.localites)}</div>
-                    <span className="badge badge-blue mt-2">×{Number(z.coef || 0).toFixed(2)}</span>
                   </button>
                 ))}
               </div>
@@ -1040,13 +1039,11 @@ const App=()=>{
                         <div className="text-xs text-gray-500 mt-1">{t('Portance:')} {t(s.portance)}</div>
                         <div className="text-xs text-gray-500">{t(s.fondation)}</div>
                       </div>
-                      <span className={`badge ${s.risque==='faible'?'badge-green':s.risque==='moyen'?'badge-blue':'badge-orange'}`}>×{Number(s.coef || 0).toFixed(2)}</span>
                     </div>
                   </button>
                 ))}
               </div>
               {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 obligatoire.')}</p></div>}
-              {sol&&solData&&<div className="mt-4 p-4 bg-gray-50 rounded-lg"><div className="text-sm"><strong>{t('Coefficient total:')}</strong> <span className="mono font-bold" style={{color:'var(--bleu)'}}>×{Number(coefTotal || 0).toFixed(3)}</span></div></div>}
             </div>
             <Nav canContinue={!!sol}/>
           </div>
