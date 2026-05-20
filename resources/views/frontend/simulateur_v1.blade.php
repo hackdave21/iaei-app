@@ -641,32 +641,62 @@ const App=()=>{
   const propositionsSolaires=useMemo(()=>{
     const props=[];
     const besoinTotal=besoins.total;
-    if(besoinTotal<=0)return props;
+    if(besoinTotal<=0 || SOLAIRES.length === 0)return props;
     
-    SOLAIRES.forEach(kit=>{
-      const couv=(kit.kw/besoinTotal)*100;
-      if(couv>=40&&couv<=150){
-        let kwRestant=kit.kw;
-        const couverts=[];
-        const nonCouverts=[];
-        
-        besoins.details.forEach(eq=>{
-          if(kwRestant>=eq.kw){
-            couverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
-            kwRestant-=eq.kw;
-          }else if(kwRestant>0){
-            const pct=Math.round((kwRestant/eq.kw)*100);
-            if(pct>=30)couverts.push(`${eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim()} (${pct}%)`);
-            else nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
-            kwRestant=0;
-          }else{
-            nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
-          }
-        });
-        
-        props.push({...kit,couv:Math.round(couv),couverts,nonCouverts,optimal:couv>=95&&couv<=115});
-      }
+    // 1. Calculate coverage for all kits
+    const list = SOLAIRES.map(kit => {
+      const couv = (kit.kw / besoinTotal) * 100;
+      return { ...kit, couv };
     });
+
+    // 2. Filter strictly between 40% and 150%
+    const strict = list.filter(item => item.couv >= 40 && item.couv <= 150);
+
+    let selected = [];
+    if (strict.length >= 3) {
+      // Pick first, middle, last from the strict range
+      const first = strict[0];
+      const last = strict[strict.length - 1];
+      let bestMid = strict[0];
+      let minDiff = Infinity;
+      strict.forEach(item => {
+        if (item.id !== first.id && item.id !== last.id) {
+          const diff = Math.abs(item.couv - 100);
+          if (diff < minDiff) {
+            minDiff = diff;
+            bestMid = item;
+          }
+        }
+      });
+      selected = Array.from(new Set([first, bestMid, last])).sort((a, b) => a.kw - b.kw);
+    } else {
+      // Less than 3, sort all by absolute distance to 100% and take 3 closest
+      const sortedByDist = [...list].sort((a, b) => Math.abs(a.couv - 100) - Math.abs(b.couv - 100));
+      selected = sortedByDist.slice(0, 3).sort((a, b) => a.kw - b.kw);
+    }
+
+    selected.forEach(kit => {
+      let kwRestant=kit.kw;
+      const couverts=[];
+      const nonCouverts=[];
+      
+      besoins.details.forEach(eq=>{
+        if(kwRestant>=eq.kw){
+          couverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+          kwRestant-=eq.kw;
+        }else if(kwRestant>0){
+          const pct=Math.round((kwRestant/eq.kw)*100);
+          if(pct>=30)couverts.push(`${eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim()} (${pct}%)`);
+          else nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+          kwRestant=0;
+        }else{
+          nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+        }
+      });
+      
+      props.push({...kit,couv:Math.round(kit.couv),couverts,nonCouverts,optimal:kit.couv>=90&&kit.couv<=120});
+    });
+    
     return props;
   },[besoins]);
 
@@ -674,27 +704,55 @@ const App=()=>{
   const propositionsGroupes=useMemo(()=>{
     const props=[];
     const besoinTotal=besoins.total*0.8;
-    if(besoinTotal<=0)return props;
+    if(besoinTotal<=0 || GROUPES.length === 0)return props;
     
-    GROUPES.forEach(grp=>{
-      const puissanceUtile=grp.kva*0.8;
-      const couv=(puissanceUtile/besoinTotal)*100;
-      if(couv>=40&&couv<=150){
-        let kwRestant=puissanceUtile;
-        const couverts=[];
-        const nonCouverts=[];
-        
-        besoins.details.forEach(eq=>{
-          if(kwRestant>=eq.kw){
-            couverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
-            kwRestant-=eq.kw;
-          }else{
-            nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+    // 1. Calculate coverage for all generators
+    const list = GROUPES.map(grp => {
+      const puissanceUtile = grp.kva * 0.8;
+      const couv = (puissanceUtile / besoinTotal) * 100;
+      return { ...grp, puissanceUtile, couv };
+    });
+
+    // 2. Filter strictly between 40% and 150%
+    const strict = list.filter(item => item.couv >= 40 && item.couv <= 150);
+
+    let selected = [];
+    if (strict.length >= 3) {
+      // Pick first, middle, last
+      const first = strict[0];
+      const last = strict[strict.length - 1];
+      let bestMid = strict[0];
+      let minDiff = Infinity;
+      strict.forEach(item => {
+        if (item.id !== first.id && item.id !== last.id) {
+          const diff = Math.abs(item.couv - 100);
+          if (diff < minDiff) {
+            minDiff = diff;
+            bestMid = item;
           }
-        });
-        
-        props.push({...grp,couv:Math.round(couv),couverts,nonCouverts,optimal:couv>=95&&couv<=115});
-      }
+        }
+      });
+      selected = Array.from(new Set([first, bestMid, last])).sort((a, b) => a.kva - b.kva);
+    } else {
+      const sortedByDist = [...list].sort((a, b) => Math.abs(a.couv - 100) - Math.abs(b.couv - 100));
+      selected = sortedByDist.slice(0, 3).sort((a, b) => a.kva - b.kva);
+    }
+
+    selected.forEach(grp=>{
+      let kwRestant=grp.puissanceUtile;
+      const couverts=[];
+      const nonCouverts=[];
+      
+      besoins.details.forEach(eq=>{
+        if(kwRestant>=eq.kw){
+          couverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+          kwRestant-=eq.kw;
+        }else{
+          nonCouverts.push(eq.label.replace(/[^\w\sÀ-ÿ]/g,'').trim());
+        }
+      });
+      
+      props.push({...grp,couv:Math.round(grp.couv),couverts,nonCouverts,optimal:grp.couv>=90&&grp.couv<=120});
     });
     return props;
   },[besoins]);
