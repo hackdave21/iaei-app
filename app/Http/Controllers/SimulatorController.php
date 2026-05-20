@@ -88,18 +88,20 @@ class SimulatorController extends Controller
         $options = EquipementOption::where('actif', true)->get();
         
         $solaires = $options->where('categorie', 'solaire')->map(function ($o) {
+            $valStr = $o->taille_puissance ?: ($o->puissance ?: $o->designation);
             return [
                 'id' => $o->code,
-                'kw' => (int) filter_var($o->taille_puissance ?? $o->puissance, FILTER_SANITIZE_NUMBER_INT),
+                'kw' => (int) filter_var($valStr, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
                 'designation' => $o->designation
             ];
         })->values();
 
         $groupes = $options->where('categorie', 'groupe')->map(function ($o) {
+            $valStr = $o->taille_puissance ?: ($o->puissance ?: $o->designation);
             return [
                 'id' => $o->code,
-                'kva' => (int) filter_var($o->taille_puissance ?? $o->puissance, FILTER_SANITIZE_NUMBER_INT),
+                'kva' => (int) filter_var($valStr, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
                 'designation' => $o->designation
             ];
