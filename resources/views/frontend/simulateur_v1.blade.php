@@ -288,6 +288,7 @@ $simTranslations =[
     window.SIMULATEUR_CONFIG = @json($config);
     window.QUICK_START = @json($quickStart ?? null);
     window.AIAE_SIM_TRANSLATIONS = @json($simTranslations);
+    window.LOGO_URL = "{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}";
 </script>
 <script type="text/babel">
 @verbatim
@@ -819,7 +820,7 @@ const App=()=>{
     <header className="bg-white border-b sticky top-0 z-50 no-print">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <button onClick={() => window.location.href = '/'} className="flex items-center gap-3">
-          <img src="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}" className="w-12 h-12 object-contain" alt="AIAE Logo" />
+          <img src={window.LOGO_URL} className="w-12 h-12 object-contain" alt="AIAE Logo" />
         </button>
         <div className="flex items-center gap-4">
           <button onClick={() => window.location.href = '/'} className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 font-medium transition-colors">
@@ -887,7 +888,7 @@ const App=()=>{
           </div>
           <div className="text-center mb-12">
             <button onClick={() => window.location.href = '/'} className="inline-block hover:scale-105 transition-transform">
-              <img src="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}" className="w-20 h-20 object-contain mb-6 mx-auto" alt="AIAE Logo" />
+              <img src={window.LOGO_URL} className="w-20 h-20 object-contain mb-6 mx-auto" alt="AIAE Logo" />
             </button>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{t("Simulateur d'Estimation")}</h1>
             <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY</p>

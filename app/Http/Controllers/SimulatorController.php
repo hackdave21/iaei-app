@@ -82,7 +82,7 @@ class SimulatorController extends Controller
                     'prix' => $t->prix_base_m2 ?? 450000,
                     'ratio' => $t->ratio_surface ?? 1
                 ];
-            });
+            })->values();
         });
 
         $options = EquipementOption::where('actif', true)->get();
